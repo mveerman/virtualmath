@@ -1,6 +1,9 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.view1', [
+        'ngRoute',
+        'myApp.vmath-function-input-directive'
+    ])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/view1', {
@@ -13,4 +16,9 @@ angular.module('myApp.view1', ['ngRoute'])
         $scope.description = {
             text: ''
         };
+
+
+
+        //signaturePad = new SignaturePad(canvas);
+
     }]);
