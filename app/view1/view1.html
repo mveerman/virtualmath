@@ -1,11 +1,26 @@
-<div class="question">
-    <h1>Opgave A</h1>
-    <p class="description clearfix">
-        <img src="img/bowl.jpg" alt="Bowl" height="150"/>
-        Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid stroomt.
-    </p>
-    <p>a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water in de fles.</p>
-    <div class="graph">[INVOER GRAFIEK]</div>
-    <p>b) Beschrijf jouw manier van denken</p>
-    <div class="deepthoughts">[UITLEG]</div>
-</div>
+<form name="questionForm1" ng-controller="View1Ctrl" novalidate>
+    <div class="question">
+        <h1>Opgave A</h1>
+        <p class="description clearfix">
+            <img src="img/bowl.jpg" alt="Bowl" height="150"/>
+            Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid stroomt.
+        </p>
+        <p>a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water in
+            de fles.</p>
+        <div class="graph">[INVOER GRAFIEK]</div>
+        <p>&nbsp;</p>
+        <div class="deepthoughts">
+            <label>b) Beschrijf jouw manier van denken
+                <textarea name="q1description" required ng-model="description.text" ng-minlength="10"></textarea>
+            </label>
+            <div role="alert">
+                <span class="error" ng-show="questionForm1.q1description.$touched && questionForm1.q1description.$error.required">
+                    Dit veld is verplicht
+                </span>
+                <span class="error" ng-show="questionForm1.q1description.$touched && questionForm1.q1description.$error.minlength">
+                    De uitleg is te kort. Geef meer tekst op.
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

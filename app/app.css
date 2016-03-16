@@ -46,3 +46,23 @@
     float: left;
     margin: 10px;
 }
+
+form {}
+label {
+    font-weight: bold;
+
+}
+label>textarea {
+    font-weight: normal;
+    display: block;
+    width: 100%;
+    height: 5em;
+}
+.ng-invalid.ng-touched {
+    border-color: red;
+}
+.error {
+    font-size:0.75em;
+    font-style: italic;
+    color: red;
+}
