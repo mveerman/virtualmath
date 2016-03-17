@@ -177,6 +177,7 @@
             this._canvas.addEventListener("mousedown", this._handleMouseDown);
             this._canvas.addEventListener("mousemove", this._handleMouseMove);
             this._canvas.addEventListener("mouseup", this._handleMouseUp);
+            this._canvas.addEventListener("mouseout", this._handleMouseUp);
         };
 
         SignaturePad.prototype._handleTouchEvents = function () {
@@ -198,6 +199,8 @@
             this._canvas.removeEventListener("mousedown", this._handleMouseDown);
             this._canvas.removeEventListener("mousemove", this._handleMouseMove);
             this._canvas.removeEventListener("mouseup", this._handleMouseUp);
+            this._canvas.removeEventListener("mouseout", this._handleMouseUp);
+
 
             this._canvas.removeEventListener("touchstart", this._handleTouchStart);
             this._canvas.removeEventListener("touchmove", this._handleTouchMove);
