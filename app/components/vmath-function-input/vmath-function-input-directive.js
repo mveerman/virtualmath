@@ -1,19 +1,20 @@
 'use strict';
 
 angular.module('myApp.vmath-function-input-directive', [])
-    .controller('vmathFunctionInputDirectiveController', ['$scope', '$element', function ($scope, $element) {
-
-    }])
     .directive('vmathFunctionInput', function ($window) {
-
         return {
             restrict: 'E',
             templateUrl: 'components/vmath-function-input/vmath-function-input-directive.html',
             transclude: true,
+            scope: {
+                fieldName: '='
+            },
             controller: ['$scope', '$element', '$attrs', '$window', function ($scope, $element, $attrs, $window) {
+                $scope.fieldName = $attrs.fieldName;
 
                 $scope.canvas = angular.element($element).find("canvas")[0];
                 $scope.redoButton = angular.element($element).find("button")[0];
+                $scope.field = angular.element($element).find("input")[0];
 
                 $scope.resizeCanvas = function () {
                     // When zoomed out to less than 100%, for some very strange reason,
@@ -25,11 +26,14 @@ angular.module('myApp.vmath-function-input-directive', [])
                     $scope.canvas.getContext("2d").scale(ratio, ratio);
                     $scope.drawAxes();
                     $scope.addLabels();
+                    $scope.field.value=$scope.signaturePad.toDataURL();
                 };
                 angular.element($window).bind('resize', function () {
                     $scope.resizeCanvas();
                     $scope.$apply();
                 });
+
+                $scope.signaturePad = new SignaturePad($scope.canvas);
 
                 $scope.drawAxes = function () {
                     var ctx = $scope.canvas.getContext("2d");
@@ -71,11 +75,14 @@ angular.module('myApp.vmath-function-input-directive', [])
 
                 };
 
-                $scope.signaturePad = new SignaturePad($scope.canvas);
                 $scope.resizeCanvas();
 
                 $scope.redoButton.addEventListener("click", function() {
                    $scope.resizeCanvas();
+                });
+
+                $scope.canvas.addEventListener("mouseout", function () {
+                    $scope.field.value=$scope.signaturePad.toDataURL();
                 });
             }]
         };
