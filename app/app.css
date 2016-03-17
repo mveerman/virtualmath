@@ -81,3 +81,9 @@ canvas {
     font-style: italic;
     color: red;
 }
+
+.vmath-function-input {}
+.vmath-function-input .vmath-function-input-body {}
+.vmath-function-input .vmath-function-input-buttons {
+    padding: 10px;
+}

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.vmath-function-input-directive', [])
-    .controller('vmathFunctionInputDirectiveController', ['$scope', function ($scope) {
+    .controller('vmathFunctionInputDirectiveController', ['$scope', '$element', function ($scope, $element) {
 
     }])
     .directive('vmathFunctionInput', function ($window) {
@@ -13,6 +13,7 @@ angular.module('myApp.vmath-function-input-directive', [])
             controller: ['$scope', '$element', '$attrs', '$window', function ($scope, $element, $attrs, $window) {
 
                 $scope.canvas = angular.element($element).find("canvas")[0];
+                $scope.redoButton = angular.element($element).find("button")[0];
 
                 $scope.resizeCanvas = function () {
                     // When zoomed out to less than 100%, for some very strange reason,
@@ -72,6 +73,10 @@ angular.module('myApp.vmath-function-input-directive', [])
 
                 $scope.signaturePad = new SignaturePad($scope.canvas);
                 $scope.resizeCanvas();
+
+                $scope.redoButton.addEventListener("click", function() {
+                   $scope.resizeCanvas();
+                });
             }]
         };
 
