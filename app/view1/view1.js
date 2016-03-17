@@ -16,9 +16,4 @@ angular.module('myApp.view1', [
         $scope.description = {
             text: ''
         };
-
-
-
-        //signaturePad = new SignaturePad(canvas);
-
     }]);
