@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('myApp.help1', [
+angular.module('virtualMath.help1', [
         'ngRoute',
-        'myApp.vmath-function-input-directive'
+        'virtualMath.vmath-function-input-directive'
     ])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/help1', {
-            templateUrl: 'help1/help1.html',
+            templateUrl: 'screens/help1/help1.html',
             controller: 'Help1Ctrl'
         });
     }])

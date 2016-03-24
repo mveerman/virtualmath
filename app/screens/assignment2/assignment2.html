@@ -1,4 +1,4 @@
-<form name="questionForm2" ng-controller="View2Ctrl" novalidate>
+<form name="assignmentForm2" ng-controller="Assignment2Ctrl" novalidate>
   <div class="question">
     <h1>Opgave B</h1>
     <p class="description clearfix">
@@ -16,10 +16,10 @@
         <textarea name="q2description" required ng-model="description.text" ng-minlength="10"></textarea>
       </label>
       <div role="alert">
-                <span class="error" ng-show="questionForm2.q2description.$touched && questionForm2.q2description.$error.required">
+                <span class="error" ng-show="assignmentForm2.q2description.$touched && assignmentForm2.q2description.$error.required">
                     Dit veld is verplicht
                 </span>
-                <span class="error" ng-show="questionForm2.q2description.$touched && questionForm2.q2description.$error.minlength">
+                <span class="error" ng-show="assignmentForm2.q2description.$touched && assignmentForm2.q2description.$error.minlength">
                     De uitleg is te kort. Geef meer tekst op.
                 </span>
       </div>

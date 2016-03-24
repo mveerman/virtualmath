@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.vmath-function-input-directive', [])
+angular.module('virtualMath.vmath-function-input-directive', [])
     .directive('vmathFunctionInput', function ($window) {
         return {
             restrict: 'E',

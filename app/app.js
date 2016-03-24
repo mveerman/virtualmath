@@ -1,13 +1,13 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('virtualMath', [
     'ngRoute',
-    'myApp.view1',
-    'myApp.view2',
-    'myApp.help1',
-    'myApp.version'
+    'virtualMath.assignment1',
+    'virtualMath.assignment2',
+    'virtualMath.help1',
+    'virtualMath.version'
 
 ]).config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.otherwise({redirectTo: '/assignment1'});
 }]);
