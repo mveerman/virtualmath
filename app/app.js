@@ -6,6 +6,7 @@ angular.module('virtualMath', [
     'virtualMath.assignment1',
     'virtualMath.assignment2',
     'virtualMath.help1',
+    'virtualMath.compare',
     'virtualMath.version'
 
 ]).config(['$routeProvider', function ($routeProvider) {
