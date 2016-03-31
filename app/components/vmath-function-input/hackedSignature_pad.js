@@ -165,10 +165,7 @@
             if (typeof this.onEnd === 'function') {
                 this.onEnd(event);
             }
-
-            //console.log(this.allPoints);
-            this._calculateSlope();
-
+            
         };
 
         SignaturePad.prototype._handleMouseEvents = function () {
@@ -213,7 +210,6 @@
 
         SignaturePad.prototype._reset = function () {
             this.allPoints = [];
-            this.allSlopes = [];
 
             this.points = [];
             this._lastVelocity = 0;
@@ -346,26 +342,6 @@
             return Math.max(this.maxWidth / (velocity + 1), this.minWidth);
         };
 
-        SignaturePad.prototype._calculateSlope = function () {
-
-            // helling (m)
-            // tussen A en B is
-            // m = (y2 - y1) / (x2 - x1)
-            // voor alle x1 =/= x2
-           // console.log('in calculateSlope');
-            //console.log(this.allPoints);
-
-            for (var i = 1, l = this.allPoints.length; i < l; i++) {
-
-                var B = i, A = B - 1;
-
-                var helling = (this.allPoints[B].y - this.allPoints[A].y) / (this.allPoints[B].x - this.allPoints[A].x);
-                //console.log('helling is nu: ' + helling);
-
-                this.allSlopes.push(helling);
-            }
-
-        };
 
         var Point = function (x, y, time) {
             this.x = x;

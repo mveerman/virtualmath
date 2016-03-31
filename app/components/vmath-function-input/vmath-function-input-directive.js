@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('virtualMath.vmath-function-input-directive', [])
-    .directive('vmathFunctionInput', function ($window) {
+angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
+    .directive('vmathFunctionInput', ['$window', 'graphAnalyzer', function ($window, graphAnalyzer) {
         return {
             restrict: 'E',
             templateUrl: 'components/vmath-function-input/vmath-function-input-directive.html',
@@ -91,6 +91,11 @@ angular.module('virtualMath.vmath-function-input-directive', [])
                     this.graphData.pristine = false;
                     this.graphData.base64url = this.signaturePad.toDataURL();
 
+                    var pointsToAnalyze= this.signaturePad.allPoints;
+                    graphAnalyzer.mirrorY(pointsToAnalyze, this.signaturePad._canvas.height);
+                    var analysis= graphAnalyzer.analyseSphereGraph(pointsToAnalyze);
+                    console.log(analysis);
+
                     this.doGraphUpdate()(this.graphData);
                 };
 
@@ -99,4 +104,4 @@ angular.module('virtualMath.vmath-function-input-directive', [])
                 }
             }
         }
-    });
+    }]);
