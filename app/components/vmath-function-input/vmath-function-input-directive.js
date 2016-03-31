@@ -84,6 +84,8 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                 this.resizeCanvas();
 
                 this.redoClickHandler = function () {
+                    angular.element(this.canvas).removeClass("wrong-graph");
+                    angular.element(this.canvas).removeClass("right-graph");
                     this.resizeCanvas();
                 };
 
@@ -95,6 +97,13 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     graphAnalyzer.mirrorY(pointsToAnalyze, this.signaturePad._canvas.height);
                     var analysis= graphAnalyzer.analyseSphereGraph(pointsToAnalyze);
                     console.log(analysis);
+                    if (analysis.result === "true") {
+                        angular.element(this.canvas).removeClass("wrong-graph");
+                        angular.element(this.canvas).addClass("right-graph");
+                    } else {
+                        angular.element(this.canvas).removeClass("right-graph");
+                        angular.element(this.canvas).addClass("wrong-graph");
+                    }
 
                     this.doGraphUpdate()(this.graphData);
                 };
