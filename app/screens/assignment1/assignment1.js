@@ -16,4 +16,10 @@ angular.module('virtualMath.assignment1', [
         $scope.description = {
             text: ''
         };
+
+        $scope.saveGraph = function(graphData) {
+            $scope.graphData = graphData;
+        };
+
+        $scope.functionInput = angular.module('virtualMath.vmath-function-input-directive');
     }]);

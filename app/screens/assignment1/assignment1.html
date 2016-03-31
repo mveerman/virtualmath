@@ -8,7 +8,7 @@
         <label>a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water in
             de fles.</label>
         <div class="graph">
-            <vmath-function-input field-name="grafiek1"></vmath-function-input>
+            <vmath-function-input on-graph-update="saveGraph"></vmath-function-input>
         </div>
         <p>&nbsp;</p>
         <div class="deepthoughts">
@@ -24,5 +24,8 @@
                 </span>
             </div>
         </div>
+    </div>
+    <div class="wf-buttons">
+        <input type="submit" value="Volgende" ng-disabled="!(graphData.dirty && assignmentForm1.q1description.$valid)" />
     </div>
 </form>
