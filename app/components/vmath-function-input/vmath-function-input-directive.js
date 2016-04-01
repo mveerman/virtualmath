@@ -13,7 +13,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
             controllerAs: 'FIctrl',
             controller: function ($element, $attrs) {
                 this.canvas = angular.element($element).find("canvas")[0];
-                
+
                 this.graphData = {
                     base64url: '',
                     dirty: false,
@@ -36,7 +36,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     this.doGraphUpdate()(this.graphData);
                 };
                 angular.element($window).bind('resize', function () {
-                    resizeCanvas();
+                    this.resizeCanvas();
                     $apply();
                 });
 
@@ -86,6 +86,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                 this.redoClickHandler = function () {
                     angular.element(this.canvas).removeClass("wrong-graph");
                     angular.element(this.canvas).removeClass("right-graph");
+                    this.signaturePad._reset();
                     this.resizeCanvas();
                 };
 
@@ -93,16 +94,17 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     this.graphData.pristine = false;
                     this.graphData.base64url = this.signaturePad.toDataURL();
 
-                    var pointsToAnalyze= this.signaturePad.allPoints;
-                    graphAnalyzer.mirrorY(pointsToAnalyze, this.signaturePad._canvas.height);
-                    var analysis= graphAnalyzer.analyseSphereGraph(pointsToAnalyze);
-                    console.log(analysis);
-                    if (analysis.result === "true") {
-                        angular.element(this.canvas).removeClass("wrong-graph");
-                        angular.element(this.canvas).addClass("right-graph");
-                    } else {
-                        angular.element(this.canvas).removeClass("right-graph");
-                        angular.element(this.canvas).addClass("wrong-graph");
+                    if (this.signaturePad.allPoints.length > 0) {
+                        var pointsToAnalyze = graphAnalyzer.mirrorY(this.signaturePad.allPoints, this.signaturePad._canvas.height);
+                        var analysis = graphAnalyzer.analyseSphereGraph(pointsToAnalyze);
+                        console.log("analysis", analysis);
+                        if (analysis.result) {
+                            angular.element(this.canvas).removeClass("wrong-graph");
+                            angular.element(this.canvas).addClass("right-graph");
+                        } else {
+                            angular.element(this.canvas).removeClass("right-graph");
+                            angular.element(this.canvas).addClass("wrong-graph");
+                        }
                     }
 
                     this.doGraphUpdate()(this.graphData);

@@ -228,9 +228,7 @@
 
         SignaturePad.prototype._addPoint = function (point) {
 
-            var allPoints = this.allPoints;
-            allPoints.push(point);
-            //console.log(allPoints);
+            this.allPoints.push(point);
 
             var points = this.points,
                 c2, c3,

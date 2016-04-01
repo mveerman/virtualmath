@@ -1,95 +1,97 @@
 'use strict';
 
 angular.module('graphModule', []).factory('graphAnalyzer', function () {
-    function logPoints(points) {
-        var i = 0;
-        points.forEach(function (p) {
-            console.log((i++) + ": [" + p.x + "," + p.y + "]");
-        });
-    }
-
-    function logSlopes(slopes) {
-        var i = 0;
-        slopes.forEach(function (s) {
-            console.log((i++) + ": " + s);
-        });
-    }
-
-    function calculateSlopes(points) {
-        if (points.length < 1) {
-            throw "need at least 2 points";
+        function logPoints(points) {
+            var i = 0;
+            points.forEach(function (p) {
+                console.log((i++) + ": [" + p.x + "," + p.y + "]");
+            });
         }
-        var slopes = [];
-        for (var i = 0; i < points.length - 1; i++) {
-            var A = points[i];
-            var B = points[i + 1];
-
-            if (A.x === B.x) {
-                continue;
-            }
-
-            var slope = (B.y - A.y) / (B.x - A.x);
-
-            slopes.push(slope);
+    
+        function calculateSlope(A, B) {
+            return (B.y - A.y) / (B.x - A.x);
         }
-        return slopes;
 
-    }
+        return {
+            mirrorY: function (points, maxY) {
+                var result = [];
+                for (var i = 0; i < points.length; ++i) {
+                    var mirroredPoint = {
+                        "x": points[i].x,
+                        "y": maxY - points[i].y
+                    };
+                    result.push(mirroredPoint);
+                }
+                return result;
+            },
+            analyseSphereGraph: function (points) {
+                var result;
+                if (points.length < 2) {
+                    result = {
+                        "result": false,
+                        "reason": "too few points"
+                    };
+                    return result;
+                }
 
-    return {
-        mirrorY: function (points, maxY) {
-            for (var i = 0; i < points.length; ++i) {
-                points[i].y = maxY - points[i].y;
-            }
-            return points;
-        },
-        analyseSphereGraph: function (points) {
-            //logPoints(points);
-            var slopes = calculateSlopes(points);
-            //logSlopes(slopes);
-            var numberOfSlopes = slopes.length;
+                var lastSlope;
+                var midPoint = -1;
+                var passedMidPoint = false;
 
-            var result;
+                for (var i = 0; i < points.length - 1; i++) {
+                    var A = points[i];
+                    var B = points[i + 1];
 
-            var nextSlope = slopes.shift();
-            var lastSlope;
-            do {
-                lastSlope = nextSlope;
-                nextSlope = slopes.shift();
-            } while (slopes.length > 0 && lastSlope > nextSlope);
-            if (slopes.length === 0) {
-                result =
-                {
-                    "result": false,
-                    "reason": "slope does not ascend anywhere"
-                };
+
+                    if (A.x === B.x) {
+                        // TODO
+                        continue;
+                    }
+                    if (!lastSlope) {
+                        lastSlope = calculateSlope(A, B);
+                        continue;
+                    }
+                    var slope = calculateSlope(A, B);
+                    // TODO handle negative slopes
+                    if (slope < lastSlope && passedMidPoint) {
+                        result = {
+                            "result": false,
+                            "reason": "descending after midpoint",
+                            "midpoint": midPoint,
+                            "index": i
+                        };
+                        break;
+                    }
+                    if (slope < lastSlope) {
+                        continue;
+                    }
+                    if (slope > lastSlope && passedMidPoint) {
+                        continue;
+                    }
+                    if (slope > lastSlope) {
+                        passedMidPoint = true;
+                        midPoint = i;
+                    }
+
+                }
+
+                if (!result) {
+                    if (!passedMidPoint) {
+                        result = {
+                            "result": false,
+                            "reason": "did not find a midpoint"
+                        }
+                    } else {
+                        result = {
+                            "result": true,
+                            "midpoint": midPoint
+                        };
+                    }
+                }
+
+                logPoints(points);
                 return result;
             }
-            if (slopes.length === numberOfSlopes) {
-                result = {
-                    "result": false,
-                    "reason": "slope does not descend at start"
-                };
-                return result;
-            }
-            do {
-                lastSlope = nextSlope;
-                nextSlope = slopes.shift();
-            } while (slopes.length > 0 && nextSlope > lastSlope);
-            if (slopes.length !== 0) {
-                result = {
-                    "result": false,
-                    "reason": "slope does not ascend until end"
-                };
-                return result;
-            }
-
-            result =
-            {
-                "result": true
-            };
-            return result;
         }
-    };
-
-});
+    }
+);
