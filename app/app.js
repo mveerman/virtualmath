@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and components
 angular.module('virtualMath', [
     'ngRoute',
+    'ngTouch',
     'virtualMath.assignment1',
     'virtualMath.assignment2',
     'virtualMath.help1',
