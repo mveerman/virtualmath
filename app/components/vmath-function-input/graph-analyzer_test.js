@@ -7,30 +7,34 @@ describe('graph analysis', function () {
         graphAnalyzer = _graphAnalyzer_;
     }));
     var xCoords = [0, 1, 2, 3, 4, 5];
-    var okYCoords = [0, 2, 1, 0.5, 1, 2];
-    var wrongYCoords = [0, 1, 2, 3, 4, 5];
-    var points1 = [];
+    var yCoordsSphere = [0, 2, 3, 3.5, 4.5, 6.5];
+    var yCoordsCilinder = [0, 1, 2, 3, 4, 5];
+    var sphereGraph = [];
     for (i = 0; i < xCoords.length; i++) {
         point = {
             "x": xCoords[i],
-            "y": okYCoords[i]
+            "y": yCoordsSphere[i]
         };
-        points1.push(point);
+        sphereGraph.push(point);
     }
-    var points2 = [];
+    var cilinderGraph = [];
     for (var i = 0; i < xCoords.length; i++) {
         var point = {
             "x": xCoords[i],
-            "y": wrongYCoords[i]
+            "y": yCoordsCilinder[i]
         };
-        points2.push(point);
+        cilinderGraph.push(point);
     }
     var okResult = {
         "result": true
     };
-    it('analyzes graphs', function () {
-        expect(graphAnalyzer.analyseSphereGraph(points1)).toEqual(okResult);
-        expect(graphAnalyzer.analyseSphereGraph(points2)).not.toEqual(okResult);
+    it('analyzes sphere graphs', function () {
+        expect(graphAnalyzer.analyseSphereGraph(sphereGraph).result).toBe(true);
+        expect(graphAnalyzer.analyseSphereGraph(cilinderGraph).result).toBe(false);
+    });
+    it('analyzes cilinder graphs', function () {
+        expect(graphAnalyzer.analyseCilinderGraph(sphereGraph).result).toBe(false);
+        expect(graphAnalyzer.analyseCilinderGraph(cilinderGraph).result).toBe(true);
     });
 });
 

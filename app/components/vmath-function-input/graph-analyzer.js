@@ -1,5 +1,6 @@
 'use strict';
 
+// TODO negative slopes, right-to-left drawn graphs
 angular.module('graphModule', []).factory('graphAnalyzer', function () {
         function logPoints(points) {
             var i = 0;
@@ -7,9 +8,13 @@ angular.module('graphModule', []).factory('graphAnalyzer', function () {
                 console.log((i++) + ": [" + p.x + "," + p.y + "]");
             });
         }
-    
+
         function calculateSlope(A, B) {
             return (B.y - A.y) / (B.x - A.x);
+        }
+
+        function withinRange(number, expected, d) {
+            return (number > expected) ? number - d <= expected : number + d >= expected;
         }
 
         return {
@@ -52,7 +57,6 @@ angular.module('graphModule', []).factory('graphAnalyzer', function () {
                         continue;
                     }
                     var slope = calculateSlope(A, B);
-                    // TODO handle negative slopes
                     if (slope < lastSlope && passedMidPoint) {
                         result = {
                             "result": false,
@@ -63,16 +67,18 @@ angular.module('graphModule', []).factory('graphAnalyzer', function () {
                         break;
                     }
                     if (slope < lastSlope) {
+                        lastSlope= slope;
                         continue;
                     }
                     if (slope > lastSlope && passedMidPoint) {
+                        lastSlope= slope;
                         continue;
                     }
                     if (slope > lastSlope) {
                         passedMidPoint = true;
                         midPoint = i;
+                        lastSlope= slope;
                     }
-
                 }
 
                 if (!result) {
@@ -89,6 +95,42 @@ angular.module('graphModule', []).factory('graphAnalyzer', function () {
                     }
                 }
 
+                logPoints(points);
+                return result;
+            },
+            analyseCilinderGraph: function (points) {
+                var result;
+                if (points.length < 2) {
+                    result = {
+                        "result": false,
+                        "reason": "too few points"
+                    };
+                    return result;
+                }
+                for (var i = 0; i < points.length - 1; i++) {
+                    var A = points[i];
+                    var B = points[i + 1];
+
+
+                    if (A.x === B.x) {
+                        // TODO
+                        continue;
+                    }
+                    var slope = calculateSlope(A, B);
+                    if (!withinRange(slope, 1, 0.05)) {
+                        result = {
+                            "result": false,
+                            "reason": "slope not within d=0.05 of 1: " + slope,
+                            "index": i
+                        }
+                        break;
+                    }
+                }
+                if (!result) {
+                    result = {
+                        "result": true
+                    }
+                }
                 logPoints(points);
                 return result;
             }
