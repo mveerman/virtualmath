@@ -52,7 +52,7 @@ angular.module('graphModule', []).factory('graphAnalyzer', function () {
                         // TODO
                         continue;
                     }
-                    if (!lastSlope) {
+                    if (typeof lastSlope === 'undefined') {
                         lastSlope = calculateSlope(A, B);
                         continue;
                     }
@@ -81,7 +81,7 @@ angular.module('graphModule', []).factory('graphAnalyzer', function () {
                     }
                 }
 
-                if (!result) {
+                if (typeof result === 'undefined') {
                     if (!passedMidPoint) {
                         result = {
                             "result": false,
@@ -122,7 +122,7 @@ angular.module('graphModule', []).factory('graphAnalyzer', function () {
                             "result": false,
                             "reason": "slope not within d=0.05 of 1: " + slope,
                             "index": i
-                        }
+                        };
                         break;
                     }
                 }
