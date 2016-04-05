@@ -19,10 +19,8 @@ angular.module('virtualMath', [
     // general survey controller
     .controller('surveyController', function ($scope) {
         $scope.surveyData = {
-            runs: [{
-                score: -1
-            }],
-            currentRun: 0,
+            runs: [],
+            currentRun: -1,
             lastScore: -1
         };
 
@@ -31,9 +29,11 @@ angular.module('virtualMath', [
         };
 
         $scope.getCurrentSurveyRunData = function() {
-            if ($scope.surveyData.runs.length > $scope.surveyData.currentRun) {
-                return $scope.surveyData.runs[$scope.surveyData.currentRun];
+            if ($scope.surveyData.currentRun < 0) {
+                $scope.startNewSurveyRun();
             }
+
+            return $scope.surveyData.runs[$scope.surveyData.currentRun];
         };
 
         $scope.startNewSurveyRun = function() {

@@ -13,7 +13,20 @@ angular.module('virtualMath.assignment2', [
     }])
 
     .controller('Assignment2Ctrl', ['$scope', function ($scope) {
-        $scope.description = {
-            text: ''
+        $scope.surveyController = $scope.$parent;
+        $scope.surveyController.getCurrentSurveyRunData().assignment2 = {
+            graphData: '',
+            description: ''
         };
+        $scope.description = '';
+
+        $scope.saveGraph = function(graphData) {
+            $scope.surveyController.getCurrentSurveyRunData().assignment2.graphData = graphData;
+        };
+
+        $scope.saveDescription = function() {
+            $scope.surveyController.getCurrentSurveyRunData().assignment2.description = $scope.description;
+        };
+
+        $scope.functionInput = angular.module('virtualMath.vmath-function-input-directive');
     }]);

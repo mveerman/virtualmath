@@ -1,28 +1,34 @@
 <form name="assignmentForm2" ng-controller="Assignment2Ctrl" novalidate>
-  <div class="question">
-    <h1>Opgave B</h1>
-    <p class="description clearfix">
-      <img src="img/cylinder.jpg" alt="Cylinder" height="150"/>
-      Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid stroomt.
-    </p>
-    <label>a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water in
-      de fles.</label>
-    <div class="graph">
-      <vmath-function-input field-name="grafiek2"></vmath-function-input>
-    </div>
-    <p>&nbsp;</p>
-    <div class="deepthoughts">
-      <label>b) Beschrijf jouw manier van denken
-        <textarea name="q2description" required ng-model="description.text" ng-minlength="10"></textarea>
-      </label>
-      <div role="alert">
-                <span class="error" ng-show="assignmentForm2.q2description.$touched && assignmentForm2.q2description.$error.required">
+    <div class="question">
+        <h1>Opgave B</h1>
+        <p class="description clearfix">
+            <img src="img/cylinder.jpg" alt="Cilinder" height="150"/>
+            Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid stroomt.
+        </p>
+        <label>a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water
+            in de fles.</label>
+        <div class="graph">
+            <vmath-function-input on-graph-update="saveGraph"></vmath-function-input>
+        </div>
+        <p>&nbsp;</p>
+        <div class="deepthoughts">
+            <label>b) Beschrijf jouw manier van denken
+                <textarea name="q2description" required ng-model="description" ng-minlength="10"
+                          ng-change="saveDescription()"></textarea>
+            </label>
+            <div role="alert">
+                <span class="error"
+                      ng-show="assignmentForm2.q2description.$touched && assignmentForm2.q2description.$error.required">
                     Dit veld is verplicht
                 </span>
-                <span class="error" ng-show="assignmentForm2.q2description.$touched && assignmentForm2.q2description.$error.minlength">
+                <span class="error"
+                      ng-show="assignmentForm2.q2description.$touched && assignmentForm2.q2description.$error.minlength">
                     De uitleg is te kort. Geef meer tekst op.
                 </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="wf-buttons">
+        <input type="submit" value="Volgende" ng-disabled="!(graphData.dirty && assignmentForm2.q2description.$valid)"/>
+    </div>
 </form>

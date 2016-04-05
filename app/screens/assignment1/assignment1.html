@@ -5,27 +5,30 @@
             <img src="img/bowl.jpg" alt="Bowl" height="150"/>
             Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid stroomt.
         </p>
-        <label>a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water in
-            de fles.</label>
+        <label>a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water
+            in de fles.</label>
         <div class="graph">
             <vmath-function-input on-graph-update="saveGraph"></vmath-function-input>
         </div>
         <p>&nbsp;</p>
         <div class="deepthoughts">
             <label>b) Beschrijf jouw manier van denken
-                <textarea name="q1description" required ng-model="description.text" ng-minlength="10"></textarea>
+                <textarea name="q1description" required ng-model="description" ng-minlength="10"
+                          ng-change="saveDescription()"></textarea>
             </label>
             <div role="alert">
-                <span class="error" ng-show="assignmentForm1.q1description.$touched && assignmentForm1.q1description.$error.required">
+                <span class="error"
+                      ng-show="assignmentForm1.q1description.$touched && assignmentForm1.q1description.$error.required">
                     Dit veld is verplicht
                 </span>
-                <span class="error" ng-show="assignmentForm1.q1description.$touched && assignmentForm1.q1description.$error.minlength">
+                <span class="error"
+                      ng-show="assignmentForm1.q1description.$touched && assignmentForm1.q1description.$error.minlength">
                     De uitleg is te kort. Geef meer tekst op.
                 </span>
             </div>
         </div>
     </div>
     <div class="wf-buttons">
-        <input type="submit" value="Volgende" ng-disabled="!(graphData.dirty && assignmentForm1.q1description.$valid)" />
+        <input type="submit" value="Volgende" ng-disabled="!(graphData.dirty && assignmentForm1.q1description.$valid)"/>
     </div>
 </form>
