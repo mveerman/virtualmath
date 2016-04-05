@@ -12,20 +12,26 @@ angular.module('virtualMath.assignment2', [
         });
     }])
 
-    .controller('Assignment2Ctrl', ['$scope', function ($scope) {
+    .controller('Assignment2Ctrl', ['$scope', '$location', function ($scope, $location) {
         $scope.surveyController = $scope.$parent;
         $scope.surveyController.getCurrentSurveyRunData().assignment2 = {
             graphData: '',
             description: ''
         };
         $scope.description = '';
+        $scope.graphData = '';
 
         $scope.saveGraph = function(graphData) {
             $scope.surveyController.getCurrentSurveyRunData().assignment2.graphData = graphData;
+            $scope.graphData = graphData;
         };
 
         $scope.saveDescription = function() {
             $scope.surveyController.getCurrentSurveyRunData().assignment2.description = $scope.description;
+        };
+
+        $scope.advanceToNextPage = function() {
+            $location.path('/compare');
         };
 
         $scope.functionInput = angular.module('virtualMath.vmath-function-input-directive');
