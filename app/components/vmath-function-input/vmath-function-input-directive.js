@@ -36,7 +36,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     this.doGraphUpdate()(this.graphData);
                 };
                 angular.element($window).bind('resize', function () {
-                    this.resizeCanvas();
+                    resizeCanvas();
                     $apply();
                 });
 
