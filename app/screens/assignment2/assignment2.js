@@ -2,6 +2,7 @@
 
 angular.module('virtualMath.assignment2', [
         'ngRoute',
+        'graphModule',
         'virtualMath.vmath-function-input-directive'
     ])
 
@@ -12,7 +13,8 @@ angular.module('virtualMath.assignment2', [
         });
     }])
 
-    .controller('Assignment2Ctrl', ['$scope', '$location', function ($scope, $location) {
+    .controller('Assignment2Ctrl', ['graphAnalyzer', '$scope', '$location', function (graphAnalyzer, $scope, $location) {
+        graphAnalyzer.analysis = 'cilinder';
         $scope.surveyController = $scope.$parent;
         $scope.surveyController.getCurrentSurveyRunData().assignment2 = {
             graphData: '',
@@ -21,12 +23,12 @@ angular.module('virtualMath.assignment2', [
         $scope.description = '';
         $scope.graphData = '';
 
-        $scope.saveGraph = function(graphData) {
+        $scope.saveGraph = function (graphData) {
             $scope.surveyController.getCurrentSurveyRunData().assignment2.graphData = graphData;
             $scope.graphData = graphData;
         };
 
-        $scope.saveDescription = function() {
+        $scope.saveDescription = function () {
             $scope.surveyController.getCurrentSurveyRunData().assignment2.description = $scope.description;
         };
 

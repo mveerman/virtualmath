@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
-    .directive('vmathFunctionInput', ['$window', 'graphAnalyzer', function ($window, graphAnalyzer) {
+    .directive('vmathFunctionInput', ['graphAnalyzer', '$window', function (graphAnalyzer, $window) {
         return {
             restrict: 'E',
             templateUrl: 'components/vmath-function-input/vmath-function-input-directive.html',
@@ -12,38 +12,39 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
             bindToController: true,
             controllerAs: 'FIctrl',
             controller: function ($element, $attrs) {
-                this.canvas = angular.element($element).find("canvas")[0];
+                var vm = this;
+                vm.canvas = angular.element($element).find("canvas")[0];
 
-                this.graphData = {
+                vm.graphData = {
                     base64url: '',
                     dirty: false,
                     pristine: true
                 };
 
-                this.resizeCanvas = function () {
+                vm.resizeCanvas = function () {
                     // When zoomed out to less than 100%, for some very strange reason,
                     // some browsers report devicePixelRatio as less than 1
                     // and only part of the canvas is cleared then.
                     var ratio = Math.max(window.devicePixelRatio || 1, 1);
-                    this.canvas.width = this.canvas.offsetWidth * ratio;
-                    this.canvas.height = this.canvas.offsetHeight * ratio;
-                    this.canvas.getContext("2d").scale(ratio, ratio);
-                    this.drawAxes();
-                    this.addLabels();
+                    vm.canvas.width = this.canvas.offsetWidth * ratio;
+                    vm.canvas.height = this.canvas.offsetHeight * ratio;
+                    vm.canvas.getContext("2d").scale(ratio, ratio);
+                    vm.drawAxes();
+                    vm.addLabels();
 
-                    this.graphData.base64url = '';
-                    this.graphData.dirty = false;
-                    this.doGraphUpdate()(this.graphData);
+                    vm.graphData.base64url = '';
+                    vm.graphData.dirty = false;
+                    vm.doGraphUpdate()(vm.graphData);
                 };
                 angular.element($window).bind('resize', function () {
                     resizeCanvas();
                     $apply();
                 });
 
-                this.signaturePad = new SignaturePad(this.canvas);
+                vm.signaturePad = new SignaturePad(vm.canvas);
 
-                this.drawAxes = function () {
-                    var ctx = this.canvas.getContext("2d");
+                vm.drawAxes = function () {
+                    var ctx = vm.canvas.getContext("2d");
                     var padding = 10;
 
                     ctx.strokeStyle = "grey";
@@ -52,51 +53,50 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     /* y axis */
                     ctx.beginPath();
                     ctx.moveTo(padding, 0);
-                    ctx.lineTo(padding, this.canvas.height);
+                    ctx.lineTo(padding, vm.canvas.height);
                     ctx.stroke();
 
                     /* x axis */
                     ctx.beginPath();
-                    ctx.moveTo(0, this.canvas.height - padding);
-                    ctx.lineTo(this.canvas.width, this.canvas.height - padding);
+                    ctx.moveTo(0, vm.canvas.height - padding);
+                    ctx.lineTo(vm.canvas.width, vm.canvas.height - padding);
                     ctx.stroke();
                 };
 
-                this.addLabels = function () {
-                    var ctx = this.canvas.getContext("2d");
+                vm.addLabels = function () {
+                    var ctx = vm.canvas.getContext("2d");
 
                     ctx.font = "7pt Arial";
                     ctx.save();
 
                     /* y axis labels */
-                    ctx.translate(8, (this.canvas.height / 2) + 50);
+                    ctx.translate(8, (vm.canvas.height / 2) + 50);
                     ctx.rotate(-Math.PI / 2);
                     ctx.fillText("Hoogte water in de fles", 10, 0);
                     ctx.restore();
 
                     /* x axis labels */
-                    ctx.fillText("Hoeveelheid water", (this.canvas.width / 2) - 40, this.canvas.height - 1);
+                    ctx.fillText("Hoeveelheid water", (vm.canvas.width / 2) - 40, vm.canvas.height - 1);
 
                     /* zero */
-                    ctx.fillText("0", 1, this.canvas.height - 1);
+                    ctx.fillText("0", 1, vm.canvas.height - 1);
                 };
 
-                this.resizeCanvas();
+                vm.resizeCanvas();
 
-                this.redoClickHandler = function () {
-                    angular.element(this.canvas).removeClass("wrong-graph");
-                    angular.element(this.canvas).removeClass("right-graph");
-                    this.signaturePad._reset();
-                    this.resizeCanvas();
+                vm.redoClickHandler = function () {
+                    angular.element(vm.canvas).removeClass("wrong-graph");
+                    angular.element(vm.canvas).removeClass("right-graph");
+                    vm.signaturePad._reset();
+                    vm.resizeCanvas();
                 };
 
-                this.mouseOutHandler = function () {
-                    this.graphData.pristine = false;
-                    this.graphData.base64url = this.signaturePad.toDataURL();
-
+                vm.mouseOutHandler = function () {
+                    vm.graphData.pristine = false;
+                    vm.graphData.base64url = vm.signaturePad.toDataURL();
                     if (this.signaturePad.allPoints.length > 0) {
-                        var pointsToAnalyze = graphAnalyzer.mirrorY(this.signaturePad.allPoints, this.signaturePad._canvas.height);
-                        var analysis = graphAnalyzer.analyseSphereGraph(pointsToAnalyze);
+                        var pointsToAnalyze = graphAnalyzer.mirrorY(vm.signaturePad.allPoints, vm.signaturePad._canvas.height);
+                        var analysis = graphAnalyzer.analyze(pointsToAnalyze);
                         console.log("analysis", analysis);
                         if (analysis.result) {
                             angular.element(this.canvas).removeClass("wrong-graph");
@@ -107,11 +107,11 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                         }
                     }
 
-                    this.doGraphUpdate()(this.graphData);
+                    vm.doGraphUpdate()(vm.graphData);
                 };
 
-                this.mouseDownHandler = function () {
-                    this.graphData.dirty = true;
+                vm.mouseDownHandler = function () {
+                    vm.graphData.dirty = true;
                 }
             }
         }

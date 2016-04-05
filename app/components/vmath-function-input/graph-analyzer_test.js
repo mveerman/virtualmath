@@ -9,6 +9,8 @@ describe('graph analysis', function () {
     var xCoords = [0, 1, 2, 3, 4, 5];
     var yCoordsSphere = [0, 2, 3, 3.5, 4.5, 6.5];
     var yCoordsCilinder = [0, 1, 2, 3, 4, 5];
+    var yCoordsCilinderWobbly = [0, 1.03, 1.98, 3, 4.05, 5.01];
+
     var sphereGraph = [];
     for (i = 0; i < xCoords.length; i++) {
         point = {
@@ -25,16 +27,25 @@ describe('graph analysis', function () {
         };
         cilinderGraph.push(point);
     }
+    var cilinderGraphWobbly = [];
+    for (var i = 0; i < xCoords.length; i++) {
+        var point = {
+            "x": xCoords[i],
+            "y": yCoordsCilinderWobbly[i]
+        }
+        cilinderGraphWobbly.push(point);
+    }
     var okResult = {
         "result": true
     };
     it('analyzes sphere graphs', function () {
-        expect(graphAnalyzer.analyseSphereGraph(sphereGraph).result).toBe(true);
-        expect(graphAnalyzer.analyseSphereGraph(cilinderGraph).result).toBe(false);
+        expect(graphAnalyzer.analyzeSphereGraph(sphereGraph).result).toBe(true);
+        expect(graphAnalyzer.analyzeSphereGraph(cilinderGraph).result).toBe(false);
     });
     it('analyzes cilinder graphs', function () {
-        expect(graphAnalyzer.analyseCilinderGraph(sphereGraph).result).toBe(false);
-        expect(graphAnalyzer.analyseCilinderGraph(cilinderGraph).result).toBe(true);
+        expect(graphAnalyzer.analyzeCilinderGraph(sphereGraph).result).toBe(false);
+        expect(graphAnalyzer.analyzeCilinderGraph(cilinderGraph).result).toBe(true);
+        expect(graphAnalyzer.analyzeCilinderGraph(cilinderGraphWobbly).result).toBe(true);
     });
 });
 

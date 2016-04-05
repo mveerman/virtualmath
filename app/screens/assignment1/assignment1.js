@@ -2,6 +2,7 @@
 
 angular.module('virtualMath.assignment1', [
         'ngRoute',
+        'graphModule',
         'virtualMath.vmath-function-input-directive'
     ])
 
@@ -12,7 +13,8 @@ angular.module('virtualMath.assignment1', [
         });
     }])
 
-    .controller('Assignment1Ctrl', ['$scope', '$location', function ($scope, $location) {
+    .controller('Assignment1Ctrl', ['graphAnalyzer', '$scope', '$location', function (graphAnalyzer, $scope, $location) {
+        graphAnalyzer.analysis= 'sphere';
         $scope.surveyController = $scope.$parent;
         $scope.surveyController.getCurrentSurveyRunData().assignment1 = {
             graphData: '',
