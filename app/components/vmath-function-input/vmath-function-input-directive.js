@@ -11,108 +11,112 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
             },
             bindToController: true,
             controllerAs: 'FIctrl',
-            controller: function ($element, $attrs) {
+            controller: function ($scope, $element, $attrs) {
+                var canvas = angular.element($element).find("canvas")[0];
+                var path;
+                var drag = false;
+                initPaper();
+
                 var vm = this;
-                vm.canvas = angular.element($element).find("canvas")[0];
+
+                function initPaper() {
+                    paper.install(window);
+                    paper.setup(canvas);
+                }
+
+                function createPoint(event) {
+                    var rect = canvas.getBoundingClientRect();
+                    return new paper.Point(
+                        event.clientX - rect.left,
+                        event.clientY - rect.top
+                    );
+                }
+
+                function analyze(path) {
+                    var points = [];
+                    for (var i = 0; i < path.segments.length; i++) {
+                        points.push({x: path.segments[i].point.x, y: canvas.height - path.segments[i].point.y});
+                    }
+                    var result = graphAnalyzer.analyze(points);
+
+                    handleGraphResult(result);
+
+                    if (result.midpoint) {
+                        // place debug-point for now
+                        var midpoint = path.segments[result.midpoint].point;
+                        var circle = new paper.Path.Circle(new Point(midpoint.x, midpoint.y), 5);
+                        circle.fillColor = 'blue';
+                    }
+                    return result;
+                }
+
+                function handleGraphResult(result) {
+                    if (result.result) {
+                        angular.element(canvas).removeClass('wrong-graph').addClass('right-graph');
+                    } else {
+                        angular.element(canvas).removeClass('right-graph').addClass('wrong-graph');
+                    }
+                }
 
                 vm.graphData = {
                     base64url: '',
-                    dirty: false,
-                    pristine: true
+                    pristine: true,
+                    dirty: false
                 };
-
-                vm.resizeCanvas = function () {
-                    // When zoomed out to less than 100%, for some very strange reason,
-                    // some browsers report devicePixelRatio as less than 1
-                    // and only part of the canvas is cleared then.
-                    var ratio = Math.max(window.devicePixelRatio || 1, 1);
-                    vm.canvas.width = this.canvas.offsetWidth * ratio;
-                    vm.canvas.height = this.canvas.offsetHeight * ratio;
-                    vm.canvas.getContext("2d").scale(ratio, ratio);
-                    vm.drawAxes();
-                    vm.addLabels();
-
-                    vm.graphData.base64url = '';
-                    vm.graphData.dirty = false;
-                    vm.doGraphUpdate()(vm.graphData);
-                };
-                angular.element($window).bind('resize', function () {
-                    resizeCanvas();
-                    $apply();
-                });
-
-                vm.signaturePad = new SignaturePad(vm.canvas);
-
-                vm.drawAxes = function () {
-                    var ctx = vm.canvas.getContext("2d");
-                    var padding = 10;
-
-                    ctx.strokeStyle = "grey";
-                    ctx.lineWidth = 2;
-
-                    /* y axis */
-                    ctx.beginPath();
-                    ctx.moveTo(padding, 0);
-                    ctx.lineTo(padding, vm.canvas.height);
-                    ctx.stroke();
-
-                    /* x axis */
-                    ctx.beginPath();
-                    ctx.moveTo(0, vm.canvas.height - padding);
-                    ctx.lineTo(vm.canvas.width, vm.canvas.height - padding);
-                    ctx.stroke();
-                };
-
-                vm.addLabels = function () {
-                    var ctx = vm.canvas.getContext("2d");
-
-                    ctx.font = "7pt Arial";
-                    ctx.save();
-
-                    /* y axis labels */
-                    ctx.translate(8, (vm.canvas.height / 2) + 50);
-                    ctx.rotate(-Math.PI / 2);
-                    ctx.fillText("Hoogte water in de fles", 10, 0);
-                    ctx.restore();
-
-                    /* x axis labels */
-                    ctx.fillText("Hoeveelheid water", (vm.canvas.width / 2) - 40, vm.canvas.height - 1);
-
-                    /* zero */
-                    ctx.fillText("0", 1, vm.canvas.height - 1);
-                };
-
-                vm.resizeCanvas();
 
                 vm.redoClickHandler = function () {
-                    angular.element(vm.canvas).removeClass("wrong-graph");
-                    angular.element(vm.canvas).removeClass("right-graph");
-                    vm.signaturePad._reset();
-                    vm.resizeCanvas();
+                    angular.element(canvas).removeClass('wrong-graph').removeClass('right-graph');
+                    paper.project.clear();
+                    paper.project.view.update();
+                    vm.graphData.dirty = false;
+                    path = undefined;
                 };
 
-                vm.mouseOutHandler = function () {
-                    vm.graphData.pristine = false;
-                    vm.graphData.base64url = vm.signaturePad.toDataURL();
-                    if (this.signaturePad.allPoints.length > 0) {
-                        var pointsToAnalyze = graphAnalyzer.mirrorY(vm.signaturePad.allPoints, vm.signaturePad._canvas.height);
-                        var analysis = graphAnalyzer.analyze(pointsToAnalyze);
-                        console.log("analysis", analysis);
-                        if (analysis.result) {
-                            angular.element(this.canvas).removeClass("wrong-graph");
-                            angular.element(this.canvas).addClass("right-graph");
-                        } else {
-                            angular.element(this.canvas).removeClass("right-graph");
-                            angular.element(this.canvas).addClass("wrong-graph");
-                        }
+                vm.mouseUp = function () {
+                    if (!drag) {
+                        return;
                     }
-
+                    path.simplify();
+                    vm.graphData.analysis = analyze(path);
+                    vm.graphData.pristine = false;
+                    vm.graphData.base64url = canvas.toDataURL.apply(canvas);
                     vm.doGraphUpdate()(vm.graphData);
+                    drag = false;
                 };
 
-                vm.mouseDownHandler = function () {
+                vm.mouseDrag = function (event) {
+                    if (drag) {
+                        path.add(createPoint(event));
+                        path.smooth();
+                    }
+                };
+
+                vm.mouseDown = function (event) {
+                    if (path !== undefined) {
+                        // only 1 line allowed to keep analysis simple
+                        return;
+                    }
                     vm.graphData.dirty = true;
-                }
+                    drag = true;
+                    path = new paper.Path();
+                    path.strokeColor = 'black';
+                    path.add(createPoint(event));
+                };
+
+                vm.touchEnd = function () {
+                    vm.mouseUp();
+                };
+
+                vm.touchMove = function (event) {
+                    vm.mouseDrag(event.targetTouches[0]);
+                };
+
+                vm.touchStart = function (event) {
+                    vm.mouseDown(event.targetTouches[0]);
+                };
+
             }
-        }
-    }]);
+        };
+    }])
+;
+

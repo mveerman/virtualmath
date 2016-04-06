@@ -1,6 +1,8 @@
 <div class="vmath-function-input">
     <div class="vmath-function-input-body">
-        <canvas ng-mousedown="FIctrl.mouseDownHandler()" ng-touchstart="FIctrl.mouseDownHandler()" ng-mouseleave="FIctrl.mouseOutHandler()" ng-touchend="FIctrl.mouseOutHandler()"></canvas>
+        <canvas ng-mousedown="FIctrl.mouseDown($event)" ng-mousemove="FIctrl.mouseDrag($event)"
+                ng-mouseup="FIctrl.mouseUp()" ng-mouseleave="FIctrl.mouseUp()" ng-touchstart="FIctrl.touchStart($event)"
+                ng-touchmove="FIctrl.touchMove($event)" ng-touchend="FIctrl.touchEnd()"></canvas>
     </div>
     <div class="vmath-function-input-buttons">
         <button type="button" class="button clear" ng-click="FIctrl.redoClickHandler()">Opnieuw proberen</button>

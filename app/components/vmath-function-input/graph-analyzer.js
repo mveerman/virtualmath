@@ -6,12 +6,12 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
 
     vm.analysis = '';
 
-    vm.analyze = function (points, maxY) {
+    vm.analyze = function (points) {
         if (vm.analysis === 'sphere') {
-            return vm.analyzeSphereGraph(points, maxY);
+            return vm.analyzeSphereGraph(points);
         }
         if (vm.analysis === 'cilinder') {
-            return vm.analyzeCilinderGraph(points, maxY);
+            return vm.analyzeCilinderGraph(points);
         }
         throw 'unknown analysis: ' + vm.analysis;
     };

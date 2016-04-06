@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "paper" : "~0.9.25",
     "angular": "~1.4.0",
     "angular-route": "~1.4.0",
     "ngtouch": "~1.0.1",
