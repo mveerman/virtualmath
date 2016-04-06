@@ -12,8 +12,8 @@ angular.module('virtualMath.help1', [
         });
     }])
 
-    .controller('Help1Ctrl', ['$scope', function ($scope) {
-        $scope.description = {
-            text: ''
+    .controller('Help1Ctrl', ['$scope', '$location', function ($scope, $location) {
+        $scope.advanceToNextPage = function() {
+            $location.path('/compare');
         };
     }]);

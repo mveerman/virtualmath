@@ -1,16 +1,21 @@
-<div class="question">
-    <h1>Help 1</h1>
-    <p class="description clearfix">
-        Dit is de helppagina met een animatie ter uitleg
-    </p>
-    <p>
-        <video width="100%" autoplay>
-            <source src="/3dsMax/kom-klok.mp4" type="video/mp4"/>
+<div class="wf-page">
+    <div class="question">
+        <h1>Help 1</h1>
+        <p class="description clearfix">
+            Dit is de helppagina met een animatie ter uitleg
+        </p>
+        <p>
+            <video width="100%" autoplay>
+                <source src="/3dsMax/Help%201.mp4" type="video/mp4"/>
+                Your browser does not support the video tag.
+            </video>
+        <p>
+            <small>(als de video niet afspeelt, klik dan <a href="/3dsMax/Help%201.mp4" target="_blank">hier</a></small>
+        </p>
 
-            Your browser does not support the video tag.
-        </video>
-    <p>
-        <small>(als de video niet afspeelt, klik dan <a href="/3dsMax/kom-klok.mp4" target="_blank">hier</a></small>
-    </p>
+    </div>
 
+    <div class="wf-buttons" ng-controller="Help1Ctrl">
+        <input type="submit" value="Volgende" ng-click="advanceToNextPage()"/>
+    </div>
 </div>
