@@ -1,8 +1,28 @@
-<div class="question">
+<div class="question" ng-controller="CompareCtrl">
     <h1>Vergelijk</h1>
     <p class="description clearfix">
         Vergelijk de grafieken. Ben je tevreden? Lever het werk dan in.
     </p>
+
+    <div class="assignment-compare-block">
+        <h3>Opgave A</h3>
+        <div class="figure">
+            <img src="img/bowl.jpg" alt="Bowl" height="150"/>
+        </div>
+        <div class="answer">
+            <img src="{{currentRunData.assignment1.graphData.base64url}}" />
+        </div>
+    </div>
+
+    <div class="assignment-compare-block">
+        <h3>Opgave B</h3>
+        <div class="figure">
+            <img src="img/cylinder.jpg" alt="Bowl" height="150"/>
+        </div>
+        <div class="answer">
+            <img src="{{currentRunData.assignment2.graphData.base64url}}" />
+        </div>
+    </div>
 
 
 </div>

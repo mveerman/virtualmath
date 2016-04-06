@@ -71,6 +71,7 @@ canvas {
     border: 1px solid grey;
 
 }
+
 canvas.wrong-graph {
     border-color: red;
 }
@@ -89,8 +90,32 @@ canvas.right-graph {
     color: red;
 }
 
-.vmath-function-input {}
-.vmath-function-input .vmath-function-input-body {}
+.vmath-function-input {
+}
+
+.vmath-function-input .vmath-function-input-body {
+}
+
 .vmath-function-input .vmath-function-input-buttons {
     padding: 10px;
+}
+
+.assignment-compare-block {
+    max-width: 400px;
+    max-height: 220px;
+}
+
+.assignment-compare-block > h3 {
+
+}
+
+.assignment-compare-block > div {
+    display: inline-block;
+    width: 49%;
+}
+
+.assignment-compare-block > div > img {
+    width: 100%;
+    max-width: 150px;
+    max-height: 150px;
 }

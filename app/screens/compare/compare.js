@@ -13,7 +13,5 @@ angular.module('virtualMath.compare', [
     }])
 
     .controller('CompareCtrl', ['$scope', function ($scope) {
-        $scope.description = {
-            text: ''
-        };
+        $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
     }]);
