@@ -33,7 +33,12 @@ angular.module('virtualMath.assignment2', [
         };
 
         $scope.advanceToNextPage = function() {
-            $location.path('/compare');
+            $scope.surveyController.determineRunScore();
+            if ($scope.surveyController.getCurrentSurveyRunData().score <= 0) {
+                $location.path('/help1');
+            }else {
+                $location.path('/compare');
+            }
         };
 
         $scope.functionInput = angular.module('virtualMath.vmath-function-input-directive');

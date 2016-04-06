@@ -45,6 +45,23 @@ angular.module('virtualMath', [
             });
             $scope.surveyData.currentRun++;
         };
+        
+        $scope.determineRunScore = function () {
+            var data = $scope.getCurrentSurveyRunData();
+            var assignment1Score = 0;
+            if (data.assignment1 && data.assignment1.graphData && data.assignment1.graphData.analysis) {
+                if (data.assignment1.graphData.analysis.result) {
+                    assignment1Score = 1;
+                }
+            }
+            var assignment2Score = 0;
+            if (data.assignment2 && data.assignment2.graphData && data.assignment2.graphData.analysis) {
+                if (data.assignment2.graphData.analysis.result) {
+                    assignment2Score = 1;
+                }
+            }
+            data.score = assignment1Score + assignment2Score;
+        }
     })
 
     .run( function($rootScope, $location) {
