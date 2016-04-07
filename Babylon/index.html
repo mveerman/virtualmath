@@ -52,9 +52,11 @@
         
 
             BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-53.babylon", scene, function (newMeshes) {
-        
-            // Set the target of the camera to the first imported mesh
-            camera.target = new Vector3(0, 500, 0);
+
+                // Set the target of the camera to the first imported mesh
+                camera.setTarget = new BABYLON.Vector3(0, 500, 0);
+
+                //scene.debugLayer.show();
 
             });
         
