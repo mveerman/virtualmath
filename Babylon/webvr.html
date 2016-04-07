@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Bol - WebVR</title>
+        <script src="js/cannon.js"></script>
+        <script src="js/oimo.js"></script>
+        <script src="js/hand.minified-1.2.js"></script>
+        <script src="js/babylon.2.4.0.alpha.js"></script>
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                /*touch-action: none;*/
+            }
+
+            /*
+            #renderCanvas, #presenting-message {
+            */
+            #presenting-message {
+                box-sizing: border-box;
+                height: 100%;
+                left: 0;
+                margin: 0;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
+
+            #presenting-message {
+                color: white;
+                font-family: sans-serif;
+                font-size: 2em;
+                font-weight: bold;
+                z-index: 1;
+                text-align: center;
+                padding: 0.5em;
+                background-color: #444;
+                /*display: none;*/
+            }
+
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <div id="presenting-message">Put on your headset now</div>
+    <script>
+        var canvas = document.getElementById("renderCanvas"), engine = new BABYLON.Engine(canvas, true), scene;
+
+        var createScene = function () {
+        
+            // This creates a basic Babylon Scene object (non-mesh)
+            var myScene = new BABYLON.Scene(engine);
+            myScene.clearColor = new BABYLON.Color3(0.7, 0.7, 0.7);
+
+            var position = new BABYLON.Vector3(0, 0, -300);
+
+            var camera = new BABYLON.VRDeviceOrientationFreeCamera("Camera", position, myScene, 1); // new VRDeviceOrientationFreeCamera(name, position, scene, compensateDistortion)
+
+			// This attaches the camera to the canvas
+			camera.attachControl(canvas, true);
+
+			// This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+            var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), myScene);
+        
+            // Default intensity is 1. Let's dim the light a small amount
+            light.intensity = 1.2;
+
+            BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-53.babylon", myScene, function (meshes) {
+
+                // Set the target of the camera to the first imported mesh
+                camera.setTarget(new BABYLON.Vector3.Zero());
+
+
+            }, function (progress) {}, function(error) {});
+        
+            return myScene;
+        
+        };
+        
+        scene = createScene();
+
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+
+
+        var button = document.getElementById('presenting-message');
+        button.addEventListener('click', function() {
+            engine.switchFullscreen(true);
+        });
+
+    </script>
+</body>
+</html>
