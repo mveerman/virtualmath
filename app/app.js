@@ -7,6 +7,7 @@ angular.module('virtualMath', [
         'virtualMath.assignment1',
         'virtualMath.assignment2',
         'virtualMath.help1',
+        'virtualMath.help2',
         'virtualMath.compare',
         'virtualMath.version'
     ])

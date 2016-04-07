@@ -12,6 +12,10 @@ angular.module('virtualMath.compare', [
         });
     }])
 
-    .controller('CompareCtrl', ['$scope', function ($scope) {
+    .controller('CompareCtrl', ['$scope', '$location', function ($scope, $location) {
         $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
+
+        $scope.goto = function(page) {
+            $location.path(page);
+        };
     }]);
