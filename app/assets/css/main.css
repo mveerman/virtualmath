@@ -1213,6 +1213,16 @@
 			box-shadow: inset 0px 0px 0px 1px #3ecceb;
 		}
 
+	.button:disabled, button:disabled:hover {
+		background-image: -moz-linear-gradient(top, #dddddd, #cccccc);
+		background-image: -webkit-linear-gradient(top, #dddddd, #cccccc);
+		background-image: -ms-linear-gradient(top, #dddddd, #cccccc);
+		background-image: linear-gradient(top, #dddddd, #cccccc);
+		background-color: #cccccc;
+		color: #fff;
+		box-shadow: inset 0px 0px 0px 1px #dddddd;
+	}
+
 /* Desktop + Tablet */
 
 	@media screen and (min-width: 737px) {
