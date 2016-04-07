@@ -16,12 +16,37 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                 var path;
                 var drag = false;
                 initPaper();
+                drawAxes();
 
                 var vm = this;
 
                 function initPaper() {
                     paper.install(window);
                     paper.setup(canvas);
+                }
+
+                function drawAxes() {
+                    var yAxis = new paper.Path();
+                    var offSet = 12;
+                    yAxis.add(new paper.Point(offSet, offSet));
+                    yAxis.add(new paper.Point(offSet, canvas.scrollHeight - offSet));
+                    yAxis.strokeColor = 'black';
+                    var xAxis = new paper.Path();
+                    xAxis.add(new paper.Point(offSet, canvas.scrollHeight - offSet));
+                    xAxis.add(new paper.Point(canvas.scrollWidth - offSet, canvas.scrollHeight - offSet));
+                    xAxis.strokeColor = 'black';
+                    var yLabel = new paper.PointText(new paper.Point(offSet, (canvas.scrollHeight - offSet) / 2));
+                    yLabel.content = 'hoogte water';
+                    var textStyle = {
+                        fontSize: 12,
+                        fontFamily: 'Courier'
+                    };
+                    yLabel.style= textStyle;
+                    yLabel.rotate(270, yLabel.bounds.bottomLeft);
+                    var xLabel = new paper.PointText(new paper.Point((canvas.scrollWidth - offSet) / 2, canvas.scrollHeight));
+                    xLabel.content = 'hoeveelheid water';
+                    xLabel.style= textStyle;
+                    paper.view.draw();
                 }
 
                 function createPoint(event) {
@@ -35,7 +60,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                 function analyze(path) {
                     var points = [];
                     for (var i = 0; i < path.segments.length; i++) {
-                        points.push({x: path.segments[i].point.x, y: canvas.height - path.segments[i].point.y});
+                        points.push({x: path.segments[i].point.x, y: canvas.scrollHeight - path.segments[i].point.y});
                     }
                     var result = graphAnalyzer.analyze(points);
 
@@ -69,6 +94,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     paper.project.clear();
                     paper.project.view.update();
                     vm.graphData.dirty = false;
+                    drawAxes();
                     path = undefined;
                 };
 
@@ -87,7 +113,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                 vm.mouseDrag = function (event) {
                     if (drag) {
                         path.add(createPoint(event));
-                        path.smooth();
+                        path.smooth({type: 'continuous'});
                     }
                 };
 
