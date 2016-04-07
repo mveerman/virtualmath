@@ -1,28 +1,42 @@
-<div class="question" ng-controller="CompareCtrl">
-    <h1>Vergelijk</h1>
-    <p class="description clearfix">
-        Vergelijk de grafieken. Ben je tevreden? Lever het werk dan in.
-    </p>
-
-    <div class="assignment-compare-block">
-        <h3>Opgave A</h3>
-        <div class="figure">
-            <img src="img/bowl.jpg" alt="Bowl" height="150"/>
-        </div>
-        <div class="answer">
-            <img src="{{currentRunData.assignment1.graphData.base64url}}" />
+<div class="container" ng-controller="CompareCtrl">
+    <div class="row">
+        <div class="12u 12u(mobile)">
+            <section>
+                <h2>Vergelijken en inleveren</h2>
+                <p>
+                    Vergelijk de grafieken. Ben je tevreden? Lever het werk dan in.
+                </p>
+            </section>
         </div>
     </div>
+    <div class="row">
+        <div class="12u 12u(mobile)">
+            <section>
+                <ul class="small-image-list">
+                    <li>
+                        <a href="#"><img src="img/bowl.jpg" alt="Bol" class="left" /></a>
+                        <a href="#"><img src="{{currentRunData.assignment1.graphData.base64url}}" alt="" class="right"/></a>
+                        <h4>Opgave A</h4>
+                        <p>{{currentRunData.assignment1.description}}</p>
 
-    <div class="assignment-compare-block">
-        <h3>Opgave B</h3>
-        <div class="figure">
-            <img src="img/cylinder.jpg" alt="Bowl" height="150"/>
-        </div>
-        <div class="answer">
-            <img src="{{currentRunData.assignment2.graphData.base64url}}" />
+                    </li>
+                    <li>
+                        <a href="#"><img src="img/cylinder.jpg" alt="Cilinder" class="left" /></a>
+                        <a href="#"><img src="{{currentRunData.assignment2.graphData.base64url}}" alt="" class="right"/></a>
+                        <h4>Opgave A</h4>
+                        <p>{{currentRunData.assignment2.description}}</p>
+                    </li>
+                </ul>
+            </section>
         </div>
     </div>
-
-
+    <div class="row">
+        <div class="12u">
+            <section>
+                <!--<button type="submit" class="button"
+                        ng-click="advanceToNextPage()">Volgende
+                </button>-->
+            </section>
+        </div>
+    </div>
 </div>

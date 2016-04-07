@@ -13,31 +13,67 @@
     <title>VirtualMath</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body ng-controller="surveyController">
-<ul class="menu">
-    <li><a href="#/assignment1">Opgave A</a></li>
-    <li><a href="#/assignment2">Opgave B</a></li>
-    <li><a href="#/help1">Help 1</a></li>
-    <li><a href="#/compare">Vergelijken en inleveren</a></li>
-</ul>
+<div id="page-wrapper">
+    <div id="header-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+                    <header id="header">
+                        <h1><a href="#" id="logo">VirtualMath</a></h1>
+                        <nav id="nav">
+                            <a href="#/assignment1">Opgave A</a>
+                            <a href="#/assignment2">Opgave B</a>
+                            <a href="#/help1">Help 1</a>
+                            <a href="#/compare">Vergelijken</a>
+                        </nav>
+                    </header>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
+    <div id="main">
 
-<div ng-view></div>
 
-<div>VirtualMath: v<span app-version></span></div>
+        <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a
+                href="http://browsehappy.com/">upgrade
+            your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div ng-view></div>
+
+        <div></div>
+
+
+    </div>
+
+    <div id="footer-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+                    <div id="copyright">
+                        &copy; UvA / HvA &ndash; ICT Services &ndash; O&O | VirtualMath: v<span app-version></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- In production use:
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
+
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/ngtouch/build/ngTouch.min.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
@@ -52,5 +88,13 @@
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>
 <script src="components/version/interpolate-filter.js"></script>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/skel-viewport.min.js"></script>
+<script src="assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="assets/js/main.js"></script>
 </body>
 </html>

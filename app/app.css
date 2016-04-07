@@ -119,3 +119,18 @@ canvas.right-graph {
     max-width: 150px;
     max-height: 150px;
 }
+
+.answer-graph {
+
+}
+.answer-graph img {
+    width: 100%;
+    max-width:150px;
+}
+
+@media screen and (min-width: 737px) {
+    .compare-row {
+        background: #c8d2bc url("images/bg1.png");
+        padding: 2em 0;
+    }
+}
