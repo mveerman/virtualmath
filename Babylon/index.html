@@ -36,10 +36,7 @@
 			scene.clearColor = new BABYLON.Color3(0.7, 0.7, 0.7);
         
             // This creates and positions a free camera (non-mesh)
-            //var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
-
-//			var camera = new BABYLON.ArcRotateCamera("Camera", 0, Math.PI / 2, 500, BABYLON.Vector3(0,0,100), scene);
-			var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 500, BABYLON.Vector3.Zero(), scene);
+			var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 500, BABYLON.Vector3.Zero(), scene); //new ArcRotateCamera(name, alpha, beta, radius, target, scene)
 
             // This targets the camera to scene origin
             camera.setTarget(BABYLON.Vector3.Zero());
@@ -57,11 +54,8 @@
             BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-53.babylon", scene, function (newMeshes) {
         
             // Set the target of the camera to the first imported mesh
-         	new Vector3(0, 500, 0)
-            camera.target = Vector3 //newMeshes[0];
-			
-  
-        
+            camera.target = new Vector3(0, 500, 0);
+
             });
         
             return scene;
@@ -78,6 +72,7 @@
         window.addEventListener("resize", function () {
             engine.resize();
         });
+
     </script>
 </body>
 </html>
