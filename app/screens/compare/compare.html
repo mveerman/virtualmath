@@ -34,7 +34,7 @@
                 <button type="submit" class="button" ng-click="goto('help1')">Hulp bij de oefening</button>
             </section>
 
-            <section>
+            <section ng-if="currentRunData.score >= 1">
                 <button type="submit" class="button" ng-click="goto('help2')">Meer hulp bij de oefening</button>
             </section>
         </div>
