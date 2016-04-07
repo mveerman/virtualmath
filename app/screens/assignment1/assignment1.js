@@ -26,6 +26,7 @@ angular.module('virtualMath.assignment1', [
         $scope.saveGraph = function(graphData) {
             $scope.surveyController.getCurrentSurveyRunData().assignment1.graphData = graphData;
             $scope.graphData = graphData;
+            $scope.surveyController.determineRunScore();
         };
 
         $scope.saveDescription = function() {

@@ -26,6 +26,7 @@ angular.module('virtualMath.assignment2', [
         $scope.saveGraph = function (graphData) {
             $scope.surveyController.getCurrentSurveyRunData().assignment2.graphData = graphData;
             $scope.graphData = graphData;
+            $scope.surveyController.determineRunScore();
         };
 
         $scope.saveDescription = function () {
@@ -33,7 +34,6 @@ angular.module('virtualMath.assignment2', [
         };
 
         $scope.advanceToNextPage = function() {
-            $scope.surveyController.determineRunScore();
             if ($scope.surveyController.getCurrentSurveyRunData().score <= 0) {
                 $location.path('/help1');
             }else {

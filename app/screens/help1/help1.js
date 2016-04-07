@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('virtualMath.help1', [
-        'ngRoute',
-        'virtualMath.vmath-function-input-directive'
+        'ngRoute'
     ])
 
     .config(['$routeProvider', function ($routeProvider) {

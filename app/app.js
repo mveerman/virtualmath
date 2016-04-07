@@ -9,6 +9,7 @@ angular.module('virtualMath', [
         'virtualMath.help1',
         'virtualMath.help2',
         'virtualMath.compare',
+        'virtualMath.feedback',
         'virtualMath.version'
     ])
 
@@ -41,6 +42,9 @@ angular.module('virtualMath', [
         };
 
         $scope.startNewSurveyRun = function () {
+            if ($scope.surveyData.currentRun >= 0) {
+                $scope.surveyData.lastScore = $scope.getCurrentSurveyRunData().score;
+            }
             $scope.surveyData.runs.push({
                 score: -1
             });
@@ -62,7 +66,11 @@ angular.module('virtualMath', [
                 }
             }
             data.score = assignment1Score + assignment2Score;
-        }
+        };
+
+        $scope.getLastScore = function () {
+            return $scope.surveyData.lastScore;
+        };
     })
 
     .run( function($rootScope, $location) {

@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('virtualMath.compare', [
-        'ngRoute',
-        'virtualMath.vmath-function-input-directive'
+        'ngRoute'
     ])
 
     .config(['$routeProvider', function ($routeProvider) {
@@ -14,8 +13,14 @@ angular.module('virtualMath.compare', [
 
     .controller('CompareCtrl', ['$scope', '$location', function ($scope, $location) {
         $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
+        $scope.lastScore = $scope.$parent.getLastScore();
 
         $scope.goto = function(page) {
             $location.path(page);
         };
+        
+        $scope.startNewRun = function() {
+            $scope.$parent.startNewSurveyRun();
+            $location.path('assignment1');
+        }
     }]);
