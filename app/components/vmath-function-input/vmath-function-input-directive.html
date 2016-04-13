@@ -5,6 +5,8 @@
                 ng-touchmove="FIctrl.touchMove($event)" ng-touchend="FIctrl.touchEnd()"></canvas>
     </div>
     <div class="vmath-function-input-buttons">
-        <button type="button" class="button clear" ng-click="FIctrl.redoClickHandler()">Opnieuw proberen</button>
+        <button type="button" class="button clear" ng-click="FIctrl.redoClickHandler()"
+                ng-disabled="!(FIctrl.graphData.dirty)">Opnieuw proberen
+        </button>
     </div>
 </div>

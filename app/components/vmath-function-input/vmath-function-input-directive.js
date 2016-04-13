@@ -85,7 +85,6 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
 
                 vm.graphData = {
                     base64url: '',
-                    pristine: true,
                     dirty: false
                 };
 
@@ -104,7 +103,6 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     }
                     path.simplify();
                     vm.graphData.analysis = analyze(path);
-                    vm.graphData.pristine = false;
                     vm.graphData.base64url = canvas.toDataURL.apply(canvas);
                     vm.doGraphUpdate()(vm.graphData);
                     drag = false;
