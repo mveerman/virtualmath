@@ -6,11 +6,12 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
 
     vm.analysis = '';
 
-    vm.analyze = function (points) {
+    vm.analyze = function (graph) {
         if (vm.analysis === 'sphere') {
-            return vm.analyzeSphereGraph(points);
+            return vm.analyzeSphereGraph(graph);
         }
         if (vm.analysis === 'cilinder') {
+            var points = getCartesianPoints(graph);
             return vm.analyzeCilinderGraph(points);
         }
         throw 'unknown analysis: ' + vm.analysis;
@@ -28,8 +29,9 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         return result;
     };
 
-    vm.analyzeSphereGraph = function (points) {
+    vm.analyzeSphereGraph = function (graph) {
         var result;
+        var points = getCartesianPoints(graph);
         if (points.length < 2) {
             result = {
                 "result": false,
@@ -39,7 +41,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         }
 
         var lastSlope;
-        var midPoint = -1;
+        var midPointIdx = -1;
         var passedMidPoint = false;
 
         for (var i = 0; i < points.length - 1; i++) {
@@ -57,10 +59,11 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             }
             var slope = calculateSlope(A, B);
             if (slope < lastSlope && passedMidPoint) {
+                var midpoint = graph.path.segments[midPointIdx].point;
                 result = {
                     "result": false,
                     "reason": "descending after midpoint",
-                    "midpoint": midPoint,
+                    "midpoint": {x: midpoint.x, y: midpoint.y},
                     "index": i
                 };
                 break;
@@ -75,7 +78,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             }
             if (slope > lastSlope) {
                 passedMidPoint = true;
-                midPoint = i;
+                midPointIdx = i;
                 lastSlope = slope;
             }
         }
@@ -87,9 +90,10 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
                     "reason": "did not find a midpoint"
                 }
             } else {
+                var midpoint = graph.path.segments[midPointIdx].point;
                 result = {
                     "result": true,
-                    "midpoint": midPoint
+                    "midpoint": {x: midpoint.x, y: midpoint.y}
                 };
             }
         }
@@ -149,6 +153,15 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
 
     function withinRange(number, expected, d) {
         return (number > expected) ? number - d <= expected : number + d >= expected;
+    }
+
+    function getCartesianPoints(graph) {
+        var points = [];
+        for (var i = 0, segments = graph.path.segments; i < segments.length; i++) {
+            var point = {x: segments[i].point.x, y: graph.height - segments[i].point.y};
+            points.push(point);
+        }
+        return points;
     }
 
 });

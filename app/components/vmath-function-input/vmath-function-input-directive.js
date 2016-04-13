@@ -41,11 +41,11 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                         fontSize: 12,
                         fontFamily: 'Courier'
                     };
-                    yLabel.style= textStyle;
+                    yLabel.style = textStyle;
                     yLabel.rotate(270, yLabel.bounds.bottomLeft);
                     var xLabel = new paper.PointText(new paper.Point((canvas.scrollWidth - offSet) / 2, canvas.scrollHeight));
                     xLabel.content = 'hoeveelheid water';
-                    xLabel.style= textStyle;
+                    xLabel.style = textStyle;
                     paper.view.draw();
                 }
 
@@ -58,18 +58,18 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                 }
 
                 function analyze(path) {
-                    var points = [];
-                    for (var i = 0; i < path.segments.length; i++) {
-                        points.push({x: path.segments[i].point.x, y: canvas.scrollHeight - path.segments[i].point.y});
+                    var graph = {
+                        path: path,
+                        width: paper.view.size.width,
+                        height: paper.view.size.height
                     }
-                    var result = graphAnalyzer.analyze(points);
+                    var result = graphAnalyzer.analyze(graph);
 
                     handleGraphResult(result);
 
                     if (result.midpoint) {
                         // place debug-point for now
-                        var midpoint = path.segments[result.midpoint].point;
-                        var circle = new paper.Path.Circle(new Point(midpoint.x, midpoint.y), 5);
+                        var circle = new paper.Path.Circle(new Point(result.midpoint.x, result.midpoint.y), 5);
                         circle.fillColor = 'blue';
                     }
                     return result;
