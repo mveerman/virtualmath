@@ -15,11 +15,18 @@ angular.module('virtualMath.compare', [
         $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
         $scope.lastScore = $scope.$parent.getLastScore();
 
-        $scope.goto = function(page) {
+        $scope.goto = function (page) {
+            if (page === 'help1') {
+                $scope.setHelp1Shown();
+            }
+            if (page === 'help2') {
+                $scope.setHelp2Shown();
+            }
             $location.path(page);
         };
-        
-        $scope.startNewRun = function() {
+
+
+        $scope.startNewRun = function () {
             $scope.$parent.startNewSurveyRun();
             $location.path('assignment1');
         }

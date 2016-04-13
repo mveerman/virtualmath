@@ -25,7 +25,9 @@ angular.module('virtualMath', [
         $scope.surveyData = {
             runs: [],
             currentRun: -1,
-            lastScore: -1
+            lastScore: -1,
+            help1shown: false,
+            help2shown: false
         };
 
         $scope.getSurveyRunData = function () {
@@ -46,11 +48,13 @@ angular.module('virtualMath', [
                 $scope.surveyData.lastScore = $scope.getCurrentSurveyRunData().score;
             }
             $scope.surveyData.runs.push({
-                score: -1
+                score: -1,
+                help1shown: false,
+                help2shown: false
             });
             $scope.surveyData.currentRun++;
         };
-        
+
         $scope.determineRunScore = function () {
             var data = $scope.getCurrentSurveyRunData();
             var assignment1Score = 0;
@@ -71,15 +75,41 @@ angular.module('virtualMath', [
         $scope.getLastScore = function () {
             return $scope.surveyData.lastScore;
         };
+
+        $scope.setHelp1Shown = function () {
+            var data = $scope.getCurrentSurveyRunData();
+            data.help1shown = true;
+            $scope.surveyData.help1shown = true;
+        };
+
+        $scope.isHelp1Shown = function (inRun) {
+            if (inRun) {
+                return $scope.getCurrentSurveyRunData().help1shown;
+            }
+            return $scope.surveyData.help1shown;
+        };
+
+        $scope.setHelp2Shown = function () {
+            var data = $scope.getCurrentSurveyRunData();
+            data.help2shown = true;
+            $scope.surveyData.help2shown = true;
+        };
+
+        $scope.isHelp2Shown = function (inRun) {
+            if (inRun) {
+                return $scope.getCurrentSurveyRunData().help2shown;
+            }
+            return $scope.surveyData.help2shown;
+        };
     })
 
-    .run( function($rootScope, $location) {
+    .run(function ($rootScope, $location) {
 
         // register listener to watch route changes
-        $rootScope.$on( "$routeChangeStart", function(event, next, current) {
-            if ( !$rootScope.initialized ) {
-                if ( next.templateUrl != "/screens/assignment1/assignment1.html" ) {
-                    $location.path( "/assignment1" );
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+            if (!$rootScope.initialized) {
+                if (next.templateUrl != "/screens/assignment1/assignment1.html") {
+                    $location.path("/assignment1");
                 }
             }
         });
