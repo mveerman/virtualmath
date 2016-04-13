@@ -72,6 +72,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                         var circle = new paper.Path.Circle(new Point(result.midpoint.x, result.midpoint.y), 5);
                         circle.fillColor = 'blue';
                     }
+                    console.log(result);
                     return result;
                 }
 

@@ -14,7 +14,7 @@ angular.module('virtualMath.assignment2', [
     }])
 
     .controller('Assignment2Ctrl', ['graphAnalyzer', '$scope', '$location', function (graphAnalyzer, $scope, $location) {
-        graphAnalyzer.analysis = 'cilinder';
+        graphAnalyzer.analysis = 'cylinder';
         $scope.surveyController = $scope.$parent;
         $scope.surveyController.getCurrentSurveyRunData().assignment2 = {
             graphData: '',

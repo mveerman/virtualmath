@@ -10,7 +10,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         if (vm.analysis === 'sphere') {
             return vm.analyzeSphereGraph(graph);
         }
-        if (vm.analysis === 'cilinder') {
+        if (vm.analysis === 'cylinder') {
             return vm.analyzeCylinderGraph(graph);
         }
         throw 'unknown analysis: ' + vm.analysis;
@@ -102,40 +102,39 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
     };
 
     vm.analyzeCylinderGraph = function (graph) {
-        var points = getCartesianPoints(graph);
-        var result;
-        if (points.length < 2) {
-            result = {
-                "result": false,
-                "reason": "too few points"
-            };
-            return result;
-        }
-        for (var i = 0; i < points.length - 1; i++) {
-            var A = points[i];
-            var B = points[i + 1];
 
+        var segments = graph.path.segments;
 
-            if (A.x === B.x) {
-                // TODO
-                continue;
-            }
-            var slope = calculateSlope(A, B);
-            if (!withinRange(slope, 1, 0.05)) {
-                result = {
-                    "result": false,
-                    "reason": "slope not within d=0.05 of 1: " + slope,
-                    "index": i
-                };
-                break;
-            }
+        if (segments.length < 2) {
+            return cylinderFailure('too few points');
         }
-        if (!result) {
-            result = {
-                "result": true
-            }
+
+        // -12 for axes-offset
+        var maxDiagonalLength = Math.sqrt(Math.pow(graph.width - 12, 2) + Math.pow(graph.height - 12, 2));
+
+        var firstPoint = segments[0].point;
+        var lastPoint = segments[segments.length - 1].point;
+
+        var optimalLength = firstPoint.getDistance(lastPoint);
+        var actualLength = graph.path.length;
+
+        // check if drawn line is no less than 70% length of the diagonal of the graph window
+        if (maxDiagonalLength - actualLength > 3 * (maxDiagonalLength / 10)) {
+            return cylinderFailure('too short graph');
         }
-        logPoints(points);
+        // // check if within 1% of optimal length
+        if (actualLength - optimalLength > (optimalLength / 100)) {
+            return cylinderFailure('too long graph');
+        }
+        // check slope between start and end approx 1
+        var slope = calculateSlope(firstPoint, lastPoint);
+        // expect negative slope because origin is in upper left
+        if (slope > -0.9 || slope < -1.1) {
+            return cylinderFailure('wrong axis');
+        }
+        var result = {
+            result: true
+        };
         return result;
     };
 
@@ -162,6 +161,14 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             points.push(point);
         }
         return points;
+    }
+
+    function cylinderFailure(reason) {
+        var result = {
+            result: false,
+            reason: reason
+        };
+        return result;
     }
 
 });

@@ -24,7 +24,7 @@ describe('graph analysis', function () {
     it('analyzes sphere graphs', function () {
         expect(graphAnalyzer.analyzeSphereGraph(graph).result).toBe(false);
     });
-    it('analyzes cilinder graphs', function () {
+    it('analyzes cylinder graphs', function () {
         expect(graphAnalyzer.analyzeCylinderGraph(graph).result).toBe(true);
     });
 });
