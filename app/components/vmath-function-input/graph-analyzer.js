@@ -11,8 +11,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             return vm.analyzeSphereGraph(graph);
         }
         if (vm.analysis === 'cilinder') {
-            var points = getCartesianPoints(graph);
-            return vm.analyzeCilinderGraph(points);
+            return vm.analyzeCylinderGraph(graph);
         }
         throw 'unknown analysis: ' + vm.analysis;
     };
@@ -102,7 +101,8 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         return result;
     };
 
-    vm.analyzeCilinderGraph = function (points) {
+    vm.analyzeCylinderGraph = function (graph) {
+        var points = getCartesianPoints(graph);
         var result;
         if (points.length < 2) {
             result = {
