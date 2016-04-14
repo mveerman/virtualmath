@@ -4,6 +4,7 @@
 angular.module('virtualMath', [
         'ngRoute',
         'ngTouch',
+        'virtualMath.start',
         'virtualMath.assignment1',
         'virtualMath.assignment2',
         'virtualMath.help1',
@@ -15,7 +16,7 @@ angular.module('virtualMath', [
 
     // config
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/assignment1'});
+        $routeProvider.otherwise({redirectTo: '/start'});
     }])
 
     // general survey controller
@@ -37,7 +38,6 @@ angular.module('virtualMath', [
         $scope.getCurrentSurveyRunData = function () {
             if ($scope.surveyData.currentRun < 0) {
                 $scope.startNewSurveyRun();
-                $rootScope.initialized = true;
             }
 
             return $scope.surveyData.runs[$scope.surveyData.currentRun];
@@ -108,8 +108,8 @@ angular.module('virtualMath', [
         // register listener to watch route changes
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             if (!$rootScope.initialized) {
-                if (next.templateUrl != "/screens/assignment1/assignment1.html") {
-                    $location.path("/assignment1");
+                if (next.templateUrl != "/screens/start/start.html") {
+                    $location.path("/start");
                 }
             }
         });
