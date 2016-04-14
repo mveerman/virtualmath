@@ -103,7 +103,7 @@ angular.module('virtualMath', [
         };
     })
 
-    .run(function ($rootScope, $location) {
+    .run(function ($rootScope, $location, $window) {
 
         // register listener to watch route changes
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
@@ -113,4 +113,10 @@ angular.module('virtualMath', [
                 }
             }
         });
+
+        // warn for data loss when reload is attempted
+        $window.onbeforeunload = function (event) {
+            event.preventDefault();
+            return "Het opnieuw laden van de pagina zorgt ervoor dat alle ingevoerde gegevens verdwijnen.\n\nDeze actie wordt niet aangeraden!"
+        };
     });
