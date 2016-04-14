@@ -134,3 +134,25 @@ canvas.right-graph {
         padding: 2em 0;
     }
 }
+
+.login-form {
+    background-color: #efefef;
+    padding:1em;
+}
+
+.login-form > a.form-container {}
+
+.form-container > div {
+    padding-bottom: 1em;
+    padding-right: 5px;
+}
+
+.form-container  label {
+    display: block;
+}
+
+.form-container  input,
+.form-container  select {
+    width: 100%;
+}
+

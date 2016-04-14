@@ -1,61 +1,80 @@
-<form name="LoginForm" novalidate ng-controller="StartCtrl">
-    <div class="container">
-        <div class="row main-row">
-            <div class="6u 12u(mobile)">
-                <section>
-                    <h2>
-                        Welkom bij <i>VirtualMath</i>.
-                    </h2>
-                    <p>
-                        <b>DEZE TEKST MOET NOG AANGEVULD WORDEN IN HET KADER VAN
-                            <a href="https://jira.ic.uva.nl/browse/OOPOCTVWO-42" target="_blank">OOPOCTVWO-42</a>
-                        </b>.
-                    </p>
-                </section>
-            </div>
-            <div class="6u 12u(mobile)">
-                <section>
-                    <h2>Jouw gegevens</h2>
-                    <div class="">
-                        <p>
-                            <input type="text" name="studentName" placeholder="Naam" ng-model="student.name"
-                                   ng-required="true">
-                            <input type="number" name="studentAge" placeholder="Leeftijd" min="10" max="110"
-                                   ng-model="student.age"
-                                   ng-required="true">
-                        </p>
-                        <p>
-                            <input type="text" name="studentSchool" placeholder="Schoolnaam" ng-required="true"
-                                   ng-model="student.schoolName">
-                        </p>
-                        <p>
-                            <select name="studentSchoolType" ng-required="true"
-                                    ng-model="student.schoolType">
-                                <option value="" disabled selected>Schooltype</option>
-                                <option>VMBO</option>
-                                <option>HAVO</option>
-                                <option>VWO</option>
-                            </select>
-                            <input type="number" name="studentSchoolYear" placeholder="Leerjaar" ng-required="true"
-                                   ng-model="student.schoolYear" min="1" max="6">
-                        </p>
-                        <p>
-                            <input type="email" name="studentEmail" placeholder="Email" ng-required="true"
-                                   ng-model="student.email">
-                        </p>
-                    </div>
-                </section>
-            </div>
+<div class="container">
+    <div class="row main-row">
+        <div class="6u 12u(mobile)">
+            <section>
+                <h2>
+                    Welkom bij <i>VirtualMath</i>.
+                </h2>
+                <p>
+                    <b>DEZE TEKST MOET NOG AANGEVULD WORDEN IN HET KADER VAN
+                        <a href="https://jira.ic.uva.nl/browse/OOPOCTVWO-42" target="_blank">OOPOCTVWO-42</a>
+                    </b>.
+                </p>
+            </section>
         </div>
-        <div class="row">
-            <div class="12u">
-                <section>
-                    <button type="submit" class="button"
-                            ng-click="advanceToNextPage()"
-                            ng-disabled="LoginForm.$invalid">Beginnen met de oefening
-                    </button>
-                </section>
-            </div>
+        <div class="6u 12u(mobile)">
+            <section class="bar">
+                <form name="LoginForm" novalidate ng-controller="StartCtrl" class="login-form">
+                    <h2>Jouw gegevens</h2>
+                    <div class="form-container">
+                        <div class="row">
+                            <div class="8u">
+                                <label>Jouw naam</label>
+                                <input type="text" name="studentName" placeholder="Naam" ng-model="student.name"
+                                       ng-required="true">
+                            </div>
+                            <div class="4u">
+                                <label>Jouw leeftijd</label>
+                                <input type="number" name="studentAge" placeholder="Leeftijd" min="10" max="110"
+                                       ng-model="student.age"
+                                       ng-required="true">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="12u">
+                                <label>Jouw emailadres</label>
+                                <input type="email" name="studentEmail" placeholder="Email" ng-required="true"
+                                       ng-model="student.email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="12u">
+                                <label>Naam van jouw school</label>
+                                <input type="text" name="studentSchool" placeholder="Schoolnaam" ng-required="true"
+                                       ng-model="student.schoolName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="8u">
+                                <label for="studentSchoolType">Schooltype</label>
+                                <select name="studentSchoolType" id="studentSchoolType" ng-required="true"
+                                        ng-model="student.schoolType">
+                                    <option value="" disabled selected>Schooltype</option>
+                                    <option>VMBO</option>
+                                    <option>HAVO</option>
+                                    <option>VWO</option>
+                                </select>
+                            </div>
+                            <div class="4u">
+                                <label>Leerjaar</label>
+                                <input type="number" name="studentSchoolYear" placeholder="jaar" ng-required="true"
+                                       ng-model="student.schoolYear" min="1" max="6">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
-</form>
+    <div class="row">
+        <div class="12u">
+            <section>
+                <button type="submit" class="button"
+                        ng-click="advanceToNextPage()"
+                        ng-disabled="LoginForm.$invalid">Beginnen met de oefening
+                </button>
+            </section>
+        </div>
+    </div>
+</div>
+
