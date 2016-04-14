@@ -5,4 +5,4 @@ angular.module('virtualMath.version', [
   'virtualMath.version.version-directive'
 ])
 
-.value('version', '0.2');
+.value('version', '0.3');
