@@ -15,6 +15,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                 var canvas = angular.element($element).find("canvas")[0];
                 var path;
                 var drag = false;
+                var originOffset = 12;
                 initPaper();
                 drawAxes();
 
@@ -27,7 +28,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
 
                 function drawAxes() {
                     var yAxis = new paper.Path();
-                    var offSet = 12;
+                    var offSet = originOffset;
                     yAxis.add(new paper.Point(offSet, offSet));
                     yAxis.add(new paper.Point(offSet, canvas.scrollHeight - offSet));
                     yAxis.strokeColor = 'black';
@@ -61,7 +62,8 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     var graph = {
                         path: path,
                         width: paper.view.size.width,
-                        height: paper.view.size.height
+                        height: paper.view.size.height,
+                        originOffset: originOffset
                     }
                     var result = graphAnalyzer.analyze(graph);
 

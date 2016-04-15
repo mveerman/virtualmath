@@ -109,35 +109,54 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             return cylinderFailure('too few points');
         }
 
-        // -12 for axes-offset
-        var maxDiagonalLength = Math.sqrt(Math.pow(graph.width - 12, 2) + Math.pow(graph.height - 12, 2));
+        var maxDiagonalLength = Math.sqrt(Math.pow(graph.width - graph.originOffset, 2) + Math.pow(graph.height - graph.originOffset, 2));
 
-        var firstPoint = segments[0].point;
-        var lastPoint = segments[segments.length - 1].point;
+        var firstPoint = graph.path.firstSegment.point;
+        var lastPoint = graph.path.lastSegment.point;
 
-        var optimalLength = firstPoint.getDistance(lastPoint);
         var actualLength = graph.path.length;
 
         // check if drawn line is no less than 70% length of the diagonal of the graph window
         if (maxDiagonalLength - actualLength > 3 * (maxDiagonalLength / 10)) {
             return cylinderFailure('too short graph');
         }
-        // // check if within 1% of optimal length
-        if (actualLength - optimalLength > (optimalLength / 100)) {
-            return cylinderFailure('too long graph');
-        }
         // check slope between start and end approx 1
         var slope = calculateSlope(firstPoint, lastPoint);
         // expect negative slope because origin is in upper left
         if (slope > -0.9 || slope < -1.1) {
-            return cylinderFailure('wrong axis');
+            return cylinderFailure('wrong slope (' + slope + ')');
         }
-        var result = {
+
+        var diff = 10;
+        var boxPoint1 = firstPoint.subtract(new paper.Point(0, diff));
+        var boxPoint2 = lastPoint.subtract(new paper.Point(0, diff));
+        var boxPoint3 = lastPoint.add(new paper.Point(0, diff));
+        var boxPoint4 = firstPoint.add(new paper.Point(0, diff));
+        var boxingPath = new paper.Path([boxPoint1, boxPoint2, boxPoint3, boxPoint4, boxPoint1]);
+
+
+        // enable to visualize for debugging
+        // boxingPath.strokeColor = 'green';
+
+        var optimalPath = new paper.Path([firstPoint, lastPoint]);
+        var outOfBounds = [];
+        for (var i = 0; i < segments.length; i++) {
+            var segmentPoint = segments[i].point;
+            if (!boxingPath.contains(segmentPoint)) {
+                outOfBounds.push({x: segmentPoint.x, y: segmentPoint.y});
+            }
+        }
+        if (outOfBounds.length > 0) {
+            return {
+                result: false,
+                reason: "diffuse points",
+                outOfBounds: outOfBounds
+            };
+        }
+        return {
             result: true
         };
-        return result;
     };
-
 
     function logPoints(points) {
         var i = 0;
@@ -149,11 +168,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
     function calculateSlope(A, B) {
         return (B.y - A.y) / (B.x - A.x);
     }
-
-    function withinRange(number, expected, d) {
-        return (number > expected) ? number - d <= expected : number + d >= expected;
-    }
-
+    
     function getCartesianPoints(graph) {
         var points = [];
         for (var i = 0, segments = graph.path.segments; i < segments.length; i++) {
@@ -164,11 +179,10 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
     }
 
     function cylinderFailure(reason) {
-        var result = {
+        return {
             result: false,
             reason: reason
         };
-        return result;
     }
 
 });
