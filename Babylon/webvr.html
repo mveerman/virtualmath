@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <title>Bol - WebVR</title>
         <script src="js/cannon.js"></script>
         <script src="js/oimo.js"></script>
@@ -79,7 +80,6 @@
                 // Set the target of the camera to the first imported mesh
                 camera.setTarget(new BABYLON.Vector3.Zero());
 
-
             }, function (progress) {}, function(error) {});
         
             return myScene;
@@ -100,9 +100,14 @@
 
         var button = document.getElementById('presenting-message');
         button.addEventListener('click', function() {
+            console.log('click before going to fullscreen');
             engine.switchFullscreen(true);
         });
 
     </script>
 </body>
 </html>
+
+<!--
+http://www.html5gamedevs.com/topic/21758-creating-a-vr-reticle/
+->
