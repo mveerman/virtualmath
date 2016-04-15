@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Bol</title>
+        <script src="js/cannon.js"></script>
+        <script src="js/oimo.js"></script>
+        <script src="js/hand.minified-1.2.js"></script>
+        <script src="js/babylon.2.4.0.alpha.js"></script>
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+		Number.prototype.pad = function(size) {
+			var s = String(this);
+			while (s.length < (size || 2)) {s = "0" + s;}
+			return s;	
+		};
+		
+    if (BABYLON.Engine.isSupported()) {
+        var canvas = document.getElementById("renderCanvas");
+        var engine = new BABYLON.Engine(canvas, true);
+		
+	
+		
+		
+        BABYLON.SceneLoader.Load('models/', 'help-2-45.babylon', engine, function (scene) {
+		scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);      
+		
+		//var light4 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
+		//light4.intensity = .7;
+			var camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", 1, 0.8, 10, new BABYLON.Vector3(58.685,  23.1421,  -824.8871), scene);
+	   camera.setPosition(new BABYLON.Vector3(62.560, 30.1091, -818.8507));
+	    camera.setTarget = new BABYLON.Vector3(58.685,  23.1421,  -824.8871);
+		
+		  //scene.activeCamera = camera;
+	   	//camera.attachControl(canvas, true);
+			// This attaches the camera to the canvas
+			
+			var dscamera = scene.getCameraByName('Camera002');
+			//Object { x: 62.56089150041567, y: 30.109167093471655, z: -818.8507566373283 }
+			
+	//console.log(dscamera.fov);
+	
+	camera.fov = 0.4131;
+	//console.log(camera.fov);
+	
+	
+	console.log(camera.position)
+	  //var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(58.685,  23.1421,  -824.8871), scene);
+    	//camera.rotation = new BABYLON.Vector3(0, Math.PI, 0);
+	  
+ 		
+		//Object { x: 58.685, y: 23.1421, z: -824.8871 }
+		
+		
+		var balNum = 1
+		var ground = scene.getMeshByName('scherm');
+		var bal = scene.getMeshByName('bal' + balNum);
+		var lat = scene.getMeshByName('lat' + balNum);
+		var bol = scene.getMeshByName('bol')
+		//var plunjer = scene.getMeshByName('plunjer')
+		//var plunjerkop = scene.getMeshByName('plunjerkop')
+		var vloeistof = scene.getMeshByName('vloeistof')
+		var pomphuis = scene.getMeshByName('pomphuis')
+			
+		for (var j = 3; j < 203; j++) {
+		// getallen naar naam
+			var tempName = 'Plane' + (j).pad(3);
+			var tempPlaneMesh = scene.getMeshByName(tempName);
+		}
+			
+		//scene.debugLayer.show();	
+		var vullenMag = false
+		var balMag = true
+		var startingPoint;
+	    var currentMesh;
+		var mouseOffset
+		var pickInfo
+		var kleur = [2,53,79,102,125,151,202]; 	// 6 x startkleurring - stop
+		var kleurNum = 0 
+		var balXpos ;
+		var aniDown;
+		
+		var sapKleur = new BABYLON.StandardMaterial("std", scene);
+				
+				
+				
+		var getGroundPosition = function () {
+			var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh == ground; });
+				if (pickinfo.hit) {
+					return pickinfo.pickedPoint;
+				}
+					return null;
+		}
+				
+	
+		var onPointerDown = function (evt) {
+			if (evt.button !== 0) {
+				return;
+			}
+			
+			// check if we are under a mesh
+			var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh !== ground; });
+				if (pickInfo.hit) {
+					currentMesh = pickInfo.pickedMesh;
+			
+					if (currentMesh == bal && balMag){
+		 				startingPoint = getGroundPosition(evt);
+						/*var aniNum = 'lat' + balNum 
+						var aniDown = scene.getMeshByName(aniNum),name
+						
+						if (!vullenMag)	{
+						scene.beginAnimation(aniDown, 0, 10, false, 1 ,function (){
+							scene.stopAnimation(aniDown);
+							});
+						}*/
+						
+						if (kleurNum > 0){
+							scene.beginAnimation(aniDown, 10, 17, false, 1 ,function (){
+							scene.stopAnimation(aniDown);
+							});
+						}
+						
+						vullenMag = true
+					}
+					
+					if (currentMesh == pomphuis && vullenMag){
+						balMag = false
+						var start = kleur[kleurNum] + 1
+						var einde = kleur[kleurNum + 1] + 1
+						
+						vullenMag = false		
+						
+						var kleurAniStart = 105 + kleurNum*420
+						var kleurAniStop = 430 + kleurNum*420
+						kleurNum = kleurNum + 1
+							
+						var aniNum = 'lat' + balNum 
+						
+					/*	if (kleurNum > 1){
+							scene.beginAnimation(aniDown, 10, 17, false, 1 ,function (){
+							scene.stopAnimation(aniDown);
+							});
+						}*/
+	
+							
+						aniDown = scene.getMeshByName(aniNum),name
+						scene.beginAnimation(aniDown, 0, 10, false, 1 ,function (){
+							scene.stopAnimation(aniDown);
+							});
+							
+						for (var k = start; k < einde; k++) {
+							var tempKleur = 'Plane' + (k).pad(3);
+							var kleurAni = scene.getMeshByName(tempKleur);
+							
+							scene.beginAnimation(kleurAni, kleurAniStart, kleurAniStop, false, 1 ,function (){
+									//console.log(einde);
+									if (k == einde && balMag == false){
+										balMag = true
+										balNum = balNum + 1
+										bal = scene.getMeshByName('bal' + balNum);
+										lat = scene.getMeshByName('lat' + balNum);
+										;}
+									scene.stopAnimation(kleurAni);
+							});
+						}
+						var straalNum = 'straal' + kleurNum
+								var straalDown = scene.getMeshByName(straalNum),name
+								scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1 ,function (){
+									scene.stopAnimation(straalDown);
+									});
+									scene.beginAnimation(pomphuis, 125, 403, false, 1 ,function (){});
+									scene.beginAnimation(vloeistof, 125, 403, false, 1 ,function (){
+									
+									switch (kleurNum) {
+										case 1:
+											sapKleur.diffuseColor = new BABYLON.Color3(0, 1, 1);
+											break;
+										case 2:
+											sapKleur.diffuseColor = new BABYLON.Color3(0, 1, 0);
+											break;
+										case 3:
+											sapKleur.diffuseColor = new BABYLON.Color3(1, 0, 1);
+											break;
+										case 4:
+											sapKleur.diffuseColor = new BABYLON.Color3(1, 0, 0);
+											break;
+										case 5:
+											sapKleur.diffuseColor = new BABYLON.Color3(0, 0, 1);
+											break;
+									}
+									
+									vloeistof.material= sapKleur
+										
+										if (kleurNum !=6){
+											scene.beginAnimation(pomphuis, 404, 450, false, 1 ,function (){});
+											scene.beginAnimation(vloeistof, 404, 450, false, 1 ,function (){});
+										}
+									});
+					}
+				}
+			}
+	
+			var onPointerUp = function () {
+				startingPoint = null;
+			}
+			
+			var onPointerMove = function (evt) {
+				if (!startingPoint) {
+					return;
+				}
+			
+				var current = getGroundPosition(evt);
+			
+				if (!current) {
+					return;
+				}
+				if (currentMesh == bal){
+					var diff = current.subtract(startingPoint);
+					currentMesh.position.y= currentMesh.position.y + diff.y
+					lat.position.y = bal.position.y 
+					startingPoint = current;
+				}
+			}
+		
+			canvas.addEventListener("pointerdown", onPointerDown, false);
+			canvas.addEventListener("pointerup", onPointerUp, false);
+			canvas.addEventListener("pointermove", onPointerMove, false);
+			
+			scene.onDispose = function () {
+			canvas.removeEventListener("pointerdown", onPointerDown);
+			canvas.removeEventListener("pointerup", onPointerUp);
+			canvas.removeEventListener("pointermove", onPointerMove);
+		}
+        
+          
+				
+			// Wait for textures and shaders to be ready
+	        scene.executeWhenReady(function () {
+             
+
+                // Once the scene is loaded, just register a render loop to render it
+			engine.runRenderLoop(function() {
+        	scene.render();
+			
+        	})
+		});
+        }, function (progress) {
+            // To do: give progress feedback to user
+        });
+    }
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+</body>
+</html>
