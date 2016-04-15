@@ -16,11 +16,24 @@
                 margin: 0;
                 padding: 0;
             }
-
-            #renderCanvas {
+            #rednerCanvas, .buttons {
+                position: absolute;
                 width: 100%;
-                height: 100%;
+            }
+            #renderCanvas {
+                top: 0;
+                left: 0;
                 touch-action: none;
+                z-index: 1;
+                height: 100%;
+            }
+            .button, .buttons {
+                height:50px;
+            }
+            .buttons {
+                text-align: center;
+                bottom: 10px;
+                z-index: 2;
             }
         </style>
     </head>
@@ -33,24 +46,24 @@
 		Number.prototype.pad = function(size) {
 			var s = String(this);
 			while (s.length < (size || 2)) {s = "0" + s;}
-			return s;	
+			return s;
 		};
-	
+
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
 
         var createScene = function () {
-        
+
             // This creates a basic Babylon Scene object (non-mesh)
             var scene = new BABYLON.Scene(engine);
 			scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
-        
+
             // This creates and positions a free camera (non-mesh)
 			var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 500, BABYLON.Vector3.Zero(), scene); //new ArcRotateCamera(name, alpha, beta, radius, target, scene)
 
 			// This attaches the camera to the canvas
-			camera.attachControl(canvas, true);           
-           
+			camera.attachControl(canvas, true);
+
             BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-58.babylon", scene, function (newMeshes) {
 
                 // Set the target of the camera to the first imported mesh
@@ -88,10 +101,10 @@
 				generator.getShadowMap().renderList.push(vierkant);
 				generator.getShadowMap().renderList.push(nummers);
 				generator.getShadowMap().renderList.push(voet);
-												
+
 				generator.useBlurVarianceShadowMap = true;
 				generator.blurBoxOffset = 155.0;
-			
+
 				for (var i =0; i < newMeshes.length; i++) {
 					newMeshes[i].receiveShadows = false;
 				}
@@ -106,28 +119,28 @@
 				var kleur = [2,53,79,102,125,151,202]; 	// 6 x startkleurring - stop
 				var kleurNum = 0;
 				var processing = 0;
-			
+
 				scene.onPointerDown = function (evt, pickResult) {
 					var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh !== ground; });
-						
+
 						if (pickInfo.hit && kleurNum < 6 && processing == 0) {
 							var currentMesh = pickInfo.pickedMesh;
-	
+
 							if (currentMesh.name == 'knop'){
 								camera.detachControl(canvas);
-								
-								
+
+
 								knop.position.z = knoppos+3;
 								knop.material = knoprood;
-								
+
 								knop.diffuseColor = new BABYLON.Color3(1, 0, 0);
-																						
+
 								var start = kleur[kleurNum] + 1;
 								var einde = kleur[kleurNum + 1] + 1;
-								
+
 								var kleurAniStart = 105 + kleurNum * 420;
 								var kleurAniStop = 430 + kleurNum * 420;
-								
+
 								kleurNum = kleurNum + 1;
 								processing = 1;
 
@@ -138,7 +151,7 @@
 										scene.stopAnimation(kleurAni);
 									})
 								}
-								
+
 								for (var l = 0; l < 22; l++) {
 									var tempNum = 'num' + (l).pad(3);
 									var Nummers = scene.getMeshByName(tempNum);
@@ -146,7 +159,7 @@
 										scene.stopAnimation(Nummers);
 									});
 								}
-								
+
 								var straalNum = 'straal' + kleurNum;
 								var straalDown = scene.getMeshByName(straalNum);
 								scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function() {
@@ -158,7 +171,7 @@
 							}
 						}
 				};
-				
+
 			    scene.onPointerUp = function () {
 						camera.attachControl(canvas, true);
 				};
@@ -169,11 +182,11 @@
 				nummers.receiveShadows = false;
 				voet.receiveShadows = false;
 				ground.receiveShadows = true;
-	
+
             });
-        
+
             return scene;
-        
+
         };
 
         var scene = createScene();
@@ -188,5 +201,9 @@
         });
 
     </script>
+    <div class="buttons">
+        <img class="button" id="imgCameraBtn" src="img/oculus.png" alt="">
+        <img class="button" id="imgFullScreenBtn" src="img/fullscreen.png" alt="">
+    </div>
 </body>
 </html>
