@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <title>Bol</title>
         <script src="js/cannon.js"></script>
         <script src="js/oimo.js"></script>
@@ -26,6 +27,9 @@
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
+
+		"use strict";
+
 		Number.prototype.pad = function(size) {
 			var s = String(this);
 			while (s.length < (size || 2)) {s = "0" + s;}
@@ -44,7 +48,6 @@
             // This creates and positions a free camera (non-mesh)
 			var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 500, BABYLON.Vector3.Zero(), scene); //new ArcRotateCamera(name, alpha, beta, radius, target, scene)
 
-          	
 			// This attaches the camera to the canvas
 			camera.attachControl(canvas, true);           
            
@@ -53,33 +56,16 @@
                 // Set the target of the camera to the first imported mesh
                 camera.setTarget = new BABYLON.Vector3(0, 500, 0);
 
-               //scene.debugLayer.show();
- 		
-		
+                //scene.debugLayer.show();
+
 				//OBJECTEN KUNNEN NIET MEER DAN 4 LICHTEN HANDELEN
-				
-				//var light = new BABYLON.SpotLight("light", new BABYLON.Vector3(x, y, z), scene);
-				//var light0 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 300, 0), scene); //diffuse van boven
-				//light0.diffuse = new BABYLON.Color3(0, 0, 0);
-				
-				//var light1= new BABYLON.DirectionalLight("light", new BABYLON.Vector3(0, -150, 0), scene); // van boven
-				//var light2 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 18, 0), scene); // van onder
+
 				var light3 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-40, -200, -200), scene); // van voren
 				var light4 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
-	
-				//var light5 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 50, -200), scene); //diffuse van voren
-				//var light6 = new BABYLON.PointLight("Omni0", new BABYLON.Vector3(0, 50, 200), scene); //diffuse van achteren
-			
-				// Default intensity is 1. Let's dim the light a small amount
-				//light0.intensity = .4;
-				//light2.intensity = .4;
+
 				light3.intensity = 1;
 				light4.intensity = 1;
-				
-				//light5.intensity = 0.4;
-				//light6.intensity = 0.4;
-			
-			
+
 				var stang = scene.getMeshByName('stang');
 				var ground = scene.getMeshByName('plateau');
 				var bol = scene.getMeshByName('bol');
@@ -87,7 +73,7 @@
 				var nummers = scene.getMeshByName('num021');
 				var voet = scene.getMeshByName('voet');
 				var knop = scene.getMeshByName('knop');
-				var knoppos = knop.position.z
+				var knoppos = knop.position.z;
 
 				var knopgroen = new BABYLON.StandardMaterial("std", scene);
 				knopgroen.diffuseColor = new BABYLON.Color3(0, 1, 0);
@@ -95,8 +81,7 @@
 				knoprood.diffuseColor = new BABYLON.Color3(1, 0, 0);
 
 				knop.material = knopgroen;
-				
-			
+
 				var generator = new BABYLON.ShadowGenerator(256, light4);
 				generator.getShadowMap().renderList.push(stang);
 				generator.getShadowMap().renderList.push(bol);
@@ -110,8 +95,7 @@
 				for (var i =0; i < newMeshes.length; i++) {
 					newMeshes[i].receiveShadows = false;
 				}
-				
-				
+
 				for (var j = 3; j < 203; j++) {
 					// getallen naar naam
 					var tempName = 'Plane' + (j).pad(3);
@@ -120,67 +104,65 @@
 				}
 
 				var kleur = [2,53,79,102,125,151,202]; 	// 6 x startkleurring - stop
-				var kleurNum = 0 
-				var processing = 0
+				var kleurNum = 0;
+				var processing = 0;
 			
 				scene.onPointerDown = function (evt, pickResult) {
 					var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return mesh !== ground; });
 						
-						if (pickInfo.hit & kleurNum < 6 & processing == 0) {
-							currentMesh = pickInfo.pickedMesh;
+						if (pickInfo.hit && kleurNum < 6 && processing == 0) {
+							var currentMesh = pickInfo.pickedMesh;
 	
 							if (currentMesh.name == 'knop'){
 								camera.detachControl(canvas);
 								
 								
-								knop.position.z = knoppos+3
+								knop.position.z = knoppos+3;
 								knop.material = knoprood;
 								
-								knop.diffuseColor = new BABYLON.Color3(1, 0, 0)
+								knop.diffuseColor = new BABYLON.Color3(1, 0, 0);
 																						
-								var start = kleur[kleurNum] + 1
-								var einde = kleur[kleurNum + 1] + 1
+								var start = kleur[kleurNum] + 1;
+								var einde = kleur[kleurNum + 1] + 1;
 								
-								var kleurAniStart = 105 + kleurNum*420
-								var kleurAniStop = 430 + kleurNum*420
+								var kleurAniStart = 105 + kleurNum * 420;
+								var kleurAniStop = 430 + kleurNum * 420;
 								
-								kleurNum = kleurNum + 1
-								processing = 1
-																	
+								kleurNum = kleurNum + 1;
+								processing = 1;
+
 								for (var k = start; k < einde; k++) {
 									var tempKleur = 'Plane' + (k).pad(3);
 									var kleurAni = scene.getMeshByName(tempKleur);
-									scene.beginAnimation(kleurAni, kleurAniStart, kleurAniStop, false, 1 ,function (){
-									scene.stopAnimation(kleurAni);})
+									scene.beginAnimation(kleurAni, kleurAniStart, kleurAniStop, false, 1, function() {
+										scene.stopAnimation(kleurAni);
+									})
 								}
 								
 								for (var l = 0; l < 22; l++) {
 									var tempNum = 'num' + (l).pad(3);
 									var Nummers = scene.getMeshByName(tempNum);
-									scene.beginAnimation(Nummers, kleurAniStart, kleurAniStop, false, 1 ,function (){
-									scene.stopAnimation(Nummers);});
+									scene.beginAnimation(Nummers, kleurAniStart, kleurAniStop, false, 1, function() {
+										scene.stopAnimation(Nummers);
+									});
 								}
 								
-								var straalNum = 'straal' + kleurNum
-								var straalDown = scene.getMeshByName(straalNum),name
-								scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1 ,function (){
+								var straalNum = 'straal' + kleurNum;
+								var straalDown = scene.getMeshByName(straalNum);
+								scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function() {
 									processing = 0;
 									scene.stopAnimation(straalDown);
 									knop.position.z = knoppos;
 									knop.material = knopgroen;
-									});
-														
+								});
 							}
 						}
 				};
 				
 			    scene.onPointerUp = function () {
-						camera.attachControl(canvas, true); 
-						return;
-				}
-		
-		
-			
+						camera.attachControl(canvas, true);
+				};
+
 				stang.receiveShadows = false;
 				bol.receiveShadows = false;
 				vierkant.receiveShadows = false;
@@ -193,13 +175,7 @@
             return scene;
         
         };
-        
-		
-	    
 
-
-		
-		
         var scene = createScene();
 
         engine.runRenderLoop(function () {
