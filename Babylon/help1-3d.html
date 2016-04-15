@@ -8,6 +8,7 @@
         <script src="js/oimo.js"></script>
         <script src="js/hand.minified-1.2.js"></script>
         <script src="js/babylon.2.4.0.alpha.js"></script>
+		<script src="js/gui-manager.js"></script>
         <style>
             html, body {
                 overflow: hidden;
@@ -202,8 +203,8 @@
 
     </script>
     <div class="buttons">
-        <img class="button" id="imgCameraBtn" src="img/oculus.png" alt="">
-        <img class="button" id="imgFullScreenBtn" src="img/fullscreen.png" alt="">
+        <img class="button" id="imgCameraBtn" src="img/oculus.png" onClick="goCardboard()" alt="">
+        <img class="button" id="imgFullScreenBtn" src="img/fullscreen.png" onClick ="goFullScreen()" alt="">
     </div>
 </body>
 </html>
