@@ -31,10 +31,12 @@
 		"use strict";
 
 		// number padding function
-		Number.prototype.pad = function(size) {
+		Number.prototype.pad = function (size) {
 			var s = String(this);
-			while (s.length < (size || 2)) {s = "0" + s;}
-			return s;	
+			while (s.length < (size || 2)) {
+				s = "0" + s;
+			}
+			return s;
 		};
 	
         var canvas = document.getElementById("renderCanvas");
@@ -46,32 +48,26 @@
             var scene = new BABYLON.Scene(engine);
 			scene.clearColor = new BABYLON.Color3(0.7, 0.7, 0.7);
         
-            // This creates and positions a free camera (non-mesh)
-			//var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 500, BABYLON.Vector3.Zero(), scene); //new ArcRotateCamera(name, alpha, beta, radius, target, scene)
-			var camera = new BABYLON.VRDeviceOrientationArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 500, BABYLON.Vector3.Zero(), scene); //new ArcRotateCamera(name, alpha, beta, radius, target, scene)
+            var camera = new BABYLON.VRDeviceOrientationArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 500, BABYLON.Vector3.Zero(), scene); //new ArcRotateCamera(name, alpha, beta, radius, target, scene)
 
             // This targets the camera to scene origin
             camera.setTarget(BABYLON.Vector3.Zero());
           	
 			// This attaches the camera to the canvas
 			camera.attachControl(canvas, true);           
-        
-			// This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-           
+
             BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-53.babylon", scene, function (newMeshes) {
 
                 // Set the target of the camera to the first imported mesh
                 camera.setTarget = new BABYLON.Vector3(0, 500, 0);
 
-               //scene.debugLayer.show();
- 		
-				//var light = new BABYLON.SpotLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-			var light = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-2, -7,5), scene);
-			var light2 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 8, 0), scene);
-			var light3 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-2, -7,5), scene);
-			var light4 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(2, -7,5), scene);
-			//light.position = new BABYLON.Vector3(10, 0, 10);
-				// Default intensity is 1. Let's dim the light a small amount
+                //scene.debugLayer.show();
+
+				var light = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-2, -7,5), scene);
+				var light2 = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 8, 0), scene);
+				var light3 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-2, -7,5), scene);
+				var light4 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(2, -7,5), scene);
+
 				light2.intensity = .2;
 				light.intensity =.5;
 				light3.intensity = .2;
