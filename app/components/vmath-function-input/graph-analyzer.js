@@ -1,6 +1,6 @@
 'use strict';
 
-// TODO negative slopes, right-to-left drawn graphs
+// TODO right-to-left drawn graphs
 angular.module('graphModule', []).service('graphAnalyzer', function () {
     var vm = this;
 
@@ -16,32 +16,23 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         throw 'unknown analysis: ' + vm.analysis;
     };
 
-    vm.mirrorY = function (points, maxY) {
-        var result = [];
-        for (var i = 0; i < points.length; ++i) {
-            var mirroredPoint = {
-                "x": points[i].x,
-                "y": maxY - points[i].y
-            };
-            result.push(mirroredPoint);
-        }
-        return result;
-    };
-
+    // TODO be less strict about small aberations, demand midpoint somewhere in middle, demand graph has some length
     vm.analyzeSphereGraph = function (graph) {
         var result;
-        var points = getCartesianPoints(graph);
+        var points = [];
+        graph.path.segments.forEach(function (s) {
+            points.push({x: s.point.x, y: s.point.y});
+        });
         if (points.length < 2) {
             result = {
-                "result": false,
-                "reason": "too few points"
+                result: false,
+                reason: 'too few points'
             };
             return result;
         }
 
         var lastSlope;
-        var midPointIdx = -1;
-        var passedMidPoint = false;
+        var midpoint;
 
         for (var i = 0; i < points.length - 1; i++) {
             var A = points[i];
@@ -49,56 +40,54 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
 
 
             if (A.x === B.x) {
-                // TODO
-                continue;
+                return {
+                    result: false,
+                    reason: 'vertical line at ' + point2String(A)
+                };
+            }
+            var slope = calculateSlope({x: A.x, y: graph.height - A.y}, {x: B.x, y: graph.height - B.y});
+            if (slope < 0) {
+                return {
+                    result: false,
+                    reason: 'negative slope at ' + point2String(A)
+                };
             }
             if (typeof lastSlope === 'undefined') {
-                lastSlope = calculateSlope(A, B);
+                lastSlope = slope;
                 continue;
             }
-            var slope = calculateSlope(A, B);
-            if (slope < lastSlope && passedMidPoint) {
-                var midpoint = graph.path.segments[midPointIdx].point;
-                result = {
-                    "result": false,
-                    "reason": "descending after midpoint",
-                    "midpoint": {x: midpoint.x, y: midpoint.y},
-                    "index": i
+            if (slope < lastSlope && typeof midpoint !== 'undefined') {
+                return {
+                    result: false,
+                    reason: 'descending after midpoint at ' + point2String(A),
+                    midpoint: midpoint
                 };
-                break;
             }
             if (slope < lastSlope) {
                 lastSlope = slope;
                 continue;
             }
-            if (slope > lastSlope && passedMidPoint) {
+            if (slope > lastSlope && typeof midpoint != 'undefined') {
                 lastSlope = slope;
                 continue;
             }
             if (slope > lastSlope) {
-                passedMidPoint = true;
-                midPointIdx = i;
+                midpoint = A;
                 lastSlope = slope;
             }
         }
 
-        if (typeof result === 'undefined') {
-            if (!passedMidPoint) {
-                result = {
-                    "result": false,
-                    "reason": "did not find a midpoint"
-                }
-            } else {
-                var midpoint = graph.path.segments[midPointIdx].point;
-                result = {
-                    "result": true,
-                    "midpoint": {x: midpoint.x, y: midpoint.y}
-                };
+
+        if (typeof midpoint == 'undefined') {
+            return {
+                result: false,
+                reason: "did not find a midpoint"
             }
         }
-
-        logPoints(points);
-        return result;
+        return {
+            result: true,
+            midpoint: midpoint
+        };
     };
 
     vm.analyzeCylinderGraph = function (graph) {
@@ -138,7 +127,6 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         // enable to visualize for debugging
         // boxingPath.strokeColor = 'green';
 
-        var optimalPath = new paper.Path([firstPoint, lastPoint]);
         var outOfBounds = [];
         for (var i = 0; i < segments.length; i++) {
             var segmentPoint = segments[i].point;
@@ -149,7 +137,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         if (outOfBounds.length > 0) {
             return {
                 result: false,
-                reason: "diffuse points",
+                reason: "points out of bounds",
                 outOfBounds: outOfBounds
             };
         }
@@ -158,24 +146,8 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         };
     };
 
-    function logPoints(points) {
-        var i = 0;
-        points.forEach(function (p) {
-            console.log((i++) + ": [" + p.x + "," + p.y + "]");
-        });
-    }
-
     function calculateSlope(A, B) {
         return (B.y - A.y) / (B.x - A.x);
-    }
-    
-    function getCartesianPoints(graph) {
-        var points = [];
-        for (var i = 0, segments = graph.path.segments; i < segments.length; i++) {
-            var point = {x: segments[i].point.x, y: graph.height - segments[i].point.y};
-            points.push(point);
-        }
-        return points;
     }
 
     function cylinderFailure(reason) {
@@ -183,6 +155,10 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             result: false,
             reason: reason
         };
+    }
+
+    function point2String(point) {
+        return '[' + point.x + ',' + point.y + ']'
     }
 
 });

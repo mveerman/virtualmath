@@ -69,11 +69,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
 
                     handleGraphResult(result);
 
-                    if (result.midpoint) {
-                        // place debug-point for now
-                        var circle = new paper.Path.Circle(new Point(result.midpoint.x, result.midpoint.y), 5);
-                        circle.fillColor = 'blue';
-                    }
+
                     console.log(result);
                     return result;
                 }
@@ -83,6 +79,12 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                         angular.element(canvas).removeClass('wrong-graph').addClass('right-graph');
                     } else {
                         angular.element(canvas).removeClass('right-graph').addClass('wrong-graph');
+                    }
+                    if (result.midpoint) {
+                        // TODO remove this after debugging
+                        var circle = new paper.Path.Circle(new Point(result.midpoint.x, result.midpoint.y), 5);
+                        circle.fillColor = 'blue';
+                        paper.view.draw();
                     }
                 }
 
