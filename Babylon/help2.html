@@ -78,7 +78,7 @@
                 var aniDown;
                 var streepIn = false;
                 var sapKleur = new BABYLON.StandardMaterial("std", scene);
-                var timerMag = false;
+				var wisStreep
 
 
                 var getGroundPosition = function () {
@@ -91,15 +91,6 @@
                     return null;
                 };
 
-                //laat de streep over de bol maar 5 seconden staan
-                setInterval(function () {
-                    if (streepIn && timerMag) {
-                        scene.beginAnimation(aniDown, 10, 17, false, 1, function () {
-                            scene.stopAnimation(aniDown);
-                            streepIn = false
-                        });
-                    }
-                }, 5000);
 
                 var onPointerDown = function (evt) {
                     if (evt.button !== 0) {
@@ -115,18 +106,11 @@
 
                         if (currentMesh == bal && balMag) {
                             startingPoint = getGroundPosition(evt);
-                            /*var aniNum = 'lat' + balNum
-                             var aniDown = scene.getMeshByName(aniNum),name
-
-                             if (!vullenMag)	{
-                             scene.beginAnimation(aniDown, 0, 10, false, 1 ,function (){
-                             scene.stopAnimation(aniDown);
-                             });
-                             }*/
 
                             if (streepIn) {
                                 scene.beginAnimation(aniDown, 10, 17, false, 1, function () {
                                     scene.stopAnimation(aniDown);
+									clearTimeout(wisStreep);
                                     streepIn = false
                                 });
                             }
@@ -151,7 +135,6 @@
                             scene.beginAnimation(aniDown, 0, 10, false, 1, function() {
                                 scene.stopAnimation(aniDown);
                                 streepIn = true;
-                                timerMag = false;
                             });
 
                             for (var k = start; k < einde; k++) {
@@ -194,7 +177,16 @@
                                         break;
                                 }
                                 vloeistof.material = sapKleur;
-                                timerMag = true;
+                                
+								wisStreep = setInterval(function () {
+                   				scene.beginAnimation(aniDown, 10, 17, false, 1, function () {
+										scene.stopAnimation(aniDown);
+										clearTimeout(wisStreep);
+										streepIn = false
+									});
+                                }, 5000);
+								
+								
                                 if (kleurNum != 6) {
                                     scene.beginAnimation(pomphuis, 404, 450, false, 1, function() {});
                                     scene.beginAnimation(vloeistof, 404, 450, false, 1, function() {});
