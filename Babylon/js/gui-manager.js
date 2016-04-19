@@ -12,37 +12,44 @@ function GUIManager() {
 
     vm.isVRCameraSelected = false;
 
+    var images = {
+        normalCamera: 'img/phone.png',
+        vrCamera: 'img/oculus.png',
+        fullScreen: 'img/fullscreen.png',
+        windowedScreen: 'img/screen.png'
+    };
+
     vm.selectVRCamera = function () {
         vm.isVRCameraSelected = true;
         cameraButton.onclick = vm.selectNormalCamera;
-        cameraButton.src = 'img/oculus.png';
+        cameraButton.src = images.normalCamera;
         window.redrawScene();
     };
     vm.selectNormalCamera = function () {
         vm.isVRCameraSelected = false;
         cameraButton.onclick = vm.selectVRCamera;
-        cameraButton.src = 'img/phone.png';
+        cameraButton.src = images.vrCamera;
         window.redrawScene();
     };
 
     vm.selectFullScreen = function () {
         screenButton.onclick = vm.selectWindowedScreen;
-        screenButton.src = 'img/screen.png';
+        screenButton.src = images.windowedScreen;
         goFullScreen();
     };
 
     vm.selectWindowedScreen = function () {
         screenButton.onclick = vm.selectFullScreen;
-        screenButton.src = 'img/fullscreen.png';
+        screenButton.src = images.fullScreen;
         goWindowedScreen();
     };
 
     var cameraButton = document.getElementById('cameraButton');
-    cameraButton.src = 'img/oculus.png';
+    cameraButton.src = images.vrCamera;
     cameraButton.onclick = vm.selectVRCamera;
 
     var screenButton = document.getElementById('screenButton');
-    screenButton.src = 'img/fullscreen.png';
+    screenButton.src = images.fullScreen;
     screenButton.onclick = vm.selectFullScreen;
 
 }
