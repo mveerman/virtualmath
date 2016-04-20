@@ -24,9 +24,6 @@ angular.module('virtualMath.start', [
                 $rootScope.initialized = true;
             }
 
-            // set student info to surveyController
-            $scope.surveyController.studentData.name = $scope.student.name;
-
             $location.path('/assignment1');
         };
     }]);

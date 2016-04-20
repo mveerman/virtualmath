@@ -1,24 +1,32 @@
 <div class="container">
     <form name="LoginForm" novalidate ng-controller="StartController">
-    <div class="row main-row">
-        <div class="6u 12u(mobile)">
-            <section>
-                <h2>
-                    Welkom bij de <i>Graphs of Dynamic Situations Virtual tool</i>
-                </h2>
-                <p>
-                    De tool is bedoeld om je te helpen om grafieken by dynamische relaties te begrijpen. De tool doet dit door deze relaties inzichtelijk te maken met concrete voorbeelden in Virtual Reality en door gericht feedback te geven op de grafiek die jezelf hebt getekend.<br/>
-                    <br/>
-                    Dit is een proof-versie van de product waardoor alleen maar met één enkele voorbeeld van een dynamisch context wordt gewerkt.<br/>
-                    <br/>
-                    Je krijgt een opdracht voorgelegd waarbij je een grafiek van een dynamische relatie moet maken. Dit doe je op de scherm met een pen of met de vinger. Je krijgt vervolgens de context in VD te zien en bepaalde aanwijzingen. Je hebt ook de mogelijkheid om je grafieken te verbeteren. Wanneer je de grafiek submit ontvang je feedback op het door jouw grafieken getekend. Op deze wijze krijg je inzicht in de aspecten die je wel/niet beheerst bij het maken van dit soort grafieken.<br/>
-                    <br/>
-                    Veel succes!
-                </p>
-            </section>
-        </div>
-        <div class="6u 12u(mobile)">
-            <section class="bar login-form">
+        <div class="row main-row">
+            <div class="6u 12u(mobile)">
+                <section>
+                    <h2>
+                        Welkom bij de <i>Graphs of Dynamic Situations Virtual tool</i>
+                    </h2>
+                    <p>
+                        De tool is bedoeld om je te helpen om grafieken by dynamische relaties te begrijpen. De tool
+                        doet dit door deze relaties inzichtelijk te maken met concrete voorbeelden in Virtual Reality en
+                        door gericht feedback te geven op de grafiek die jezelf hebt getekend.<br/>
+                        <br/>
+                        Dit is een proof-versie van het product waardoor alleen maar met één enkel voorbeeld van een
+                        dynamische context wordt gewerkt.<br/>
+                        <br/>
+                        Je krijgt een opdracht voorgelegd waarbij je een grafiek van een dynamische relatie moet maken.
+                        Dit doe je op het scherm met muis, pen of vinger. Je krijgt vervolgens de context in VD te
+                        zien en bepaalde aanwijzingen. Je hebt ook de mogelijkheid om je grafieken te verbeteren.
+                        Wanneer je de grafiek inlevert ontvang je feedback op de door jouw getekende grafieken. Op deze
+                        wijze krijg je inzicht in de aspecten die je wel/niet beheerst bij het maken van dit soort
+                        grafieken.<br/>
+                        <br/>
+                        Veel succes!
+                    </p>
+                </section>
+            </div>
+            <div class="6u 12u(mobile)">
+                <section class="bar login-form">
 
                     <h2>Jouw gegevens</h2>
                     <div class="form-container">
@@ -54,7 +62,7 @@
                                 <label for="studentSchoolType">Schooltype</label>
                                 <select name="studentSchoolType" id="studentSchoolType" ng-required="true"
                                         ng-model="student.schoolType">
-                                    <option value="" disabled selected>Schooltype</option>
+                                    <option value="" disabled selected>Selecteer...</option>
                                     <option>VMBO</option>
                                     <option>HAVO</option>
                                     <option>VWO</option>
@@ -68,30 +76,31 @@
                         </div>
                         <div class="row">
                             <div class="12u">
+                                <label for="studentWiskundeType">Type wiskunde</label>
                                 <select name="studentWiskundeType" id="studentWiskundeType" ng-required="true"
                                         ng-model="student.wiskundeType">
-                                    <option value="" disabled selected>Type wiskunde</option>
-                                    <option>Winskunde A</option>
-                                    <option>Winskunde B</option>
-                                    <option>Winskunde C</option>
+                                    <option value="" disabled selected>Selecteer...</option>
+                                    <option>Wiskunde A</option>
+                                    <option>Wiskunde B</option>
+                                    <option>Wiskunde C</option>
                                 </select>
                             </div>
                         </div>
                     </div>
 
-            </section>
+                </section>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="12u">
-            <section>
-                <button type="submit" class="button"
-                        ng-click="advanceToNextPage()"
-                        ng-disabled="LoginForm.$invalid">Beginnen met de oefening
-                </button>
-            </section>
+        <div class="row">
+            <div class="12u">
+                <section>
+                    <button type="submit" class="button"
+                            ng-click="advanceToNextPage()"
+                            ng-disabled="LoginForm.$invalid">Beginnen met de oefening
+                    </button>
+                </section>
+            </div>
         </div>
-    </div>
     </form>
 </div>
 

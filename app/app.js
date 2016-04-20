@@ -24,7 +24,8 @@ angular.module('virtualMath', [
         $rootScope.initialized = false;
 
         $scope.studentData = {
-            name: ''
+            name: '',
+            displayName: ''
         };
 
         $scope.surveyData = {
