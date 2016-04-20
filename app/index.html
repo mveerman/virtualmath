@@ -29,7 +29,11 @@
                 <div class="12u">
                     <header id="header">
                         <h1><a href="#" id="logo">VirtualMath</a></h1>
+                        <nav id="nav" class="student-name">
+                            <a ng-if="studentData.name.length > 0">Aangemeld als {{studentData.name}}</a>
+                        </nav>
                         <!--<nav id="nav">
+                            <a href="#/start">Aanmelden</a>
                             <a href="#/assignment1">Opgave A</a>
                             <a href="#/assignment2">Opgave B</a>
                             <a href="#/help1">Help 1</a>
@@ -37,6 +41,7 @@
                             <a href="#/compare">Vergelijken</a>
                             <a href="#/feedback">Feedback</a>
                         </nav>-->
+
                     </header>
                 </div>
             </div>

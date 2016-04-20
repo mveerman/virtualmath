@@ -13,10 +13,9 @@ angular.module('virtualMath.start', [
 
     .controller('StartController', ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
 
-        $scope.student = {
-            name: '',
-            level: ''
-        };
+        $scope.surveyController = $scope.$parent;
+
+        $scope.student = $scope.surveyController.studentData;
 
         $scope.advanceToNextPage = function () {
             $scope.surveyController = $scope.$parent;
@@ -24,6 +23,10 @@ angular.module('virtualMath.start', [
                 $scope.surveyController.startNewSurveyRun();
                 $rootScope.initialized = true;
             }
+
+            // set student info to surveyController
+            $scope.surveyController.studentData.name = $scope.student.name;
+
             $location.path('/assignment1');
         };
     }]);

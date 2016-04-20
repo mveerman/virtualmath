@@ -23,6 +23,10 @@ angular.module('virtualMath', [
     .controller('SurveyController', function ($scope, $rootScope) {
         $rootScope.initialized = false;
 
+        $scope.studentData = {
+            name: ''
+        };
+
         $scope.surveyData = {
             runs: [],
             currentRun: -1,
