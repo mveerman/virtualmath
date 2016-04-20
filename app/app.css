@@ -218,3 +218,41 @@ textarea {
     width: 100%;
     height: 5em;
 }
+
+.compare-answers {
+    width: 100%;
+    max-width: 750px;
+}
+.compare-answers > div.answer-row {
+    margin-bottom: 1em;
+    position: relative;
+    width: 100%;
+}
+.compare-answers:last-child {
+    margin-bottom: 0;
+}
+
+.compare-answers .title {
+
+}
+.compare-answers .question {
+    float: left;
+    width: 45%;
+}
+
+.compare-answers .answer {
+    float: right;
+    width: 45%;
+}
+
+.compare-answers .question img,
+.compare-answers .answer img{
+    width: 100%
+}
+
+.compare-answers .description {
+    clear: both;
+    word-wrap: break-word; /* IE 5.5-7 */
+    white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+    white-space: pre-wrap; /* current browsers */
+}
