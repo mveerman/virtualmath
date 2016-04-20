@@ -1,7 +1,7 @@
 <form name="assignmentForm1" novalidate>
     <div class="container" ng-controller="Assignment1Ctrl">
         <div class="row main-row">
-            <div class="12u 12u(mobile)">
+            <div class="6u 12u(mobile)">
                 <section>
                     <img src="img/bowl.jpg" alt="Bowl" height="150" class="left"/>
                     <h2>Opgave A</h2>
@@ -9,20 +9,18 @@
                         Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid
                         stroomt.
                     </p>
-                    <ol type="a">
+                    <ol type="a" class="questions">
                         <li>
-                            a) Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de
+                            Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de
                             hoeveelheid water in de fles.
                         </li>
                         <li>
-                            b) Leg uit hoe je tot je antwoord bent gekomen.
+                            Leg uit hoe je tot je antwoord bent gekomen.
                         </li>
                     </ol>
 
                 </section>
             </div>
-        </div>
-        <div class="row">
             <div class="6u 12u(mobile)">
                 <section>
                     <div class="graph">
@@ -30,15 +28,19 @@
                         <vmath-function-input on-graph-update="saveGraph"></vmath-function-input>
                     </div>
                 </section>
-            </div>
 
-            <div class="6u 12u(mobile)">
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="12u 12u(mobile)">
                 <section>
-                    <div class="deepthoughts">
-                        <label>Uitleg
+                    <div>
+                        <label>Uitleg</label>
                         <textarea name="q1description" required ng-model="description" ng-minlength="10"
-                                  ng-change="saveDescription()"></textarea>
-                        </label>
+                                  ng-change="saveDescription()" placeholder="Minimaal 10 tekens"></textarea>
+
                         <div role="alert">
                             <span class="error"
                                   ng-show="assignmentForm1.q1description.$touched && assignmentForm1.q1description.$error.required">
