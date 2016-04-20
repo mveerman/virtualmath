@@ -16,7 +16,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         throw 'unknown analysis: ' + vm.analysis;
     };
 
-    // TODO be less strict about small aberations, demand midpoint somewhere in middle, demand graph has some length
+    // TODO be less strict about small aberrations, demand midpoint somewhere in middle, demand graph has some length
     vm.analyzeSphereGraph = function (graph) {
         var result;
         var points = [];
@@ -24,20 +24,17 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             points.push({x: s.point.x, y: s.point.y});
         });
         if (points.length < 2) {
-            result = {
+            return {
                 result: false,
                 reason: 'too few points'
             };
-            return result;
         }
-
         var lastSlope;
         var midpoint;
 
         for (var i = 0; i < points.length - 1; i++) {
             var A = points[i];
             var B = points[i + 1];
-
 
             if (A.x === B.x) {
                 return {
@@ -77,12 +74,11 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             }
         }
 
-
         if (typeof midpoint == 'undefined') {
             return {
                 result: false,
-                reason: "did not find a midpoint"
-            }
+                reason: 'did not find a midpoint'
+            };
         }
         return {
             result: true,
@@ -91,38 +87,45 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
     };
 
     vm.analyzeCylinderGraph = function (graph) {
+        var tolerances = {
+            angle: 15,
+            outOfBounds: 10,
+            length: {
+                min: (graph.height - graph.originOffset) * 2 / 3
+            }
+        };
 
         var segments = graph.path.segments;
+        var firstPoint = graph.path.firstSegment.point;
+        var lastPoint = graph.path.lastSegment.point;
 
         if (segments.length < 2) {
             return cylinderFailure('too few points');
         }
 
-        var maxDiagonalLength = Math.sqrt(Math.pow(graph.width - graph.originOffset, 2) + Math.pow(graph.height - graph.originOffset, 2));
-
-        var firstPoint = graph.path.firstSegment.point;
-        var lastPoint = graph.path.lastSegment.point;
-
-        var actualLength = graph.path.length;
-
-        // check if drawn line is no less than 70% length of the diagonal of the graph window
-        if (maxDiagonalLength - actualLength > 3 * (maxDiagonalLength / 10)) {
-            return cylinderFailure('too short graph');
+        // check if drawn line has minimum length
+        if (graph.path.length < tolerances.length.min) {
+            return {
+                result: false,
+                reason: 'too short graph (was: ' + graph.path.length + ', expected: > ' + tolerances.length.min + ')'
+            };
         }
-        // check slope between start and end approx 1
-        var slope = calculateSlope(firstPoint, lastPoint);
-        // expect negative slope because origin is in upper left
-        if (slope > -0.9 || slope < -1.1) {
-            return cylinderFailure('wrong slope (' + slope + ')');
+        // check angle approx. 45%
+        var angle = Math.atan2(firstPoint.y - lastPoint.y, lastPoint.x - firstPoint.x) * 180 / Math.PI;
+        var desiredAngle = 45;
+        if (angle < desiredAngle - tolerances.angle || angle > desiredAngle + tolerances.angle) {
+            return {
+                result: false,
+                reason: 'angle out of tolerance bounds (' + angle + ' degrees)'
+            };
         }
-
-        var diff = 10;
+        // check intermediate points within bounds of ideal straight line between start and finish
+        var diff = tolerances.outOfBounds;
         var boxPoint1 = firstPoint.subtract(new paper.Point(0, diff));
         var boxPoint2 = lastPoint.subtract(new paper.Point(0, diff));
         var boxPoint3 = lastPoint.add(new paper.Point(0, diff));
         var boxPoint4 = firstPoint.add(new paper.Point(0, diff));
         var boxingPath = new paper.Path([boxPoint1, boxPoint2, boxPoint3, boxPoint4, boxPoint1]);
-
 
         // enable to visualize for debugging
         // boxingPath.strokeColor = 'green';
@@ -137,7 +140,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         if (outOfBounds.length > 0) {
             return {
                 result: false,
-                reason: "points out of bounds",
+                reason: 'points out of bounds',
                 outOfBounds: outOfBounds
             };
         }
@@ -158,7 +161,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
     }
 
     function point2String(point) {
-        return '[' + point.x + ',' + point.y + ']'
+        return '[' + point.x + ',' + point.y + ']';
     }
 
 });
