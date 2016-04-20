@@ -8,8 +8,8 @@ describe('virtualMath.view1 module', function() {
 
     it('should ....', inject(function($controller) {
       //spec body
-      var view1Ctrl = $controller('Assignment1Ctrl');
-      expect(view1Ctrl).toBeDefined();
+      var view1Controller = $controller('Assignment1Controller');
+      expect(view1Controller).toBeDefined();
     }));
 
   });

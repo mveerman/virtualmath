@@ -7,11 +7,11 @@ angular.module('virtualMath.start', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/start', {
             templateUrl: 'screens/start/start.html',
-            controller: 'StartCtrl'
+            controller: 'StartController'
         });
     }])
 
-    .controller('StartCtrl', ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
+    .controller('StartController', ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
 
         $scope.student = {
             name: '',

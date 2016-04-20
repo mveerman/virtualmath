@@ -20,7 +20,7 @@ angular.module('virtualMath', [
     }])
 
     // general survey controller
-    .controller('surveyController', function ($scope, $rootScope) {
+    .controller('SurveyController', function ($scope, $rootScope) {
         $rootScope.initialized = false;
 
         $scope.surveyData = {

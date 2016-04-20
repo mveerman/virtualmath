@@ -7,11 +7,11 @@ angular.module('virtualMath.compare', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/compare', {
             templateUrl: 'screens/compare/compare.html',
-            controller: 'CompareCtrl'
+            controller: 'CompareController'
         });
     }])
 
-    .controller('CompareCtrl', ['$scope', '$location', function ($scope, $location) {
+    .controller('CompareController', ['$scope', '$location', function ($scope, $location) {
         $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
         $scope.lastScore = $scope.$parent.getLastScore();
 

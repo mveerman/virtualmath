@@ -7,11 +7,11 @@ angular.module('virtualMath.help2', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/help2', {
             templateUrl: 'screens/help2/help2.html',
-            controller: 'Help2Ctrl'
+            controller: 'Help2Controller'
         });
     }])
 
-    .controller('Help2Ctrl', ['$scope', '$location', function ($scope, $location) {
+    .controller('Help2Controller', ['$scope', '$location', function ($scope, $location) {
         $scope.advanceToNextPage = function() {
             $location.path('/compare');
         };

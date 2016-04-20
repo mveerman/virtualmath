@@ -7,11 +7,11 @@ angular.module('virtualMath.feedback', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/feedback', {
             templateUrl: 'screens/feedback/feedback.html',
-            controller: 'FeedbackCtrl'
+            controller: 'FeedbackController'
         });
     }])
 
-    .controller('FeedbackCtrl', ['$scope', '$location', function ($scope, $location) {
+    .controller('FeedbackController', ['$scope', '$location', function ($scope, $location) {
         $scope.advanceToNextPage = function() {
             $location.path('/compare');
         };

@@ -9,11 +9,11 @@ angular.module('virtualMath.assignment2', [
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/assignment2', {
             templateUrl: 'screens/assignment2/assignment2.html',
-            controller: 'Assignment2Ctrl'
+            controller: 'Assignment2Controller'
         });
     }])
 
-    .controller('Assignment2Ctrl', ['graphAnalyzer', '$scope', '$location', function (graphAnalyzer, $scope, $location) {
+    .controller('Assignment2Controller', ['graphAnalyzer', '$scope', '$location', function (graphAnalyzer, $scope, $location) {
         graphAnalyzer.analysis = 'cylinder';
         $scope.surveyController = $scope.$parent;
         $scope.surveyController.getCurrentSurveyRunData().assignment2 = {
