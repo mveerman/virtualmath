@@ -4,12 +4,16 @@
         <div class="6u 12u(mobile)">
             <section>
                 <h2>
-                    Welkom bij <i>VirtualMath</i>
+                    Welkom bij de <i>Graphs of Dynamic Situations Virtual tool</i>
                 </h2>
                 <p>
-                    <b>DEZE TEKST MOET NOG AANGEVULD WORDEN IN HET KADER VAN
-                        <a href="https://jira.ic.uva.nl/browse/OOPOCTVWO-42" target="_blank">OOPOCTVWO-42</a>
-                    </b>.
+                    De tool is bedoeld om je te helpen om grafieken by dynamische relaties te begrijpen. De tool doet dit door deze relaties inzichtelijk te maken met concrete voorbeelden in Virtual Reality en door gericht feedback te geven op de grafiek die jezelf hebt getekend.<br/>
+                    <br/>
+                    Dit is een proof-versie van de product waardoor alleen maar met één enkele voorbeeld van een dynamisch context wordt gewerkt.<br/>
+                    <br/>
+                    Je krijgt een opdracht voorgelegd waarbij je een grafiek van een dynamische relatie moet maken. Dit doe je op de scherm met een pen of met de vinger. Je krijgt vervolgens de context in VD te zien en bepaalde aanwijzingen. Je hebt ook de mogelijkheid om je grafieken te verbeteren. Wanneer je de grafiek submit ontvang je feedback op het door jouw grafieken getekend. Op deze wijze krijg je inzicht in de aspecten die je wel/niet beheerst bij het maken van dit soort grafieken.<br/>
+                    <br/>
+                    Veel succes!
                 </p>
             </section>
         </div>
@@ -60,6 +64,17 @@
                                 <label>Leerjaar</label>
                                 <input type="number" name="studentSchoolYear" placeholder="jaar" ng-required="true"
                                        ng-model="student.schoolYear" min="1" max="6">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="12u">
+                                <select name="studentWiskundeType" id="studentWiskundeType" ng-required="true"
+                                        ng-model="student.wiskundeType">
+                                    <option value="" disabled selected>Type wiskunde</option>
+                                    <option>Winskunde A</option>
+                                    <option>Winskunde B</option>
+                                    <option>Winskunde C</option>
+                                </select>
                             </div>
                         </div>
                     </div>
