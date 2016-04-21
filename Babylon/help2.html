@@ -48,10 +48,18 @@
 
                 var balNum = 1;
                 var ground = scene.getMeshByName('scherm');
+				var plateau = scene.getMeshByName('plateau');
+				var stang = scene.getMeshByName('stang');
+				var pomphuis = scene.getMeshByName('pomphuis');
                 var bal = scene.getMeshByName('bal' + balNum);
                 var lat = scene.getMeshByName('lat' + balNum);
                 var bol = scene.getMeshByName('bol');
                 var vloeistof = scene.getMeshByName('vloeistof');
+				var light = scene.getLightByName('FDirect002')
+				
+				
+
+
 
                 for (var j = 3; j < 203; j++) {
                     // getallen naar naam
@@ -73,18 +81,49 @@
                 var balXpos;
                 var aniDown;
                 var streepIn = false;
-                var sapKleur = new BABYLON.StandardMaterial("std", scene);
-				var wisStreep
+                var wisStreep
 				var lock = false
 				var knop = scene.getMeshByName('knop');
 				var knoppos = knop.position.z;
 				
+				var sapKleur = new BABYLON.StandardMaterial("std", scene);
+				sapKleur.diffuseColor = new BABYLON.Color3(1, 1, 0);
+				vloeistof.material = sapKleur
 				var knopgroen = new BABYLON.StandardMaterial("std", scene);
 				knopgroen.diffuseColor = new BABYLON.Color3(0, 1, 0);
 				var knoprood = new BABYLON.StandardMaterial("std", scene);
 				knoprood.diffuseColor = new BABYLON.Color3(1, 0, 0);
 				knop.material = knopgroen;
 
+				var generator = new BABYLON.ShadowGenerator(512, light);
+				generator.getShadowMap().renderList.push(bol);
+				generator.getShadowMap().renderList.push(ground);
+				generator.getShadowMap().renderList.push(stang);
+				generator.getShadowMap().renderList.push(pomphuis);
+					
+					
+				for (var i =0; i < scene.length; i++) {
+					scene[i].receiveShadows = false;
+				}
+				
+				
+				for (var j = 3; j < 203; j++) {
+					var tempName = 'Plane' + (j).pad(3);
+					var tempPlaneMesh = scene.getMeshByName(tempName);
+					generator.getShadowMap().renderList.push(tempPlaneMesh);
+				}
+					
+					
+															
+				generator.useBlurVarianceShadowMap = true;
+				generator.blurBoxOffset = 5.0;
+
+				plateau.receiveShadows = true;
+				stang.receiveShadows = false;
+				bol.receiveShadows = false;
+				pomphuis.receiveShadows = false;
+				ground.receiveShadows = false;
+				vloeistof.receiveShadows = false
 
                 var getGroundPosition = function () {
                     var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) {
