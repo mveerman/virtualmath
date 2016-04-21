@@ -15,12 +15,9 @@ angular.module('virtualMath.feedback', [
 
         $scope.surveyController = $scope.$parent;
         $scope.getScore = $scope.surveyController.getScore;
-
         $scope.isHelp1Shown = $scope.surveyController.isHelp1Shown;
-
         $scope.isHelp2Shown = $scope.surveyController.isHelp2Shown;
-
-        $scope.hasRedo = function() {
+        $scope.hasRedo = function () {
             return $scope.surveyController.surveyData.length > 1;
         };
     }]);
