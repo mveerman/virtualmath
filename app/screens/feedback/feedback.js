@@ -12,7 +12,15 @@ angular.module('virtualMath.feedback', [
     }])
 
     .controller('FeedbackController', ['$scope', '$location', function ($scope, $location) {
-        $scope.advanceToNextPage = function() {
-            $location.path('/compare');
+
+        $scope.surveyController = $scope.$parent;
+        $scope.getScore = $scope.surveyController.getScore;
+
+        $scope.isHelp1Shown = $scope.surveyController.isHelp1Shown;
+
+        $scope.isHelp2Shown = $scope.surveyController.isHelp2Shown;
+
+        $scope.hasRedo = function() {
+            return $scope.surveyController.surveyData.length > 1;
         };
     }]);

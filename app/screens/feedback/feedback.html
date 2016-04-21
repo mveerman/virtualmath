@@ -1,10 +1,62 @@
 <div class="container" ng-controller="FeedbackController">
     <div class="row main-row">
-        <div class="12u 12u(mobile)">
-            <section>
-                <h2>Feedback</h2>
-                <p>Uw antwoorden zijn ingediend.</p>
-                <p><small>Dit werkt nog niet :-)</small></p>
+        <div class="6u 12u(mobile)">
+            <section ng-switch="getScore()">
+                <h2>Resultaat</h2>
+                <div ng-switch-when="0">
+                    <p>
+                        Je bent nu op weg naar niveau 1 doordat je hulp 1 en/of hulp 2 heb je geprobeerd in te zetten
+                        bij het maken van de grafiek. Om de volgende levels te bereiken zou je het verband moeten leggen
+                        tussen de hoogte en hoeveelheid water en rekening moeten houden met de vorm van de vaas.
+                    </p>
+                    <p>
+                        <span ng-if="!isHelp1Shown() && !isHelp2Shown()">
+                            Je hebt geen gebruik gemaakt van de aangeboden hulpmiddelen
+                        </span>
+                        <span ng-if="isHelp1Shown() && !isHelp2Shown()">
+                            Je hebt niet gebruik gemaakt van alle hulpmiddelen
+                        </span>
+                        <span ng-if="isHelp1Shown() && isHelp2Shown()">
+                            Je hebt alle hulpmiddelen gebruikt
+                        </span>
+                        <span ng-if="hasRedo() && (isHelp1Shown() || isHelp2Shown())">
+                            maar je hebt wel geprobeerd deze toe te passen
+                        </span>
+                    </p>
+                </div>
+                <div ng-switch-when="1">
+                    <p>
+                        Je hebt niveau 1 bereikt: je hebt het verband tussen de hoeveelheid water en de hoogte in een
+                        juiste grafiek weer kunnen geven in één van de twee situaties. Om het volgende niveau te
+                        bereiken zou je het verband moeten leggen niet alleen tussen de hoogte en hoeveelheid water maar
+                        zul je ook rekening moeten houden met de vorm van de vaas.
+                    </p>
+                    <p>
+                        <span ng-if="!isHelp1Shown() && !isHelp2Shown()">
+                            Je hebt geen gebruik gemaakt van de aangeboden hulpmiddelen
+                        </span>
+                        <span ng-if="isHelp1Shown() && !isHelp2Shown()">
+                            Je hebt niet gebruik gemaakt van alle hulpmiddelen
+                        </span>
+                        <span ng-if="isHelp1Shown() && isHelp2Shown()">
+                            Je hebt alle hulpmiddelen gebruikt
+                        </span>
+                        <span ng-if="hasRedo && (isHelp1Shown() || isHelp2Shown())">
+                            maar je hebt wel geprobeerd deze toe te passen
+                        </span>
+                    </p>
+                </div>
+                <div ng-switch-when="2">
+                    <p>
+                        Je hebt niveau 2 bereikt; je hebt het verband tussen de hoeveelheid water en de hoogte in een
+                        juiste grafiek weer kunnen geven in beide situaties.
+                    </p>
+                </div>
+                <div ng-switch-default>
+                    <p>
+                        Je hebt de oefening niet op de correcte manier gemaakt.
+                    </p>
+                </div>
             </section>
         </div>
     </div>
