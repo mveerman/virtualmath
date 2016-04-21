@@ -1,4 +1,3 @@
-"use strict";
 
 Number.prototype.pad = function (size) {
     var s = String(this);
@@ -8,8 +7,10 @@ Number.prototype.pad = function (size) {
     return s;
 };
 
-function createScene(engine, canvas, isVR) {
-    // This creates a basic Babylon Scene object (non-mesh)
+var createScene = function(engine, canvas, isVR) {
+    "use strict";
+
+   // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
     scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
 
@@ -85,7 +86,7 @@ function createScene(engine, canvas, isVR) {
                 return mesh !== ground;
             });
 
-            if (pickInfo.hit && kleurNum < 6 && processing == 0) {
+            if (pickInfo.hit && kleurNum < 6 && processing === 0) {
                 var currentMesh = pickInfo.pickedMesh;
 
                 if (currentMesh.name == 'knop') {
@@ -109,22 +110,24 @@ function createScene(engine, canvas, isVR) {
                     for (var k = start; k < einde; k++) {
                         var tempKleur = 'Plane' + (k).pad(3);
                         var kleurAni = scene.getMeshByName(tempKleur);
-                        scene.beginAnimation(kleurAni, kleurAniStart, kleurAniStop, false, 1, function () {
+                        /*jshint -W083 */
+                        scene.beginAnimation(kleurAni, kleurAniStart, kleurAniStop, false, 1, function() {
                             scene.stopAnimation(kleurAni);
-                        })
+                        });
                     }
 
                     for (var l = 0; l < 22; l++) {
                         var tempNum = 'num' + (l).pad(3);
-                        var Nummers = scene.getMeshByName(tempNum);
-                        scene.beginAnimation(Nummers, kleurAniStart, kleurAniStop, false, 1, function () {
-                            scene.stopAnimation(Nummers);
+                        var nummers = scene.getMeshByName(tempNum);
+                        /*jshint -W083 */
+                        scene.beginAnimation(nummers, kleurAniStart, kleurAniStop, false, 1, function() {
+                            scene.stopAnimation(nummers);
                         });
                     }
 
                     var straalNum = 'straal' + kleurNum;
                     var straalDown = scene.getMeshByName(straalNum);
-                    scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function () {
+                    scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function() {
                         processing = 0;
                         scene.stopAnimation(straalDown);
                         knop.position.z = knoppos;
@@ -149,4 +152,4 @@ function createScene(engine, canvas, isVR) {
 
     return scene;
 
-}
+};
