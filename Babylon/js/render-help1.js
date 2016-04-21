@@ -25,7 +25,7 @@ var createScene = function(engine, canvas, isVR) {
     // This attaches the camera to the canvas
     camera.attachControl(canvas, true);
 
-    BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-58.babylon", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "models/", "help-1.babylon", scene, function (newMeshes) {
 
         // Set the target of the camera to the first imported mesh
         camera.setTarget = new BABYLON.Vector3(0, 500, 0);
@@ -56,7 +56,7 @@ var createScene = function(engine, canvas, isVR) {
 
         knop.material = knopgroen;
 
-        var generator = new BABYLON.ShadowGenerator(256, light4);
+        var generator = new BABYLON.ShadowGenerator(1024, light4);
         generator.getShadowMap().renderList.push(stang);
         generator.getShadowMap().renderList.push(bol);
         generator.getShadowMap().renderList.push(vierkant);
@@ -64,7 +64,7 @@ var createScene = function(engine, canvas, isVR) {
         generator.getShadowMap().renderList.push(voet);
 
         generator.useBlurVarianceShadowMap = true;
-        generator.blurBoxOffset = 155.0;
+        generator.blurBoxOffset = 5;
 
         for (var i = 0; i < newMeshes.length; i++) {
             newMeshes[i].receiveShadows = false;
