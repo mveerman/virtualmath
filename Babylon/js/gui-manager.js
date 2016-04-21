@@ -24,6 +24,7 @@ function GUIManager() {
         cameraButton.onclick = vm.selectNormalCamera;
         cameraButton.src = images.normalCamera;
         window.redrawScene();
+        goFullScreen();
     };
     vm.selectNormalCamera = function () {
         vm.isVRCameraSelected = false;
