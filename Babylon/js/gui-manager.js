@@ -7,7 +7,7 @@ function GUIManager() {
                 element[method]();
                 return true;
             }
-        })
+        });
     }
 
     function goFullScreen() {
