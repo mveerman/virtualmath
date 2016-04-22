@@ -1,26 +1,21 @@
 function GUIManager() {
     var vm = this;
 
-    function goFullScreen() {
-        var element = document.documentElement;
-        ['requestFullscreen', 'webkitRequestFullscreen', 'mozRequestFullScreen', 'msRequestFullscreen'].some(function (method) {
+    function callOneIfExists(element, methods) {
+        methods.some(function (method) {
             if (element[method]) {
                 element[method]();
                 return true;
             }
-        });
+        })
+    }
+
+    function goFullScreen() {
+        callOneIfExists(document.documentElement, ['requestFullscreen', 'webkitRequestFullscreen', 'mozRequestFullScreen', 'msRequestFullscreen']);
     }
 
     function goWindowedScreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
+        callOneIfExists(document, ['exitFullscreen', 'webkitExitFullscreen', 'mozCancelFullScreen', 'msExitFullscreen']);
     }
 
     vm.isVRCameraSelected = false;
