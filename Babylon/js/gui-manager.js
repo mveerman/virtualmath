@@ -22,7 +22,7 @@ function GUIManager() {
 
     var images = {
         normalCamera: 'img/phone.png',
-        vrCamera: 'img/oculus.png',
+        vrCamera: 'img/cardboard.png',
         fullScreen: 'img/fullscreen.png',
         windowedScreen: 'img/screen.png'
     };
