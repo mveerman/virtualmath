@@ -3,15 +3,12 @@ function GUIManager() {
 
     function goFullScreen() {
         var element = document.documentElement;
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) {
-            element.webkitRequestFullscreen();
-        } else if (element.mozRequestFullScreen) {
-            element.mozRequestFullScreen();
-        } else if (element.msRequestFullscreen) {
-            element.msRequestFullscreen();
-        }
+        ['requestFullscreen', 'webkitRequestFullscreen', 'mozRequestFullScreen', 'msRequestFullscreen'].some(function (method) {
+            if (element[method]) {
+                element[method]();
+                return true;
+            }
+        });
     }
 
     function goWindowedScreen() {
