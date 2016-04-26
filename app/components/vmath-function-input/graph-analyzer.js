@@ -16,21 +16,37 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         throw 'unknown analysis: ' + vm.analysis;
     };
 
-    // TODO be less strict about small aberrations, demand midpoint somewhere in middle, demand graph has some length
+    // TODO be less strict about small aberrations
     vm.analyzeSphereGraph = function (graph) {
-        var result;
+        var tolerances = {
+            noOfPoints: 3,
+            length: {
+                min: (graph.height - graph.originOffset) * 2 / 3
+            },
+            midpointRangePercent: 10
+        };
+
+        var path= graph.path;
+        
         var points = [];
-        graph.path.segments.forEach(function (s) {
+        path.segments.forEach(function (s) {
             points.push({x: s.point.x, y: s.point.y});
         });
-        if (points.length < 2) {
+        if (points.length < tolerances.noOfPoints) {
             return {
                 result: false,
                 reason: 'too few points'
             };
         }
+        if (path.length < tolerances.length.min) {
+            return {
+                result: false,
+                reason: 'too short graph (was: ' + path.length + ', expected: > ' + tolerances.length.min + ')'
+            };
+        }
         var lastSlope;
         var midpoint;
+        var midpointIdx = -1;
 
         for (var i = 0; i < points.length - 1; i++) {
             var A = points[i];
@@ -42,7 +58,8 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
                     reason: 'vertical line at ' + point2String(A)
                 };
             }
-            var slope = calculateSlope({x: A.x, y: graph.height - A.y}, {x: B.x, y: graph.height - B.y});
+            // origin is in upper left, so flip y-values
+            var slope = (A.y - B.y) / (B.x - A.x);
             if (slope < 0) {
                 return {
                     result: false,
@@ -70,6 +87,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             }
             if (slope > lastSlope) {
                 midpoint = A;
+                midpointIdx = i;
                 lastSlope = slope;
             }
         }
@@ -80,6 +98,17 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
                 reason: 'did not find a midpoint'
             };
         }
+        // check if midpoint within 10% of graph-length of middle
+        var lengthToMidpoint = graph.path.getOffsetOf(graph.path.segments[midpointIdx].point);
+        var lengthToMiddle = graph.path.length / 2;
+        var tolerance = tolerances.midpointRangePercent * graph.path.length / 100;
+        if (lengthToMiddle - lengthToMidpoint > tolerance) {
+            return {
+                result: false,
+                reason: 'midpoint too far from halfway of graph (halfway: ' + lengthToMiddle + ', midpoint: ' + lengthToMidpoint + ', tolerance: ' + tolerance + ')',
+                midpoint: midpoint
+            };
+        }
         return {
             result: true,
             midpoint: midpoint
@@ -88,6 +117,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
 
     vm.analyzeCylinderGraph = function (graph) {
         var tolerances = {
+            noOfPoints: 2,
             angle: 15,
             outOfBounds: 10,
             length: {
@@ -99,8 +129,11 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
         var firstPoint = graph.path.firstSegment.point;
         var lastPoint = graph.path.lastSegment.point;
 
-        if (segments.length < 2) {
-            return cylinderFailure('too few points');
+        if (segments.length < tolerances.noOfPoints) {
+            return {
+                result: false,
+                reason: 'too few points (was: ' + segments.length + ', expected: > ' + tolerances.noOfPoints + ')'
+            };
         }
 
         // check if drawn line has minimum length
@@ -110,6 +143,7 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
                 reason: 'too short graph (was: ' + graph.path.length + ', expected: > ' + tolerances.length.min + ')'
             };
         }
+
         // check angle approx. 45%
         var angle = Math.atan2(firstPoint.y - lastPoint.y, lastPoint.x - firstPoint.x) * 180 / Math.PI;
         var desiredAngle = 45;
@@ -148,17 +182,6 @@ angular.module('graphModule', []).service('graphAnalyzer', function () {
             result: true
         };
     };
-
-    function calculateSlope(A, B) {
-        return (B.y - A.y) / (B.x - A.x);
-    }
-
-    function cylinderFailure(reason) {
-        return {
-            result: false,
-            reason: reason
-        };
-    }
 
     function point2String(point) {
         return '[' + point.x + ',' + point.y + ']';
