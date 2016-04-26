@@ -37,6 +37,11 @@ var createScene = function (engine, canvas, isVR) {
 
         //scene.debugLayer.show();
 
+        // maak meshes pickable
+        newMeshes.forEach(function(element) {
+            element.isPickable = true;
+        });
+
         //OBJECTEN KUNNEN NIET MEER DAN 4 LICHTEN HANDELEN
 
         var light3 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-40, -200, -200), scene); // van voren
