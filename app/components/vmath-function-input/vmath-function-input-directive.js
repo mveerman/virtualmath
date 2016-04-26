@@ -64,7 +64,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                         width: paper.view.size.width,
                         height: paper.view.size.height,
                         originOffset: originOffset
-                    }
+                    };
                     var result = graphAnalyzer.analyze(graph);
 
                     handleGraphResult(result);
@@ -109,6 +109,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
                     path.simplify();
                     vm.graphData.analysis = analyze(path);
                     vm.graphData.base64url = canvas.toDataURL.apply(canvas);
+                    vm.graphData.pathAsJson = path.exportJSON();
                     vm.doGraphUpdate()(vm.graphData);
                     drag = false;
                 };
