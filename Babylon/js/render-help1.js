@@ -1,3 +1,4 @@
+
 Number.prototype.pad = function (size) {
     var s = String(this);
     while (s.length < (size || 2)) {
@@ -6,10 +7,10 @@ Number.prototype.pad = function (size) {
     return s;
 };
 
-var createScene = function (engine, canvas, isVR) {
+var createScene = function(engine, canvas, isVR) {
     "use strict";
 
-    // This creates a basic Babylon Scene object (non-mesh)
+   // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
     scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
 
@@ -24,16 +25,10 @@ var createScene = function (engine, canvas, isVR) {
     // This attaches the camera to the canvas
     camera.attachControl(canvas, true);
 
-    function CrosshairInFrontOfCamera(crosshair, camera, distanceFromCamera) {
-        //crosshair.parent = camera;
-        crosshair.position = camera.position.add(new BABYLON.Vector3(0, 0, distanceFromCamera));
-    }
-
-
     BABYLON.SceneLoader.ImportMesh("", "models/", "help-1.babylon", scene, function (newMeshes) {
 
         // Set the target of the camera to the first imported mesh
-        camera.setTarget = new BABYLON.Vector3(0, 500, 0);
+        //camera.setTarget = new BABYLON.Vector3(0, 500, 0);
 
         //scene.debugLayer.show();
 
@@ -44,11 +39,11 @@ var createScene = function (engine, canvas, isVR) {
 
         //OBJECTEN KUNNEN NIET MEER DAN 4 LICHTEN HANDELEN
 
-        var light3 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-40, -200, -200), scene); // van voren
-        var light4 = new BABYLON.DirectionalLight("light", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
+        var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(-40, -200, -200), scene); // van voren
+        var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
 
-        light3.intensity = 1;
-        light4.intensity = 1;
+        light1.intensity = 1;
+        light2.intensity = 1;
 
         var stang = scene.getMeshByName('stang');
         var ground = scene.getMeshByName('plateau');
@@ -66,7 +61,7 @@ var createScene = function (engine, canvas, isVR) {
 
         knop.material = knopgroen;
 
-        var generator = new BABYLON.ShadowGenerator(1024, light4);
+        var generator = new BABYLON.ShadowGenerator(1024, light2);
         generator.getShadowMap().renderList.push(stang);
         generator.getShadowMap().renderList.push(bol);
         generator.getShadowMap().renderList.push(vierkant);
@@ -100,52 +95,56 @@ var createScene = function (engine, canvas, isVR) {
                 var currentMesh = pickInfo.pickedMesh;
 
                 if (currentMesh.name == 'knop') {
-                    camera.detachControl(canvas);
-
-
-                    knop.position.z = knoppos + 3;
-                    knop.material = knoprood;
-
-                    knop.diffuseColor = new BABYLON.Color3(1, 0, 0);
-
-                    var start = kleur[kleurNum] + 1;
-                    var einde = kleur[kleurNum + 1] + 1;
-
-                    var kleurAniStart = 105 + kleurNum * 420;
-                    var kleurAniStop = 430 + kleurNum * 420;
-
-                    kleurNum = kleurNum + 1;
-                    processing = 1;
-
-                    for (var k = start; k < einde; k++) {
-                        var tempKleur = 'Plane' + (k).pad(3);
-                        var kleurAni = scene.getMeshByName(tempKleur);
-                        /*jshint -W083 */
-                        scene.beginAnimation(kleurAni, kleurAniStart, kleurAniStop, false, 1, function () {
-                            scene.stopAnimation(kleurAni);
-                        });
-                    }
-
-                    for (var l = 0; l < 22; l++) {
-                        var tempNum = 'num' + (l).pad(3);
-                        var nummers = scene.getMeshByName(tempNum);
-                        /*jshint -W083 */
-                        scene.beginAnimation(nummers, kleurAniStart, kleurAniStop, false, 1, function () {
-                            scene.stopAnimation(nummers);
-                        });
-                    }
-
-                    var straalNum = 'straal' + kleurNum;
-                    var straalDown = scene.getMeshByName(straalNum);
-                    scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function () {
-                        processing = 0;
-                        scene.stopAnimation(straalDown);
-                        knop.position.z = knoppos;
-                        knop.material = knopgroen;
-                    });
+	       			camera.detachControl(canvas);
+                   alsKnop()
                 }
             }
         };
+
+
+
+		function alsKnop(){
+			knop.position.z = knoppos + 3;
+			knop.material = knoprood;
+  
+			knop.diffuseColor = new BABYLON.Color3(1, 0, 0);
+  
+			var start = kleur[kleurNum] + 1;
+			var einde = kleur[kleurNum + 1] + 1;
+  
+			var kleurAniStart = 105 + kleurNum * 420;
+			var kleurAniStop = 430 + kleurNum * 420;
+  
+			kleurNum = kleurNum + 1;
+			processing = 0;
+  
+			for (var k = start; k < einde; k++) {
+				var tempKleur = 'Plane' + (k).pad(3);
+				var kleurAni = scene.getMeshByName(tempKleur);
+				/*jshint -W083 */
+				scene.beginAnimation(kleurAni, kleurAniStart, kleurAniStop, false, 1, function() {
+					scene.stopAnimation(kleurAni);
+				});
+			}
+  
+			for (var l = 0; l < 22; l++) {
+				var tempNum = 'num' + (l).pad(3);
+				var nummers = scene.getMeshByName(tempNum);
+				/*jshint -W083 */
+				scene.beginAnimation(nummers, kleurAniStart, kleurAniStop, false, 1, function() {
+					scene.stopAnimation(nummers);
+				});
+			}
+  
+			var straalNum = 'straal' + kleurNum;
+			var straalDown = scene.getMeshByName(straalNum);
+			scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function() {
+				processing = 0;
+				scene.stopAnimation(straalDown);
+				knop.position.z = knoppos;
+				knop.material = knopgroen;
+			});
+	    }
 
         scene.onPointerUp = function () {
             camera.attachControl(canvas, true);
@@ -158,55 +157,52 @@ var createScene = function (engine, canvas, isVR) {
         voet.receiveShadows = false;
         ground.receiveShadows = true;
 
-        /*
-        var circle = BABYLON.Mesh.CreatePlane("circle", 10, scene);
-        var circlemat = new BABYLON.StandardMaterial("", scene);
-        circlemat.emissiveTexture = new BABYLON.Texture("models/crosshair.png", scene);
-        circlemat.opacityTexture = circlemat.emissiveTexture;
-        circle.position.z = 40;
-        circle.material = circlemat;
-
-        scene.registerBeforeRender(function() {
-
-            CrosshairInFrontOfCamera(circle, camera, 300);
-
-            // zet origin (van Ray en Path) op basis van camera position
-            var origin = new BABYLON.Vector3(camera.position.x, camera.position.y, camera.position.z);
-            // zet origin (van Ray en Path) op basis van circle position
-            var destination = new BABYLON.Vector3(circle.position.x, circle.position.y, circle.position.z);
-
-            //var destination = camera.getTarget().subtract(camera.position);
-
-            // rode lijnen
-            var path = new BABYLON.Mesh.CreateLines("lines", [origin, destination], scene);
-            path.color = new BABYLON.Color3(1, 0, 0);
-
-            // rayPicker om button te picken
-            var rayPick = new BABYLON.Ray(origin, destination);
-
-            var pickInfo = scene.pickWithRay(rayPick, function (mesh) {
-                return (mesh.name.indexOf('knop') === 0);
-            });
-
-            if (pickInfo.hit && pickInfo.pickedMesh.name === 'knop' ) {
-                console.log('pickInfo', pickInfo);
-            }
-
-            var meshFound = scene.pickWithRay(rayPick, function (item) {
-                return (item.name.indexOf('knop') === 0) ;
-            });
-
-            //var meshFound = scene.pickWithRay(rayPick);
-            if (meshFound !== null && meshFound.pickedPoint !== null) {
-                //if(meshFound.hit) {
-                console.log('meshFound', meshFound);
-            }
-
-        });
-        */
-
-    });
-
+		if (isVR) {	
+			var circle = BABYLON.Mesh.CreatePlane("circle", 40, scene);
+			var circlemat = new BABYLON.StandardMaterial("", scene);
+			circlemat.emissiveTexture = new BABYLON.Texture("img/vinger.png", scene);
+			circlemat.opacityTexture = circlemat.emissiveTexture;
+		
+			circle.position.z = 400;
+			circle.position.x = -110;
+			circle.position.y = -75;
+			circle.material = circlemat;
+			circle.parent = camera;    
+			circle.renderingGroupId = 1;
+			light1.excludedMeshes = [circle];
+			light2.excludedMeshes = [circle];
+			
+			ground.isPickable = false
+			bol.isPickable = false
+			circle.isPickable = false
+			knop.isPickable = true
+		
+			knop.absolutePosition.x = -171
+			knop.absolutePosition.y = -88
+			knop.absolutePosition.z = -32
+			
+		
+			scene.registerBeforeRender(function () {
+					
+					var Lookout = camera.position.clone();
+					var direction = circle.absolutePosition.subtract(Lookout);
+					var offset = direction.clone().scale(10);
+					var rayOrigin = Lookout.add(offset);
+					var ray = new BABYLON.Ray(camera.position,rayOrigin);
+					var pickResult = scene.pickWithRay(ray);
+							
+					if (pickResult.hit && kleurNum < 6 && processing == 0) {
+						if (pickResult.pickedMesh == knop){
+							//var axisX = BABYLON.Mesh.CreateLines("axisX", [camera.position,rayOrigin], scene);
+							alsKnop()
+							processing = 1
+						}
+					}
+		
+			});
+	
+		}
+	});
     return scene;
 
 };
