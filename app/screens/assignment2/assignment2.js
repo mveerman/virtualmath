@@ -2,7 +2,7 @@
 
 angular.module('virtualMath.assignment2', [
         'ngRoute',
-        'graphModule',
+        'virtualMath.graph',
         'virtualMath.vmath-function-input-directive'
     ])
 

@@ -1,7 +1,7 @@
 'use strict';
 
 describe('graph analysis', function () {
-    beforeEach(module('graphModule'));
+    beforeEach(module('virtualMath.graph'));
     var graphAnalyzer;
     var graph;
     beforeEach(inject(function (_graphAnalyzer_) {

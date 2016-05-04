@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('virtualMath.vmath-function-input-directive', ['graphModule'])
+angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph'])
     .directive('vmathFunctionInput', ['graphAnalyzer', '$window', function (graphAnalyzer, $window) {
         return {
             restrict: 'E',

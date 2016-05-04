@@ -1,7 +1,7 @@
 'use strict';
 
 // TODO right-to-left drawn graphs
-angular.module('graphModule', []).service('graphAnalyzer', function () {
+angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
     var vm = this;
 
     vm.analysis = '';
