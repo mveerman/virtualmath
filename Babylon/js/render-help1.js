@@ -96,7 +96,7 @@ var createScene = function(engine, canvas, isVR) {
 
                 if (currentMesh.name == 'knop') {
 	       			camera.detachControl(canvas);
-                   alsKnop()
+                   alsKnop();
                 }
             }
         };
@@ -172,14 +172,14 @@ var createScene = function(engine, canvas, isVR) {
 			light1.excludedMeshes = [circle];
 			light2.excludedMeshes = [circle];
 			
-			ground.isPickable = false
-			bol.isPickable = false
-			circle.isPickable = false
-			knop.isPickable = true
+			ground.isPickable = false;
+			bol.isPickable = false;
+			circle.isPickable = false;
+			knop.isPickable = true;
 		
-			knop.absolutePosition.x = -171
-			knop.absolutePosition.y = -88
-			knop.absolutePosition.z = -32
+			knop.absolutePosition.x = -171;
+			knop.absolutePosition.y = -88;
+			knop.absolutePosition.z = -32;
 			
 		
 			scene.registerBeforeRender(function () {
@@ -191,11 +191,11 @@ var createScene = function(engine, canvas, isVR) {
 					var ray = new BABYLON.Ray(camera.position,rayOrigin);
 					var pickResult = scene.pickWithRay(ray);
 							
-					if (pickResult.hit && kleurNum < 6 && processing == 0) {
+					if (pickResult.hit && kleurNum < 6 && processing === 0) {
 						if (pickResult.pickedMesh == knop){
 							//var axisX = BABYLON.Mesh.CreateLines("axisX", [camera.position,rayOrigin], scene);
-							alsKnop()
-							processing = 1
+							alsKnop();
+							processing = 1;
 						}
 					}
 		
