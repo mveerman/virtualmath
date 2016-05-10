@@ -6,6 +6,10 @@ angular.module('virtualMath.graph').service('graphUtil', function () {
 
     vm.createSphereGraphPath = function (canvas, originOffset) {
         var path = new paper.Path();
+
+        // wolframAlpha with radius 5:
+        // ParametricPlot[ {-1/3 * pi * x^3 + pi * x^2 * 5, x} , {x,0,10}  ]
+
         var volume = function (h, r) {
             return Math.PI * Math.pow(h, 2) * (3 * r - h) / 3;
         };

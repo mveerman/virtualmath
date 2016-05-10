@@ -16,103 +16,101 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         throw 'unknown analysis: ' + vm.analysis;
     };
 
-    // TODO be less strict about small aberrations
     vm.analyzeSphereGraph = function (graph) {
+        var debug = false;
         var tolerances = {
             noOfPoints: 3,
-            length: {
-                min: (graph.height - graph.originOffset) * 2 / 3
-            },
-            midpointRangePercent: 10
+            height: graph.height - graph.originOffset - ((graph.height - graph.originOffset) * 0.40)
         };
 
-        var path= graph.path;
-        
-        var points = [];
-        path.segments.forEach(function (s) {
-            points.push({x: s.point.x, y: s.point.y});
-        });
-        if (points.length < tolerances.noOfPoints) {
+
+        var path = graph.path.clone();
+        if (path.lastSegment.point.x < path.firstSegment.point.x) {
+            path.reverse();
+        }
+
+        var pathStartPoint = path.getPointAt(0);
+        var pathEndPoint = path.getPointAt(path.length);
+
+        var pathHeight = pathStartPoint.y - pathEndPoint.y;
+
+        if (pathHeight < tolerances.height) {
             return {
                 result: false,
-                reason: 'too few points'
-            };
-        }
-        if (path.length < tolerances.length.min) {
-            return {
-                result: false,
-                reason: 'too short graph (was: ' + path.length + ', expected: > ' + tolerances.length.min + ')'
-            };
-        }
-        var lastSlope;
-        var midpoint;
-        var midpointIdx = -1;
-
-        for (var i = 0; i < points.length - 1; i++) {
-            var A = points[i];
-            var B = points[i + 1];
-
-            if (A.x === B.x) {
-                return {
-                    result: false,
-                    reason: 'vertical line at ' + point2String(A)
-                };
-            }
-            // origin is in upper left, so flip y-values
-            var slope = (A.y - B.y) / (B.x - A.x);
-            if (slope < 0) {
-                return {
-                    result: false,
-                    reason: 'negative slope at ' + point2String(A)
-                };
-            }
-            if (typeof lastSlope === 'undefined') {
-                lastSlope = slope;
-                continue;
-            }
-            if (slope < lastSlope && typeof midpoint !== 'undefined') {
-                return {
-                    result: false,
-                    reason: 'descending after midpoint at ' + point2String(A),
-                    midpoint: midpoint
-                };
-            }
-            if (slope < lastSlope) {
-                lastSlope = slope;
-                continue;
-            }
-            if (slope > lastSlope && typeof midpoint != 'undefined') {
-                lastSlope = slope;
-                continue;
-            }
-            if (slope > lastSlope) {
-                midpoint = A;
-                midpointIdx = i;
-                lastSlope = slope;
+                reason: 'graph-height less than minimum (' + (pathStartPoint.y - pathEndPoint.y ) + ' < ' + tolerances.height + ')'
             }
         }
 
-        if (typeof midpoint == 'undefined') {
+        var line = new paper.Path.Line(pathStartPoint, pathEndPoint);
+
+        if (debug) {
+            line.strokeColor = 'blue';
+        }
+
+        var crossings = path.getCrossings(line);
+
+        // TODO fix this check for erratic start/end on touchscreens
+        if (crossings.length != 1) {
             return {
                 result: false,
-                reason: 'did not find a midpoint'
+                reason: 'crossings != 1 (' + crossings.length + ')'
             };
         }
-        // check if midpoint within 10% of graph-length of middle
-        var lengthToMidpoint = graph.path.getOffsetOf(graph.path.segments[midpointIdx].point);
-        var lengthToMiddle = graph.path.length / 2;
-        var tolerance = tolerances.midpointRangePercent * graph.path.length / 100;
-        if (lengthToMiddle - lengthToMidpoint > tolerance) {
-            return {
-                result: false,
-                reason: 'midpoint too far from halfway of graph (halfway: ' + lengthToMiddle + ', midpoint: ' + lengthToMidpoint + ', tolerance: ' + tolerance + ')',
-                midpoint: midpoint
-            };
+
+        var intersectionPoint = crossings[0].intersection.point;
+
+
+        // TODO check if midpoint somewhere halfway the path height
+
+
+        if (debug) {
+            var intersectHighlight = new paper.Path.Circle(intersectionPoint, 5);
+            intersectHighlight.fillColor = 'blue';
         }
+
+        var topPath = path.split(crossings[0]);
+
+        var bottomPathStartPoint = path.getPointAt(0);
+        var bottomPathEndPoint = path.getPointAt(path.length);
+        var lowerTriangle = new paper.Path([new paper.Point(bottomPathStartPoint.x, bottomPathEndPoint.y), bottomPathEndPoint, bottomPathStartPoint]);
+        lowerTriangle.closed = true;
+
+        if (debug) {
+            lowerTriangle.fillColor = 'yellow';
+            lowerTriangle.fillColor.alpha = 0.2;
+        }
+        var i;
+
+        for (i = 0; i < path.segments.length; i++) {
+            if (!lowerTriangle.contains(path.segments[i].point)) {
+                return {
+                    result: false,
+                    reason: 'lower points outside triangle'
+                }
+            }
+        }
+        var topPathStartPoint = topPath.getPointAt(0);
+        var topPathEndPoint = topPath.getPointAt(topPath.length);
+        var upperTriangle = new paper.Path([new paper.Point(topPathEndPoint.x, topPathStartPoint.y), topPathEndPoint, topPathStartPoint]);
+        upperTriangle.closed = true;
+
+        if (debug) {
+            upperTriangle.fillColor = 'yellow';
+            upperTriangle.fillColor.alpha = 0.2;
+        }
+        for (i = 0; i < path.segments.length; i++) {
+            if (!lowerTriangle.contains(path.segments[i].point)) {
+                return {
+                    result: false,
+                    reason: 'lower points outside triangle'
+                }
+            }
+        }
+
         return {
-            result: true,
-            midpoint: midpoint
+            result: true
         };
+
     };
 
     vm.analyzeCylinderGraph = function (graph) {
@@ -182,9 +180,4 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
             result: true
         };
     };
-
-    function point2String(point) {
-        return '[' + point.x + ',' + point.y + ']';
-    }
-
 });

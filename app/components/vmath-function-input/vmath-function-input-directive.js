@@ -80,12 +80,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     } else {
                         angular.element(canvas).removeClass('right-graph').addClass('wrong-graph');
                     }
-                    if (result.midpoint) {
-                        // TODO remove this after debugging
-                        var circle = new paper.Path.Circle(new Point(result.midpoint.x, result.midpoint.y), 5);
-                        circle.fillColor = 'blue';
-                        paper.view.draw();
-                    }
+                    paper.view.draw();
                 }
 
                 vm.graphData = {
