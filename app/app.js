@@ -77,6 +77,10 @@ angular.module('virtualMath', [
             data.score = assignment1Score + assignment2Score;
         };
 
+        $scope.getScore = function () {
+            return $scope.getCurrentSurveyRunData().score;
+        };
+
         $scope.getLastScore = function () {
             return $scope.surveyData.lastScore;
         };
