@@ -49,16 +49,18 @@ angular.module('virtualMath', [
         };
 
         $scope.startNewSurveyRun = function () {
+            var score = -1;
             var assignment1Data = null;
             var assignment2Data = null;
             if ($scope.surveyData.currentRun >= 0) {
                 var data = $scope.getCurrentSurveyRunData();
                 $scope.surveyData.lastScore = data.score;
+                score = data.score;
                 assignment1Data = data.assignment1;
                 assignment2Data = data.assignment2;
             }
             $scope.surveyData.runs.push({
-                score: -1,
+                score: score,
                 help1shown: false,
                 help2shown: false,
                 assignment1: assignment1Data,
