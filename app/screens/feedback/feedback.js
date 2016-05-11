@@ -24,7 +24,7 @@ angular.module('virtualMath.feedback', [
         $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
 
         $scope.runReward = function () {
-            console.log("run reward");
+            // console.log("run reward");
             var rewardCanvasA = $scope.getRewardCanvas('REWARD_ASSIGNMENT_A');
             var rewardDataA = JSON.parse($scope.currentRunData.assignment1.graphData.pathAsJson);
             $scope.buildVase(rewardCanvasA, rewardDataA);
@@ -47,8 +47,8 @@ angular.module('virtualMath.feedback', [
         };
 
         $scope.buildVase = function (canvas, data) {
-            console.log('build vase called');
-            console.log(data);
+            // console.log('build vase called');
+            // console.log(data);
 
             paper.setup(canvas);
 
@@ -76,7 +76,7 @@ angular.module('virtualMath.feedback', [
 
             var inhoud = Math.PI * Math.pow((canvas.width / 4), 2) * canvas.height;
             var xPerc = inhoud / (maxX - minX);
-            console.info("Inhoud:", inhoud, "xPerc:", xPerc);
+            // console.info("Inhoud:", inhoud, "xPerc:", xPerc);
 
             var tY = (canvas.height - 2) / (maxY - minY);
 
@@ -97,7 +97,7 @@ angular.module('virtualMath.feedback', [
              factor: 1.0
              });*/
             //original.simplify(3.0);
-            console.log(original);
+            // console.log(original);
 
             var vaseLeft = new paper.Path();
             vaseLeft.strokeColor = 'black';
@@ -115,8 +115,8 @@ angular.module('virtualMath.feedback', [
             var subTotal = 0;
 
 
-            for (var i = 0; i < orgSegs.length; i++) {
-                var seg = orgSegs[i];
+            for (var ii = 0; ii < orgSegs.length; ii++) {
+                var seg = orgSegs[ii];
                 var curve = seg.curve;
                 if (!seg.isLast()) {
                     for (var ci = 0; ci < curve.length; ci = ci + 10) { // set a point every 5px
@@ -128,8 +128,8 @@ angular.module('virtualMath.feedback', [
                             angle = Math.atan2(prevPoint.y - curPoint.y, curPoint.x - prevPoint.x) * 180 / Math.PI;
                             multiplier = (90 - angle) / 45;
                         }
-                        console.info("x0:", curPoint.x, "y0:", curPoint.y);
-                        console.log("angle: ", angle, "multiplier: ", multiplier, "height: ", curPoint.y);
+                        // console.info("x0:", curPoint.x, "y0:", curPoint.y);
+                        // console.log("angle: ", angle, "multiplier: ", multiplier, "height: ", curPoint.y);
                         if (angle >= 0 && multiplier <= 2 && multiplier >= 0) {
                             var newHeight = curPoint.y;
                             if (prevPoint != null) {
@@ -146,7 +146,7 @@ angular.module('virtualMath.feedback', [
                                 straal = Math.sqrt(subInhoud / (Math.PI * heightD));
                             }
                             subTotal = subTotal + subInhoud;
-                            console.info("straal: ", straal, "Hoogte", heightD);
+                            // console.info("straal: ", straal, "Hoogte", heightD);
 
 
                             /*var vlPoint = new Point(
@@ -185,7 +185,7 @@ angular.module('virtualMath.feedback', [
             });
 
             paper.view.draw();
-            console.log('debug')
+            // console.log('debug')
         };
 
         paper.install(window);
