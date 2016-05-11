@@ -65,7 +65,7 @@ var createScene = function(engine, canvas, isVR) {
 
         knop.material = knopgroen;
 
-        var generator = new BABYLON.ShadowGenerator(256, light2);
+        var generator = new BABYLON.ShadowGenerator(512, light2);
         generator.getShadowMap().renderList.push(stang);
         generator.getShadowMap().renderList.push(bol);
         generator.getShadowMap().renderList.push(vierkant);
