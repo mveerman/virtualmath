@@ -7,19 +7,28 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
             templateUrl: 'components/vmath-function-input/vmath-function-input-directive.html',
             transclude: true,
             scope: {
-                doGraphUpdate: '&onGraphUpdate'
+                doGraphUpdate: '&onGraphUpdate',
+                data: '='
             },
             bindToController: true,
             controllerAs: 'FIctrl',
             controller: function ($scope, $element, $attrs) {
+                var vm = this;
                 var canvas = angular.element($element).find("canvas")[0];
                 var path;
                 var drag = false;
                 var originOffset = 12;
                 initPaper();
                 drawAxes();
+                vm.graphData = {
+                    base64url: '',
+                    dirty: false
+                };
 
-                var vm = this;
+                if (vm.data != null) {
+                    drawPrevious(vm.graphData, vm.data);
+                }
+
 
                 function initPaper() {
                     paper.install(window);
@@ -50,6 +59,14 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     paper.view.draw();
                 }
 
+                function drawPrevious(graphData, pData) {
+                    var previous = new paper.Path();
+                    previous.importJSON(JSON.parse(pData.pathAsJson));
+                    previous.strokeColor = 'black';
+                    paper.view.draw();
+                    graphData.dirty = true;
+                }
+
                 function createPoint(event) {
                     var rect = canvas.getBoundingClientRect();
                     return new paper.Point(
@@ -70,7 +87,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     handleGraphResult(result);
 
 
-                    console.log(result);
+                    // console.log(result);
                     return result;
                 }
 
@@ -82,11 +99,6 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     }
                     paper.view.draw();
                 }
-
-                vm.graphData = {
-                    base64url: '',
-                    dirty: false
-                };
 
                 vm.redoClickHandler = function () {
                     angular.element(canvas).removeClass('wrong-graph').removeClass('right-graph');

@@ -16,12 +16,15 @@ angular.module('virtualMath.assignment2', [
     .controller('Assignment2Controller', ['graphAnalyzer', '$scope', '$location', function (graphAnalyzer, $scope, $location) {
         graphAnalyzer.analysis = 'cylinder';
         $scope.surveyController = $scope.$parent;
-        $scope.surveyController.getCurrentSurveyRunData().assignment2 = {
-            graphData: '',
-            description: ''
-        };
-        $scope.description = '';
-        $scope.graphData = '';
+        var data = $scope.surveyController.getCurrentSurveyRunData();
+        if (data.assignment2 == null) {
+            data.assignment2 = {
+                graphData: null,
+                description: ''
+            };
+        }
+        $scope.description = data.assignment2.description;
+        $scope.graphData = data.assignment2.graphData;
 
         $scope.saveGraph = function (graphData) {
             $scope.surveyController.getCurrentSurveyRunData().assignment2.graphData = graphData;

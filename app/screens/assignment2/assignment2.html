@@ -24,7 +24,7 @@
                 <section>
                     <div class="graph">
                         <label>Grafiek</label>
-                        <vmath-function-input on-graph-update="saveGraph"></vmath-function-input>
+                        <vmath-function-input data="graphData" on-graph-update="saveGraph"></vmath-function-input>
                     </div>
                 </section>
             </div>
@@ -35,7 +35,7 @@
                     <div class="deepthoughts">
                         <label>Uitleg
                         <textarea name="q1description" required ng-model="description" ng-minlength="10"
-                                  ng-change="saveDescription()"></textarea>
+                                  ng-change="saveDescription()" placeholder="Minimaal 10 tekens"></textarea>
                         </label>
                         <div role="alert">
                             <span class="error"

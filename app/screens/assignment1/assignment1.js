@@ -14,26 +14,29 @@ angular.module('virtualMath.assignment1', [
     }])
 
     .controller('Assignment1Controller', ['graphAnalyzer', '$scope', '$location', function (graphAnalyzer, $scope, $location) {
-        graphAnalyzer.analysis= 'sphere';
+        graphAnalyzer.analysis = 'sphere';
         $scope.surveyController = $scope.$parent;
-        $scope.surveyController.getCurrentSurveyRunData().assignment1 = {
-            graphData: '',
-            description: ''
-        };
-        $scope.description = '';
-        $scope.graphData = '';
+        var data = $scope.surveyController.getCurrentSurveyRunData();
+        if (data.assignment1 == null) {
+            data.assignment1 = {
+                graphData: null,
+                description: ''
+            };
+        }
+        $scope.description = data.assignment1.description;
+        $scope.graphData = data.assignment1.graphData;
 
-        $scope.saveGraph = function(graphData) {
+        $scope.saveGraph = function (graphData) {
             $scope.surveyController.getCurrentSurveyRunData().assignment1.graphData = graphData;
             $scope.graphData = graphData;
             $scope.surveyController.determineRunScore();
         };
 
-        $scope.saveDescription = function() {
+        $scope.saveDescription = function () {
             $scope.surveyController.getCurrentSurveyRunData().assignment1.description = $scope.description;
         };
 
-        $scope.advanceToNextPage = function() {
+        $scope.advanceToNextPage = function () {
             $location.path('/assignment2');
         };
 
