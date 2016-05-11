@@ -62,7 +62,7 @@ var createScene  = function(engine, canvas) {
             knoprood.diffuseColor = new BABYLON.Color3(1, 0, 0);
             knop.material = knopgroen;
 
-            var generator = new BABYLON.ShadowGenerator(256, light);
+            var generator = new BABYLON.ShadowGenerator(512, light);
             generator.getShadowMap().renderList.push(bol);
             generator.getShadowMap().renderList.push(ground);
             generator.getShadowMap().renderList.push(stang);
