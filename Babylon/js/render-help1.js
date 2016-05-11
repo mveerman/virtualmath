@@ -14,6 +14,7 @@ var createScene = function(engine, canvas, isVR) {
     var scene = new BABYLON.Scene(engine);
     scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
 
+
     var camera;
 
     if (isVR) {
@@ -58,6 +59,9 @@ var createScene = function(engine, canvas, isVR) {
         knopgroen.diffuseColor = new BABYLON.Color3(0, 1, 0);
         var knoprood = new BABYLON.StandardMaterial("std", scene);
         knoprood.diffuseColor = new BABYLON.Color3(1, 0, 0);
+
+		var knopGeluid = new BABYLON.Sound("water", "models/knop.mp3" , scene, function () {});
+		var waterGeluid = new BABYLON.Sound("water", "models/water.mp3" , scene, function () {});
 
         knop.material = knopgroen;
 
@@ -104,6 +108,7 @@ var createScene = function(engine, canvas, isVR) {
 
 
 		function alsKnop(){
+			knopGeluid.play(0);
 			knop.position.z = knoppos + 3;
 			knop.material = knoprood;
   
@@ -136,9 +141,11 @@ var createScene = function(engine, canvas, isVR) {
 				});
 			}
   
+  			waterGeluid.play(0.5);
 			var straalNum = 'straal' + kleurNum;
 			var straalDown = scene.getMeshByName(straalNum);
 			scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function() {
+				
 				processing = 0;
 				scene.stopAnimation(straalDown);
 				knop.position.z = knoppos;
