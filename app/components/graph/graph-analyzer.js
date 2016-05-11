@@ -1,6 +1,5 @@
 'use strict';
 
-// TODO right-to-left drawn graphs
 angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
     var vm = this;
 
@@ -20,7 +19,8 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         var debug = false;
         var tolerances = {
             noOfPoints: 3,
-            height: graph.height - graph.originOffset - ((graph.height - graph.originOffset) * 0.40)
+            height: (graph.height - graph.originOffset) * 0.6,
+            fingerRadius: 10
         };
 
 
@@ -49,8 +49,20 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
 
         var crossings = path.getCrossings(line);
 
-        // TODO fix this check for erratic start/end on touchscreens
+        // filter for erratic start/end on touchscreens
+        var crossings = crossings.filter(function (crossing) {
+                return pathStartPoint.getDistance(crossing.intersection.point) > tolerances.fingerRadius
+                    && pathEndPoint.getDistance(crossing.intersection.point) > tolerances.fingerRadius;
+            }
+        );
         if (crossings.length != 1) {
+            if (debug) {
+                crossings.forEach(function (crosssing) {
+                    var circle = new paper.Shape.Circle(crosssing.intersection.point, 5);
+                    circle.fillColor = 'red';
+                });
+            }
+
             return {
                 result: false,
                 reason: 'crossings != 1 (' + crossings.length + ')'
