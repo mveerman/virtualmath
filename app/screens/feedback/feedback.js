@@ -88,6 +88,7 @@ angular.module('virtualMath.feedback', [
             original.dashArray = [6, 2];
             original.closed = false;
             original.fullySelected = false;
+            original.reduce();
 
             var vaseLeft = new paper.Path();
             vaseLeft.strokeColor = 'black';
@@ -145,14 +146,8 @@ angular.module('virtualMath.feedback', [
                 }
                 prevPoint = curPoint;
             }
-            vaseLeft.smooth({
-                type: 'catmull-rom',
-                factor: 0.4
-            });
-            vaseRight.smooth({
-                type: 'catmull-rom',
-                factor: 0.4
-            });
+            vaseLeft.smooth({type: 'continuous'});
+            vaseRight.smooth({type: 'continuous'});
 
             paper.view.draw();
         };
