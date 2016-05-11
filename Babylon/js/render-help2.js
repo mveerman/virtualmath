@@ -18,11 +18,15 @@ var createScene  = function(engine, canvas) {
             var plateau = scene.getMeshByName('plateau');
             var stang = scene.getMeshByName('stang');
             var pomphuis = scene.getMeshByName('pomphuis');
+            var pompvoet = scene.getMeshByName('pompvoet');			
             var bal = scene.getMeshByName('bal' + balNum);
             var lat = scene.getMeshByName('lat' + balNum);
             var bol = scene.getMeshByName('bol');
             var vloeistof = scene.getMeshByName('vloeistof');
             var light = scene.getLightByName('FDirect002');
+
+			var knopGeluid = new BABYLON.Sound("water", "models/knop.mp3" , scene, function () {});
+			var waterGeluid = new BABYLON.Sound("water", "models/water.mp3" , scene, function () {});
 
             var j,tempName, tempPlaneMesh;
 
@@ -83,8 +87,10 @@ var createScene  = function(engine, canvas) {
             stang.receiveShadows = false;
             bol.receiveShadows = false;
             pomphuis.receiveShadows = false;
-            ground.receiveShadows = false;
+			pompvoet.receiveShadows = false;
+			ground.receiveShadows = false;
             vloeistof.receiveShadows = false;
+            
 
             var getGroundPosition = function () {
                 var pickinfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) {
@@ -101,7 +107,8 @@ var createScene  = function(engine, canvas) {
                 if (evt.button !== 0) {
                     return;
                 }
-
+				
+						
                 // check if we are under a mesh
                 var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) {
                     return mesh !== ground;
@@ -130,6 +137,8 @@ var createScene  = function(engine, canvas) {
                     }
 
                     if (currentMesh == knop && vullenMag) {
+
+						knopGeluid.play(0);
 
                         knop.position.z = knoppos + 2;
                         knop.material = knoprood;
@@ -178,10 +187,9 @@ var createScene  = function(engine, canvas) {
                         var straalDown = scene.getMeshByName(straalNum);
                         lock = true;
 
-                        var waterGeluid = new BABYLON.Sound("water", "models/water.mp3" , scene, function () {
-                            waterGeluid.play(0.5);
-                        });
-
+                        
+						waterGeluid.play(0.5);
+						
                         scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function() {
                             scene.stopAnimation(straalDown);
                             lock = false;
