@@ -5,6 +5,8 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
 
     vm.analysis = '';
 
+    vm.debug= false;
+
     vm.analyze = function (graph) {
         if (vm.analysis === 'sphere') {
             return vm.analyzeSphereGraph(graph);
@@ -16,10 +18,10 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
     };
 
     vm.analyzeSphereGraph = function (graph) {
-        var debug = false;
         var tolerances = {
             noOfPoints: 3,
             height: (graph.height - graph.originOffset) * 0.6,
+            ignoredCurveLength: 10,
             fingerRadius: 10
         };
 
@@ -43,7 +45,7 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
 
         var line = new paper.Path.Line(pathStartPoint, pathEndPoint);
 
-        if (debug) {
+        if (vm.debug) {
             line.strokeColor = 'blue';
         }
 
@@ -56,9 +58,9 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
             }
         );
         if (crossings.length != 1) {
-            if (debug) {
-                crossings.forEach(function (crosssing) {
-                    var circle = new paper.Shape.Circle(crosssing.intersection.point, 5);
+            if (vm.debug) {
+                crossings.forEach(function (crossing) {
+                    var circle = new paper.Shape.Circle(crossing.intersection.point, 5);
                     circle.fillColor = 'red';
                 });
             }
@@ -74,11 +76,24 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
 
         // TODO check if midpoint somewhere halfway the path height
 
-
-        if (debug) {
+        if (vm.debug) {
             var intersectHighlight = new paper.Path.Circle(intersectionPoint, 5);
             intersectHighlight.fillColor = 'blue';
         }
+
+        // check for straights
+        // for (i = 0; i < path.curves.length; i++) {
+        //     if (path.curves[i].length > tolerances.ignoredCurveLength && (path.curves[i].isStraight() || path.curves[i].isLinear())) {
+        //         if (debug) {
+        //             var curveHighlight = new paper.Path([path.segment1, path.segment2]);
+        //             curveHighlight.strokeColor = 'red';
+        //         }
+        //         return {
+        //             result: false,
+        //             reason: 'straight curve found'
+        //         };
+        //     }
+        // }
 
         var topPath = path.split(crossings[0]);
 
@@ -87,7 +102,7 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         var lowerTriangle = new paper.Path([new paper.Point(bottomPathStartPoint.x, bottomPathEndPoint.y), bottomPathEndPoint, bottomPathStartPoint]);
         lowerTriangle.closed = true;
 
-        if (debug) {
+        if (vm.debug) {
             lowerTriangle.fillColor = 'yellow';
             lowerTriangle.fillColor.alpha = 0.2;
         }
@@ -106,7 +121,7 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         var upperTriangle = new paper.Path([new paper.Point(topPathEndPoint.x, topPathStartPoint.y), topPathEndPoint, topPathStartPoint]);
         upperTriangle.closed = true;
 
-        if (debug) {
+        if (vm.debug) {
             upperTriangle.fillColor = 'yellow';
             upperTriangle.fillColor.alpha = 0.2;
         }

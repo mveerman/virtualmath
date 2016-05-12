@@ -84,14 +84,13 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     };
                     var result = graphAnalyzer.analyze(graph);
 
-                    handleGraphResult(result);
-
-
-                    // console.log(result);
+                    if (graphAnalyzer.debug) {
+                        visualizeResult(result);
+                    }
                     return result;
                 }
 
-                function handleGraphResult(result) {
+                function visualizeResult(result) {
                     if (result.result) {
                         angular.element(canvas).removeClass('wrong-graph').addClass('right-graph');
                     } else {
