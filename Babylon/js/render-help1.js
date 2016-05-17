@@ -82,12 +82,12 @@ var createScene = function(engine, canvas, isVR) {
             newMeshes[i].receiveShadows = false;
         }
 
-        for (var j = 3; j < 203; j++) {
+/*        for (var j = 3; j < 203; j++) {
             // getallen naar naam
             var tempName = 'Plane' + (j).pad(3);
             var tempPlaneMesh = scene.getMeshByName(tempName);
             generator.getShadowMap().renderList.push(tempPlaneMesh);
-        }
+        }*/
 		
 		 var kleurNum = 0;
         var processing = false;
@@ -358,12 +358,14 @@ var createScene = function(engine, canvas, isVR) {
 				cap.position.y = -100 + slicje * 200
 				cap.position.x = 124.5019
 				if(typeof sphere != "undefined"){sphere.dispose()}
-				sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter: 200, diameterX: 200, slice: slicenew,  updatable: true}, scene);
+				sphere = BABYLON.MeshBuilder.CreateSphere("waterbol", {diameter: 200, diameterX: 200, slice: slicenew,  updatable: true}, scene);
 				sphere.position.x = 124.5019
 				sphere.rotation.z = Math.PI
 				cap.material = capKleur;
 				sphere.material = sapTexture;
 				sapTexture.diffuseTexture.vScale = slicenew;
+				generator.getShadowMap().renderList.push(cap)
+				generator.getShadowMap().renderList.push(sphere)
 			};
 		});
 	});
