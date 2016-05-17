@@ -28,9 +28,6 @@ var createScene = function(engine, canvas, isVR) {
 
     BABYLON.SceneLoader.ImportMesh("", "models/", "help-1.babylon", scene, function (newMeshes) {
 
-        //Set the target of the camera to the first imported mesh
-        //camera.setTarget = new BABYLON.Vector3(0, 500, 0);
-
         scene.debugLayer.show();
 
         //maak meshes pickable
@@ -81,13 +78,6 @@ var createScene = function(engine, canvas, isVR) {
         for (var i = 0; i < newMeshes.length; i++) {
             newMeshes[i].receiveShadows = false;
         }
-
-/*        for (var j = 3; j < 203; j++) {
-            // getallen naar naam
-            var tempName = 'Plane' + (j).pad(3);
-            var tempPlaneMesh = scene.getMeshByName(tempName);
-            generator.getShadowMap().renderList.push(tempPlaneMesh);
-        }*/
 		
 		 var kleurNum = 0;
         var processing = false;
