@@ -7,13 +7,46 @@ Number.prototype.pad = function (size) {
     return s;
 };
 
+// derdemachts vergelijking oplossing (3 waardes in oorspronklijk script, waarvan 1 gekozen, niet gebruikte if's verwijderd)
+var volume;
+var volumeMin;
+var volumeMax ;
+var a = Math.PI/3;
+var b = -Math.PI;
+var c = 0;
+var d = volume;
+var oplossing;
+var root;
+var root_re;
+
+		
+function oplossen()
+{
+	d = volume;
+	var q = (3*a*c-b*b)/(9*a*a);
+	var r = (9*a*b*c - 27*a*a*d - 2*b*b*b)/(54*a*a*a);
+	var root_im;
+	var qqq_plus_rr = q*q*q + r*r;
+	if (qqq_plus_rr < 0)
+	{
+		var j = Math.sqrt(-q);
+		var i = j*j*j;
+		var k = Math.acos( r/i );
+		var M = Math.cos(k/3);
+		var N = Math.sqrt(3) * Math.sin(k/3);
+		var b_over_3a = b/(3.0*a);
+		root =  j*(N - M) - b_over_3a;
+		oplossing  = root.toPrecision(5);
+	}
+}
+
+
 var createScene = function(engine, canvas, isVR) {
     "use strict";
 
    // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
     scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
-
 
     var camera;
 
@@ -28,14 +61,8 @@ var createScene = function(engine, canvas, isVR) {
 
     BABYLON.SceneLoader.ImportMesh("", "models/", "help-1.babylon", scene, function (newMeshes) {
 
-        scene.debugLayer.show();
+        //scene.debugLayer.show();
 
-        //maak meshes pickable
-        newMeshes.forEach(function(element) {
-            element.isPickable = true;
-        });
-
-        //OBJECTEN KUNNEN NIET MEER DAN 4 LICHTEN HANDELEN
 
         var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(-40, -200, -200), scene); // van voren
         var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
@@ -53,13 +80,15 @@ var createScene = function(engine, canvas, isVR) {
         var knoppos = knop.position.z;
 
         var knopgroen = new BABYLON.StandardMaterial("std", scene);
-        knopgroen.diffuseColor = new BABYLON.Color3(0, 1, 0);
+        knopgroen.diffuseColor = new BABYLON.Color3(0, 0.7, 0);
+		knopgroen.emissiveColor = new BABYLON.Color3(0, 0.5, 0);
         var knoprood = new BABYLON.StandardMaterial("std", scene);
         knoprood.diffuseColor = new BABYLON.Color3(1, 0, 0);
-
+		knoprood.emissiveColor = new BABYLON.Color3(0.5, 0, 0);
+		
 		var knopGeluid = new BABYLON.Sound("water", "models/knop.mp3" , scene, function () {});
 		var waterGeluid = new BABYLON.Sound("water", "models/water.mp3" , scene, function () {});
-		var starttijd
+		var starttijd;
         knop.material = knopgroen;
 
         var generator = new BABYLON.ShadowGenerator(512, light2);
@@ -75,11 +104,11 @@ var createScene = function(engine, canvas, isVR) {
 		var capKleur = new BABYLON.StandardMaterial("topkleur", scene);		
 
 
-        for (var i = 0; i < newMeshes.length; i++) {
-            newMeshes[i].receiveShadows = false;
-        }
+		for (var i = 0; i < newMeshes.length; i++) {
+			newMeshes[i].receiveShadows = false;
+		}
 		
-		 var kleurNum = 0;
+		var kleurNum = 0;
         var processing = false;
 		
 
@@ -91,7 +120,7 @@ var createScene = function(engine, canvas, isVR) {
             if (pickInfo.hit && kleurNum < 6 && !processing) {
                 var currentMesh = pickInfo.pickedMesh;
 
-                if (currentMesh.name == 'knop') {
+                if (currentMesh.name === 'knop') {
 	       			camera.detachControl(canvas);
                    alsKnop();
                 }
@@ -99,7 +128,6 @@ var createScene = function(engine, canvas, isVR) {
         };
 
 		var lastCalledTime;
-		var fps;
 		var delta; 
 		
 		//vraag verstreken tijd op
@@ -107,7 +135,6 @@ var createScene = function(engine, canvas, isVR) {
 		
 		  if(!lastCalledTime) {
 			 lastCalledTime = Date.now();
-			 fps = 0;
 			 return;
 		  }
 		  delta = (Date.now() - lastCalledTime)/1000;
@@ -148,109 +175,45 @@ var createScene = function(engine, canvas, isVR) {
 			// vertraging voor vollopen ivm dalen straal	
 			window.setTimeout(function () {
 		        processing = true;
-				verstrekenTijd()
-  				starttijd = lastCalledTime
+				verstrekenTijd();
+  				starttijd = lastCalledTime;
 				waterGeluid.play();
 								
 				switch (kleurNum) {
 					case 1:
-						volumeMin = 0
-						volumeMax = 0.6981	// 1/6 gevuld
+						volumeMin = 0;
+						volumeMax = 0.6981;	// 1/6 gevuld
 						capKleur.emissiveColor = new BABYLON.Color3(1, 1, 0);
 						break;
 					case 2:
-						volumeMin = 0.6981
-						volumeMax = 1.3963	// 1/3 gevuld
+						volumeMin = 0.6981;
+						volumeMax = 1.3963;	// 1/3 gevuld
 						capKleur.emissiveColor = new BABYLON.Color3(0, 1, 1);
 						break;
 					case 3:
-						volumeMin = 1.3963
-						volumeMax = 2.0944	// 1/2 gevuld
+						volumeMin = 1.3963;
+						volumeMax = 2.0944;	// 1/2 gevuld
 						capKleur.emissiveColor = new BABYLON.Color3(0, 1, 0);
 						break;
 					case 4:
-						volumeMin = 2.0944
-						volumeMax = 2.7925	// 2/3 gevuld
+						volumeMin = 2.0944;
+						volumeMax = 2.7925;	// 2/3 gevuld
 						capKleur.emissiveColor = new BABYLON.Color3(1, 0, 1);
 					   break;
 					case 5:
-						volumeMin = 2.7925
-						volumeMax = 3.4907	// 5/6 gevuld
+						volumeMin = 2.7925;
+						volumeMax = 3.4907;	// 5/6 gevuld
 						capKleur.emissiveColor = new BABYLON.Color3(1, 0, 0);
 						break;
 					case 6:
-						volumeMin = 3.4907
-						volumeMax = 4.1887	// gevuld
+						volumeMin = 3.4907;
+						volumeMax = 4.1887;	// gevuld
 						capKleur.emissiveColor = new BABYLON.Color3(0, 0, 1);
 						break;
 					}
 					
 				}, 600);
 	    }
-
-		// derdemachts vergelijking oplossing (3 waardes in oorspronklijk script, waarvan 1 gekozen)
-		function cube_root(x)
-		{
-			var cube_root
-			if(x < 0)
-			{
-				cube_root = -Math.pow( -x,(1.0/3.0) );
-			}
-			else
-			{
-				cube_root = Math.pow( x,(1.0/3.0) );
-			}
-			return cube_root;
-		}
-					
-		function oplossen()
-		{
-			d = volume
-			var q = (3*a*c-b*b)/(9*a*a);
-			var r = (9*a*b*c - 27*a*a*d - 2*b*b*b)/(54*a*a*a);
-			var root_im
-			var qqq_plus_rr = q*q*q + r*r;
-			if (qqq_plus_rr < 0)
-			{
-				var j = Math.sqrt(-q);
-				var i = j*j*j;
-				var k = Math.acos( r/i );
-				var M = Math.cos(k/3);
-				var N = Math.sqrt(3) * Math.sin(k/3);
-				var b_over_3a = b/(3.0*a);
-				root =  j*(N - M) - b_over_3a;
-				oplossing  = root.toPrecision(8);
-			}
-			else
-			{
-				if(qqq_plus_rr > 0)
-				{
-					var root_qqq_plus_rr = Math.sqrt(qqq_plus_rr);
-		
-					var s = cube_root( r + root_qqq_plus_rr );
-					var t = cube_root( r - root_qqq_plus_rr );
-		
-					if(root_im > 0)
-					{
-						oplossing  = root_re.toPrecision(8) + " + " + root_im.toPrecision(8) + " i";
-					}
-					if(root_im < 0)
-					{
-						oplossing  = root_re.toPrecision(8) + " - " + (-root_im).toPrecision(8) + " i";
-					}
-					if(root_im == 0)
-					{
-						oplossing  = root_re.toPrecision(8);
-					}
-				}
-				else
-				{
-					root = -cube_root(d/a);
-					oplossing  = root.toPrecision(6);
-				}
-			}
-		}
-
 
 
         scene.onPointerUp = function () {
@@ -279,9 +242,6 @@ var createScene = function(engine, canvas, isVR) {
 			light1.excludedMeshes = [vinger];
 			light2.excludedMeshes = [vinger];
 			
-			ground.isPickable = false;
-			bol.isPickable = false;
-			vinger.isPickable = false;
 			knop.isPickable = true;
 		
 			knop.absolutePosition.x = -171;
@@ -291,20 +251,12 @@ var createScene = function(engine, canvas, isVR) {
 		
 		var sapTexture = new BABYLON.StandardMaterial("colours", scene);
 		sapTexture.diffuseTexture = new BABYLON.Texture("models/colours.png", scene);
-		sapTexture.emissiveColor = new BABYLON.Color3(.7, .7, .7)
-		sapTexture.specularColor = new BABYLON.Color3(.5, .5, .5)
-		var slicje = 0.01
-		var cap
-		var sphere
-		var volume
-		var volumeMin
-		var volumeMax 
-		var a = Math.PI/3
-		var b = -Math.PI
-		var c = 0
-		var d = volume
-		var oplossing
-		var root
+		sapTexture.emissiveColor = new BABYLON.Color3(0.7, 0.7, 0.7);
+		sapTexture.specularColor = new BABYLON.Color3(0.5, 0.5, 0.5);
+		var slicje = 0.01;
+		var cap;
+		var sphere;
+		var deler = 1;
 	
 		scene.registerBeforeRender(function () {
 				
@@ -315,48 +267,53 @@ var createScene = function(engine, canvas, isVR) {
 				var rayOrigin = Lookout.add(offset);
 				var ray = new BABYLON.Ray(camera.position,rayOrigin);
 				var pickResult = scene.pickWithRay(ray);
-						
+					
 				if (pickResult.hit && kleurNum < 6 && !processing) {
-					if (pickResult.pickedMesh == knop){
+					if (pickResult.pickedMesh === knop){
 						//var axisX = BABYLON.Mesh.CreateLines("axisX", [camera.position,rayOrigin], scene);
 						alsKnop();
 						processing = true;
 					}
 				}
-			};
+			}
 			
 			if (processing){
-				
-				verstrekenTijd()
-				var elapsed = lastCalledTime - starttijd
+								
+				verstrekenTijd();
+				var elapsed = lastCalledTime - starttijd;
 
 				if (elapsed <= 10000){
-					volume = elapsed/10000 * (volumeMax-volumeMin)	+ volumeMin			
+					volume = elapsed/10000 * (volumeMax-volumeMin)	+ volumeMin;			
 				}else{
-					volume = volumeMax
+					volume = volumeMax;
 				}
-
-				oplossen()
-				slicje = oplossing/2
 				
-				//omzetting van longitudinaal naar hoogte
-				var slicenew = Math.acos(1-(2*slicje))/Math.PI
-				var straalCap = Math.sqrt(1-((1-slicje*2)*(1-slicje*2)))*200
-
-				if(typeof cap != "undefined"){cap.dispose()}
-				cap = BABYLON.Mesh.CreateCylinder("kappie", 1, straalCap, straalCap, 48, scene, 1);cap.scaling.y = 0
-				cap.position.y = -100 + slicje * 200
-				cap.position.x = 124.5019
-				if(typeof sphere != "undefined"){sphere.dispose()}
-				sphere = BABYLON.MeshBuilder.CreateSphere("waterbol", {diameter: 200, diameterX: 200, slice: slicenew,  updatable: true}, scene);
-				sphere.position.x = 124.5019
-				sphere.rotation.z = Math.PI
-				cap.material = capKleur;
-				sphere.material = sapTexture;
-				sapTexture.diffuseTexture.vScale = slicenew;
-				generator.getShadowMap().renderList.push(cap)
-				generator.getShadowMap().renderList.push(sphere)
-			};
+				if (deler === 2){ //vul eens per 3 beelden (CPU belasting lager)
+					deler = 0;
+					oplossen();
+					slicje = oplossing/2;
+					
+					//omzetting van longitudinaal naar hoogte
+					var slicenew = Math.acos(1-(2*slicje))/Math.PI;
+					var straalCap = Math.sqrt(1-((1-slicje*2)*(1-slicje*2)))*200;
+	
+					if(typeof cap !== "undefined"){cap.dispose();}
+					cap = BABYLON.Mesh.CreateCylinder("kappie", 1, straalCap, straalCap, 48, scene, 1);cap.scaling.y = 0;
+					cap.position.y = -100 + slicje * 200;
+					cap.position.x = 124.5019;
+					if(typeof sphere !== "undefined"){sphere.dispose();}
+					sphere = BABYLON.MeshBuilder.CreateSphere("waterbol", {diameter: 200, diameterX: 200, slice: slicenew,  updatable: true}, scene);
+					sphere.position.x = 124.5019;
+					sphere.rotation.z = Math.PI;
+					cap.material = capKleur;
+					sphere.material = sapTexture;
+					sapTexture.diffuseTexture.vScale = slicenew;
+					generator.getShadowMap().renderList.push(cap);
+					generator.getShadowMap().renderList.push(sphere);
+				}else{
+					deler++;
+				}
+			}
 		});
 	});
     return scene;
