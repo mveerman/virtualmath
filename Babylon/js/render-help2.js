@@ -208,7 +208,8 @@ var createScene  = function(engine, canvas) {
 
                         var kleurAniStart = 105 + kleurNum * 420;
                         var kleurAniStop = 430 + kleurNum * 420;
-                        if (kleurNum < 6) {
+                        
+						if (kleurNum < 6) {
                             kleurNum = kleurNum + 1;
                         }
 
@@ -237,11 +238,12 @@ var createScene  = function(engine, canvas) {
 
 							knop.position.z = knoppos;
 							knop.material = knopgroen;
-			
-							sapKleur.diffuseColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum]);
-							sapKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurEmissive[kleurNum]);
-							sapKleur.specularColor = new BABYLON.Color3.FromHexString(kleurSpecular[kleurNum]);
-							vloeistof.material = sapKleur;
+							if (kleurNum < 6) {
+								sapKleur.diffuseColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum]);
+								sapKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurEmissive[kleurNum]);
+								sapKleur.specularColor = new BABYLON.Color3.FromHexString(kleurSpecular[kleurNum]);
+								vloeistof.material = sapKleur;
+							}
                         });
 						
 						// vertraging voor vollopen ivm dalen straal	
