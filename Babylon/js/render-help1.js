@@ -17,7 +17,6 @@ var c = 0;
 var d = volume;
 var oplossing;
 var root;
-var root_re;
 
 		
 function oplossen()
@@ -25,7 +24,6 @@ function oplossen()
 	d = volume;
 	var q = (3*a*c-b*b)/(9*a*a);
 	var r = (9*a*b*c - 27*a*a*d - 2*b*b*b)/(54*a*a*a);
-	var root_im;
 	var qqq_plus_rr = q*q*q + r*r;
 	if (qqq_plus_rr < 0)
 	{
@@ -102,7 +100,9 @@ var createScene = function(engine, canvas, isVR) {
         generator.blurBoxOffset = 5;
 
 		var capKleur = new BABYLON.StandardMaterial("topkleur", scene);		
-
+		var kleurDiffuse = ['#FFFF00','#00FFFF','#00FF00','#FF00FF','#FF0000','#0000FF'];
+		var kleurEmissive = ['#666600','#006666','#006600','#660066','#660000','#000066'];
+		var kleurSpecular = ['#888800','#008888','#008800','#880088','#880000','#000088'];
 
 		for (var i = 0; i < newMeshes.length; i++) {
 			newMeshes[i].receiveShadows = false;
@@ -179,38 +179,10 @@ var createScene = function(engine, canvas, isVR) {
   				starttijd = lastCalledTime;
 				waterGeluid.play();
 								
-				switch (kleurNum) {
-					case 1:
-						volumeMin = 0;
-						volumeMax = 0.6981;	// 1/6 gevuld
-						capKleur.emissiveColor = new BABYLON.Color3(1, 1, 0);
-						break;
-					case 2:
-						volumeMin = 0.6981;
-						volumeMax = 1.3963;	// 1/3 gevuld
-						capKleur.emissiveColor = new BABYLON.Color3(0, 1, 1);
-						break;
-					case 3:
-						volumeMin = 1.3963;
-						volumeMax = 2.0944;	// 1/2 gevuld
-						capKleur.emissiveColor = new BABYLON.Color3(0, 1, 0);
-						break;
-					case 4:
-						volumeMin = 2.0944;
-						volumeMax = 2.7925;	// 2/3 gevuld
-						capKleur.emissiveColor = new BABYLON.Color3(1, 0, 1);
-					   break;
-					case 5:
-						volumeMin = 2.7925;
-						volumeMax = 3.4907;	// 5/6 gevuld
-						capKleur.emissiveColor = new BABYLON.Color3(1, 0, 0);
-						break;
-					case 6:
-						volumeMin = 3.4907;
-						volumeMax = 4.1887;	// gevuld
-						capKleur.emissiveColor = new BABYLON.Color3(0, 0, 1);
-						break;
-					}
+				//1/6e inhoud bol = 4/3*pi*r*r
+				volumeMin = ((kleurNum-1)*4/18*Math.PI);  
+				volumeMax = (kleurNum*4/18*Math.PI);
+				capKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum-1]);
 					
 				}, 600);
 	    }

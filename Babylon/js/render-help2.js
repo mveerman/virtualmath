@@ -64,7 +64,6 @@ var createScene  = function(engine, canvas) {
             var plateau = scene.getMeshByName('plateau');
             var stang = scene.getMeshByName('stang');
             var pomphuis = scene.getMeshByName('pomphuis');
-            var pompvoet = scene.getMeshByName('pompvoet');			
             var bal = scene.getMeshByName('bal' + balNum);
             var lat = scene.getMeshByName('lat' + balNum);
             var bol = scene.getMeshByName('bol');
@@ -84,7 +83,7 @@ var createScene  = function(engine, canvas) {
 			var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-40, -100, -100), scene); // van voren
 
 			light1.intensity = 1;
-			light2.intensity = .9;
+			light2.intensity = 0.9;
 			light3.intensity = 0;
 			light4.intensity = 0;
 						
@@ -251,9 +250,10 @@ var createScene  = function(engine, canvas) {
 						verstrekenTijd();
 						starttijd = lastCalledTime;
 						waterGeluid.play();
-										
-						volumeMin = ((kleurNum-1)*4/18*Math.PI)  
-						volumeMax = (kleurNum*4/18*Math.PI)
+
+						//1/6e inhoud bol = 4/3*pi*r*r				
+						volumeMin = ((kleurNum-1)*4/18*Math.PI);  
+						volumeMax = (kleurNum*4/18*Math.PI);
 						capKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum-1]);
 						}, 600);
 
