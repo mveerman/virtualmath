@@ -56,7 +56,7 @@ function verstrekenTijd() {
 var createScene  = function(engine, canvas) {
     "use strict";
 
-        BABYLON.SceneLoader.Load('models/', 'help-2z7.babylon', engine, function (scene) {
+        BABYLON.SceneLoader.Load('models/', 'help-2.babylon', engine, function (scene) {
             scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
 			//scene.debugLayer.show();
             var balNum = 1;
