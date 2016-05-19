@@ -83,7 +83,6 @@ var createScene  = function(engine, canvas) {
 			var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
 			var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-40, -100, -100), scene); // van voren
 
-
 			light1.intensity = 1;
 			light2.intensity = .9;
 			light3.intensity = 0;
@@ -91,7 +90,6 @@ var createScene  = function(engine, canvas) {
 						
 			var knopGeluid = new BABYLON.Sound("water", "models/knop.mp3" , scene, function () {});
 			var waterGeluid = new BABYLON.Sound("water", "models/water.mp3" , scene, function () {});
-
 
             //scene.debugLayer.show();
             var vullenMag = false;
@@ -134,12 +132,9 @@ var createScene  = function(engine, canvas) {
             generator.getShadowMap().renderList.push(pomphuis);
 			var capKleur = new BABYLON.StandardMaterial("topkleur", scene);	
 
-
             for (var i =0; i < scene.meshes.length; i++) {
                 scene.meshes[i].receiveShadows = false;
             }
-
-
 
             generator.useBlurVarianceShadowMap = true;
             generator.blurBoxOffset = 5.0;
@@ -257,42 +252,11 @@ var createScene  = function(engine, canvas) {
 						starttijd = lastCalledTime;
 						waterGeluid.play();
 										
-						switch (kleurNum) {
-							case 1:
-								volumeMin = 0;
-								volumeMax = 0.6981;	// 1/6 gevuld
-								capKleur.emissiveColor = new BABYLON.Color3(1, 1, 0);
-								break;
-							case 2:
-								volumeMin = 0.6981;
-								volumeMax = 1.3963;	// 1/3 gevuld
-								capKleur.emissiveColor = new BABYLON.Color3(0, 1, 1);
-								break;
-							case 3:
-								volumeMin = 1.3963;
-								volumeMax = 2.0944;	// 1/2 gevuld
-								capKleur.emissiveColor = new BABYLON.Color3(0, 1, 0);
-								break;
-							case 4:
-								volumeMin = 2.0944;
-								volumeMax = 2.7925;	// 2/3 gevuld
-								capKleur.emissiveColor = new BABYLON.Color3(1, 0, 1);
-							   break;
-							case 5:
-								volumeMin = 2.7925;
-								volumeMax = 3.4907;	// 5/6 gevuld
-								capKleur.emissiveColor = new BABYLON.Color3(1, 0, 0);
-								break;
-							case 6:
-								volumeMin = 3.4907;
-								volumeMax = 4.1887;	// gevuld
-								capKleur.emissiveColor = new BABYLON.Color3(0, 0, 1);
-								break;
-							}
-							 
+						volumeMin = ((kleurNum-1)*4/18*Math.PI)  
+						volumeMax = (kleurNum*4/18*Math.PI)
+						capKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum-1]);
 						}, 600);
 
-	
                         scene.beginAnimation(vloeistof, 125, 419, false, 1, function() {
                             wisStreep = setInterval(function () {
                                 aniDown.scaling.y = 0.01;
@@ -309,13 +273,12 @@ var createScene  = function(engine, canvas) {
 							bal = scene.getMeshByName('bal' + balNum);
 							lat = scene.getMeshByName('lat' + balNum);
 
-
                             if (kleurNum !== 6) {
 								sapKleur.diffuseColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum]);
 								sapKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurEmissive[kleurNum]);
 								sapKleur.specularColor = new BABYLON.Color3.FromHexString(kleurSpecular[kleurNum]);
 								vloeistof.material = sapKleur;
-                                scene.beginAnimation(vloeistof, 430, 466, false, 1, function() {});
+                                scene.beginAnimation(vloeistof, 420, 466, false, 1, function() {});
                             }
                         });
                     }
@@ -366,13 +329,11 @@ var createScene  = function(engine, canvas) {
 
 
 		scene.registerBeforeRender(function () {
-			
+			// per x frame een gedeeltelijk bol met y hoogte
 			if (processing){
-								
 				verstrekenTijd();
 				var elapsed = lastCalledTime - starttijd;
-
-				if (elapsed <= 10000){
+			if (elapsed <= 10000){
 					volume = elapsed/10000 * (volumeMax-volumeMin)	+ volumeMin;			
 				}else{
 					volume = volumeMax;
