@@ -68,17 +68,10 @@ var createScene  = function(engine, canvas) {
             var lat = scene.getMeshByName('lat' + balNum);
             var bol = scene.getMeshByName('bol');
             var vloeistof = scene.getMeshByName('vloeistof');
+			var straal = scene.getMeshByName('straal1');
 			var light3 = scene.getLightByName('FDirect001');
 			var light4 = scene.getLightByName('FDirect002');
 			
-			//var camera = scene.getCameraByName('Camera002');
-			//console.log(camera.position.x,camera.position.y,camera.position.z)
-       		//var camera = new BABYLON.FreeCamera("FreeCamera", new BABYLON.Vector3(78.685, 53.1421, -1024.8871), scene);
-			//camera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
-			//camera.fov = 0.3
-  			//camera.attachControl(canvas, true);
-	        //scene.activeCamera = camera;
-	   
 			var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
 			var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-40, -100, -100), scene); // van voren
 
@@ -98,7 +91,7 @@ var createScene  = function(engine, canvas) {
             var currentMesh;
             var latPos = [130, 154, 178, 200, 224, 246];
 			var kleurDiffuse = ['#FFFF00','#00FFFF','#00FF00','#FF00FF','#FF0000','#0000FF'];
-			var kleurEmissive = ['#666600','#006666','#006600','#660066','#660000','#000066'];
+			var kleurEmissive = ['#555500','#005555','#005500','#550055','#550000','#000055'];
 			var kleurSpecular = ['#888800','#008888','#008800','#880088','#880000','#000088'];
             var balWas = [];
             var kleurNum = 0;
@@ -116,6 +109,7 @@ var createScene  = function(engine, canvas) {
 			sapKleur.specularColor = new BABYLON.Color3.FromHexString(kleurSpecular[0]);
 			
             vloeistof.material = sapKleur;
+			straal.material = sapKleur; 
             var knopgroen = new BABYLON.StandardMaterial("std", scene);
             knopgroen.diffuseColor = new BABYLON.Color3(0, 1, 0);
 			knopgroen.emissiveColor = new BABYLON.Color3(0, 0.5, 0);
@@ -159,14 +153,11 @@ var createScene  = function(engine, canvas) {
                 return null;
             };
 
-
-
             var onPointerDown = function (evt) {
                 if (evt.button !== 0) {
                     return;
                 }
-				
-						
+							
                 // check if we are under a mesh
                 var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) {
                     return mesh !== ground;
@@ -206,15 +197,14 @@ var createScene  = function(engine, canvas) {
  
                         vullenMag = false;
 
-                        var kleurAniStart = 105 + kleurNum * 420;
-                        var kleurAniStop = 430 + kleurNum * 420;
+                        var kleurAniStart = 105 //+ kleurNum * 420;
+                        var kleurAniStop = 430// + kleurNum * 420;
                         
 						if (kleurNum < 6) {
                             kleurNum = kleurNum + 1;
                         }
 
                         var aniNum = 'lat' + balNum;
-
                         aniDown = scene.getMeshByName(aniNum);
 
                         var hoogte = Math.abs(((aniDown.position.y + 82) / 85) -1 );
@@ -222,29 +212,22 @@ var createScene  = function(engine, canvas) {
                         var latScale = (latPos[balNum-1]  - bolRonding ) / (latPos[balNum-1] );
                         aniDown.scaling.y = latScale;
                         streepIn = true;
-
-
-                        var straalNum = 'straal' + kleurNum;
-                        var straalDown = scene.getMeshByName(straalNum);
                         lock = true;
-
-                        
 						waterGeluid.play(0.5);
 						
-                        scene.beginAnimation(straalDown, kleurAniStart, kleurAniStop, false, 1, function() {
-                            scene.stopAnimation(straalDown);
+                        scene.beginAnimation(straal, kleurAniStart, kleurAniStop, false, 1, function() {
+                            scene.stopAnimation(straal);
                             lock = false;
 							processing = false;
-
 							knop.position.z = knoppos;
 							knop.material = knopgroen;
-							if (kleurNum < 6) {
+						if (kleurNum !== 6) {
 								sapKleur.diffuseColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum]);
 								sapKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurEmissive[kleurNum]);
 								sapKleur.specularColor = new BABYLON.Color3.FromHexString(kleurSpecular[kleurNum]);
-								vloeistof.material = sapKleur;
-							}
-                        });
+								scene.beginAnimation(vloeistof, 423, 470, false, 1, function() {})
+							};
+	                    });
 						
 						// vertraging voor vollopen ivm dalen straal	
 					window.setTimeout(function () {
@@ -259,7 +242,7 @@ var createScene  = function(engine, canvas) {
 						capKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum-1]);
 						}, 600);
 
-                        scene.beginAnimation(vloeistof, 125, 419, false, 1, function() {
+                        scene.beginAnimation(vloeistof, 125, 423, false, 1, function() {
                             wisStreep = setInterval(function () {
                                 aniDown.scaling.y = 0.01;
                                 clearTimeout(wisStreep);
@@ -267,21 +250,11 @@ var createScene  = function(engine, canvas) {
                             }, 5000);
 
 							balMag = true;
-							
-							if (balNum <6) {
-								balNum = balNum + 1;
-							}
+							balNum = balNum + 1;
+
 							balWas.push(bal.name);
 							bal = scene.getMeshByName('bal' + balNum);
 							lat = scene.getMeshByName('lat' + balNum);
-
-                            if (kleurNum !== 6) {
-								sapKleur.diffuseColor = new BABYLON.Color3.FromHexString(kleurDiffuse[kleurNum]);
-								sapKleur.emissiveColor = new BABYLON.Color3.FromHexString(kleurEmissive[kleurNum]);
-								sapKleur.specularColor = new BABYLON.Color3.FromHexString(kleurSpecular[kleurNum]);
-								vloeistof.material = sapKleur;
-                                scene.beginAnimation(vloeistof, 420, 466, false, 1, function() {});
-                            }
                         });
                     }
                 }
