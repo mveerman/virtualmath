@@ -7,7 +7,7 @@ Number.prototype.pad = function (size) {
     return s;
 };
 
-
+	
 // derdemachts vergelijking oplossing (3 waardes in oorspronklijk script, waarvan 1 gekozen, niet gebruikte if's verwijderd)
 var volume;
 var volumeMin;
@@ -56,7 +56,7 @@ function verstrekenTijd() {
 var createScene  = function(engine, canvas) {
     "use strict";
 
-        BABYLON.SceneLoader.Load('models/', 'help-2.babylon', engine, function (scene) {
+        BABYLON.SceneLoader.Load('models/', 'help-2-04.babylon', engine, function (scene) {
             scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
 			//scene.debugLayer.show();
             var balNum = 1;
@@ -71,6 +71,7 @@ var createScene  = function(engine, canvas) {
 			var straal = scene.getMeshByName('straal1');
 			var light3 = scene.getLightByName('FDirect001');
 			var light4 = scene.getLightByName('FDirect002');
+			var camera = scene.getCameraByName('Camera002');
 			
 			var light1 = new BABYLON.DirectionalLight("light1", new BABYLON.Vector3(-40, -100, 100), scene); // van achteren
 			var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-40, -100, -100), scene); // van voren
@@ -339,6 +340,14 @@ var createScene  = function(engine, canvas) {
 				}else{
 					deler++;
 				}
+			}
+			//auto scaling windows bij browser opening of rescale
+			var WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+			var aspect = HEIGHT/WIDTH;
+			if(aspect < 0.5) {
+				camera.fov = 0.375;
+				}else{
+				camera.fov = aspect*0.75;
 			}
 		});
 

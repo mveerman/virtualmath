@@ -57,7 +57,7 @@ var createScene = function(engine, canvas, isVR) {
     // This attaches the camera to the canvas
     camera.attachControl(canvas, true);
 
-    BABYLON.SceneLoader.ImportMesh("", "models/", "help-1.babylon", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-04.babylon", scene, function (newMeshes) {
 
         //scene.debugLayer.show();
 
@@ -285,6 +285,15 @@ var createScene = function(engine, canvas, isVR) {
 				}else{
 					deler++;
 				}
+			}
+			console.log(camera.fov)
+			//auto scaling windows bij browser opening of rescale
+			var WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+			var aspect = HEIGHT/WIDTH;
+			if(aspect < 0.7) {
+				camera.fov = 0.7;
+				}else{
+				camera.fov = aspect*1;
 			}
 		});
 	});
