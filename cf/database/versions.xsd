@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="currentversion" type="xs:int" />
+    <xs:element name="version" type="xs:int"/>
+    <xs:element name="file" type="xs:string"/>
+    <xs:element name="isComponent" type="xs:boolean" default="false" />
+    <xs:element name="inTransaction" type="xs:boolean" default="true" />
+    
+    <xs:element name="tag">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="version" />
+                <xs:element ref="file"/>
+                <xs:element ref="isComponent" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="inTransaction" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="tags">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tag" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="database">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="currentversion"/>
+                <xs:element ref="tags"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+

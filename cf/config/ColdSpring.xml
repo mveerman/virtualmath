@@ -1,0 +1,105 @@
+<beans default-autowire="byName">
+	
+   <!-- This is your Model-Glue configuration -->
+   <bean id="modelglue.modelGlueConfiguration" class="ModelGlue.gesture.configuration.ModelGlueConfiguration">
+   
+   	<!-- Be sure to change these to false when you go to production! -->
+   	<property name="reload"><value>true</value></property>
+   	<property name="debug"><value>false</value></property>
+   	
+   	<!-- Name of the URL variable that states which event-handler to run -->
+   	<property name="eventValue"><value>event</value></property>
+   	<!-- Default event-handler -->
+   	<property name="defaultEvent"><value>home</value></property>
+   	<!-- Execute this event when the requested event is missing. Won't work if generationEnabled=true and in development mode! -->
+   	<property name="missingEvent"><value>page.missing</value></property>
+   	<!-- Execute this event when an error occurs. -->
+   	<property name="defaultExceptionHandler"><value>page.error</value></property>
+   	
+   	<!-- Controls reloading -->
+   	<property name="reloadPassword"><value>true</value></property>
+   	<property name="reloadKey"><value>init</value></property>
+   
+   	<!-- Where to find necessary files -->
+   	<property name="configurationPath"><value>/virtualmath/config/ModelGlue.xml</value></property>
+   	<property name="applicationMapping"><value>/virtualmath</value></property>
+   	<property name="viewMappings"><value>/virtualmath/views</value></property>
+   	<property name="helperMappings"><value>/virtualmath/helpers</value></property>
+   	
+   	<!-- Generate unknown events when in development mode?  (reload=false) -->
+   	<property name="generationEnabled"><value>false</value></property>
+   	
+   	<!-- Scaffolding config -->
+   	<!-- Turning this off will disable any scaffold generation. Turning this on requires the reload setting above to also be on.-->	
+   	<property name="rescaffold"><value>true</value></property>
+   	<!-- Where do you want generated views to be saved to? -->
+   	<property name="generatedViewMapping"><value>views</value></property>
+   	<!--This directory structure should already exists. ModelGlue will create the Scaffolds.xml file and overwrite as needed.-->
+   	<property name="scaffoldPath"><value>/virtualmath/config/scaffolds/Scaffolds.xml</value></property>
+   	<!-- What scaffold generation patterns should ModelGlue use if you do not specify in the <scaffold type=""> attribute? .-->
+   	<property name="defaultScaffolds"><value>list,edit,view,commit,delete</value></property>
+   	
+   	<!-- See documentation or ModelGlueConfiguration.cfc for additional options. -->
+   </bean>
+
+   <bean id="modelglue.scaffoldType.List" class="coldspring.beans.factory.config.MapFactoryBean">
+      <property name="SourceMap">
+         <map>
+            <entry key="class">
+               <value>virtualmath.model.scaffoldTemplates.List</value>
+            </entry>
+            <event key="hasXMLGeneration">
+               <value>true</value>
+            </event>
+            <event key="hasViewGeneration">
+               <value>true</value>
+            </event>
+            <entry key="prefix">
+               <value>List.</value>
+            </entry>
+            <entry key="suffix">
+               <value>.cfm</value>
+            </entry>
+         </map>
+      </property>
+   </bean>
+   
+   <!-- Configuration -->
+   <bean id="AppConfig" class="ModelGlue.Bean.CommonBeans.SimpleConfig">
+		<property name="Config">
+			<map>
+				<entry key="dsn"><value>virtualmath</value></entry>
+			</map>
+		</property>
+	</bean>
+   
+   <!-- Managers -->
+   <bean id="DatabaseManager" class="virtualmath.database.DatabaseManager">
+      <property name="datasource"><value>virtualmath</value></property>
+      <property name="RootPath"><value></value></property>
+      <property name="VersionsSchemaPath"><value>versions.xsd</value></property>
+      <property name="DatabaseVersionsPath"><value>/virtualmath/database/versions.xml</value></property>
+    </bean>
+   
+   <!-- Services -->
+
+  <!-- Gateways-->
+  <bean id="UserGateway" class="virtualmath.model.gateways.UserGateway" />
+
+
+  <bean id="UserInfoBean" class="virtualmath.model.beans.UserInfoBean" singleton="false">
+    <property name="authenticated"><value>false</value></property>
+    <property name="authorized"><value>false</value></property>
+  </bean>
+
+  
+   <!-- ORM Framework Configuration -->
+   <alias alias="ormAdapter" name="ormAdapter.Transfer" />
+   <alias alias="ormService" name="ormService.Transfer" />
+   <bean id="transferConfiguration" class="transfer.com.config.Configuration">
+      <constructor-arg name="datasourcePath"><value>/virtualmath/config/transfer/Datasource.xml</value></constructor-arg>
+      <constructor-arg name="configPath"><value>/virtualmath/config/transfer/Transfer.xml</value></constructor-arg>
+      <constructor-arg name="definitionPath"><value>/virtualmath/model/data/transfer</value></constructor-arg>
+   </bean>
+
+</beans>

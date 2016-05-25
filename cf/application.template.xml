@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="application.xsd">
+	<mode>production</mode>
+	<hostname>localhost</hostname>
+	<secure>true</secure>
+	<dbname></dbname>
+	<dbowner></dbowner>
+	<ldap>
+		<server></server>
+		<port></port>
+		<useSecureConnection></useSecureConnection>
+		<username></username>
+		<password></password>
+	</ldap>
+	<!-- Available skins are
+			- uva [default]
+			- hva
+	 -->
+	 <skin></skin>
+</application>

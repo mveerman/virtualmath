@@ -1,0 +1,13 @@
+<modelglue>
+
+   <event-handlers>
+
+      <event-handler name="front.home">
+         <views>
+            <include name="body" template="front/front.cfm"/>
+         </views>
+      </event-handler>
+
+   </event-handlers>
+
+</modelglue>

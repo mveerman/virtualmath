@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+	<xs:simpleType name="modeType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="development"/>
+			<xs:enumeration value="production"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:element name="ldap">
+      	<xs:complexType>
+      		<xs:all>
+      			<xs:element name="server" type="xs:string" />
+      			<xs:element name="port" type="xs:integer" />
+      			<xs:element name="useSecureConnection" type="xs:boolean" />
+      			<xs:element name="username" type="xs:string" />
+      			<xs:element name="password" type="xs:string" />
+      		</xs:all>
+      	</xs:complexType>
+   	</xs:element>
+	
+	<xs:element name="application">
+      	<xs:complexType>
+      		<xs:all>
+            	<xs:element name="mode" type="modeType" default="production" />
+            	<xs:element name="hostname" type="xs:string" />
+            	<xs:element name="secure" type="xs:boolean" />
+            	<xs:element name="dbname" type="xs:string" />
+            	<xs:element name="dbowner" type="xs:string" />
+            	<xs:element ref="ldap" />
+            	<xs:element name="skin" type="xs:string" />
+         	</xs:all>
+      	</xs:complexType>
+   	</xs:element>
+</xs:schema>

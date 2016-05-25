@@ -1,0 +1,73 @@
+<modelglue>
+
+   <controllers>
+      <controller name="GeneralControl" type="virtualmath.controller.GeneralController">
+         <message-listener message="OnRequestStart" function="OnRequestStart"/>
+         <message-listener message="probe" function="probeDatabase"/>
+         <message-listener message="checkEnvironment" function="checkEnvironment"/>
+      </controller>
+   </controllers>
+
+   <event-handlers>
+   
+      <event-handler name="home">
+         <broadcasts>
+            <message name="checkEnvironment"/>
+         </broadcasts>
+         <results>
+            <result name="isfront" do="front.home"/>
+            <result name="isadmin" do="admin.home"/>
+         </results>
+      </event-handler>
+
+      <event-handler name="layout">
+         <views>
+            <include name="page" template="templates/page.cfm"/>
+         </views>
+      </event-handler>
+      
+      <event-handler name="page.missing">
+         <views>
+            <include name="body" template="templates/missing.cfm"/>
+         </views>
+         <results>
+            <result do="layout"/>
+         </results>
+      </event-handler>
+
+      <event-handler name="exception">
+         <views>
+            <include name="body" template="templates/exception.cfm"/>
+         </views>
+         <results>
+            <result do="layout"/>
+         </results>
+      </event-handler>
+
+      <event-handler name="probe">
+         <broadcasts>
+            <message name="probe"/>
+         </broadcasts>
+         <views>
+            <include name="body" template="probe/success.cfm"/>
+         </views>
+         <results>
+            <result name="ProbeFailure" do="probe.failure"></result>
+         </results>
+      </event-handler>
+
+      <event-handler name="probe.failure">
+         <views>
+            <include name="body" template="probe/failure.cfm"/>
+         </views>
+      </event-handler>
+
+      <event-handler name="probe.keepalive">
+         <views>
+            <include name="body" template="probe/keepalive.cfm"/>
+         </views>
+      </event-handler>
+
+   </event-handlers>
+
+</modelglue>

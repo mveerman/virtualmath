@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="versions.xsd">
+  <currentversion>3</currentversion>
+
+  <tags>
+
+    <tag>
+      <version>1</version>
+      <file>/virtualmath/database/scripts/system.cfm</file>
+    </tag>
+
+    <tag>
+      <version>2</version>
+      <file>/virtualmath/database/scripts/base.cfm</file>
+    </tag>
+
+    <tag>
+      <version>3</version>
+      <file>/virtualmath/database/scripts/basic_objects.cfm</file>
+      <inTransaction>false</inTransaction>
+    </tag>
+
+  </tags>
+</database>
