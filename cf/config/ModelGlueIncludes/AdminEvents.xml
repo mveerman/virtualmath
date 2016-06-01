@@ -1,159 +1,125 @@
 <modelglue>
 
-   <controllers>
-      <controller name="AdminControl" type="virtualmath.controller.AdminController" beans="AppConfig,AdminSecurityService">
-         <message-listener message="checkAuthenticationStatus" function="isAuthenticated" />
-         <message-listener message="authenticate" function="doAuthentication" />
-         <message-listener message="admin.logout" function="doLogout" />
-         <message-listener message="userMustBeInRole" function="checkRole" />
-         <message-listener message="onRequestStart" function="onRequestStart" />
-         <message-listener message="admin.home.getCounts" function="getCounts" />
-      </controller>
-   </controllers>
-   
-   <event-types>
-      <event-type name="admin.LayoutEvent">
-        <after>
-            <results>
-               <result do="layout"/>
-            </results>
-            <views>
-               <include name="admin.header" template="admin/header.cfm"/>
-               <include name="admin.footer" template="admin/footer.cfm"/>
-               <include name="body" template="admin/layout.cfm"/>
-            </views>
-        </after>
-      </event-type>
-      
-      <event-type name="admin.AuthenticationEvent">
-        <before>
-            <broadcasts>
-                <message name="checkAuthenticationStatus"/>
-            </broadcasts>
-            <results>
-                <result name="notAuthenticated" do="admin.login" redirect="true"/>
-            </results>
-            <views>
-               <include name="admin.header.actions" template="admin/general-actions.cfm"/>
-               <include name="admin.navigation" template="admin/navigation.cfm"/>
-            </views>
-        </before>
-      </event-type>
-      
-   </event-types>
-   
-   <!-- Unrestricted admin pages -->
-   <event-handlers defaultType="admin.LayoutEvent">
+  <controllers>
+    <controller name="AdminControl" type="virtualmath.controller.AdminController"
+                beans="AppConfig,AdminSecurityService">
+      <message-listener message="checkAuthenticationStatus" function="isAuthenticated"/>
+      <message-listener message="authenticate" function="doAuthentication"/>
+      <message-listener message="admin.logout" function="doLogout"/>
+      <message-listener message="userMustBeInRole" function="checkRole"/>
+      <message-listener message="onRequestStart" function="onRequestStart"/>
+      <message-listener message="admin.home.getCounts" function="getCounts"/>
+    </controller>
+  </controllers>
 
-      <!-- basic access denied page -->
-      <event-handler name="admin.accessdenied">
-         <views>
-            <include name="admin.body" template="admin/denied.cfm"/>
-         </views>
-      </event-handler>
-      
-      <event-handler name="admin.SecurityViolation">
-         <views>
-            <include name="admin.body" template="admin/securityviolation.cfm"/>
-         </views>
-      </event-handler>
-      
-   </event-handlers>
-   
-   <!--  IP Restricted admin pages -->
-   <event-handlers defaultType="admin.IPrestrictEvent">
+  <event-types>
+    <event-type name="admin.LayoutEvent">
+      <after>
+        <results>
+          <result do="layout"/>
+        </results>
+        <views>
+          <include name="admin.header" template="admin/header.cfm"/>
+          <include name="admin.footer" template="admin/footer.cfm"/>
+          <include name="body" template="admin/layout.cfm"/>
+        </views>
+      </after>
+    </event-type>
 
-   </event-handlers>
-   
-   <!-- Home events -->
-   <event-handlers defaultType="admin.AuthenticationEvent,admin.LayoutEvent">
-      
-      <event-handler name="admin.home">
-         <broadcasts>
-            <message name="ModelGlue.genericList">
-               <argument name="criteria" value=""/>
-               <argument name="object" value="general.year"/>
-               <argument name="queryName" value="general.yearQuery"/>
-            </message>
-            <message name="admin.home.getCounts"/>
-         </broadcasts>
-         <views>
-            <include name="admin.body" template="admin/home/home.cfm"/>
-         </views>
-      </event-handler>
-      
-      <event-handler name="admin.generate">
-         <broadcasts>
-            <message name="userMustBeInRole">
-               <argument name="role" value="sysadmin,editor"/>
-            </message>
-            <message name="ModelGlue.genericList">
-               <argument name="criteria" value=""/>
-               <argument name="object" value="general.year"/>
-               <argument name="queryName" value="general.yearQuery"/>
-            </message>
-         </broadcasts>
-         <views>
-            <include name="admin.body" template="admin/generate/list.cfm"/>
-         </views>
-         <results>
-            <result do="admin.SecurityViolation" name="SecurityViolation" redirect="true"/>
-         </results>
-      </event-handler>
-      
-      <event-handler name="admin.generate.download" type="admin.IPrestrictEvent,admin.AuthenticationEvent">
-         <broadcasts>
-            <message name="userMustBeInRole">
-               <argument name="role" value="sysadmin,editor"/>
-            </message>
-            <message name="admin.generate.list" />
-         </broadcasts>
-         <views>
-            <include name="body" template="admin/generate/download.cfm"/>
-         </views>
-         <results>
-            <result do="admin.SecurityViolation" name="SecurityViolation" redirect="true"/>
-         </results>
-      </event-handler>
-   </event-handlers>
-   
-   <!-- Login events -->
-   <event-handlers>
-      
-      <event-handler name="admin.login" type="admin.IPrestrictEvent">
-         <broadcasts>  
-            <message name="authenticate" />  
-         </broadcasts>  
-         <results>  
-            <result name="logininvalid" do="admin.login.invalid"/>  
-            <result name="isauthenticated" do="admin.home" redirect="true" />
-            <result do="admin.login.view" />
-         </results>  
-      </event-handler>
-      
-      <event-handler name="admin.logout" type="admin.IPrestrictEvent">
-         <broadcasts>  
-            <message name="admin.logout" />  
-         </broadcasts>  
-         <results>  
-            <result do="admin.login" redirect="true" />
-         </results>  
-      </event-handler>
-      
-      <event-handler access="private" name="admin.login.view" type="admin.LayoutEvent">
-         <views>
-            <include name="admin.body" template="admin/login/loginform.cfm"/>
-         </views>
-      </event-handler>
-      
-      <event-handler access="private" name="admin.login.invalid">
-         <views>
-            <include name="admin.login.message" template="admin/login/invalid.cfm"/>
-         </views>
-      </event-handler>
-      
-   </event-handlers>
-   
-   
-   
+    <event-type name="admin.AuthenticationEvent">
+      <before>
+        <broadcasts>
+          <message name="checkAuthenticationStatus"/>
+        </broadcasts>
+        <results>
+          <result name="notAuthenticated" do="admin.login" redirect="true"/>
+        </results>
+        <views>
+          <include name="admin.header.actions" template="admin/general-actions.cfm"/>
+          <include name="admin.navigation" template="admin/navigation.cfm"/>
+        </views>
+      </before>
+    </event-type>
+
+  </event-types>
+
+  <!-- Unrestricted admin pages -->
+  <event-handlers defaultType="admin.LayoutEvent">
+
+    <!-- basic access denied page -->
+    <event-handler name="admin.accessdenied">
+      <views>
+        <include name="admin.body" template="admin/denied.cfm"/>
+      </views>
+    </event-handler>
+
+    <event-handler name="admin.SecurityViolation">
+      <views>
+        <include name="admin.body" template="admin/securityviolation.cfm"/>
+      </views>
+    </event-handler>
+
+  </event-handlers>
+
+  <!--  IP Restricted admin pages -->
+  <event-handlers defaultType="admin.IPrestrictEvent">
+
+  </event-handlers>
+
+  <!-- Home events -->
+  <event-handlers defaultType="admin.AuthenticationEvent,admin.LayoutEvent">
+
+    <event-handler name="admin.home">
+      <!--<broadcasts>
+         <message name="ModelGlue.genericList">
+            <argument name="criteria" value=""/>
+            <argument name="object" value="general.year"/>
+            <argument name="queryName" value="general.yearQuery"/>
+         </message>
+         <message name="admin.home.getCounts"/>
+      </broadcasts>-->
+      <views>
+        <include name="admin.body" template="admin/home/home.cfm"/>
+      </views>
+    </event-handler>
+  </event-handlers>
+
+  <!-- Login events -->
+  <event-handlers>
+
+    <event-handler name="admin.login" type="admin.IPrestrictEvent">
+      <broadcasts>
+        <message name="authenticate"/>
+      </broadcasts>
+      <results>
+        <result name="logininvalid" do="admin.login.invalid"/>
+        <result name="isauthenticated" do="admin.home" redirect="true"/>
+        <result do="admin.login.view"/>
+      </results>
+    </event-handler>
+
+    <event-handler name="admin.logout" type="admin.IPrestrictEvent">
+      <broadcasts>
+        <message name="admin.logout"/>
+      </broadcasts>
+      <results>
+        <result do="admin.login" redirect="true"/>
+      </results>
+    </event-handler>
+
+    <event-handler access="private" name="admin.login.view" type="admin.LayoutEvent">
+      <views>
+        <include name="admin.body" template="admin/login/loginform.cfm"/>
+      </views>
+    </event-handler>
+
+    <event-handler access="private" name="admin.login.invalid">
+      <views>
+        <include name="admin.login.message" template="admin/login/invalid.cfm"/>
+      </views>
+    </event-handler>
+
+  </event-handlers>
+
+
 </modelglue>

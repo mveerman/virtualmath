@@ -24,7 +24,7 @@
 		<cfargument name="password" type="string" required="true">
 		
 		<cfset var user = getOrmService().getTransfer().readByPropertyMap(baseclass, arguments)>
-		
+
 		<cfif user.getisPersisted()>
 			<cfreturn user>
 		<cfelse>

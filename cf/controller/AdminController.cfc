@@ -11,17 +11,11 @@
 		<cfset event.setValue("iseditor", false)>
 		
 		<cfif StructKeyExists(session, "adminUser")>
-			<cfset userroles = session.adminUser.getRoleStruct()>
-			<cfloop collection="#userroles#" item="role_id">
-				<cfswitch expression="#userroles[role_id].getRoleKey()#">
-					<cfcase value="sysadmin">
-						<cfset event.setValue("isadministrator", true)>
-					</cfcase>
-					<cfcase value="editor">
-						<cfset event.setValue("iseditor", true)>
-					</cfcase>
-				</cfswitch>
-			</cfloop>
+			<cfif session.adminUser.getAdmin eq true>
+				<cfset event.setValue("isadministrator", true)>
+			<cfelse>
+				<cfset event.setValue("iseditor", true)>
+			</cfif>
 		</cfif>
 		
 	</cffunction>

@@ -5,7 +5,7 @@
 
    	<!-- Be sure to change these to false when you go to production! -->
    	<property name="reload"><value>true</value></property>
-   	<property name="debug"><value>false</value></property>
+   	<property name="debug"><value>true</value></property>
 
    	<!-- Name of the URL variable that states which event-handler to run -->
    	<property name="eventValue"><value>event</value></property>
@@ -31,7 +31,7 @@
 
    	<!-- Scaffolding config -->
    	<!-- Turning this off will disable any scaffold generation. Turning this on requires the reload setting above to also be on.-->
-   	<property name="rescaffold"><value>true</value></property>
+   	<property name="rescaffold"><value>false</value></property>
    	<!-- Where do you want generated views to be saved to? -->
    	<property name="generatedViewMapping"><value>views</value></property>
    	<!--This directory structure should already exists. ModelGlue will create the Scaffolds.xml file and overwrite as needed.-->

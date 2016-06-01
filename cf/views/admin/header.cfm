@@ -5,7 +5,7 @@
             <header id="header">
                 <h1>VirtualMath </h1><sub>Teachers portal</sub>
                 <nav id="nav">
-                    <a href="#viewstate.linkTo('admin.home')#">Home</a>
+                    #viewcollection.getView('admin.navigation')#
                 </nav>
 
             </header>

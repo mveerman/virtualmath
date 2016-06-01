@@ -175,8 +175,8 @@
 					charset="utf-8" >
 					
 				<cfset coldspring = REReplaceNoCase(coldspring, "<property name=""reload""><value>(true|false)</value></property>", "<property name=""reload""><value>true</value></property>", "one")> 
-				<cfset coldspring = REReplaceNoCase(coldspring, "<property name=""rescaffold""><value>(true|false)</value></property>", "<property name=""rescaffold""><value>true</value></property>", "one")>
-				<cfset coldspring = REReplaceNoCase(coldspring, "<property name=""debug""><value>(true|false)</value></property>", "<property name=""debug""><value>false</value></property>", "one")>
+				<cfset coldspring = REReplaceNoCase(coldspring, "<property name=""rescaffold""><value>(true|false)</value></property>", "<property name=""rescaffold""><value>false</value></property>", "one")>
+				<cfset coldspring = REReplaceNoCase(coldspring, "<property name=""debug""><value>(true|false)</value></property>", "<property name=""debug""><value>true</value></property>", "one")>
 				<cfset coldspring = REReplaceNoCase(coldspring, "<property name=""mode""><value>(development|production)</value></property>", "<property name=""mode""><value>development</value></property>", "all")>
 				
 				<cffile 

@@ -5,7 +5,7 @@
 	adminUser = UserGW.get();
 	adminUser.setName("Administrator");
 	adminUser.setUsername("admin");
-	adminUser.setPassword("admin");
+	adminUser.setPassword(hash("admin"));
 	adminUser.setAdmin(true);
 	UserGW.save(adminUser);
 </cfscript>

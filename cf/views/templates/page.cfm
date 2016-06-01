@@ -12,7 +12,8 @@
 	@embeds view "body"
 --->
 
-<cfsetting enablecfoutputonly="false" showdebugoutput="false">
+<!---<cfsetting enablecfoutputonly="false" showdebugoutput="false">--->
+<cfsetting enablecfoutputonly="false" showdebugoutput="true">
 
 <cfheader name="Content-Type" value="text/html; charset=UTF-8" />
 

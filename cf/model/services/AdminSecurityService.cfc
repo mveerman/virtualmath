@@ -17,7 +17,9 @@
 	<cffunction name="authenticate" access="public" output="false" returntype="transfer.com.TransferObject">
 		<cfargument name="username" required="true" type="string">
 		<cfargument name="password" required="true" type="string">
-		
+
+
+
 		<cfreturn getUserGateway().authenticate(username, password)>
 		
 	</cffunction>
