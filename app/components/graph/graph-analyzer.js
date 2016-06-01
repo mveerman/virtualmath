@@ -21,7 +21,7 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         var tolerances = {
             noOfPoints: 3,
             height: (graph.height - graph.originOffset) * 0.6,
-            ignoredCurveLength: 10,
+            midPointOffset: 50,
             fingerRadius: 10
         };
 
@@ -52,7 +52,7 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         var crossings = path.getCrossings(line);
 
         // filter for erratic start/end on touchscreens
-        var crossings = crossings.filter(function (crossing) {
+        crossings = crossings.filter(function (crossing) {
                 return pathStartPoint.getDistance(crossing.intersection.point) > tolerances.fingerRadius
                     && pathEndPoint.getDistance(crossing.intersection.point) > tolerances.fingerRadius;
             }
@@ -74,26 +74,21 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         var intersectionPoint = crossings[0].intersection.point;
 
 
-        // TODO check if midpoint somewhere halfway the path height
+        var distanceToIntersection = pathStartPoint.getDistance(intersectionPoint);
+        var midHeightDiff = distanceToIntersection - (line.length / 2);
+
+        if (midHeightDiff > tolerances.midPointOffset || midHeightDiff < -tolerances.midPointOffset) {
+            return {
+                result: false,
+                reason: 'midpoint.y exceeds tolerance (tolerance: +/- ' + tolerances.midPointOffset + ', actual: ' + midHeightDiff + ')'
+            };
+        }
+
 
         if (vm.debug) {
             var intersectHighlight = new paper.Path.Circle(intersectionPoint, 5);
             intersectHighlight.fillColor = 'blue';
         }
-
-        // check for straights
-        // for (i = 0; i < path.curves.length; i++) {
-        //     if (path.curves[i].length > tolerances.ignoredCurveLength && (path.curves[i].isStraight() || path.curves[i].isLinear())) {
-        //         if (debug) {
-        //             var curveHighlight = new paper.Path([path.segment1, path.segment2]);
-        //             curveHighlight.strokeColor = 'red';
-        //         }
-        //         return {
-        //             result: false,
-        //             reason: 'straight curve found'
-        //         };
-        //     }
-        // }
 
         var topPath = path.split(crossings[0]);
 

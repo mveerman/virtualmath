@@ -114,6 +114,9 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     }
                     path.simplify();
                     vm.graphData.analysis = analyze(path);
+                    if (graphAnalyzer.debug) {
+                        console.log("analysis result", vm.graphData.analysis);
+                    }
                     vm.graphData.base64url = canvas.toDataURL.apply(canvas);
                     vm.graphData.pathAsJson = path.exportJSON();
                     vm.doGraphUpdate()(vm.graphData);
