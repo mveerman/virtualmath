@@ -107,7 +107,7 @@ angular.module('virtualMath.feedback', [
 
             var subTotal = 0;
 
-            for (var x = 0; x < original.length; x = x + 20) {
+            for (var x = 0; x < original.length; x = x + 50) {
                 var curPoint = original.getPointAt(x);
                 var angle = 0;
                 var multiplier = 0;

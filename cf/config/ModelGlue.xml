@@ -7,6 +7,7 @@
 
    <include template="/virtualmath/config/ModelGlueIncludes/GeneralEvents.xml"/>
    <include template="/virtualmath/config/ModelGlueIncludes/FrontEvents.xml"/>
+   <include template="/virtualmath/config/ModelGlueIncludes/AdminEvents.xml"/>
 
    <controllers>
       <controller name="MyController" type="virtualmath.controller.Controller">
