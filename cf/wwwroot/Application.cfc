@@ -44,8 +44,8 @@
 			setMode(application.settings.application.mode.xmlText);
 			setDatabaseName(application.settings.application.dbname.xmlText);
 			application.dbOwner = application.settings.application.dbowner.xmlText;
-			application.hostname = application.settings.application.hostname.xmlText;
-			application.skin = application.settings.application.skin.xmlText;
+			// application.hostname = application.settings.application.hostname.xmlText;
+			// application.skin = application.settings.application.skin.xmlText;
 		</cfscript>
 	
 	</cffunction>
@@ -291,10 +291,10 @@
 <cffunction name="onRequestStart" output="false">
 	<cfset request.isInclude = false />
 
-    <cfset request.skin = application.skin>
+    <!---<cfset request.skin = application.skin>
     <cfif isDefined("url.skin") and listFind("hva,uva", url.skin) gt 0>
         <cfset request.skin = url.skin>
-    </cfif>
+    </cfif>--->
 </cffunction>
 
 

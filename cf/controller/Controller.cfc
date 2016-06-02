@@ -11,11 +11,6 @@
 		
 		<cfset AppConfig = getModelGlue().getBean('AppConfig') />
 		<cfset config = AppConfig.getConfig() />
-		<cfset config.ldapAddress = application.settings.application.ldap.server.xmlText />
-		<cfset config.ldapPort = application.settings.application.ldap.port.xmlText />
-		<cfset config.ldapUseSecureConnection = application.settings.application.ldap.useSecureConnection.xmlText />
-		<cfset config.ldapAdminUser = application.settings.application.ldap.username.xmlText />
-		<cfset config.ldapAdminPass = application.settings.application.ldap.password.xmlText />
 		<cfset AppConfig.setConfig(config) />
 		
 		<cfreturn this />
