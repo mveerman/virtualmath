@@ -6,7 +6,6 @@
     (
         student_id          NUMERIC NOT NULL,
         name                VARCHAR(255) NOT NULL,
-        email               VARCHAR(255),
         age                 NUMERIC NOT NULL,
         school              VARCHAR(255),
         schooltype          VARCHAR(50),
@@ -32,7 +31,9 @@
         name                    VARCHAR(255) NOT NULL,
         username                VARCHAR(255) NOT NULL,
         password                VARCHAR(255) NOT NULL,
-        admin                   BOOLEAN default TRUE NOT NULL
+        admin                   BOOLEAN default FALSE NOT NULL
+        teacher                 BOOLEAN default FALSE NOT NULL
+        researcher              BOOLEAN default FALSE NOT NULL
     )
     </cfquery>
 

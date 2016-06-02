@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<transfer xsi:noNamespaceSchemaLocation="../../../transfer/resources/xsd/transfer.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<transfer xsi:noNamespaceSchemaLocation="../../lib/Transfer/resources/xsd/transfer.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <objectCache>
         <!--
         'defaultcache' is the setting for all classes not specified by a 'cache' element. Here we have set the scope of all the objects to be cached in the
@@ -21,7 +21,6 @@
             <object name="students" table="STUDENTS">
                 <id name="student_id" type="numeric" generate="true"/>
                 <property name="name" type="string"/>
-                <property name="email" type="string"/>
                 <property name="age" type="numeric"/>
                 <property name="school" type="string"/>
                 <property name="schooltype" type="string"/>
@@ -48,6 +47,8 @@
                 <property name="username" type="string" nullable="false"/>
                 <property name="password" type="string" nullable="false"/>
                 <property name="admin" type="boolean" nullable="false"/>
+                <property name="teacher" type="boolean" nullable="false"/>
+                <property name="researcher" type="boolean" nullable="false"/>
             </object>
             
         </package>
