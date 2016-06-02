@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('virtualMath.start', [
-        'ngRoute'
-    ])
+    'ngRoute'
+])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/start', {
@@ -13,17 +13,7 @@ angular.module('virtualMath.start', [
 
     .controller('StartController', ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
 
-        $scope.surveyController = $scope.$parent;
-
-        $scope.student = $scope.surveyController.studentData;
-
         $scope.advanceToNextPage = function () {
-            $scope.surveyController = $scope.$parent;
-            if (!$rootScope.initialized) {
-                $scope.surveyController.startNewSurveyRun();
-                $rootScope.initialized = true;
-            }
-
-            $location.path('/assignment1');
+            $location.path('/personal-info');
         };
     }]);

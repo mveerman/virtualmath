@@ -5,6 +5,7 @@ angular.module('virtualMath', [
         'ngRoute',
         'ngTouch',
         'virtualMath.start',
+    'virtualMath.personalInfo',
         'virtualMath.assignment1',
         'virtualMath.assignment2',
         'virtualMath.help1',
@@ -126,7 +127,7 @@ angular.module('virtualMath', [
         // register listener to watch route changes
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             if (!$rootScope.initialized) {
-                if (next.templateUrl != "/screens/start/start.html") {
+                if (next.templateUrl != "screens/personal-info/personal-info.html") {
                     $location.path("/start");
                 }
             }
