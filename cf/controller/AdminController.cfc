@@ -7,14 +7,19 @@
 		<cfset var userroles = "">
 		<cfset var role_id = "">
 		
-		<cfset event.setValue("isadministrator", false)>
-		<cfset event.setValue("iseditor", false)>
-		
+		<cfset event.setValue("isAdministrator", false)>
+		<cfset event.setValue("isTeacher", false)>
+		<cfset event.setValue("isResearcher", false)>
+
 		<cfif StructKeyExists(session, "adminUser")>
-			<cfif session.adminUser.getAdmin eq true>
-				<cfset event.setValue("isadministrator", true)>
-			<cfelse>
-				<cfset event.setValue("iseditor", true)>
+			<cfif session.adminUser.getAdmin() eq true>
+				<cfset event.setValue("isAdministrator", true)>
+			</cfif>
+			<cfif session.adminUser.getTeacher() eq true>
+				<cfset event.setValue("isTeacher", true)>
+			</cfif>
+			<cfif session.adminUser.getResearcher() eq true>
+				<cfset event.setValue("isResearcher", true)>
 			</cfif>
 		</cfif>
 		

@@ -52,7 +52,7 @@
             <include name="body" template="probe/success.cfm"/>
          </views>
          <results>
-            <result name="ProbeFailure" do="probe.failure"></result>
+            <result name="ProbeFailure" do="probe.failure" />
          </results>
       </event-handler>
 
