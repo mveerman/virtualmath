@@ -21,9 +21,9 @@
 
     UserGW = application._modelglue.getBean("UserGateway");
     researcher = UserGW.get();
-    researcher.setName("Dummy teacher");
-    researcher.setUsername("teacher");
-    researcher.setPassword(hash("teacher"));
+    researcher.setName("Dummy researcher");
+    researcher.setUsername("researcher");
+    researcher.setPassword(hash("researcher"));
     researcher.setAdmin(false);
     researcher.setTeacher(false);
     researcher.setResearcher(true);
