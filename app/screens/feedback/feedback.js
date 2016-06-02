@@ -13,6 +13,11 @@ angular.module('virtualMath.feedback', [
 
     .controller('FeedbackController', ['$scope', '$document', function ($scope, $document) {
 
+        $scope.$on('$locationChangeStart', function(event, next, current){
+            // Prevent the browser default action (Going back):
+            event.preventDefault();
+        });
+
         $scope.surveyController = $scope.$parent;
         $scope.getScore = $scope.surveyController.getScore;
         $scope.isHelp1Shown = $scope.surveyController.isHelp1Shown;
