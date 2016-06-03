@@ -2,7 +2,7 @@
   "name": "virtualMath",
   "description": "The HvA VirtualMath project",
   "version": "0.2.0",
-  "homepage": "https://gir.ic.uva.nl/app",
+  "homepage": "https://virtualmath.ic.uva.nl/app",
   "license": "MIT",
   "private": true,
   "dependencies": {
