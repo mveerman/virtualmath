@@ -42,13 +42,14 @@
 			// Title Bar.
 				$(
 					'<div id="titleBar">' +
-						'<a href="#navPanel" class="toggle"></a>' +
+						//'<a href="#navPanel" class="toggle"></a>' + // disabled because we don't have sections to navigate to
 						'<span class="title">' + $('#header h1').text() + '</span>' +
 					'</div>'
 				)
 					.appendTo($body);
 
 			// Navigation Panel.
+            /*
 				$(
 					'<div id="navPanel">' +
 						'<nav>' +
@@ -67,6 +68,7 @@
 						target: $body,
 						visibleClass: 'navPanel-visible'
 					});
+			*/
 
 			// Fix: Remove navPanel transitions on WP<10 (poor/buggy performance).
 				if (skel.vars.os == 'wp' && skel.vars.osVersion < 10)
