@@ -5,6 +5,7 @@
 */
 
 (function($) {
+	'use strict';
 
 	skel
 		.breakpoints({
@@ -42,7 +43,7 @@
 				$(
 					'<div id="titleBar">' +
 						'<a href="#navPanel" class="toggle"></a>' +
-						'<span class="title">' + $('#logo').html() + '</span>' +
+						'<span class="title">' + $('#header h1').text() + '</span>' +
 					'</div>'
 				)
 					.appendTo($body);
