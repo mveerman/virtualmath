@@ -5,7 +5,7 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
 
     vm.analysis = '';
 
-    vm.debug= false;
+    vm.debug = false;
 
     vm.analyze = function (graph) {
         if (vm.analysis === 'sphere') {
@@ -25,6 +25,12 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
             fingerRadius: 10
         };
 
+        if (graph.path.segments.length < tolerances.noOfPoints) {
+            return {
+                result: false,
+                reason: 'too few points (was: ' + graph.path.segments.length + ', expected: >= ' + tolerances.noOfPoints + ')'
+            };
+        }
 
         var path = graph.path.clone();
         if (path.lastSegment.point.x < path.firstSegment.point.x) {
@@ -152,7 +158,7 @@ angular.module('virtualMath.graph', []).service('graphAnalyzer', function () {
         if (segments.length < tolerances.noOfPoints) {
             return {
                 result: false,
-                reason: 'too few points (was: ' + segments.length + ', expected: > ' + tolerances.noOfPoints + ')'
+                reason: 'too few points (was: ' + segments.length + ', expected: >= ' + tolerances.noOfPoints + ')'
             };
         }
 
