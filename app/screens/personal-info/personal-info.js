@@ -24,6 +24,6 @@ angular.module('virtualMath.personalInfo', [
                 $rootScope.initialized = true;
             }
 
-            $location.path('/assignment1');
+            $location.path('/intro');
         };
     }]);

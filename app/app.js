@@ -6,6 +6,7 @@ angular.module('virtualMath', [
         'ngTouch',
         'virtualMath.start',
     'virtualMath.personalInfo',
+    'virtualMath.intro',
         'virtualMath.assignment1',
         'virtualMath.assignment2',
         'virtualMath.help1',
