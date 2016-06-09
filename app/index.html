@@ -28,9 +28,10 @@
             <div class="row">
                 <div class="12u">
                     <header id="header">
-                        <h1>{{ 'index.title' | i18next }}</h1>
+                        <h1>graphs of dynamic situations</h1><!-- {{ 'index.title' | i18next }} -->
                         <nav id="nav" class="student-name">
                             <a ng-if="initialized">{{ 'index.logged-in' | i18next }} {{studentData.name}}</a>
+                            <span ng-click="changeLang('nl')" ng-class="{nl:'active'}[currentLang]">NL</span> | <span ng-click="changeLang('en')" ng-class="{en:'active'}[currentLang]">EN</span> | <span ng-click="changeLang('dev')" ng-class="{dev:'active'}[currentLang]">DEV</span>
                         </nav>
                         <!--<nav id="nav">
                             <a href="#/start">Aanmelden</a>
@@ -41,7 +42,6 @@
                             <a href="#/compare">Vergelijken</a>
                             <a href="#/feedback">Feedback</a>
                         </nav>-->
-
                     </header>
                 </div>
             </div>

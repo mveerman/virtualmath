@@ -23,7 +23,7 @@ angular.module('virtualMath', [
     }])
 
     // general survey controller
-    .controller('SurveyController', function ($scope, $rootScope) {
+    .controller('SurveyController', function ($scope, $rootScope,  $i18next) {
         $rootScope.initialized = false;
 
         $scope.studentData = {
@@ -122,9 +122,18 @@ angular.module('virtualMath', [
             }
             return $scope.surveyData.help2shown;
         };
+
+        // default language
+        $scope.currentLang = 'nl';
+
+        $scope.changeLang = function (lang) {
+            console.log("switched lang to: " + lang);
+            $i18next.options.lng = $scope.currentLang = lang;
+
+        };
     })
 
-    .run(function ($rootScope, $location, $window, $i18next) {
+    .run(function ($rootScope, $location, $window) {
 
         // register listener to watch route changes
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
@@ -140,8 +149,6 @@ angular.module('virtualMath', [
             event.preventDefault();
             return "Het opnieuw laden van de pagina zorgt ervoor dat alle ingevoerde gegevens verdwijnen.\n\nDeze actie wordt niet aangeraden!"
         };
-
-        $i18next.options.lng = 'nl';
 
     });
 
