@@ -3,18 +3,17 @@
         <div class="6u 12u(mobile) row main-row">
             <section>
                 <p>
-                    Je gaat nu een grafiek tekenen van een dynamische relatie. Dit kun je op het scherm doen met behulp
-                    van een muis, pen of vinger.
+                    {{ 'intro.p1' | i18next }}
                 </p>
-                <p>Zodra jij tevreden bent met jouw grafiek lever je hem in. Je krijgt dan
-                    gerichte feedback op je eigen werk.
+                <p>
+                    {{ 'intro.p2' | i18next }}
                 </p>
             </section>
         </div>
         <div class="12u row">
             <section>
                 <button type="submit" class="button"
-                        ng-click="advanceToNextPage()">Ga verder
+                        ng-click="advanceToNextPage()">{{ 'intro.button' | i18next }}
                 </button>
             </section>
         </div>

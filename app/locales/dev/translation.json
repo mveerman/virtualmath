@@ -16,13 +16,18 @@
     "placeholder_name": "personal-info.placeholder_name",
     "label_age": "personal-info.label_age",
     "placeholder_age": "personal-info.placeholder_age",
-    "label_school": "label_school",
-    "placeholder_school": "placeholder_school",
-    "label_schooltype": "label_schooltype",
-    "label_year": "label_year",
-    "placeholder_year": "placeholder_year",
-    "label_mathtype": "label_mathtype",
+    "label_school": "personal-info.label_school",
+    "placeholder_school": "personal-info.placeholder_school",
+    "label_schooltype": "personal-info.label_schooltype",
+    "label_year": "personal-info.label_year",
+    "placeholder_year": "personal-info.placeholder_year",
+    "label_mathtype": "personal-info.label_mathtype",
     "button": "personal-info.button"
+  },
+  "intro": {
+    "p1": "intro.p1",
+    "p2": "intro.p2",
+    "button": "intro.button"
   },
   "generic": {
     "select": "generic.select"
