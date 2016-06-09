@@ -38,6 +38,11 @@
     "label_graph": "Grafiek",
     "label_explanation": "Uitleg"
   },
+  "help": {
+    "title_help1": "Help",
+    "title_help2": "Help 2",
+    "start": "Start de hulp"
+  },
   "generic": {
     "select": "Selecteer",
     "next": "Volgende",

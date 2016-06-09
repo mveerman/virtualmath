@@ -38,6 +38,11 @@
     "label_graph": "assignments.label_graph",
     "label_explanation": "assignments.label_explanation"
   },
+  "help": {
+    "title_help1": "help.title_help1",
+    "title_help2": "help.title_help2",
+    "start": "help.start"
+  },
   "generic": {
     "select": "generic.select",
     "next": "generic.next",
