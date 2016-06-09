@@ -29,13 +29,14 @@
     "p2": "intro.p2",
     "button": "intro.button"
   },
-  "assignment1": {
-    "title": "assignment1.title",
-    "description": "assignment1.description",
-    "questions_li1": "questions_li1",
-    "questions_li2": "questions_li2",
-    "label_graph": "label_graph",
-    "label_explanation": "label_explanation"
+  "assignments": {
+    "title_assignment1": "assignments.title_assignment1",
+    "title_assignment2": "assignments.title_assignment2",
+    "description": "assignments.description",
+    "questions_li1": "assignments.questions_li1",
+    "questions_li2": "assignments.questions_li2",
+    "label_graph": "assignments.label_graph",
+    "label_explanation": "assignments.label_explanation"
   },
   "generic": {
     "select": "generic.select",

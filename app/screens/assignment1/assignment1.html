@@ -4,16 +4,16 @@
             <div class="6u 12u(mobile)">
                 <section>
                     <img src="img/bowl.jpg" alt="Bowl" height="150" class="left"/>
-                    <h2>{{ 'assignment1.title' | i18next }}</h2>
+                    <h2>{{ 'assignments.title_assignment1' | i18next }}</h2>
                     <p class="description clearfix">
-                        {{ 'assignment1.description' | i18next }}
+                        {{ 'assignments.description' | i18next }}
                     </p>
                     <ol type="a" class="questions">
                         <li>
-                            {{ 'assignment1.questions_li1' | i18next }}
+                            {{ 'assignments.questions_li1' | i18next }}
                         </li>
                         <li>
-                            {{ 'assignment1.questions_li2' | i18next }}
+                            {{ 'assignments.questions_li2' | i18next }}
                         </li>
                     </ol>
 
@@ -22,7 +22,7 @@
             <div class="6u 12u(mobile)">
                 <section>
                     <div class="graph">
-                        <label>{{ 'assignment1.label_graph' | i18next }}</label>
+                        <label>{{ 'assignments.label_graph' | i18next }}</label>
                         <vmath-function-input data="graphData" on-graph-update="saveGraph"></vmath-function-input>
                     </div>
                 </section>
@@ -35,7 +35,7 @@
             <div class="12u 12u(mobile)">
                 <section>
                     <div>
-                        <label>{{ 'assignment1.label_explanation' | i18next }}</label>
+                        <label>{{ 'assignments.label_explanation' | i18next }}</label>
                         <textarea name="q1description" required ng-model="description" ng-minlength="10"
                                   ng-change="saveDescription()" placeholder="{{ 'generic.minimum_characters' | i18next }}"></textarea>
 
