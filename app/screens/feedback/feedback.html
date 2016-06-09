@@ -2,59 +2,53 @@
     <div class="row main-row">
         <div class="6u 12u(mobile)">
             <section ng-switch="getScore()">
-                <h2>Resultaat</h2>
+                <h2>{{ 'feedback.title' | i18next }}</h2>
                 <div ng-switch-when="0">
                     <p>
-                        Je bent nu op weg naar niveau 1 doordat je hulp 1 en/of hulp 2 heb je geprobeerd in te zetten
-                        bij het maken van de grafiek. Om de volgende levels te bereiken zou je het verband moeten leggen
-                        tussen de hoogte en hoeveelheid water en rekening moeten houden met de vorm van de vaas.
+                        {{ 'feedback.switch_0' | i18next }}
                     </p>
                     <p>
                         <span ng-if="!isHelp1Shown() && !isHelp2Shown()">
-                            Je hebt geen gebruik gemaakt van de aangeboden hulpmiddelen
+                            {{ 'feedback.without_help' | i18next }}
                         </span>
                         <span ng-if="isHelp1Shown() && !isHelp2Shown()">
-                            Je hebt niet gebruik gemaakt van alle hulpmiddelen
+                            {{ 'feedback.some_help' | i18next }}
                         </span>
                         <span ng-if="isHelp1Shown() && isHelp2Shown()">
-                            Je hebt alle hulpmiddelen gebruikt
+                            {{ 'feedback.all_help' | i18next }}
                         </span>
                         <span ng-if="hasRedo() && (isHelp1Shown() || isHelp2Shown())">
-                            maar je hebt wel geprobeerd deze toe te passen
+                           {{ 'feedback.applied_help' | i18next }}
                         </span>
                     </p>
                 </div>
                 <div ng-switch-when="1">
                     <p>
-                        Je hebt niveau 1 bereikt: je hebt het verband tussen de hoeveelheid water en de hoogte in een
-                        juiste grafiek weer kunnen geven in één van de twee situaties. Om het volgende niveau te
-                        bereiken zou je het verband moeten leggen niet alleen tussen de hoogte en hoeveelheid water maar
-                        zul je ook rekening moeten houden met de vorm van de vaas.
+                        {{ 'feedback.switch_1' | i18next }}
                     </p>
                     <p>
                         <span ng-if="!isHelp1Shown() && !isHelp2Shown()">
-                            Je hebt geen gebruik gemaakt van de aangeboden hulpmiddelen
+                            {{ 'feedback.without_help' | i18next }}
                         </span>
                         <span ng-if="isHelp1Shown() && !isHelp2Shown()">
-                            Je hebt niet gebruik gemaakt van alle hulpmiddelen
+                            {{ 'feedback.some_help' | i18next }}
                         </span>
                         <span ng-if="isHelp1Shown() && isHelp2Shown()">
-                            Je hebt alle hulpmiddelen gebruikt
+                            {{ 'feedback.all_help' | i18next }}
                         </span>
                         <span ng-if="hasRedo && (isHelp1Shown() || isHelp2Shown())">
-                            maar je hebt wel geprobeerd deze toe te passen
+                            {{ 'feedback.applied_help' | i18next }}
                         </span>
                     </p>
                 </div>
                 <div ng-switch-when="2">
                     <p>
-                        Je hebt niveau 2 bereikt; je hebt het verband tussen de hoeveelheid water en de hoogte in een
-                        juiste grafiek weer kunnen geven in beide situaties.
+                        {{ 'feedback.switch_2' | i18next }}
                     </p>
                 </div>
                 <div ng-switch-default>
                     <p>
-                        Je hebt de oefening niet op de correcte manier gemaakt.
+                        {{ 'feedback.switch_default' | i18next }}
                     </p>
                 </div>
             </section>
@@ -63,8 +57,8 @@
     <div class="row">
         <div class="6u 12u(mobile)">
             <section>
-                <h2>Opgave A</h2>
-                <p>Jouw grafiek hoort bij het volgende object:</p>
+                <h2>{{ 'assignments.title_assignment1' | i18next }}</h2>
+                <p>{{ 'feedback.label_reward' | i18next }}:</p>
             </section>
             <section>
                 <canvas id="REWARD_ASSIGNMENT_A" width="500" height="500"></canvas>
@@ -72,8 +66,8 @@
         </div>
         <div class="6u 12u(mobile)">
             <section>
-                <h2>Opgave B</h2>
-                <p>Jouw grafiek hoort bij het volgende object:</p>
+                <h2>{{ 'assignments.title_assignment2' | i18next }}</h2>
+                <p>{{ 'feedback.label_reward' | i18next }}:</p>
             </section>
             <section>
                 <canvas id="REWARD_ASSIGNMENT_B" width="500" height="500"></canvas>

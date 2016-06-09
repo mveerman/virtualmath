@@ -51,6 +51,18 @@
     "button_retry": "compare.button_retry",
     "button_submit": "compare.button_submit"
   },
+  "feedback": {
+    "title": "feedback.title",
+    "label_reward": "feedback.label_reward",
+    "switch_default": "feedback.switch_default",
+    "switch_0": "feedback.switch_0",
+    "switch_1": "feedback.switch_1",
+    "switch_2": "feedback.switch_2",
+    "without_help": "feedback.without_help",
+    "some_help": "feedback.some_help",
+    "all_help": "feedback.all_help",
+    "applied_help": "feedback.applied_help"
+  },
   "generic": {
     "select": "generic.select",
     "next": "generic.next",
