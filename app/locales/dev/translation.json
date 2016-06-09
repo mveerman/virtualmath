@@ -43,6 +43,14 @@
     "title_help2": "help.title_help2",
     "start": "help.start"
   },
+  "compare": {
+    "title": "compare.title",
+    "p": "comapre.p",
+    "button_help1": "compare.button_help1",
+    "button_help2": "compare.button_help2",
+    "button_retry": "compare.button_retry",
+    "button_submit": "compare.button_submit"
+  },
   "generic": {
     "select": "generic.select",
     "next": "generic.next",

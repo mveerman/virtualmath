@@ -43,6 +43,14 @@
     "title_help2": "Help 2",
     "start": "Start de hulp"
   },
+  "compare": {
+    "title": "Vergelijken en inleveren",
+    "p": "Vergelijk de grafieken. Ben je tevreden? Lever het werk dan in.",
+    "button_help1": "Hulp bij de oefening",
+    "button_help2": "Meer hulp bij de oefening",
+    "button_retry": "Opnieuw proberen",
+    "button_submit": "Antwoorden indienen"
+  },
   "generic": {
     "select": "Selecteer",
     "next": "Volgende",

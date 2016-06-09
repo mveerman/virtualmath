@@ -2,9 +2,9 @@
     <div class="row">
         <div class="12u 12u(mobile)">
             <section>
-                <h2>Vergelijken en inleveren</h2>
+                <h2>{{ 'compare.title' | i18next }}</h2>
                 <p>
-                    Vergelijk de grafieken. Ben je tevreden? Lever het werk dan in.
+                    {{ 'compare.p' | i18next }}
                 </p>
             </section>
         </div>
@@ -15,7 +15,7 @@
                 <div class="compare-answers">
                     <div class="answer-row">
                         <div class="title">
-                            <h4>Opgave A</h4>
+                            <h4>{{ 'assignments.title_assignment1' | i18next }}</h4>
                         </div>
                         <div class="question">
                             <img src="img/bowl.jpg" alt="Bol" /></a>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="answer-row">
                         <div class="title">
-                            <h4>Opgave B</h4>
+                            <h4>{{ 'assignments.title_assignment2' | i18next }}</h4>
                         </div>
                         <div class="question">
                             <img src="img/cylinder.jpg" alt="Bol" /></a>
@@ -46,19 +46,19 @@
         </div>
         <div class="4u 12u(mobile)">
             <section>
-                <button type="submit" class="button" ng-click="goto('help1')">Hulp bij de oefening</button>
+                <button type="submit" class="button" ng-click="goto('help1')">{{ 'compare.button_help1' | i18next }}</button>
             </section>
 
             <section ng-if="currentRunData.score >= 1">
-                <button type="submit" class="button" ng-click="goto('help2')">Meer hulp bij de oefening</button>
+                <button type="submit" class="button" ng-click="goto('help2')">{{ 'compare.button_help2' | i18next }}</button>
             </section>
         </div>
     </div>
     <div class="row">
         <div class="12u">
             <section>
-                <button type="submit" class="button" ng-click="startNewRun()" ng-if="currentRunData.score>lastScore">Opnieuw proberen</button>
-                <button type="submit" class="button" ng-click="goto('feedback')" >Antwoorden indienen</button>
+                <button type="submit" class="button" ng-click="startNewRun()" ng-if="currentRunData.score>lastScore">{{ 'compare.button_retry' | i18next }}</button>
+                <button type="submit" class="button" ng-click="goto('feedback')" >{{ 'compare.button_submit' | i18next }}</button>
             </section>
         </div>
     </div>
