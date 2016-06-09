@@ -29,7 +29,20 @@
     "p2": "intro.p2",
     "button": "intro.button"
   },
+  "assignment1": {
+    "title": "assignment1.title",
+    "description": "assignment1.description",
+    "questions_li1": "questions_li1",
+    "questions_li2": "questions_li2",
+    "label_graph": "label_graph",
+    "label_explanation": "label_explanation"
+  },
   "generic": {
-    "select": "generic.select"
+    "select": "generic.select",
+    "next": "generic.next",
+    "minimum_characters": "minimum_characters",
+    "required": "required",
+    "minlength": "minlength",
+    "erase": "erase"
   }
 }

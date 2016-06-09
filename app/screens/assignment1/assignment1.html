@@ -4,18 +4,16 @@
             <div class="6u 12u(mobile)">
                 <section>
                     <img src="img/bowl.jpg" alt="Bowl" height="150" class="left"/>
-                    <h2>Opgave A</h2>
+                    <h2>{{ 'assignment1.title' | i18next }}</h2>
                     <p class="description clearfix">
-                        Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid
-                        stroomt.
+                        {{ 'assignment1.description' | i18next }}
                     </p>
                     <ol type="a" class="questions">
                         <li>
-                            Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de
-                            hoeveelheid water in de fles.
+                            {{ 'assignment1.questions_li1' | i18next }}
                         </li>
                         <li>
-                            Leg uit hoe je tot je antwoord bent gekomen.
+                            {{ 'assignment1.questions_li2' | i18next }}
                         </li>
                     </ol>
 
@@ -24,7 +22,7 @@
             <div class="6u 12u(mobile)">
                 <section>
                     <div class="graph">
-                        <label>Grafiek</label>
+                        <label>{{ 'assignment1.label_graph' | i18next }}</label>
                         <vmath-function-input data="graphData" on-graph-update="saveGraph"></vmath-function-input>
                     </div>
                 </section>
@@ -37,18 +35,18 @@
             <div class="12u 12u(mobile)">
                 <section>
                     <div>
-                        <label>Uitleg</label>
+                        <label>{{ 'assignment1.label_explanation' | i18next }}</label>
                         <textarea name="q1description" required ng-model="description" ng-minlength="10"
-                                  ng-change="saveDescription()" placeholder="Minimaal 10 tekens"></textarea>
+                                  ng-change="saveDescription()" placeholder="{{ 'generic.minimum_characters' | i18next }}"></textarea>
 
                         <div role="alert">
                             <span class="error"
                                   ng-show="assignmentForm1.q1description.$touched && assignmentForm1.q1description.$error.required">
-                                Dit veld is verplicht
+                                {{ 'generic.required' | i18next }}
                             </span>
                             <span class="error"
                                   ng-show="assignmentForm1.q1description.$touched && assignmentForm1.q1description.$error.minlength">
-                                De uitleg is te kort. Geef meer tekst op.
+                                {{ 'generic.minlength' | i18next }}
                             </span>
                         </div>
                     </div>
@@ -60,7 +58,7 @@
                 <section>
                     <button type="submit" class="button"
                             ng-disabled="!(graphData.dirty && assignmentForm1.q1description.$valid)"
-                            ng-click="advanceToNextPage()">Volgende
+                            ng-click="advanceToNextPage()">{{ 'generic.next' | i18next }}
                     </button>
                 </section>
             </div>

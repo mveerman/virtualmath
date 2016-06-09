@@ -29,7 +29,20 @@
     "p2": "Zodra jij tevreden bent met jouw grafiek lever je hem in. Je krijgt dan gerichte feedback op je eigen werk.",
     "button": "Ga verder"
   },
+  "assignment1": {
+    "title": "Opgave A",
+    "description": "Stel je voor dat deze fles gevuld wordt met water, waarbij het water met constante snelheid stroomt.",
+    "questions_li1": "Schets een grafiek waarin je de hoogte van het water in de fles uitzet tegenover de hoeveelheid water in de fles.",
+    "questions_li2": "Leg uit hoe je tot je antwoord bent gekomen.",
+    "label_graph": "Grafiek",
+    "label_explanation": "Uitleg"
+  },
   "generic": {
-    "select": "Selecteer"
+    "select": "Selecteer",
+    "next": "Volgende",
+    "minimum_characters": "Minimaal 10 tekens",
+    "required": "Dit veld is verplicht",
+    "minlength": "De uitleg is te kort. Geef meer tekst op.",
+    "erase": "wissen"
   }
 }
