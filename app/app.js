@@ -5,15 +5,16 @@ angular.module('virtualMath', [
         'ngRoute',
         'ngTouch',
         'virtualMath.start',
-    'virtualMath.personalInfo',
-    'virtualMath.intro',
+        'virtualMath.personalInfo',
+        'virtualMath.intro',
         'virtualMath.assignment1',
         'virtualMath.assignment2',
         'virtualMath.help1',
         'virtualMath.help2',
         'virtualMath.compare',
         'virtualMath.feedback',
-        'virtualMath.version'
+        'virtualMath.version',
+        'jm.i18next'
     ])
 
     // config
@@ -123,7 +124,7 @@ angular.module('virtualMath', [
         };
     })
 
-    .run(function ($rootScope, $location, $window) {
+    .run(function ($rootScope, $location, $window, $i18next) {
 
         // register listener to watch route changes
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
@@ -139,4 +140,21 @@ angular.module('virtualMath', [
             event.preventDefault();
             return "Het opnieuw laden van de pagina zorgt ervoor dat alle ingevoerde gegevens verdwijnen.\n\nDeze actie wordt niet aangeraden!"
         };
+
+        $i18next.options.lng = 'nl';
+
     });
+
+angular.module('jm.i18next').config(
+    ['$i18nextProvider', function ($i18nextProvider) {
+        $i18nextProvider.options = {
+            lng: 'nl', // If not given, i18n will detect the browser language.
+            useCookie: true,
+            useLocalStorage: false,
+            fallbackLng: 'dev',
+            resGetPath: 'locales/__lng__/translation.json',
+            defaultLoadingValue: ''
+        };
+
+    }]
+);

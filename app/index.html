@@ -28,9 +28,9 @@
             <div class="row">
                 <div class="12u">
                     <header id="header">
-                        <h1>graphs of dynamic situations</h1>
+                        <h1>{{ 'start.title' | i18next }}</h1>
                         <nav id="nav" class="student-name">
-                            <a ng-if="initialized">Aangemeld als {{studentData.name}}</a>
+                            <a ng-if="initialized">{{ 'start.logged-in' | i18next }} {{studentData.name}}</a>
                         </nav>
                         <!--<nav id="nav">
                             <a href="#/start">Aanmelden</a>
@@ -85,6 +85,8 @@
 <script src="bower_components/ngtouch/build/ngTouch.min.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/paper/dist/paper-core.js"></script>
+<script src="bower_components/i18next/i18next.min.js"></script>
+<script src="bower_components/ng-i18next/dist/ng-i18next.min.js"></script>
 <script src="app.js"></script>
 <script src="screens/start/start.js"></script>
 <script src="screens/personal-info/personal-info.js"></script>
