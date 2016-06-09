@@ -1,7 +1,14 @@
 {
-  "start": {
+  "index": {
     "title": "graphs of dynamic situations",
     "logged-in": "Aangemeld als"
+  },
+  "start": {
+    "welcome": "Welkom bij de",
+    "title": "Graphs of Dynamic Situations Virtual tool",
+    "p1": "Deze tool is bedoeld om je te helpen om grafieken van dynamische relaties te begrijpen. De tool doet dit door deze relaties inzichtelijk te maken met concrete voorbeelden in Virtual Reality en door gericht feedback te geven op de grafiek die jezelf hebt getekend.",
+    "p2": "Dit is een proof of concept, waardoor alleen maar met één enkel voorbeeld van een dynamische context wordt gewerkt.",
+    "button": "Ga verder"
   },
   "personal-info": {
 

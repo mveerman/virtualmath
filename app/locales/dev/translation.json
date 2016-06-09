@@ -1,7 +1,14 @@
 {
-  "start": {
+  "index": {
     "title": "start.title",
     "logged-in": "start.logged-in"
+  },
+  "start": {
+    "welcome": "start.welcome",
+    "title": "start.title",
+    "p1": " start.p1",
+    "p2": "start.p2",
+    "button": "start.button"
   },
   "personal-info": {
 

@@ -3,24 +3,19 @@
         <div class="6u 12u(mobile) row main-row">
             <section>
                 <h2>
-                    Welkom bij de <i>Graphs of Dynamic Situations Virtual tool</i>
+                    {{ 'start.welcome' | i18next }} <i>{{ 'start.title' | i18next }}</i>
                 </h2>
                 <p>
-                    Deze tool is bedoeld om je te helpen om grafieken van dynamische relaties te begrijpen. De tool
-                    doet dit door deze relaties inzichtelijk te maken met concrete voorbeelden in Virtual Reality en
-                    door gericht feedback te geven op de grafiek die jezelf hebt getekend.
+                    {{ 'start.p1' | i18next }}
                 </p>
                 <p>
-                    Dit is een proof of concept, waardoor alleen maar met één enkel voorbeeld van een dynamische
-                    context wordt gewerkt.
+                    {{ 'start.p2' | i18next}}
                 </p>
             </section>
         </div>
         <div class="12u row">
             <section>
-                <button type="submit" class="button"
-                        ng-click="advanceToNextPage()">Ga verder
-                </button>
+                <button type="submit" class="button" ng-click="advanceToNextPage()">{{ 'start.button' | i18next }}</button>
             </section>
         </div>
     </form>
