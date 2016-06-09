@@ -4,51 +4,51 @@
             <div class="6u 12u(mobile)">
                 <section class="bar login-form">
 
-                    <h2>Jouw gegevens</h2>
+                    <h2>{{ 'personal-info.title' | i18next }}</h2>
                     <div class="form-container">
                         <div class="row">
                             <div class="8u">
-                                <label>Jouw naam</label>
-                                <input type="text" name="studentName" placeholder="Naam" ng-model="student.name"
+                                <label>{{ 'personal-info.label_name' | i18next }}</label>
+                                <input type="text" name="studentName" placeholder="{{ 'personal-info.placeholder_name' | i18next }}" ng-model="student.name"
                                        ng-required="true">
                             </div>
                             <div class="4u">
-                                <label>Jouw leeftijd</label>
-                                <input type="number" name="studentAge" placeholder="Leeftijd" min="10" max="110"
+                                <label>{{ 'personal-info.label_age' | i18next }}</label>
+                                <input type="number" name="studentAge" placeholder="{{ 'personal-info.placeholder_age' | i18next }}" min="10" max="110"
                                        ng-model="student.age"
                                        ng-required="true">
                             </div>
                         </div>
                         <div class="row">
                             <div class="12u">
-                                <label>Naam van jouw school</label>
-                                <input type="text" name="studentSchool" placeholder="Schoolnaam" ng-required="true"
+                                <label>{{ 'personal-info.label_school' | i18next }}</label>
+                                <input type="text" name="studentSchool" placeholder="{{ 'personal-info.placeholder_school' | i18next }}" ng-required="true"
                                        ng-model="student.schoolName">
                             </div>
                         </div>
                         <div class="row">
                             <div class="8u">
-                                <label for="studentSchoolType">Schooltype</label>
+                                <label for="studentSchoolType">{{ 'personal-info.label_schooltype' | i18next }}</label>
                                 <select name="studentSchoolType" id="studentSchoolType" ng-required="true"
                                         ng-model="student.schoolType">
-                                    <option value="" disabled selected>Selecteer...</option>
+                                    <option value="" disabled selected>{{ 'generic.select' | i18next }}...</option>
                                     <option>VMBO</option>
                                     <option>HAVO</option>
                                     <option>VWO</option>
                                 </select>
                             </div>
                             <div class="4u">
-                                <label>Leerjaar</label>
-                                <input type="number" name="studentSchoolYear" placeholder="jaar" ng-required="true"
+                                <label>{{ 'personal-info.label_year' | i18next }}</label>
+                                <input type="number" name="studentSchoolYear" placeholder="{{ 'personal-info.placeholder_year' | i18next }}" ng-required="true"
                                        ng-model="student.schoolYear" min="1" max="6">
                             </div>
                         </div>
                         <div class="row">
                             <div class="12u">
-                                <label for="studentWiskundeType">Type wiskunde</label>
+                                <label for="studentWiskundeType">{{ 'personal-info.label_mathtype' | i18next }}</label>
                                 <select name="studentWiskundeType" id="studentWiskundeType" ng-required="true"
                                         ng-model="student.wiskundeType">
-                                    <option value="" disabled selected>Selecteer...</option>
+                                    <option value="" disabled selected>{{ 'generic.select' | i18next }}...</option>
                                     <option>Wiskunde A</option>
                                     <option>Wiskunde B</option>
                                     <option>Wiskunde C</option>
@@ -65,7 +65,7 @@
                 <section>
                     <button type="submit" class="button"
                             ng-click="advanceToNextPage()"
-                            ng-disabled="LoginForm.$invalid">Beginnen met de oefening
+                            ng-disabled="LoginForm.$invalid">{{ 'personal-info.button' | i18next }}
                     </button>
                 </section>
             </div>

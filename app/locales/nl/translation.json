@@ -11,6 +11,20 @@
     "button": "Ga verder"
   },
   "personal-info": {
-
+    "title": "Jouw gegevens",
+    "label_name": "Jouw naam",
+    "placeholder_name": "Naam",
+    "label_age": "Jouw leeftijd",
+    "placeholder_age": "Leeftijd",
+    "label_school": "Naam van jouw school",
+    "placeholder_school": "Schoolnaam",
+    "label_schooltype": "Schooltype",
+    "label_year": "Leerjaar",
+    "placeholder_year": "jaar",
+    "label_mathtype": "Type wiskunde",
+    "button": "Beginnen met de oefening"
+  },
+  "generic": {
+    "select": "Selecteer"
   }
 }
