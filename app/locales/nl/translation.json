@@ -63,6 +63,10 @@
     "all_help": "Je hebt alle hulpmiddelen gebruikt",
     "applied_help": "maar je hebt wel geprobeerd deze toe te passen"
   },
+  "axes": {
+    "amount": "hoeveelheid water",
+    "height": "hoogte water"
+  },
   "generic": {
     "select": "Selecteer",
     "next": "Volgende",

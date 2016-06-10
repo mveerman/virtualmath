@@ -25,8 +25,8 @@
     "button": "Begin the exercise"
   },
   "intro": {
-    "p1": "Je gaat nu een grafiek tekenen van een dynamische relatie. Dit kun je op het scherm doen met behulp van een muis, pen of vinger.",
-    "p2": "Zodra jij tevreden bent met jouw grafiek lever je hem in. Je krijgt dan gerichte feedback op je eigen werk.",
+    "p1": "You are now going to draw a graph of a dynamic relationship. You can do this on the screen using a mouse, stylus or finger.",
+    "p2": "Once you are satisfied with your graph your hand it in. You will receive specific feedback on your work.",
     "button": "Continue"
   },
   "assignments": {
@@ -62,6 +62,10 @@
     "some_help": "You have not made ​​use of all the tools",
     "all_help": "You have used all the tools",
     "applied_help": "but you have tried to apply them"
+  },
+  "axes": {
+    "amount": "amount of water",
+    "height": "water height"
   },
   "generic": {
     "select": "Select",

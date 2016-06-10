@@ -63,6 +63,10 @@
     "all_help": "feedback.all_help",
     "applied_help": "feedback.applied_help"
   },
+  "axes": {
+    "amount": "axes.amount",
+    "height": "axes.height"
+  },
   "generic": {
     "select": "generic.select",
     "next": "generic.next",

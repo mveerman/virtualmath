@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph'])
-    .directive('vmathFunctionInput', ['graphAnalyzer', '$window', function (graphAnalyzer, $window) {
+    .directive('vmathFunctionInput', ['graphAnalyzer', '$window', '$filter', function (graphAnalyzer, $window, $filter) {
         return {
             restrict: 'E',
             templateUrl: 'components/vmath-function-input/vmath-function-input-directive.html',
@@ -46,7 +46,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     xAxis.add(new paper.Point(canvas.scrollWidth - offSet, canvas.scrollHeight - offSet));
                     xAxis.strokeColor = 'black';
                     var yLabel = new paper.PointText(new paper.Point(offSet, (canvas.scrollHeight - offSet) / 2));
-                    yLabel.content = 'hoogte water';
+                    yLabel.content = $filter('i18next')('axes.height');
                     var textStyle = {
                         fontSize: 12,
                         fontFamily: 'Courier'
@@ -54,7 +54,7 @@ angular.module('virtualMath.vmath-function-input-directive', ['virtualMath.graph
                     yLabel.style = textStyle;
                     yLabel.rotate(270, yLabel.bounds.bottomLeft);
                     var xLabel = new paper.PointText(new paper.Point((canvas.scrollWidth - offSet) / 2, canvas.scrollHeight));
-                    xLabel.content = 'hoeveelheid water';
+                    xLabel.content = $filter('i18next')('axes.amount');
                     xLabel.style = textStyle;
                     paper.view.draw();
                 }
