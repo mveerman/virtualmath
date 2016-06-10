@@ -261,3 +261,7 @@ textarea {
     padding: 1em;
     background-color: white;
 }
+
+.active {
+    color: white;
+}
