@@ -18,6 +18,7 @@
     "ng-i18next": "0.3.6"
   },
   "resolutions": {
-    "angular": "1.4.0"
+    "angular": "1.4.0",
+    "i18next": "1.9.0"
   }
 }
