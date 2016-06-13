@@ -7,18 +7,17 @@
   "private": true,
   "dependencies": {
     "paper": "0.9.25",
-    "angular": "1.4.0",
-    "angular-route": "1.4.0",
+    "angular": "1.4.2",
+    "angular-route": "1.4.2",
     "ngtouch": "1.0.1",
-    "angular-loader": "1.4.0",
-    "angular-mocks": "1.4.0",
-    "angular-sanitize": "1.4.0",
-    "html5-boilerplate": "5.2.0",
-    "i18next": "1.9.0",
-    "ng-i18next": "0.3.6"
+    "angular-loader": "1.4.2",
+    "angular-mocks": "1.4.2",
+    "angular-sanitize": "1.4.2",
+    "html5-boilerplate": "5.3.0",
+    "i18next": "1.10.2",
+    "ng-i18next": "0.5.1"
   },
   "resolutions": {
-    "angular": "1.4.0",
-    "i18next": "1.9.0"
+    "angular": "1.4.2"
   }
 }
