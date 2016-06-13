@@ -6,15 +6,18 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "paper": "~0.9.25",
-    "angular": "~1.4.0",
-    "angular-route": "~1.4.0",
-    "ngtouch": "~1.0.1",
-    "angular-loader": "~1.4.0",
-    "angular-mocks": "~1.4.0",
-    "angular-sanitize": "~1.4.0",
-    "html5-boilerplate": "~5.2.0",
-    "i18next": "~1.9.0",
-    "ng-i18next": "~0.3.6"
+    "paper": "0.9.25",
+    "angular": "1.4.0",
+    "angular-route": "1.4.0",
+    "ngtouch": "1.0.1",
+    "angular-loader": "1.4.0",
+    "angular-mocks": "1.4.0",
+    "angular-sanitize": "1.4.0",
+    "html5-boilerplate": "5.2.0",
+    "i18next": "1.9.0",
+    "ng-i18next": "0.3.6"
+  },
+  "resolutions": {
+    "angular": "1.4.0"
   }
 }
