@@ -57,7 +57,7 @@ var createScene = function(engine, canvas, isVR) {
     // This attaches the camera to the canvas
     camera.attachControl(canvas, true);
 
-    BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-04.babylon", scene, function (newMeshes) {
+    BABYLON.SceneLoader.ImportMesh("", "models/", "help-1-05.babylon", scene, function (newMeshes) {
 
         //scene.debugLayer.show();
 
@@ -100,9 +100,15 @@ var createScene = function(engine, canvas, isVR) {
         generator.blurBoxOffset = 5;
 
 		var capKleur = new BABYLON.StandardMaterial("topkleur", scene);		
-		var kleurDiffuse = ['#FFFF00','#00FFFF','#00FF00','#FF00FF','#FF0000','#0000FF'];
-		var kleurEmissive = ['#666600','#006666','#006600','#660066','#660000','#000066'];
-		var kleurSpecular = ['#888800','#008888','#008800','#880088','#880000','#000088'];
+		//var kleurDiffuse = ['#FFFF00','#00FFFF','#00FF00','#FF00FF','#FF0000','#0000FF'];
+		var kleurDiffuse = ['#00FFFF','#FF0000','#00FF00','#FF00FF','#FFFF00','#0000FF'];
+		//var kleurEmissive = ['#666600','#006666','#006600','#660066','#660000','#000066'];
+		var kleurEmissive = ['#006666','#660000','#006600','#660066','#666600','#000066'];
+		//var kleurSpecular = ['#888800','#008888','#008800','#880088','#880000','#000088'];
+		var kleurSpecular = ['#008888','#880000','#008800','#880088','#888800','#000088'];
+		// cyaan, rood, groen, mangaan, geel, blauw
+		//groen-blauw, rood, groen, rood-blauw, rood-geel, blauw
+
 
 		for (var i = 0; i < newMeshes.length; i++) {
 			newMeshes[i].receiveShadows = false;
@@ -113,6 +119,7 @@ var createScene = function(engine, canvas, isVR) {
 		
 
         scene.onPointerDown = function (evt, pickResult) {
+			
             var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) {
                 return mesh !== ground;
             });
@@ -286,7 +293,7 @@ var createScene = function(engine, canvas, isVR) {
 					deler++;
 				}
 			}
-			console.log(camera.fov)
+			//console.log(camera.fov)
 			//auto scaling windows bij browser opening of rescale
 			var WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
 			var aspect = HEIGHT/WIDTH;

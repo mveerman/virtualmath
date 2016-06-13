@@ -56,7 +56,7 @@ function verstrekenTijd() {
 var createScene  = function(engine, canvas) {
     "use strict";
 
-        BABYLON.SceneLoader.Load('models/', 'help-2-04.babylon', engine, function (scene) {
+        BABYLON.SceneLoader.Load('models/', 'help-2-07.babylon', engine, function (scene) {
             scene.clearColor = new BABYLON.Color3(0.8, 0.8, 0.8);
 			//scene.debugLayer.show();
             var balNum = 1;
@@ -91,9 +91,17 @@ var createScene  = function(engine, canvas) {
             var startingPoint;
             var currentMesh;
             var latPos = [130, 154, 178, 200, 224, 246];
-			var kleurDiffuse = ['#FFFF00','#00FFFF','#00FF00','#FF00FF','#FF0000','#0000FF'];
-			var kleurEmissive = ['#555500','#005555','#005500','#550055','#550000','#000055'];
-			var kleurSpecular = ['#888800','#008888','#008800','#880088','#880000','#000088'];
+		
+						
+			//var kleurDiffuse = ['#FFFF00','#00FFFF','#00FF00','#FF00FF','#FF0000','#0000FF'];
+			var kleurDiffuse = ['#00FFFF','#FF0000','#00FF00','#FF00FF','#FFFF00','#0000FF'];
+			//var kleurEmissive = ['#666600','#006666','#006600','#660066','#660000','#000066'];
+			var kleurEmissive = ['#006666','#660000','#006600','#660066','#666600','#000066'];
+			//var kleurSpecular = ['#888800','#008888','#008800','#880088','#880000','#000088'];
+			var kleurSpecular = ['#008888','#880000','#008800','#880088','#888800','#000088'];
+			// cyaan, rood, groen, mangaan, geel, blauw
+			//groen-blauw, rood, groen, rood-blauw, rood-geel, blauw
+			
             var balWas = [];
             var kleurNum = 0;
         	var processing = false;
