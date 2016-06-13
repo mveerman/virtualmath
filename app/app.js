@@ -4,6 +4,7 @@
 angular.module('virtualMath', [
         'ngRoute',
         'ngTouch',
+        'ngSanitize',
         'virtualMath.start',
         'virtualMath.personalInfo',
         'virtualMath.intro',
