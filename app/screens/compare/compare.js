@@ -11,7 +11,7 @@ angular.module('virtualMath.compare', [
         });
     }])
 
-    .controller('CompareController', ['$scope', '$location', function ($scope, $location) {
+    .controller('CompareController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
         $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
         $scope.surveyData = $scope.$parent.surveyData;
         $scope.studentData = $scope.$parent.studentData;
@@ -36,6 +36,8 @@ angular.module('virtualMath.compare', [
         };
 
         $scope.storeData = function(studentData, surveyData, onSuccess) {
+
+            /*
             var mgrsURL = "../RemotingService.cfc?method=executeEvent&returnformat=json";
             var args = {};
             args.eventName = "entry.store";
@@ -55,6 +57,22 @@ angular.module('virtualMath.compare', [
                     alert("Something went wrong!!!!");
                 }
             });
+            */
+
+            var data = {
+                eventName: "entry.store",
+                returnValues: "result",
+                userInfo: studentData,
+                entryData: surveyData
+            };
+
+            $http.post("../RemotingService.cfc?method=executeEvent&returnformat=json", data)
+                .success(
+                    onSuccess
+                ).error(function(data, status, headers, config) {
+                    console.log(status + " " +  data);
+            });
+
         };
 
         $scope.startNewRun = function () {
