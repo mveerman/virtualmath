@@ -22,23 +22,23 @@
                 <id name="student_id" type="numeric" generate="true"/>
                 <property name="name" type="string"/>
                 <property name="age" type="numeric"/>
-                <property name="school" type="string"/>
+                <property name="schoolname" type="string"/>
                 <property name="schooltype" type="string"/>
                 <property name="schoollevel" type="numeric"/>
                 <property name="mathtype" type="string"/>
-                <onetomany name="entries">
-                    <link column="student_id" to="application.entries.student_id"/>
-                    <collection type="array">
-                        <order property="entry_id" order="asc"/>
-                    </collection>
-                </onetomany>
             </object>
             
             <!-- Entries object -->
             <object name="entries" table="ENTRIES">
                 <id name="entry_id" type="numeric" generate="true"/>
-                <property name="data" type="string" nullable="true"/>
-                <property name="score" type="numeric" nullable="true"/>
+                <property name="timestamp" type="date" />
+                <property name="data" type="string" nullable="false"/>
+                <property name="score" type="numeric" nullable="false"/>
+                <property name="help1shown" type="boolean" nullable="false"/>
+                <property name="help2shown" type="boolean" nullable="false"/>
+                <manytoone name="student">
+                  <link to="application.students" column="student_id"/>
+                </manytoone>
             </object>
 
             <object name="users" table="USERS">

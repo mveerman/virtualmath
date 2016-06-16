@@ -87,13 +87,15 @@
 
   <!-- Gateways-->
   <bean id="UserGateway" class="virtualmath.model.gateways.UserGateway" />
+  <bean id="EntriesGateway" class="virtualmath.model.gateways.EntriesGateway" />
 
-
+  <!-- POJO BEANS-->
   <bean id="UserInfoBean" class="virtualmath.model.beans.UserInfoBean" singleton="false">
     <property name="authenticated"><value>false</value></property>
     <property name="authorized"><value>false</value></property>
   </bean>
-
+  <bean id="StudentBean" class="virtualmath.model.beans.StudentBean" singleton="false" />
+  <bean id="EntryDataBean" class="virtualmath.model.beans.EntryDataBean" singleton="false" />
 
    <!-- ORM Framework Configuration -->
    <alias alias="ormAdapter" name="ormAdapter.Transfer" />

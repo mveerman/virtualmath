@@ -7,7 +7,7 @@
         student_id          NUMERIC NOT NULL,
         name                VARCHAR(255) NOT NULL,
         age                 NUMERIC NOT NULL,
-        school              VARCHAR(255),
+        schoolname          VARCHAR(255),
         schooltype          VARCHAR(50),
         schoollevel         NUMERIC,
         mathtype            VARCHAR(50),
@@ -20,8 +20,11 @@
     (
         entry_id                NUMERIC NOT NULL,
         student_id              NUMERIC NOT NULL,
-        data                    BLOB,
-        score                   NUMERIC,
+        data                    BLOB NOT NULL,
+        timestamp               DATETIME NOT NULL,
+        score                   NUMERIC NOT NULL,
+        help1shown              BOOLEAN default FALSE NOT NULL,
+        help2shown              BOOLEAN default FALSE NOT NULL,
         PRIMARY KEY (entry_id)
     )
     </cfquery>

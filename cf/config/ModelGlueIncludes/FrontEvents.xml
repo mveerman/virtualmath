@@ -1,11 +1,26 @@
 <modelglue>
 
+   <controllers>
+      <controller name="FrontControl" type="virtualmath.controller.FrontController">
+         <message-listener message="entry.store" function="storeEntry" />
+      </controller>
+   </controllers>
+
    <event-handlers>
 
       <event-handler name="front.home">
          <views>
             <include name="body" template="front/front.cfm"/>
          </views>
+      </event-handler>
+
+      <event-handler name="entry.store">
+         <broadcasts>
+           <message name="entry.store" />
+         </broadcasts>
+        <views>
+
+        </views>
       </event-handler>
 
    </event-handlers>
