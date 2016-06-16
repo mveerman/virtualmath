@@ -37,7 +37,7 @@ angular.module('virtualMath.compare', [
 
         $scope.storeData = function(studentData, surveyData, onSuccess) {
 
-            /*
+
             var mgrsURL = "../RemotingService.cfc?method=executeEvent&returnformat=json";
             var args = {};
             args.eventName = "entry.store";
@@ -57,8 +57,8 @@ angular.module('virtualMath.compare', [
                     alert("Something went wrong!!!!");
                 }
             });
-            */
 
+            /*
             var data = {
                 eventName: "entry.store",
                 returnValues: "result",
@@ -72,6 +72,7 @@ angular.module('virtualMath.compare', [
                 ).error(function(data, status, headers, config) {
                     console.log(status + " " +  data);
             });
+            */
 
         };
 
