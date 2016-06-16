@@ -6,7 +6,7 @@
   "start": {
     "welcome": "Welcome at the",
     "title": "Graphs of Dynamic Situations Virtual tool",
-    "p1": "This tool is designed to help you to understand graphs of dynamic relationships. The tool does this by making it more transparent relationships with concrete examples in Virtual Reality and by providing targeted feedback on the graph have drawn yourself.",
+    "p1": "This tool is designed to help you to understand graphs of dynamic relationships. The tool does this by illustrating these relationships with concrete examples in Virtual Reality and by providing targeted feedback on the graph you have drawn yourself.",
     "p2": "This is a proof of concept, which only works with a single example of a dynamic context.",
     "button": "Continue"
   },
@@ -26,15 +26,15 @@
   },
   "intro": {
     "p1": "You are now going to draw a graph of a dynamic relationship. You can do this on the screen using a mouse, stylus or finger.",
-    "p2": "Once you are satisfied with your graph your hand it in. You will receive specific feedback on your work.",
+    "p2": "Once you are satisfied with your graph you hand it in. You will receive specific feedback on your work.",
     "button": "Continue"
   },
   "assignments": {
     "title_assignment1": "Task A",
     "title_assignment2": "Task B",
-    "description": "Imagine that this bottle is filled with water, whereby the water flows at a constant speed.",
-    "questions_li1": "Sketch a graph in which you turn off the height of the water in the bottle compared to the amount of water in the bottle.",
-    "questions_li2": "Explain how you arrived at your answer.",
+    "description": "Imagine that this bottle is filled with water; the water flows at a constant speed.",
+    "questions_li1": "Sketch a graph in which you draw the height of the water in the bottle compared to the amount of water in the bottle.",
+    "questions_li2": "Explain your reasoning.",
     "label_graph": "Graph",
     "label_explanation": "Explanation"
   },
@@ -44,8 +44,8 @@
     "start": "Start help"
   },
   "compare": {
-    "title": "Compare and handing",
-    "p": "Compare the charts. Are you satisfied? Hand in the work than.",
+    "title": "Compare and hand in",
+    "p": "Compare the charts. Are you satisfied? If so, hand in your work.",
     "button_help1": "Help with exercise",
     "button_help2": "More help with exercise",
     "button_retry": "Try again",
@@ -53,15 +53,15 @@
   },
   "feedback": {
     "title": "Result",
-    "label_reward": "Your chart is part of the following item",
-    "switch_default": "You have not made ​​the excercise in the correct way.",
-    "switch_0": "You 're on your way to level 1 in that you help first and / or second relief have you tried to use when creating the chart. To reach the next levels, you should make the connection between to keep the height and volume of water and take into account the shape of the vase.",
-    "switch_1": "You have reached level 1: You have the relationship between the amount of water and can give the correct height in a graph in one of the two situations. To reach the next level you should make the connection not only between the height and volume of water, but you also have to consider the shape of the vase.",
-    "switch_2": "You have reached level 2; You are the link between the amount of water and can give informed in an appropriate graph in both situations.",
-    "without_help": "You have not made use of the tools offered",
-    "some_help": "You have not made ​​use of all the tools",
-    "all_help": "You have used all the tools",
-    "applied_help": "but you have tried to apply them"
+    "label_reward": "Your chart represents the following object",
+    "switch_default": "You failed the exercise.",
+    "switch_0": "You're on your way to level 1: You used help 1 and/or help 2 to assist you in sketching your graphs. To reach the next levels, you must figure out the relation between the height and volume of water given the shape of the vase.",
+    "switch_1": "You have reached level 1: You figured out the relation between the amount of water and the height in one of the two exercises. To reach the next level you should also consider the shape of the vases.",
+    "switch_2": "You have reached level 2; You figured out the relation between the amount of water and the height in both exercises.",
+    "without_help": "You have not used any of the help offered",
+    "some_help": "You have not used all the help offered",
+    "all_help": "You have used all the help offered",
+    "applied_help": "but you did try to apply it"
   },
   "axes": {
     "amount": "amount of water",
