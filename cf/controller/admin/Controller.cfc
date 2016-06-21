@@ -1,4 +1,4 @@
-<cfcomponent displayname="AdminController" extends="ModelGlue.gesture.controller.Controller" output="false">
+<cfcomponent displayname="Controller" extends="ModelGlue.gesture.controller.Controller" output="false">
 	
 	<cffunction name="onRequestStart" access="public" returnType="void" output="false">
 		<cfargument name="event" type="any" />
@@ -45,7 +45,7 @@
 			
 			<cfif event.exists("username") AND event.exists("password")>
 				<cftry>
-					<cfset session.adminUser = beans.AdminSecurityService.authenticate(event.getValue("username"), hash(event.getValue("password")))>
+					<cfset session.adminUser = beans.AdminSecurityService.authenticate(event.getValue("username"), beans.AdminSecurityService.saltPassword(event.getValue("password")))>
 					<cfset event.addResult("isauthenticated")>
 				<cfcatch type="UserAuthenticationError">
 					<cfset event.addResult("logininvalid")>

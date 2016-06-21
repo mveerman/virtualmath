@@ -1,9 +1,11 @@
 <cfscript>
+    secService = application._modelglue.getBean("AdminSecurityService");
+
     UserGW = application._modelglue.getBean("UserGateway");
     adminUser = UserGW.get();
     adminUser.setName("Administrator");
     adminUser.setUsername("admin");
-    adminUser.setPassword(hash("admin"));
+    adminUser.setPassword(secService.saltPassword("admin"));
     adminUser.setAdmin(true);
     adminUser.setTeacher(false);
     adminUser.setResearcher(false);
@@ -13,7 +15,7 @@
     teacher = UserGW.get();
     teacher.setName("Dummy teacher");
     teacher.setUsername("teacher");
-    teacher.setPassword(hash("teacher"));
+    teacher.setPassword(secService.saltPassword("teacher"));
     teacher.setAdmin(false);
     teacher.setTeacher(true);
     teacher.setResearcher(false);
@@ -23,7 +25,7 @@
     researcher = UserGW.get();
     researcher.setName("Dummy researcher");
     researcher.setUsername("researcher");
-    researcher.setPassword(hash("researcher"));
+    researcher.setPassword(secService.saltPassword("researcher"));
     researcher.setAdmin(false);
     researcher.setTeacher(false);
     researcher.setResearcher(true);

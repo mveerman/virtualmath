@@ -1,0 +1,75 @@
+<modelglue>
+  <controllers>
+    <controller name="AdminSystemControl" type="virtualmath.controller.admin.SystemController"
+                beans="AdminSecurityService">
+      <message-listener message="admin.system.preparepasswords" function="preparePasswords"/>
+    </controller>
+  </controllers>
+
+  <event-handlers defaultType="admin.AuthenticationEvent,admin.LayoutEvent">
+
+    <event-handler access="public" name="admin.system.usermanagement">
+      <broadcasts>
+        <message name="ModelGlue.genericList">
+          <argument name="criteria" value=""/>
+          <argument name="object" value="application.users"/>
+          <argument name="queryName" value="system.userQuery"/>
+        </message>
+      </broadcasts>
+      <views>
+        <view name="admin.body" template="admin/system/usermanagement/list.cfm">
+          <value name="xe.delete" overwrite="true" value="admin.system.usermanagement.delete"/>
+          <value name="xe.edit" overwrite="true" value="admin.system.usermanagement.edit"/>
+          <value name="xe.list" overwrite="true" value="admin.system.usermanagement"/>
+          <value name="xe.view" overwrite="true" value="admin.system.usermanagement.view"/>
+        </view>
+      </views>
+    </event-handler>
+
+    <event-handler access="public" name="admin.system.usermanagement.edit">
+      <broadcasts>
+        <message name="ModelGlue.genericRead">
+          <argument name="criteria" value="user_id"/>
+          <argument name="object" value="application.users"/>
+          <argument name="recordName" value="security.userRecord"/>
+        </message>
+      </broadcasts>
+      <views>
+        <view append="true" name="admin.body" template="admin/system/usermanagement/edit.cfm">
+          <value name="xe.commit" overwrite="true" value="admin.system.usermanagement.commit"/>
+          <value name="xe.list" overwrite="true" value="admin.system.usermanagement"/>
+        </view>
+      </views>
+    </event-handler>
+
+    <event-handler access="public" name="admin.system.usermanagement.commit">
+      <broadcasts>
+        <message name="admin.system.preparepasswords" />
+        <message name="ModelGlue.genericCommit">
+          <argument name="criteria" value="user_id"/>
+          <argument name="object" value="application.users"/>
+          <argument name="validationName" value="security.userValidation"/>
+          <argument name="recordName" value="security.userRecord"/>
+        </message>
+      </broadcasts>
+      <results>
+        <result name="commit" do="admin.system.usermanagement" preserveState="false" redirect="true"/>
+        <result name="validationError" do="admin.system.usermanagement.edit" preserveState="false" redirect="false"
+                append="user_id"/>
+      </results>
+    </event-handler>
+
+    <event-handler access="public" name="admin.system.usermanagement.delete">
+      <broadcasts>
+        <message name="ModelGlue.genericDelete">
+          <argument name="criteria" value="user_id"/>
+          <argument name="object" value="application.users"/>
+        </message>
+      </broadcasts>
+      <results>
+        <result do="admin.system.usermanagement" preserveState="false" redirect="true"/>
+      </results>
+    </event-handler>
+
+  </event-handlers>
+</modelglue>

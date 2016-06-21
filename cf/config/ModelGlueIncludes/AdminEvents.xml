@@ -1,14 +1,13 @@
 <modelglue>
 
   <controllers>
-    <controller name="AdminControl" type="virtualmath.controller.AdminController"
+    <controller name="AdminControl" type="virtualmath.controller.admin.Controller"
                 beans="AppConfig,AdminSecurityService">
       <message-listener message="checkAuthenticationStatus" function="isAuthenticated"/>
       <message-listener message="authenticate" function="doAuthentication"/>
       <message-listener message="admin.logout" function="doLogout"/>
       <message-listener message="userMustBeInRole" function="checkRole"/>
       <message-listener message="onRequestStart" function="onRequestStart"/>
-      <message-listener message="admin.home.getCounts" function="getCounts"/>
     </controller>
   </controllers>
 
@@ -61,23 +60,10 @@
 
   </event-handlers>
 
-  <!--  IP Restricted admin pages -->
-  <event-handlers defaultType="admin.IPrestrictEvent">
-
-  </event-handlers>
-
   <!-- Home events -->
   <event-handlers defaultType="admin.AuthenticationEvent,admin.LayoutEvent">
 
     <event-handler name="admin.home">
-      <!--<broadcasts>
-         <message name="ModelGlue.genericList">
-            <argument name="criteria" value=""/>
-            <argument name="object" value="general.year"/>
-            <argument name="queryName" value="general.yearQuery"/>
-         </message>
-         <message name="admin.home.getCounts"/>
-      </broadcasts>-->
       <views>
         <include name="admin.body" template="admin/home/home.cfm"/>
       </views>

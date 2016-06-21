@@ -70,6 +70,7 @@
 			<map>
 				<entry key="dsn"><value>virtualmath</value></entry>
         <entry key="version"><value>0.4</value></entry>
+        <entry key="saltkey"><value>kixRhubq4B8c1UbmuXq2eip2Kvi81ag4</value></entry>
 			</map>
 		</property>
 	</bean>
