@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="app/bower_components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="app/assets/css/main.css">
+    <link rel="stylesheet" href="css/admin.css">
     <!--[if lte IE 9]><link rel="stylesheet" href="app/assets/css/ie9.css" /><![endif]-->
     <link rel="stylesheet" href="app/app.css">
     <script src="app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>

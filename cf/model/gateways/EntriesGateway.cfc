@@ -41,7 +41,7 @@
                             var newAssignment = getOrmService().getTransfer().new("application.assignment");
                             newAssignment.setParentRun(newRun);
                             newAssignment.setAssignmentNumber(ai);
-                            newAssignment.setData(serializeJSON(runs[i]["assignment" & ai]));
+                            newAssignment.setData(charsetDecode(serializeJSON(runs[i]["assignment" & ai]), "utf-8"));
                             getOrmService().getTransfer().save(newAssignment);
                         }
 
@@ -55,6 +55,16 @@
                 </cfcatch>
             </cftry>
         </cftransaction>
+    </cffunction>
+
+    <cffunction access="public" name="list" returntype="query" output="false">
+        <cfargument name="teacher" type="numeric" required="false" />
+
+        <cfscript>
+            var Transfer = getOrmService().getTransfer();
+            var studentEntryQuery = Transfer.createQuery("from application.entry join application.student");
+            return Transfer.listByQuery(studentEntryQuery);
+        </cfscript>
     </cffunction>
 
 </cfcomponent>

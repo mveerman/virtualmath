@@ -2,7 +2,7 @@
 
 <!--- Create table version --->
 <cfquery datasource="#attributes.datasource#">
-create table DOCSYS_VERSION
+create table docsys_version
 (
     installedversion   NUMERIC(8,0)
 )

@@ -13,13 +13,13 @@
   </objectCache>
   <objectDefinitions>
     <package name="system">
-      <object name="version" table="DOCSYS_VERSION">
+      <object name="version" table="docsys_version">
         <id name="installedversion" type="numeric" generate="false"/>
       </object>
     </package>
 
-    <package name="application">
-      <object name="student" table="STUDENTS">
+    <package name="application" >
+      <object name="student" table="students">
         <id name="student_id" type="numeric" generate="true"/>
         <property name="name" type="string"/>
         <property name="age" type="numeric"/>
@@ -30,7 +30,7 @@
       </object>
 
       <!-- Entries object -->
-      <object name="entry" table="ENTRIES">
+      <object name="entry" table="entries">
         <id name="entry_id" type="numeric" generate="true"/>
         <property name="timestamp" type="date"/>
         <property name="score" type="numeric" nullable="false"/>
@@ -47,7 +47,7 @@
         </onetomany>
       </object>
 
-      <object name="run" table="ENTRYRUNS">
+      <object name="run" table="entryruns">
         <id name="run_id" type="numeric" generate="true"/>
         <property name="index" column="run_index" type="numeric" nullable="false"/>
         <property name="score" type="numeric" nullable="false"/>
@@ -61,13 +61,13 @@
         </onetomany>
       </object>
 
-      <object name="assignment" table="RUNASSIGNMENTS">
+      <object name="assignment" table="runassignments">
         <id name="assignment_id" type="numeric" generate="true"/>
         <property name="assignmentnumber" type="numeric" nullable="false"/>
-        <property name="data" type="string" nullable="false"/>
+        <property name="data" type="binary" nullable="false"/>
       </object>
 
-      <object name="users" table="USERS">
+      <object name="users" table="users">
         <id name="user_id" type="numeric" generate="true"/>
         <property name="name" type="string" nullable="false"/>
         <property name="username" type="string" nullable="false"/>

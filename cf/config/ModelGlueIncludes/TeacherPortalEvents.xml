@@ -1,0 +1,38 @@
+<modelglue>
+  <controllers>
+    <controller name="TeacherPortalController" type="virtualmath.controller.admin.TeacherPortalController"
+                beans="EntriesGateway">
+      <message-listener message="admin.teacherportal.list" function="getStudentEntriesForTeacher"/>
+    </controller>
+  </controllers>
+
+  <event-handlers defaultType="admin.LayoutEvent">
+
+    <event-handler access="public" name="admin.teacherportal.studentresults">
+      <broadcasts>
+        <message name="admin.teacherportal.list"/>
+      </broadcasts>
+      <views>
+        <view name="admin.body" template="admin/teacherportal/studentresults.cfm">
+          <value name="xe.view" overwrite="true" value="admin.teacherportal.studentresults.view"/>
+        </view>
+      </views>
+    </event-handler>
+
+    <event-handler access="public" name="admin.teacherportal.studentresults.view">
+      <broadcasts>
+        <message name="ModelGlue.genericRead">
+          <argument name="criteria" value="entry_id"/>
+          <argument name="object" value="application.entry"/>
+          <argument name="recordName" value="entryRecord"/>
+        </message>
+      </broadcasts>
+      <views>
+        <view append="true" name="admin.body" template="admin/teacherportal/view.cfm">
+          <value name="xe.list" overwrite="true" value="admin.teacherportal.studentresults"/>
+        </view>
+      </views>
+    </event-handler>
+
+  </event-handlers>
+</modelglue>
