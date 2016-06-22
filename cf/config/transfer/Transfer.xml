@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<transfer xsi:noNamespaceSchemaLocation="../../lib/Transfer/resources/xsd/transfer.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <objectCache>
-        <!--
-        'defaultcache' is the setting for all classes not specified by a 'cache' element. Here we have set the scope of all the objects to be cached in the
-        'instance', scope as an example. Instance scope is the default scope for caching, as changing the scope is generally not required. It simply means that
-        caching happens within the Transfer library itself, rather than a shared scope like application or session.
-        -->
-        <defaultcache>
-            <scope type="instance"/>
-        </defaultcache>
-    </objectCache>
-    <objectDefinitions>
-        <package name="system">
-            <object name="version" table="DOCSYS_VERSION">
-                <id name="installedversion" type="numeric" generate="false"/>
-            </object>
-        </package>
-        
-        <package name="application">
-            <object name="students" table="STUDENTS">
-                <id name="student_id" type="numeric" generate="true"/>
-                <property name="name" type="string"/>
-                <property name="age" type="numeric"/>
-                <property name="schoolname" type="string"/>
-                <property name="schooltype" type="string"/>
-                <property name="schoollevel" type="numeric"/>
-                <property name="mathtype" type="string"/>
-            </object>
-            
-            <!-- Entries object -->
-            <object name="entries" table="ENTRIES">
-                <id name="entry_id" type="numeric" generate="true"/>
-                <property name="timestamp" type="date" />
-                <property name="data" type="string" nullable="false"/>
-                <property name="score" type="numeric" nullable="false"/>
-                <property name="help1shown" type="boolean" nullable="false"/>
-                <property name="help2shown" type="boolean" nullable="false"/>
-                <manytoone name="student">
-                  <link to="application.students" column="student_id"/>
-                </manytoone>
-            </object>
+<transfer xsi:noNamespaceSchemaLocation="../../lib/Transfer/resources/xsd/transfer.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <objectCache>
+    <!--
+    'defaultcache' is the setting for all classes not specified by a 'cache' element. Here we have set the scope of all the objects to be cached in the
+    'instance', scope as an example. Instance scope is the default scope for caching, as changing the scope is generally not required. It simply means that
+    caching happens within the Transfer library itself, rather than a shared scope like application or session.
+    -->
+    <defaultcache>
+      <scope type="instance"/>
+    </defaultcache>
+  </objectCache>
+  <objectDefinitions>
+    <package name="system">
+      <object name="version" table="DOCSYS_VERSION">
+        <id name="installedversion" type="numeric" generate="false"/>
+      </object>
+    </package>
 
-            <object name="users" table="USERS">
-                <id name="user_id" type="numeric" generate="true"/>
-                <property name="name" type="string" nullable="false"/>
-                <property name="username" type="string" nullable="false"/>
-                <property name="password" type="string" nullable="false"/>
-                <property name="admin" type="boolean" nullable="false"/>
-                <property name="teacher" type="boolean" nullable="false"/>
-                <property name="researcher" type="boolean" nullable="false"/>
-            </object>
-            
-        </package>
-    </objectDefinitions>
+    <package name="application">
+      <object name="students" table="STUDENTS">
+        <id name="student_id" type="numeric" generate="true"/>
+        <property name="name" type="string"/>
+        <property name="age" type="numeric"/>
+        <property name="schoolname" type="string"/>
+        <property name="schooltype" type="string"/>
+        <property name="schoollevel" type="numeric"/>
+        <property name="mathtype" type="string"/>
+      </object>
+
+      <!-- Entries object -->
+      <object name="entries" table="ENTRIES">
+        <id name="entry_id" type="numeric" generate="true"/>
+        <property name="timestamp" type="date"/>
+        <property name="data" type="string" nullable="false"/>
+        <property name="score" type="numeric" nullable="false"/>
+        <property name="help1shown" type="boolean" nullable="false"/>
+        <property name="help2shown" type="boolean" nullable="false"/>
+        <manytoone name="student">
+          <link to="application.students" column="student_id"/>
+        </manytoone>
+      </object>
+
+      <object name="users" table="USERS">
+        <id name="user_id" type="numeric" generate="true"/>
+        <property name="name" type="string" nullable="false"/>
+        <property name="username" type="string" nullable="false"/>
+        <property name="password" type="string" nullable="false"/>
+        <property name="admin" type="boolean" nullable="false"/>
+        <property name="teacher" type="boolean" nullable="false"/>
+        <property name="researcher" type="boolean" nullable="false"/>
+      </object>
+
+    </package>
+  </objectDefinitions>
 </transfer>
