@@ -13,7 +13,8 @@
             <cfparam name="extractedData.runs[#extractedData.currentRun + 1#]" default="#StructNew()#">
             <cfparam name="extractedData.runs[#extractedData.currentRun + 1#].score" default="0">
 
-            <cfset setData(entryData)/>
+            <cfset setJsonData(entryData)/>
+            <cfset setData(extractedData)/>
             <cfset setScore(extractedData.runs[extractedData.currentRun + 1].score)/>
             <cfset setHelp1Shown(extractedData.help1Shown)/>
             <cfset setHelp2Shown(extractedData.help2Shown)/>
@@ -22,12 +23,21 @@
         <cfreturn this/>
     </cffunction>
 
+    <cffunction name="setJsonData" access="public" returntype="void">
+        <cfargument name="jsondata" type="string" required="true">
+        <cfset this.data.jsondata = jsondata>
+    </cffunction>
+
+    <cffunction name="getJsonData" access="public" returntype="string">
+        <cfreturn this.data.jsondata/>
+    </cffunction>
+
     <cffunction name="setData" access="public" returntype="void">
-        <cfargument name="data" type="string" required="true">
+        <cfargument name="data" type="struct" required="true">
         <cfset this.data.data = data>
     </cffunction>
 
-    <cffunction name="getData" access="public" returntype="string">
+    <cffunction name="getData" access="public" returntype="struct">
         <cfreturn this.data.data/>
     </cffunction>
 

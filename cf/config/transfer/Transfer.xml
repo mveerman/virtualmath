@@ -19,7 +19,7 @@
     </package>
 
     <package name="application">
-      <object name="students" table="STUDENTS">
+      <object name="student" table="STUDENTS">
         <id name="student_id" type="numeric" generate="true"/>
         <property name="name" type="string"/>
         <property name="age" type="numeric"/>
@@ -30,16 +30,41 @@
       </object>
 
       <!-- Entries object -->
-      <object name="entries" table="ENTRIES">
+      <object name="entry" table="ENTRIES">
         <id name="entry_id" type="numeric" generate="true"/>
         <property name="timestamp" type="date"/>
-        <property name="data" type="string" nullable="false"/>
         <property name="score" type="numeric" nullable="false"/>
         <property name="help1shown" type="boolean" nullable="false"/>
         <property name="help2shown" type="boolean" nullable="false"/>
         <manytoone name="student">
-          <link to="application.students" column="student_id"/>
+          <link to="application.student" column="student_id"/>
         </manytoone>
+        <onetomany name="EntryRun">
+          <link to="application.run" column="entry_id"/>
+          <collection type="array">
+            <order property="index" order="asc"/>
+          </collection>
+        </onetomany>
+      </object>
+
+      <object name="run" table="ENTRYRUNS">
+        <id name="run_id" type="numeric" generate="true"/>
+        <property name="index" column="run_index" type="numeric" nullable="false"/>
+        <property name="score" type="numeric" nullable="false"/>
+        <property name="help1shown" type="boolean" nullable="false"/>
+        <property name="help2shown" type="boolean" nullable="false"/>
+        <onetomany name="RunAssignment">
+          <link to="application.assignment" column="run_id"/>
+          <collection type="array">
+            <order property="assignmentnumber" order="asc"/>
+          </collection>
+        </onetomany>
+      </object>
+
+      <object name="assignment" table="RUNASSIGNMENTS">
+        <id name="assignment_id" type="numeric" generate="true"/>
+        <property name="assignmentnumber" type="numeric" nullable="false"/>
+        <property name="data" type="string" nullable="false"/>
       </object>
 
       <object name="users" table="USERS">
