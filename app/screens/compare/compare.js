@@ -61,21 +61,19 @@ angular.module('virtualMath.compare', [
             */
 
             var data = {
-                userInfo: studentData,
-                entryData: surveyData
+                'userInfo': studentData,
+                'entryData': surveyData
             };
 
             var params = {
                 eventName: "entry.store",
-                returnValues: "result",
-                userInfo: angular.toJson(studentData),
-                entryData: angular.toJson(surveyData)
+                returnValues: "result"
             };
 
             $http({
                 method: 'POST',
                 url: "../RemotingService.cfc?method=executeEvent&returnformat=json",
-                //data: data,
+                data: data,
                 params: params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
