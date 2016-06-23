@@ -4,8 +4,8 @@
     <cfset MAX_ASSIGNMENTS = 2>
 
     <cffunction access="public" name="store" returntype="void" output="false">
-        <cfargument name="user" type="virtualmath.model.beans.UserBean" required="true">
-        <cfargument name="data" type="virtualmath.model.beans.EntryDataBean" required="true">
+        <cfargument name="user" type="any" required="true">
+        <cfargument name="data" type="any" required="true">
 
         <cftransaction action="begin">
             <cftry>
