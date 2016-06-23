@@ -40,33 +40,35 @@
             <section class="databoard">
                 <ul>
                     <li>Kenmerk:&nbsp;#entryrecord.getEntry_id()#</li>
-                    <cfif entryrecord.getHelp1Shown()>
-                            <li class="green">Hulp 1 is gebruikt</li>
-                    <cfelse>
-                            <li class="red">Hulp 1 is niet gebruikt</li>
-                    </cfif>
-
-                    <cfif entryrecord.getHelp2Shown()>
-                            <li class="green">Hulp 2 is gebruikt</li>
-                    <cfelse>
-                            <li class="red">Hulp 2 is niet gebruikt</li>
-                    </cfif>
                 </ul>
             </section>
         </div>
         <div class="3u">
             <section class="scoreboard">
                 <div>
-                    <h4>Score</h4>
+                    <h4>Eindscore</h4>
                     <h1 class="big">#entryrecord.getScore()#</h1>
                 </div>
             </section>
+<div class="helpshown">
+    <cfif entryrecord.getHelp1Shown()>
+            <div class="helpblock green">Help 1 is getoond</div>
+    <cfelse>
+            <div class="helpblock red">Help 1 is niet getoond</div>
+    </cfif>
+
+    <cfif entryrecord.getHelp2Shown()>
+            <div class="helpblock green">Help 2 is getoond</div>
+    <cfelse>
+            <div class="helpblock red">Help 2 is niet getoond</div>
+    </cfif>
+</div>
         </div>
     </div>
     <cfset runs = entryRecord.getEntryRunArray()>
 <cfloop array="#runs#" index="run">
     <div class="row">
-        <div class="12u">
+        <div class="9u">
             <div class="runcontainer">
                 <h2>Poging #run.getIndex()#</h2>
                 <div class="assignments">
@@ -75,7 +77,7 @@
                 <cfset assignmentData = deserializeJSON(charsetencode(assignment.getData(), "utf-8"))>
                     <div class="assignmentcontainer">
                         <h3>Opgave #assignment.getAssignmentNumber()#</h3>
-                        <div class="answer">
+                        <div class="answer <cfif assignmentData.graphData.analysis.result>correct<cfelse>incorrect</cfif>">
                             <img src="#assignmentData.graphData.base64url#" width="100%">
                         </div>
                         <div class="caption">
@@ -85,19 +87,30 @@
                     </div>
             </cfloop>
                 </div>
-                <div class="helpshown">
-                    <cfif run.getHelp1Shown()>
-                        <div class="helpblock green">Help 1 is getoond</div>
-                    <cfelse>
-                        <div class="helpblock red">Help 1 is niet getoond</div>
-                    </cfif>
-                    <cfif run.getHelp2Shown()>
-                            <div class="helpblock green">Help 2 is getoond</div>
-                    <cfelse>
-                            <div class="helpblock red">Help 2 is niet getoond</div>
-                    </cfif>
-                </div>
+
             </div>
+        </div>
+        <div class="3u">
+            <section class="scoreboard">
+                <div>
+                    <h4>Score poging</h4>
+                    <h1 class="big">#run.getScore()#</h1>
+                </div>
+            </section>
+            <section>
+    <div class="helpshown">
+        <cfif run.getHelp1Shown()>
+                <div class="helpblock green">Help 1 is getoond</div>
+        <cfelse>
+                <div class="helpblock red">Help 1 is niet getoond</div>
+        </cfif>
+        <cfif run.getHelp2Shown()>
+                <div class="helpblock green">Help 2 is getoond</div>
+        <cfelse>
+                <div class="helpblock red">Help 2 is niet getoond</div>
+        </cfif>
+        </div>
+            </section>
         </div>
     </div>
 </cfloop>

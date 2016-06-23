@@ -37,6 +37,9 @@ table.studentinfo td {
     background-color: navy;
     padding: 3px;
 }
+.main-row .scoreboard {
+    margin-bottom: 15px;
+}
 
 .scoreboard h4 {
     padding: 5px;
@@ -49,4 +52,12 @@ table.studentinfo td {
     color: navy;
     background-color: lavender;
     text-align: center;
+}
+
+div.answer.correct {
+    border: 2px solid green;
+}
+
+div.answer.incorrect {
+    border: 2px solid red;
 }

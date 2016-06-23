@@ -44,7 +44,6 @@
                             newAssignment.setData(charsetDecode(serializeJSON(runs[i]["assignment" & ai]), "utf-8"));
                             getOrmService().getTransfer().save(newAssignment);
                         }
-
                     }
                 </cfscript>
 
