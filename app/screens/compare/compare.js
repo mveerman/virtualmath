@@ -11,7 +11,7 @@ angular.module('virtualMath.compare', [
         });
     }])
 
-    .controller('CompareController', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+    .controller('CompareController', ['$scope', '$location', '$http', '$httpParamSerializerJQLike', function ($scope, $location, $http, $httpParamSerializerJQLike) {
         $scope.currentRunData = $scope.$parent.getCurrentSurveyRunData();
         $scope.surveyData = $scope.$parent.surveyData;
         $scope.studentData = $scope.$parent.studentData;
@@ -47,22 +47,9 @@ angular.module('virtualMath.compare', [
             args.userInfo = angular.toJson(studentData);
             args.entryData = angular.toJson(surveyData);
 
-            /*
-            $.ajax({
-                type: "POST",
-                url: mgrsURL,
-                data: args,
-                dataType: "json",
-                success: onSuccess,
-                error: function() {
-                    alert("Something went wrong!!!!");
-                }
-            });
-            */
-
             var data = {
-                'userInfo': angular.toJson(studentData),
-                'entryData': angular.toJson(surveyData)
+                userInfo: angular.toJson(studentData),
+                entryData: angular.toJson(surveyData)
             };
 
             var params = {
@@ -73,17 +60,17 @@ angular.module('virtualMath.compare', [
             $http({
                 method: 'POST',
                 url: "../RemotingService.cfc?method=executeEvent&returnformat=json",
-                data: data,
+                data: $httpParamSerializerJQLike(data),
                 params: params,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }
             ).success(function() {
-                console.log('post successfull');
-                onSucces();
+                onSuccess();
             }).error(function(data, status, headers, config) {
                 console.log(status + " " +  data);
+                alert("Something went wrong. Please ask for assistance!!!!");
             });
 
         };
