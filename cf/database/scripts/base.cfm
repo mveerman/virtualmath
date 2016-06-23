@@ -1,6 +1,5 @@
 ﻿<cfsilent>
 
-    /* Create Tables */
     <cfquery datasource="#attributes.datasource#">
     CREATE TABLE users
     (
@@ -25,6 +24,7 @@
         schooltype          VARCHAR(50),
         schoollevel         NUMERIC,
         mathtype            VARCHAR(50),
+        teacher             VARCHAR(255),
         PRIMARY KEY (student_id)
     )
     </cfquery>
@@ -35,13 +35,11 @@
         entry_id                NUMERIC NOT NULL,
         student_id              NUMERIC NOT NULL,
         timestamp               DATETIME NOT NULL,
-        teacher                 NUMERIC,
         score                   NUMERIC NOT NULL,
         help1shown              BOOLEAN default FALSE NOT NULL,
         help2shown              BOOLEAN default FALSE NOT NULL,
         PRIMARY KEY (entry_id),
-        FOREIGN KEY (student_id) REFERENCES students(student_id),
-        FOREIGN KEY (teacher) REFERENCES users(user_id)
+        FOREIGN KEY (student_id) REFERENCES students(student_id)
     )
     </cfquery>
 

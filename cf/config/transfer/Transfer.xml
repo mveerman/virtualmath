@@ -27,6 +27,7 @@
         <property name="schooltype" type="string"/>
         <property name="schoollevel" type="numeric"/>
         <property name="mathtype" type="string"/>
+        <property name="teacher" type="string"/>
       </object>
 
       <!-- Entries object -->
