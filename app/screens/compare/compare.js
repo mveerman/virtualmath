@@ -39,13 +39,6 @@ angular.module('virtualMath.compare', [
 
 
             var mgrsURL = "../RemotingService.cfc?method=executeEvent&returnformat=json";
-            var args = {};
-            args.eventName = "entry.store";
-            args.returnValues = "result";
-
-            //Various additional variables to pass with this request
-            args.userInfo = angular.toJson(studentData);
-            args.entryData = angular.toJson(surveyData);
 
             var data = {
                 userInfo: angular.toJson(studentData),
@@ -59,7 +52,7 @@ angular.module('virtualMath.compare', [
 
             $http({
                 method: 'POST',
-                url: "../RemotingService.cfc?method=executeEvent&returnformat=json",
+                url: mgrsURL,
                 data: $httpParamSerializerJQLike(data),
                 params: params,
                 headers: {
