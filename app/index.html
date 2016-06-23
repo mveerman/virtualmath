@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="12u">
                     <header id="header">
-                        <h1>graphs of dynamic situations</h1><!-- {{ 'index.title' | i18next }} -->
+                        <h1>Interactive Virtual Math</h1><!-- {{ 'index.title' | i18next }} -->
                         <nav id="nav" class="student-name">
                             <a ng-if="initialized">{{ 'index.logged-in' | i18next }} {{studentData.name}}</a>
                             <span ng-click="changeLang('nl')" ng-class="{nl:'active'}[currentLang]">NL</span> | <span ng-click="changeLang('en')" ng-class="{en:'active'}[currentLang]">EN</span>
@@ -70,6 +70,9 @@
                 <div class="12u">
                     <div id="copyright">
                         &copy; HvA &ndash; ICT Services &ndash; O&O &mdash; VirtualMath: v<span app-version></span>
+                    </div>
+                    <div class="language-switch">
+                        <span ng-click="changeLang('nl')" ng-class="{nl:'active'}[currentLang]">NL</span> | <span ng-click="changeLang('en')" ng-class="{en:'active'}[currentLang]">EN</span>
                     </div>
                 </div>
             </div>
