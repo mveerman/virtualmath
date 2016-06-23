@@ -60,8 +60,8 @@ angular.module('virtualMath', [
                 var data = $scope.getCurrentSurveyRunData();
                 $scope.surveyData.lastScore = data.score;
                 score = data.score;
-                assignment1Data = data.assignment1;
-                assignment2Data = data.assignment2;
+                assignment1Data = angular.copy(data.assignment1);
+                assignment2Data = angular.copy(data.assignment2);
             }
             $scope.surveyData.runs.push({
                 score: score,
