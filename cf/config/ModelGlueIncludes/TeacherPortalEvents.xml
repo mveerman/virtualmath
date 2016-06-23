@@ -6,7 +6,7 @@
     </controller>
   </controllers>
 
-  <event-handlers defaultType="admin.LayoutEvent">
+  <event-handlers defaultType="admin.AuthenticationEvent,admin.AuthenticateRoleAsTeacher,admin.LayoutEvent">
 
     <event-handler access="public" name="admin.teacherportal.studentresults">
       <broadcasts>

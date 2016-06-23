@@ -76,20 +76,32 @@
 		<cfargument name="event" type="any" />
 		
 		<cfset var role="" />
-		<cfset var userroles = "">
-		<cfset var role_id = "">
-		
-		<cfloop list="#event.getArgument("role")#" index="role">
-			<cfset userroles = session.adminUser.getRoleStruct()>
-			<cfloop collection="#userroles#" item="role_id">
-				<cfif userroles[role_id].getRoleKey() eq role>
-					<cfreturn />
-				</cfif>
-			</cfloop>
+		<cfset var result = false />
+
+        <cfloop list="#event.getArgument("role")#" index="role">
+            <cfswitch expression="#role#">
+                <cfcase value="sysadmin,admin">
+                    <cfif event.getValue("isAdministrator")>
+                        <cfset result = true>
+                    </cfif>
+                </cfcase>
+                <cfcase value="researcher">
+                    <cfif event.getValue("isResearcher")>
+                        <cfset result = true>
+                    </cfif>
+                </cfcase>
+                <cfcase value="teacher">
+                    <cfif event.getValue("isTeacher")>
+                        <cfset result = true>
+                    </cfif>
+                </cfcase>
+            </cfswitch>
 		</cfloop>
 		
 		<!--- If not returned the user does not match any role --->
-		<cfset event.addResult("SecurityViolation") />
+        <cfif not result>
+            <cfset event.addResult("AuthorizationFailed") />
+        </cfif>
 				
 	</cffunction>
 

@@ -6,7 +6,7 @@
     </controller>
   </controllers>
 
-  <event-handlers defaultType="admin.AuthenticationEvent,admin.LayoutEvent">
+  <event-handlers defaultType="admin.AuthenticationEvent,admin.AuthenticateRoleAsAdmin,admin.LayoutEvent">
 
     <event-handler access="public" name="admin.system.usermanagement">
       <broadcasts>

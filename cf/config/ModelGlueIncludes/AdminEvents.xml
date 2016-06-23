@@ -40,6 +40,45 @@
       </before>
     </event-type>
 
+    <event-type name="admin.AuthenticateRoleAsAdmin">
+      <before>
+        <broadcasts>
+          <message name="userMustBeInRole">
+            <argument name="role" value="sysadmin"/>
+          </message>
+        </broadcasts>
+        <results>
+          <result name="AuthorizationFailed" do="admin.notAuthorized" redirect="true"/>
+        </results>
+      </before>
+    </event-type>
+
+    <event-type name="admin.AuthenticateRoleAsTeacher">
+      <before>
+        <broadcasts>
+          <message name="userMustBeInRole">
+            <argument name="role" value="teacher,sysadmin"/>
+          </message>
+        </broadcasts>
+        <results>
+          <result name="AuthorizationFailed" do="admin.notAuthorized" redirect="true"/>
+        </results>
+      </before>
+    </event-type>
+
+    <event-type name="admin.AuthenticateRoleAsResearcher">
+      <before>
+        <broadcasts>
+          <message name="userMustBeInRole">
+            <argument name="role" value="researcher,sysadmin"/>
+          </message>
+        </broadcasts>
+        <results>
+          <result name="AuthorizationFailed" do="admin.notAuthorized" redirect="true"/>
+        </results>
+      </before>
+    </event-type>
+
   </event-types>
 
   <!-- Unrestricted admin pages -->
@@ -66,6 +105,12 @@
     <event-handler name="admin.home">
       <views>
         <include name="admin.body" template="admin/home/home.cfm"/>
+      </views>
+    </event-handler>
+
+    <event-handler name="admin.notAuthorized">
+      <views>
+        <include name="admin.body" template="admin/unauthorized.cfm"/>
       </views>
     </event-handler>
   </event-handlers>
