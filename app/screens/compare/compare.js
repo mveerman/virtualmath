@@ -67,15 +67,18 @@ angular.module('virtualMath.compare', [
                 entryData: surveyData
             };
 
-            $http.post("../RemotingService.cfc?method=executeEvent&returnformat=json", data)
-                .success(function() {
-                    console.log('post successfull');
-                    onSucces();
-                }
-                ).error(function(data, status, headers, config) {
-                    console.log(status + " " +  data);
+            $http({
+                method: 'POST',
+                url: "../RemotingService.cfc?method=executeEvent&returnformat=json",
+                data: data,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }
+            ).success(function() {
+                console.log('post successfull');
+                onSucces();
+            }).error(function(data, status, headers, config) {
+                console.log(status + " " +  data);
             });
-
 
         };
 
