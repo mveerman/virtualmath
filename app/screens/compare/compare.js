@@ -47,6 +47,7 @@ angular.module('virtualMath.compare', [
             args.userInfo = angular.toJson(studentData);
             args.entryData = angular.toJson(surveyData);
 
+            /*
             $.ajax({
                 type: "POST",
                 url: mgrsURL,
@@ -57,8 +58,8 @@ angular.module('virtualMath.compare', [
                     alert("Something went wrong!!!!");
                 }
             });
+            */
 
-            /*
             var data = {
                 eventName: "entry.store",
                 returnValues: "result",
@@ -67,12 +68,14 @@ angular.module('virtualMath.compare', [
             };
 
             $http.post("../RemotingService.cfc?method=executeEvent&returnformat=json", data)
-                .success(
-                    onSuccess
+                .success(function() {
+                    console.log('post successfull');
+                    onSucces();
+                }
                 ).error(function(data, status, headers, config) {
                     console.log(status + " " +  data);
             });
-            */
+
 
         };
 
