@@ -30,8 +30,8 @@
 
                 <cfloop query="system.userQuery">
                 <tr>
-                    <td><a href="#viewEvent#&user_id=#system.userQuery.user_id#">#system.userQuery.username#</a></td>
-                    <td><a href="#viewEvent#&user_id=#system.userQuery.user_id#">#system.userQuery.name#</a></td>
+                    <td><a href="#editEvent#&user_id=#system.userQuery.user_id#">#system.userQuery.username#</a></td>
+                    <td><a href="#editEvent#&user_id=#system.userQuery.user_id#">#system.userQuery.name#</a></td>
                     <td><input type="checkbox" disabled<cfif system.userQuery.admin> checked</cfif>></td>
                     <td><input type="checkbox" disabled<cfif system.userQuery.teacher> checked</cfif>></td>
                     <td><input type="checkbox" disabled<cfif system.userQuery.researcher> checked</cfif>></td>
