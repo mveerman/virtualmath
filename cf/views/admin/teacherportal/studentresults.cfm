@@ -25,7 +25,7 @@
 
                 <cfloop query="teacherPortal.entries">
                 <tr>
-                    <td>#DateTimeFormat(teacherPortal.entries.timestamp, "long")#</td>
+                    <td>#DateFormat(teacherPortal.entries.timestamp, "YYYY-MM-DD")# #LSTimeFormat(teacherPortal.entries.timestamp, "HH:MM:ss")#</td>
                     <td>#teacherPortal.entries.name#</td>
                     <td>#teacherPortal.entries.schoolname#</td>
                     <td>#teacherPortal.entries.score#</td>
