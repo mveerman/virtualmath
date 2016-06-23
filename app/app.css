@@ -265,3 +265,11 @@ textarea {
 .active {
     color: white;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.language-switch {
+    text-align: center;
+}

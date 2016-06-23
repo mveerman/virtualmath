@@ -31,7 +31,7 @@
                         <h1>Interactive Virtual Math</h1><!-- {{ 'index.title' | i18next }} -->
                         <nav id="nav" class="student-name">
                             <a ng-if="initialized">{{ 'index.logged-in' | i18next }} {{studentData.name}}</a>
-                            <span ng-click="changeLang('nl')" ng-class="{nl:'active'}[currentLang]">NL</span> | <span ng-click="changeLang('en')" ng-class="{en:'active'}[currentLang]">EN</span>
+                            <span ng-click="changeLang('nl')" ng-class="{nl:'active', en: 'pointer'}[currentLang]">NL</span> | <span ng-click="changeLang('en')" ng-class="{en:'active', nl: 'pointer'}[currentLang]">EN</span>
                         </nav>
                         <!--<nav id="nav">
                             <a href="#/start">Aanmelden</a>
@@ -72,7 +72,7 @@
                         &copy; HvA &ndash; ICT Services &ndash; O&O &mdash; VirtualMath: v<span app-version></span>
                     </div>
                     <div class="language-switch">
-                        <span ng-click="changeLang('nl')" ng-class="{nl:'active'}[currentLang]">NL</span> | <span ng-click="changeLang('en')" ng-class="{en:'active'}[currentLang]">EN</span>
+                        <span ng-click="changeLang('nl')" ng-class="{nl:'active', en:'pointer'}[currentLang]">NL</span> | <span ng-click="changeLang('en')" ng-class="{en:'active', nl:'pointer'}[currentLang]">EN</span>
                     </div>
                 </div>
             </div>
