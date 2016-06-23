@@ -61,7 +61,7 @@
 
         <cfscript>
             var Transfer = getOrmService().getTransfer();
-            var studentEntryQuery = Transfer.createQuery("from application.entry join application.student");
+            var studentEntryQuery = Transfer.createQuery("from application.entry join application.student order by application.entry.timestamp desc");
             return Transfer.listByQuery(studentEntryQuery);
         </cfscript>
     </cffunction>

@@ -1,17 +1,20 @@
 <cfsilent>
-    <cfset viewState.copyToScope(variables, "isTeacher,myself,teacherPortal.entries,xe.view")>
+    <cfset viewState.copyToScope(variables, "isTeacher,myself,teacherPortal.entries,xe.view,xe.list")>
+    <cfset variables.listEvent = myself & xe.list  />
     <cfset variables.viewEvent = myself & xe.view  />
 </cfsilent>
 
 <cfoutput><div class="container">
     <div class="row main-row">
-        <div class="12u">
-            <section>
+        <div class="9u">
                 <h3>Lerarenportaal</h3>
                 <p>
                     Bekijk hier alle ingediende opgaven
                 </p>
-            </section>
+                <hr />
+        </div>
+        <div class="3u">
+                <a href="#listEvent#"><button><img src="img/icons/arrow_circle_double.png"> Verversen</button></a>
         </div>
         <div class="12u">
             <table width="100%">
