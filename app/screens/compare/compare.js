@@ -61,8 +61,8 @@ angular.module('virtualMath.compare', [
             */
 
             var data = {
-                'userInfo': studentData,
-                'entryData': surveyData
+                'userInfo': angular.toJson(studentData),
+                'entryData': angular.toJson(surveyData)
             };
 
             var params = {
