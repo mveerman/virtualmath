@@ -1,5 +1,5 @@
 function GUIManager() {
-    var vm = this;
+    var vm = this, noSleep = new NoSleep();
 
     function callOneIfExists(element, methods) {
         methods.some(function (method) {
@@ -12,10 +12,12 @@ function GUIManager() {
 
     function goFullScreen() {
         callOneIfExists(document.documentElement, ['requestFullscreen', 'webkitRequestFullscreen', 'mozRequestFullScreen', 'msRequestFullscreen']);
+        noSleep.enable();
     }
 
     function goWindowedScreen() {
         callOneIfExists(document, ['exitFullscreen', 'webkitExitFullscreen', 'mozCancelFullScreen', 'msExitFullscreen']);
+        noSleep.disable();
     }
 
     vm.isVRCameraSelected = false;
