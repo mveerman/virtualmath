@@ -39,9 +39,13 @@
     "label_explanation": "Uitleg"
   },
   "help": {
+    "title": "Help",
+    "p": "Hulp bij de oefening",
     "title_help1": "Help",
     "title_help2": "Help 2",
-    "start": "Start de hulp"
+    "start": "Start de hulp",
+    "start_help1": "Start help 1",
+    "start_help2": "Start help 2"
   },
   "compare": {
     "title": "Vergelijken en inleveren",

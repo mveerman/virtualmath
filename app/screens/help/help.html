@@ -1,0 +1,29 @@
+<div class="container" ng-controller="HelpController" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="12u 12u(mobile)">
+            <section>
+                <h2>{{ 'help.title' | i18next }}</h2>
+                <p>
+                    {{ 'help.p' | i18next }}
+                </p>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="12u">
+            <section>
+                <a href="/Babylon/help1-3d.html" class="button" target="_blank">{{ 'help.start_help1' | i18next }}</a>
+                <a href="/Babylon/help2.html" class="button" target="_blank">{{ 'help.start_help2' | i18next }}</a>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="12u">
+            <section>
+                <button type="submit" class="button"
+                        ng-click="advanceToNextPage()">{{ 'generic.next' | i18next }}
+                </button>
+            </section>
+        </div>
+    </div>
+</div>

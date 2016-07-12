@@ -39,9 +39,13 @@
     "label_explanation": "Explanation"
   },
   "help": {
+    "title": "Help",
+    "p": "Help with the exercise",
     "title_help1": "Help",
     "title_help2": "Help 2",
-    "start": "Start help"
+    "start": "Start help",
+    "start_help1": "Start help 1",
+    "start_help2": "Start help 2"
   },
   "compare": {
     "title": "Compare and hand in",

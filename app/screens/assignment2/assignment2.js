@@ -37,12 +37,7 @@ angular.module('virtualMath.assignment2', [
         };
 
         $scope.advanceToNextPage = function() {
-            if ($scope.surveyController.getCurrentSurveyRunData().score <= 0) {
-                $scope.setHelp1Shown();
-                $location.path('/help1');
-            }else {
-                $location.path('/compare');
-            }
+            $location.path('/help');
         };
 
         $scope.functionInput = angular.module('virtualMath.vmath-function-input-directive');

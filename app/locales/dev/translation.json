@@ -39,9 +39,13 @@
     "label_explanation": "assignments.label_explanation"
   },
   "help": {
+    "title": "help.title",
+    "p": "help.p",
     "title_help1": "help.title_help1",
     "title_help2": "help.title_help2",
-    "start": "help.start"
+    "start": "help.start",
+    "start_help1": "help.start_help1",
+    "start_help2": "help.start_help2"
   },
   "compare": {
     "title": "compare.title",
