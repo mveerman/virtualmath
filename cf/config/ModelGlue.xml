@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modelglue>
-   <config>
-      <setting name="viewMappings" value="/virtualmath/view"/>
-      <setting name="dsn" value="virtualmath"/>
-   </config>
+  <config>
+    <setting name="viewMappings" value="/virtualmath/view"/>
+    <setting name="dsn" value="virtualmath"/>
+  </config>
 
-   <include template="/virtualmath/config/ModelGlueIncludes/GeneralEvents.xml"/>
-   <include template="/virtualmath/config/ModelGlueIncludes/FrontEvents.xml"/>
-   <include template="/virtualmath/config/ModelGlueIncludes/AdminEvents.xml"/>
-   <include template="/virtualmath/config/ModelGlueIncludes/TeacherPortalEvents.xml"/>
-   <include template="/virtualmath/config/ModelGlueIncludes/SystemEvents.xml"/>
+  <include template="/virtualmath/config/ModelGlueIncludes/GeneralEvents.xml"/>
+  <include template="/virtualmath/config/ModelGlueIncludes/FrontEvents.xml"/>
+  <include template="/virtualmath/config/ModelGlueIncludes/AdminEvents.xml"/>
+  <include template="/virtualmath/config/ModelGlueIncludes/TeacherPortalEvents.xml"/>
+  <include template="/virtualmath/config/ModelGlueIncludes/ResearchPortalEvents.xml"/>
+  <include template="/virtualmath/config/ModelGlueIncludes/SystemEvents.xml"/>
 
-   <controllers>
-      <controller name="MyController" type="virtualmath.controller.Controller">
-         <message-listener message="OnRequestStart" function="OnRequestStart"/>
-         <message-listener message="OnQueueComplete" function="OnQueueComplete"/>
-         <message-listener message="OnRequestEnd" function="OnRequestEnd"/>
-      </controller>
-   </controllers>
-   
+  <controllers>
+    <controller name="MyController" type="virtualmath.controller.Controller">
+      <message-listener message="OnRequestStart" function="OnRequestStart"/>
+      <message-listener message="OnQueueComplete" function="OnQueueComplete"/>
+      <message-listener message="OnRequestEnd" function="OnRequestEnd"/>
+    </controller>
+  </controllers>
+
 </modelglue>
 

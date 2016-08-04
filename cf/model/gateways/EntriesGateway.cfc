@@ -66,4 +66,96 @@
         </cfscript>
     </cffunction>
 
+    <cffunction access="public" name="search" returntype="query" output="false">
+        <cfargument name="searchFormBean" type="virtualmath.model.beans.ResearchPortalSearchFormBean" required="true" />
+
+        <cfscript>
+            var Transfer = getOrmService().getTransfer();
+            var params = StructNew();
+            var qs = "from application.entry join application.student";
+            if (searchFormBean.getRun() neq "") {
+                qs = "from application.run join application.entry join application.student";
+            }
+            qs = qs & " where application.entry.entry_id is not null";
+            if (searchFormBean.getCode() neq "") {
+                qs = qs & " and application.entry.entry_id = :code";
+                params["code"]=searchFormBean.getCode();
+            }
+            if (searchFormBean.getDateStart() neq "") {
+                qs = qs & " and application.entry.timestamp >= :dateStart";
+                params["dateStart"]=searchFormBean.getDateStart();
+            }
+            if (searchFormBean.getDateEnd() neq "") {
+                qs = qs & " and application.entry.timestamp < :dateEnd";
+                params["dateEnd"]=searchFormBean.getDateEnd();
+            }
+            if (searchFormBean.getAgeStart() neq "") {
+                qs = qs & " and application.student.age >= :ageStart";
+                params["ageStart"]=searchFormBean.getAgeStart();
+            }
+            if (searchFormBean.getAgeEnd() neq "") {
+                qs = qs & " and application.student.age <= :ageEnd";
+                params["ageEnd"]=searchFormBean.getAgeEnd();
+            }
+            if (searchFormBean.getSchoolName() neq "") {
+                qs = qs & " and application.student.schoolname = :schoolName";
+                params["schoolName"]=searchFormBean.getSchoolName();
+            }
+            if (searchFormBean.getSchoolType() neq "") {
+                qs = qs & " and application.student.schooltype = :schoolType";
+                params["schoolType"]=searchFormBean.getSchoolType();
+            }
+            if (searchFormBean.getSchoolYear() neq "") {
+                qs = qs & " and application.student.schoollevel = :schoolYear";
+                params["schoolYear"]=searchFormBean.getSchoolYear();
+            }
+            if (searchFormBean.getMathType() neq "") {
+                qs = qs & " and application.student.mathtype = :mathType";
+                params["mathType"]=searchFormBean.getMathType();
+            }
+            if (searchFormBean.getRun() neq "") {
+                qs = qs & " and application.run.run_index = :run";
+                params["run"]=searchFormBean.getRun();
+            }
+            if (searchFormBean.getLevelStart() neq "") {
+                if (searchFormBean.getRun() neq "") {
+                    qs = qs & " and application.run.run_score >= :levelStart";
+                } else {
+                    qs = qs & " and application.entry.score >= :levelStart";
+                }
+                params["levelStart"]=searchFormBean.getLevelStart();
+            }
+            if (searchFormBean.getLevelEnd() neq "") {
+                if (searchFormBean.getRun() neq "") {
+                    qs = qs & " and application.run.run_score <= :levelEnd";
+                } else {
+                    qs = qs & " and application.entry.score <= :levelEnd";
+                }
+                params["levelEnd"]=searchFormBean.getLevelEnd();
+            }
+            if (searchFormBean.getHelp1Used() neq "") {
+                if (searchFormBean.getRun() neq "") {
+                    qs = qs & " and application.run.run_help1shown = :help1Used";
+                } else {
+                    qs = qs & " and application.entry.help1shown = :help1Used";
+                }
+                params["help1Used"]=iif(searchFormBean.getHelp1Used(), 1, 0);
+            }
+            if (searchFormBean.getHelp2Used() neq "") {
+                if (searchFormBean.getRun() neq "") {
+                    qs = qs & " and application.run.run_help2shown = :help2Used";
+                } else {
+                    qs = qs & " and application.entry.help2shown = :help2Used";
+                }
+                params["help2Used"]=iif(searchFormBean.getHelp2Used(), 1, 0);
+            }
+            qs = qs & " order by application.entry.timestamp desc";
+            var searchQuery = Transfer.createQuery(qs);
+            for (param in params) {
+                searchQuery.setParam(param, params[param]);
+            }
+            return Transfer.listByQuery(searchQuery);
+        </cfscript>
+    </cffunction>
+
 </cfcomponent>

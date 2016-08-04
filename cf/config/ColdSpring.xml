@@ -5,7 +5,7 @@
 
    	<!-- Be sure to change these to false when you go to production! -->
    	<property name="reload"><value>true</value></property>
-   	<property name="debug"><value>false</value></property>
+   	<property name="debug"><value>true</value></property>
 
    	<!-- Name of the URL variable that states which event-handler to run -->
    	<property name="eventValue"><value>event</value></property>
@@ -97,6 +97,10 @@
   </bean>
   <bean id="StudentBean" class="virtualmath.model.beans.StudentBean" singleton="false" />
   <bean id="EntryDataBean" class="virtualmath.model.beans.EntryDataBean" singleton="false" />
+  <bean id="ResearchPortalSearchFormBean" class="virtualmath.model.beans.ResearchPortalSearchFormBean" singleton="false" />
+  <bean id="ResearchPortalSearchResultBean" class="virtualmath.model.beans.ResearchPortalSearchResultBean" singleton="false">
+    <property name="pageSize"><value>20</value></property>
+  </bean>
 
    <!-- ORM Framework Configuration -->
    <alias alias="ormAdapter" name="ormAdapter.Transfer" />

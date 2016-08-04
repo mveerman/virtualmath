@@ -43,17 +43,17 @@
         <onetomany name="EntryRun">
           <link to="application.run" column="entry_id"/>
           <collection type="array">
-            <order property="index" order="asc"/>
+            <order property="run_index" order="asc"/>
           </collection>
         </onetomany>
       </object>
 
       <object name="run" table="entryruns">
         <id name="run_id" type="numeric" generate="true"/>
-        <property name="index" column="run_index" type="numeric" nullable="false"/>
-        <property name="score" type="numeric" nullable="false"/>
-        <property name="help1shown" type="boolean" nullable="false"/>
-        <property name="help2shown" type="boolean" nullable="false"/>
+        <property name="run_index" column="run_index" type="numeric" nullable="false"/>
+        <property name="run_score" column="score" type="numeric" nullable="false"/>
+        <property name="run_help1shown" column="help1shown" type="boolean" nullable="false"/>
+        <property name="run_help2shown" column="help2shown" type="boolean" nullable="false"/>
         <onetomany name="RunAssignment">
           <link to="application.assignment" column="run_id"/>
           <collection type="array">

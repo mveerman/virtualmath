@@ -61,3 +61,103 @@ div.answer.correct {
 div.answer.incorrect {
     border: 2px solid red;
 }
+
+.rp-results {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #007294;
+}
+
+.rp-results .first-column {
+    width: 40px;
+    color: #fff;
+    background-color: #007294;
+}
+
+.rp-results .last-column {
+    width: 100px;
+    color: #fff;
+    background-color: #007294;
+}
+
+.rp-results .last-column a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+.rp-results .last-column a:hover {
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.rp-results .row-even .last-column a:hover {
+    color: #fdf5ce;
+}
+
+.rp-results .row-odd .last-column a:hover {
+    color: #c7e3fe;
+}
+
+.rp-results .header {
+    background-color: #007294;
+}
+.rp-results .header > * {
+    padding: 8px;
+    color: #fff;
+    text-align: left;
+}
+
+.rp-results .row-odd {
+    background-color: #c7e3fe;
+}
+
+.rp-results .row-even {
+    background-color: #fdf5ce;
+}
+
+.rp-results td {
+    padding: 8px;
+}
+
+.rp-results-none {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.rp-pagination,
+.rp-results-container {
+    margin-bottom: 1em;
+    position: relative;
+}
+
+.rp-pagination {
+    height: 30px;
+    font-size: 0.9em;
+}
+
+.rp-pagination .total {
+    font-size: 0.9em;
+}
+
+.rp-pagination .page-navigation {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.rp-pagination .page-navigation input {
+    border: none;
+    background-color: transparent;
+    color: #007294;
+    padding: 0 1em;
+    font-size: 0.9em;
+}
+
+.rp-pagination .page-navigation input[disabled] {
+    color: #fff;
+}
+
+.rp-pagination .page-navigation input:active {
+    color: #fff;
+    background-color: #007294;
+}

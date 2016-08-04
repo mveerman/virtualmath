@@ -8,8 +8,8 @@
     <div class="row main-row">
         <div class="12u">
             <section>
-                <h3>Lerarenportaal</h3>
-                <div id="breadcrumb"><a href="#listEvent#">Ingediende resultaten</a> / Bekijk opgaven</div>
+                <h3>Researchportaal</h3>
+                <hr>
             </section>
         </div>
         <div class="6u">
@@ -17,7 +17,7 @@
                 <table width="100%" class="studentinfo">
                 <tr>
                     <th>Naam:&nbsp;</th>
-                    <td>#entryRecord.getStudent().getName()#</td>
+                    <td><cfif isTeacher>#entryRecord.getStudent().getName()#<cfelse>[...]</cfif></td>
                     <td>&nbsp;</td>
                     <th>Leeftijd:&nbsp;</th>
                     <td>#entryRecord.getStudent().getAge()#</td>

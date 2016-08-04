@@ -1,0 +1,38 @@
+<modelglue>
+  <controllers>
+    <controller name="ResearchPortalController" type="virtualmath.controller.admin.ResearchPortalController"
+                beans="EntriesGateway">
+      <message-listener message="admin.researchportal.search" function="search"/>
+    </controller>
+  </controllers>
+
+  <event-handlers defaultType="admin.AuthenticationEvent,admin.AuthenticateRoleAsResearch,admin.LayoutEvent">
+
+    <event-handler access="public" name="admin.researchportal.search">
+      <broadcasts>
+        <message name="admin.researchportal.search"/>
+      </broadcasts>
+      <views>
+        <view name="admin.researchportal.search.pagination" template="admin/researchportal/pagination.cfm" />
+        <view name="admin.researchportal.search.results" template="admin/researchportal/results.cfm">
+          <value name="xe.view" overwrite="true" value="admin.researchportal.search.view"/>
+        </view>
+        <view name="admin.body" template="admin/researchportal/search.cfm" />
+      </views>
+    </event-handler>
+
+    <event-handler access="public" name="admin.researchportal.search.view">
+      <broadcasts>
+        <message name="ModelGlue.genericRead">
+          <argument name="criteria" value="entry_id"/>
+          <argument name="object" value="application.entry"/>
+          <argument name="recordName" value="entryRecord"/>
+        </message>
+      </broadcasts>
+      <views>
+        <view append="true" name="admin.body" template="admin/researchportal/view.cfm" />
+      </views>
+    </event-handler>
+
+  </event-handlers>
+</modelglue>
