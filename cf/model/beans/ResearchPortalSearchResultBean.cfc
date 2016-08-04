@@ -16,14 +16,6 @@ component accessors="true" {
         return this;
     }
 
-    this.tag = {
-        pageSize: 10,
-        resultQuery: QueryNew(""),
-        currentPage: 1,
-        nextPage: false,
-        previousPage: false
-    };
-
     public numeric function getPageSize() {
         return max(variables.pageSize, 1);
     }
