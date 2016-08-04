@@ -1,13 +1,13 @@
 {
   "index": {
-    "title": "graphs of dynamic situations",
+    "title": "Interactive Virtual Math",
     "logged-in": "Aangemeld als"
   },
   "start": {
     "welcome": "Welkom bij de",
-    "title": "Graphs of Dynamic Situations Virtual tool",
-    "p1": "Deze tool is bedoeld om je te helpen om grafieken van dynamische relaties te begrijpen. De tool doet dit door deze relaties inzichtelijk te maken met concrete voorbeelden in Virtual Reality en door gericht feedback te geven op de grafiek die je zelf hebt getekend.",
-    "p2": "Dit is een proof of concept, waardoor alleen maar met één enkel voorbeeld van een dynamische context wordt gewerkt.",
+    "title": "demo van Interactive Virtual Math",
+    "p1": "In deze applicatie maak je één opgave.",
+    "p2": "Deze opgave helpt je om relaties tussen grootheden te visualiseren en in een grafiek weer te geven.",
     "button": "Ga verder"
   },
   "personal-info": {
@@ -22,12 +22,12 @@
     "label_year": "Leerjaar",
     "placeholder_year": "jaar",
     "label_mathtype": "Type wiskunde",
-    "button": "Beginnen met de oefening"
+    "button": "Ga verder"
   },
   "intro": {
-    "p1": "Je gaat nu een grafiek tekenen van een dynamische relatie. Dit kun je op het scherm doen met behulp van een muis, pen of vinger.",
-    "p2": "Zodra jij tevreden bent met jouw grafiek lever je hem in. Je krijgt dan gerichte feedback op je eigen werk.",
-    "button": "Ga verder"
+    "p1": "Je gaat nu een grafiek tekenen. Dit kun je op het scherm doen met behulp van een muis, pen of vinger.",
+    "p2": "Zodra jij tevreden bent met jouw grafiek lever je hem in. Je krijgt dan feedback op je eigen werk.",
+    "button": "Starten met de opgave"
   },
   "assignments": {
     "title_assignment1": "Opgave A",
@@ -39,13 +39,13 @@
     "label_explanation": "Uitleg"
   },
   "help": {
-    "title": "Help",
-    "p": "Hulp bij de oefening",
-    "title_help1": "Help",
-    "title_help2": "Help 2",
+    "title": "Hulp bij de opgave",
+    "p": "Je hebt nu de opgave gemaakt. Je kunt nu doorgaan of kiezen voor hulp.",
+    "title_help1": "3D animatie",
+    "title_help2": "Interactieve animatie",
     "start": "Start de hulp",
-    "start_help1": "Start help 1",
-    "start_help2": "Start help 2"
+    "start_help1": "Start 3D animatie",
+    "start_help2": "Start interactieve animatie"
   },
   "compare": {
     "title": "Vergelijken en inleveren",

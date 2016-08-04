@@ -1,13 +1,13 @@
 {
   "index": {
-    "title": "graphs of dynamic situations",
+    "title": "Interactive Virtual Math",
     "logged-in": "Signed in as"
   },
   "start": {
     "welcome": "Welcome at the",
-    "title": "Graphs of Dynamic Situations Virtual tool",
-    "p1": "This tool is designed to help you to understand graphs of dynamic relationships. The tool does this by illustrating these relationships with concrete examples in Virtual Reality and by providing targeted feedback on the graph you have drawn yourself.",
-    "p2": "This is a proof of concept, which only works with a single example of a dynamic context.",
+    "title": "demo of Interactive Virtual Math",
+    "p1": "In this application you get one assignment.",
+    "p2": "This assignment will help you to understand, visualise and draw the relations between variables in a graph.",
     "button": "Continue"
   },
   "personal-info": {
@@ -22,12 +22,12 @@
     "label_year": "Year",
     "placeholder_year": "year",
     "label_mathtype": "Math Type",
-    "button": "Begin the exercise"
+    "button": "Continue"
   },
   "intro": {
     "p1": "You are now going to draw a graph of a dynamic relationship. You can do this on the screen using a mouse, stylus or finger.",
     "p2": "Once you are satisfied with your graph you hand it in. You will receive specific feedback on your work.",
-    "button": "Continue"
+    "button": "Start the assignment"
   },
   "assignments": {
     "title_assignment1": "Task A",
