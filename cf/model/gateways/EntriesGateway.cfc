@@ -31,10 +31,10 @@
                     for (i = 1; i <= arraylen(runs); i++) {
                         var newRun = getOrmService().getTransfer().new("application.run");
                         newRun.setParentEntry(newEntry);
-                        newRun.setIndex(i);
-                        newRun.setScore(runs[i].score);
-                        newRun.setHelp1Shown(runs[i].help1Shown);
-                        newRun.setHelp2Shown(runs[i].help2Shown);
+                        newRun.setRun_Index(i);
+                        newRun.setRun_Score(runs[i].score);
+                        newRun.setRun_Help1Shown(runs[i].help1Shown);
+                        newRun.setRun_Help2Shown(runs[i].help2Shown);
                         getOrmService().getTransfer().save(newRun);
 
                         for (var ai = 1; ai <= MAX_ASSIGNMENTS; ai++) {
