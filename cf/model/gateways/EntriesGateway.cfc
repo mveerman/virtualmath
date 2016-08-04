@@ -105,9 +105,9 @@
                 qs = qs & " and application.student.schooltype = :schoolType";
                 params["schoolType"]=searchFormBean.getSchoolType();
             }
-            if (searchFormBean.getSchoolYear() neq "") {
-                qs = qs & " and application.student.schoollevel = :schoolYear";
-                params["schoolYear"]=searchFormBean.getSchoolYear();
+            if (searchFormBean.getSchoolLevel() neq "") {
+                qs = qs & " and application.student.schoollevel = :schoolLevel";
+                params["schoolLevel"]=searchFormBean.getSchoolLevel();
             }
             if (searchFormBean.getMathType() neq "") {
                 qs = qs & " and application.student.mathtype = :mathType";
@@ -155,6 +155,42 @@
                 searchQuery.setParam(param, params[param]);
             }
             return Transfer.listByQuery(searchQuery);
+        </cfscript>
+    </cffunction>
+
+    <cffunction access="public" name="getSchoolNames" returntype="query" output="false">
+        <cfscript>
+            var Transfer = getOrmService().getTransfer();
+            var schoolNamesQuery = Transfer.createQuery("select application.student.schoolname from application.student order by application.student.schoolname asc");
+            schoolNamesQuery.setDistinctMode(true);
+            return Transfer.listByQuery(schoolNamesQuery);
+        </cfscript>
+    </cffunction>
+
+    <cffunction access="public" name="getSchoolTypes" returntype="query" output="false">
+        <cfscript>
+            var Transfer = getOrmService().getTransfer();
+            var schoolTypesQuery = Transfer.createQuery("select application.student.schooltype from application.student order by application.student.schooltype asc");
+            schoolTypesQuery.setDistinctMode(true);
+            return Transfer.listByQuery(schoolTypesQuery);
+        </cfscript>
+    </cffunction>
+
+    <cffunction access="public" name="getSchoolLevels" returntype="query" output="false">
+        <cfscript>
+            var Transfer = getOrmService().getTransfer();
+            var schoolLevelsQuery = Transfer.createQuery("select application.student.schoollevel from application.student order by application.student.schoollevel asc");
+            schoolLevelsQuery.setDistinctMode(true);
+            return Transfer.listByQuery(schoolLevelsQuery);
+        </cfscript>
+    </cffunction>
+
+    <cffunction access="public" name="getMathTypes" returntype="query" output="false">
+        <cfscript>
+            var Transfer = getOrmService().getTransfer();
+            var mathTypeQuery = Transfer.createQuery("select application.student.mathtype from application.student order by application.student.mathtype asc");
+            mathTypeQuery.setDistinctMode(true);
+            return Transfer.listByQuery(mathTypeQuery);
         </cfscript>
     </cffunction>
 

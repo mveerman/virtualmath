@@ -2,6 +2,7 @@
   <controllers>
     <controller name="ResearchPortalController" type="virtualmath.controller.admin.ResearchPortalController"
                 beans="EntriesGateway">
+      <message-listener message="admin.researchportal.prepare" function="prepareSearchForm"/>
       <message-listener message="admin.researchportal.search" function="search"/>
     </controller>
   </controllers>
@@ -10,6 +11,7 @@
 
     <event-handler access="public" name="admin.researchportal.search">
       <broadcasts>
+        <message name="admin.researchportal.prepare"/>
         <message name="admin.researchportal.search"/>
       </broadcasts>
       <views>

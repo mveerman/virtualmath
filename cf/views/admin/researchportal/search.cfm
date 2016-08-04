@@ -1,5 +1,5 @@
 <cfsilent>
-    <cfset viewState.copyToScope(variables, "isResearcher,myself,researchportal.search.entries,xe.view,xe.list,searchFormBean")>
+    <cfset viewState.copyToScope(variables, "isResearcher,myself,researchportal.search.entries,xe.view,xe.list,searchFormBean,schoolNames,schoolTypes,schoolLevels,mathTypes")>
     <cfset variables.listEvent = myself & xe.list  />
     <cfset variables.viewEvent = myself & xe.view  />
 </cfsilent>
@@ -28,15 +28,27 @@
                         <cfinput type="number" name="ageEnd" min="10" max="110" label="Leeftijd tot en met" value="#searchFormBean.getAgeEnd()#" style="width:95%" />
                         <cfselect name="schoolName" label="Naam school" style="width:95%">
                             <option value="">n.v.t.</option>
+                        <cfloop query="schoolNames">
+                            <option value="#schoolName#"<cfif searchFormBean.getSchoolName() eq schoolName> selected="selected"</cfif>>#schoolName#</option>
+                        </cfloop>
                         </cfselect>
                         <cfselect name="schoolType" label="Schooltype" style="width:95%">
                             <option value="">n.v.t.</option>
+                            <cfloop query="schoolTypes">
+                                    <option value="#schoolType#"<cfif searchFormBean.getSchoolType() eq schoolType> selected="selected"</cfif>>#schoolType#</option>
+                            </cfloop>
                         </cfselect>
-                        <cfselect name="schoolYear" label="Leerjaar" style="width:95%">
+                        <cfselect name="schoolLevel" label="Leerjaar" style="width:95%">
                             <option value="">n.v.t.</option>
+                            <cfloop query="schoolLevels">
+                                    <option value="#schoolLevel#"<cfif searchFormBean.getSchoolLevel() eq schoolLevel> selected="selected"</cfif>>#schoolLevel#</option>
+                            </cfloop>
                         </cfselect>
                         <cfselect name="mathType" label="Type wiskunde" style="width:95%">
                             <option value="">n.v.t.</option>
+                            <cfloop query="mathTypes">
+                                    <option value="#mathType#"<cfif searchFormBean.getMathType() eq mathType> selected="selected"</cfif>>#mathType#</option>
+                            </cfloop>
                         </cfselect>
                         <cfformitem type="hrule" />
                         <cfselect name="run" label="Beperk tot poging">

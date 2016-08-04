@@ -1,4 +1,14 @@
 <cfcomponent displayname="ResearchPortalController" extends="ModelGlue.gesture.controller.Controller" output="false" beans="EntriesGateway">
+
+    <cffunction name="prepareSearchForm" access="public" returnType="void" output="false">
+        <cfargument name="event" type="any" />
+
+        <cfset arguments.event.setValue("schoolNames", beans.entriesGateway.getSchoolNames()) />
+        <cfset arguments.event.setValue("schoolTypes", beans.entriesGateway.getSchoolTypes()) />
+        <cfset arguments.event.setValue("schoolLevels", beans.entriesGateway.getSchoolLevels()) />
+        <cfset arguments.event.setValue("mathTypes", beans.entriesGateway.getMathTypes()) />
+
+    </cffunction>
 	
 	<cffunction name="search" access="public" returnType="void" output="false">
 		<cfargument name="event" type="any" />

@@ -9,7 +9,7 @@ component accessors="true" {
     property string ageEnd;
     property string schoolName;
     property string schoolType;
-    property string schoolYear;
+    property string schoolLevel;
     property string mathType;
     property string run;
     property string levelStart;
@@ -28,7 +28,7 @@ component accessors="true" {
         variables.ageEnd="";
         variables.schoolName="";
         variables.schoolType="";
-        variables.schoolYear="";
+        variables.schoolLevel="";
         variables.mathType="";
         variables.run="";
         variables.levelStart="";
