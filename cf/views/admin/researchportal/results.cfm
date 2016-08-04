@@ -20,7 +20,7 @@
                         <th>Niveau</th>
                         <th class="last-column"></th>
                     </tr>
-                <cfloop query="#results#" startrow="#searchResultBean.getFirstPageResult()#" endrow="#searchResultBean.getLastPageResult()#">
+                <cfloop query="results" startrow="#searchResultBean.getFirstPageResult()#" endrow="#searchResultBean.getLastPageResult()#">
                     <tr class="#iif(results.currentrow mod 2, de("row-odd"), de("row-even"))#">
                         <th class="first-column">#results.currentRow#</th>
                         <td>#DateFormat(results.timestamp, "YYYY-MM-DD")# #LSTimeFormat(results.timestamp, "HH:MM:ss")#</td>
