@@ -8,7 +8,7 @@
         <cfset arguments.event.setValue("searchFormBean", searchFormBean) />
         <cfif searchFormBean.isSearchStarted()>
             <cfset var searchResultBean = getModelGlue().getBean("ResearchPortalSearchResultBean") />
-            <cfif not searchFormBean.getSearch()>
+            <cfif not searchFormBean.isSearch()>
                 <cfset arguments.event.makeEventBean(searchResultBean) />
             </cfif>
             <cfset searchResultBean.setResultQuery(beans.entriesGateway.search(searchFormBean)) />

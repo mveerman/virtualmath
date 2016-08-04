@@ -1,4 +1,21 @@
-component {
+component accessors="true" {
+
+    property numeric pageSize;
+    property query resultQuery;
+    property numeric currentPage;
+    property string nextPage;
+    property string previousPage;
+
+    public any function init() {
+        variables.pageSize=10;
+        variables.resultQuery=QueryNew("");
+        variables.currentPage=1;
+        variables.nextPage="";
+        variables.previousPage="";
+
+        return this;
+    }
+
     this.tag = {
         pageSize: 10,
         resultQuery: QueryNew(""),
@@ -7,86 +24,46 @@ component {
         previousPage: false
     };
 
-    public void function setPageSize(required numeric pageSize)
-    {
-        this.tag.pageSize = pageSize;
+    public numeric function getPageSize() {
+        return max(variables.pageSize, 1);
     }
 
-    public numeric function getPageSize()
-    {
-        return max(this.tag.pageSize, 1);
+    public boolean function isNextPage() {
+        return len(this.getNextPage());
     }
 
-    public void function setResultQuery(required query resultQuery)
-    {
-        this.tag.resultQuery = resultQuery;
+    public boolean function isPreviousPage() {
+        return len(this.getPreviousPage());
     }
 
-    public query function getResultQuery()
-    {
-        return this.tag.resultQuery;
-    }
-
-    public void function setCurrentPage(required numeric currentPage)
-    {
-        this.tag.currentPage = currentPage;
-    }
-
-    public numeric function getCurrentPage()
-    {
-        var page = this.tag.currentPage;
-        if (getNextPage()) page=page+1;
-        if (getPreviousPage()) page=page-1;
+    public numeric function getCurrentPage() {
+        var page = variables.currentPage;
+        if (isNextPage()) page=page+1;
+        if (isPreviousPage()) page=page-1;
         return min(max(page, 1), getMaxPages());
     }
 
-    public numeric function getTotal()
-    {
+    public numeric function getTotal() {
         return getResultQuery().recordcount;
     }
 
-    public numeric function getMaxPages()
-    {
+    public numeric function getMaxPages() {
         return ceiling(getTotal()/getPageSize());
     }
 
-    public numeric function getFirstPageResult()
-    {
+    public numeric function getFirstPageResult() {
         return min(getTotal(), (getPageSize() * (getCurrentPage()-1)) + 1);
     }
 
-    public numeric function getLastPageResult()
-    {
+    public numeric function getLastPageResult() {
         return min(getPageSize() * getCurrentPage(), getTotal());
     }
 
-    public void function setNextPage(any nextPage)
-    {
-        this.tag.nextPage = true;
-    }
-
-    private boolean function getNextPage()
-    {
-        return this.tag.nextPage;
-    }
-
-    public void function setPreviousPage(any nextPage)
-    {
-        this.tag.previousPage = true;
-    }
-
-    private boolean function getPreviousPage()
-    {
-        return this.tag.previousPage;
-    }
-
-    public boolean function hasPreviousPage()
-    {
+    public boolean function hasPreviousPage() {
         return getCurrentPage() > 1;
     }
 
-    public boolean function hasNextPage()
-    {
+    public boolean function hasNextPage() {
         return getCurrentPage() < getMaxPages();
     }
 }
