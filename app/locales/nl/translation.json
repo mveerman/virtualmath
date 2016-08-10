@@ -56,12 +56,12 @@
     "button_submit": "Antwoorden indienen"
   },
   "feedback": {
-    "title": "Resultaat",
-    "label_reward": "Jouw grafiek hoort bij het volgende object",
+    "title": "Feedback",
+    "label_reward": "Dit is de vorm van de vaas bij jouw grafiek",
     "switch_default": "Je hebt de oefening niet op de correcte manier gemaakt.",
-    "switch_0": "Je bent nu op weg naar niveau 1 doordat je hulp 1 en/of hulp 2 heb je geprobeerd in te zetten bij het maken van de grafiek. Om de volgende levels te bereiken zou je het verband moeten leggen tussen de hoogte en hoeveelheid water en rekening moeten houden met de vorm van de vaas.",
-    "switch_1": "Je hebt niveau 1 bereikt: je hebt het verband tussen de hoeveelheid water en de hoogte in een juiste grafiek weer kunnen geven in één van de twee situaties. Om het volgende niveau te bereiken zou je het verband moeten leggen niet alleen tussen de hoogte en hoeveelheid water maar zul je ook rekening moeten houden met de vorm van de vaas.",
-    "switch_2": "Je hebt niveau 2 bereikt; je hebt het verband tussen de hoeveelheid water en de hoogte in een juiste grafiek weer kunnen geven in beide situaties.",
+    "switch_0": "Je hebt nu de opgave gemaakt. Om jezelf te verbeteren zou je het verband moeten leggen tussen de hoogte en hoeveelheid water en rekening moeten houden met de vorm van de vaas.",
+    "switch_1": "Je hebt nu de opgave gemaakt. Om jezelf te verbeteren zou je niet alleen het verband moeten leggen tussen de hoogte en hoeveelheid water, maar zul je ook rekening moeten houden met de vorm van de vaas.",
+    "switch_2": "Je hebt nu de opgave gemaakt. Je hebt in beiden situaties het verband gelegd tussen de hoogte en hoeveelheid water en hierbij rekening gehouden met de vorm van de vaas.",
     "without_help": "Je hebt geen gebruik gemaakt van de aangeboden hulpmiddelen",
     "some_help": "Je hebt niet gebruik gemaakt van alle hulpmiddelen",
     "all_help": "Je hebt alle hulpmiddelen gebruikt",

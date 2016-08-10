@@ -56,12 +56,12 @@
     "button_submit": "Submit answers"
   },
   "feedback": {
-    "title": "Result",
-    "label_reward": "Your chart represents the following object",
+    "title": "Feedback",
+    "label_reward": "This is the shape of the vase matching your graph",
     "switch_default": "You failed the exercise.",
-    "switch_0": "You're on your way to level 1: You used help 1 and/or help 2 to assist you in sketching your graphs. To reach the next levels, you must figure out the relation between the height and volume of water given the shape of the vase.",
-    "switch_1": "You have reached level 1: You figured out the relation between the amount of water and the height in one of the two exercises. To reach the next level you should also consider the shape of the vases.",
-    "switch_2": "You have reached level 2; You figured out the relation between the amount of water and the height in both exercises.",
+    "switch_0": "You have now finished the assignment. In order to improve yourself you have to link the relationship between the height and amount of the water and take into account the shape of the vase.",
+    "switch_1": "You have now finished the assignment. In order to improve yourself you do not only need to link the relationship between the height and amount of the water, but also take into account the shape of the vase.",
+    "switch_2": "You have now finished the assignment. You linked the relationship between the height and amount of water in both situations, and also took into account the shape of the vase.",
     "without_help": "You have not used any of the help offered",
     "some_help": "You have not used all the help offered",
     "all_help": "You have used all the help offered",
