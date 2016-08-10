@@ -10,10 +10,9 @@
     <div class="row main-row">
         <div class="12u">
             <section>
-                <h3>Beheer gebruikers</h3>
-                <p>
-                    Hier kunnen alle systeemgebruikers, leraren en onderzoekers beheerd worden.
-                </p>
+                <h3>Systeemportaal</h3>
+                <h4>Beheer gebruikers</h4>
+                <hr/>
             </section>
         </div>
         <div class="8u">

@@ -6,36 +6,33 @@
 
 <cfoutput><div class="container">
     <div class="row main-row">
-        <div class="9u">
+        <div class="12u">
                 <h3>Lerarenportaal</h3>
-                <p>
-                    Bekijk hier alle ingediende opgaven
-                </p>
+                <h4>Bekijk resultaten leerlingen</h4>
                 <hr />
         </div>
-        <div class="3u">
-                <a href="#listEvent#"><button><img src="img/icons/arrow_circle_double.png"> Verversen</button></a>
-        </div>
         <div class="12u">
-            <table width="100%">
-                <tr>
-                    <th align="left">Datum</th>
-                    <th align="left">Naam</th>
-                    <th align="left">School</th>
-                    <th align="left">Score</th>
-                    <th></th>
-                </tr>
+            <div class="rp-results-container">
+                <table class="rp-results">
+                    <tr class="header">
+                        <th align="left">Datum</th>
+                        <th align="left">Naam</th>
+                        <th align="left">School</th>
+                        <th align="left">Score</th>
+                        <th class="last-column"><a href="#listEvent#"><img src="img/icons/arrow_circle_double.png"> Verversen</a></th>
+                    </tr>
 
-                <cfloop query="teacherPortal.entries">
-                <tr>
-                    <td>#DateFormat(teacherPortal.entries.timestamp, "YYYY-MM-DD")# #LSTimeFormat(teacherPortal.entries.timestamp, "HH:MM:ss")#</td>
-                    <td>#teacherPortal.entries.name#</td>
-                    <td>#teacherPortal.entries.schoolname#</td>
-                    <td>#teacherPortal.entries.score#</td>
-                    <th><a href="#viewEvent#&entry_id=#teacherPortal.entries.entry_id#"><button><img src="img/icons/magnifier.png"> Bekijken</button></a></th>
-                </tr>
-                </cfloop>
-            </table>
+                    <cfloop query="teacherPortal.entries">
+                    <tr>
+                        <td>#DateFormat(teacherPortal.entries.timestamp, "YYYY-MM-DD")# #LSTimeFormat(teacherPortal.entries.timestamp, "HH:MM:ss")#</td>
+                        <td>#teacherPortal.entries.name#</td>
+                        <td>#teacherPortal.entries.schoolname#</td>
+                        <td>#teacherPortal.entries.score#</td>
+                        <th class="last-column"><a href="#viewEvent#&entry_id=#teacherPortal.entries.entry_id#" target="rp-results-screen"><img src="img/icons/magnifier.png"> Bekijken</a></th>
+                    </tr>
+                    </cfloop>
+                </table>
+            </div>
         </div>
     </div>
 </div>

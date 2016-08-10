@@ -3,7 +3,8 @@
         <div class="row">
             <div class="12u">
                 <div id="copyright">
-                    &copy; HvA &ndash; ICT Services &ndash; O&O &mdash; VirtualMath: v#viewstate.getValue("appconfig").version#
+                    Interactive VirtualMath version #viewstate.getValue("appconfig").version#<br/>
+                    &copy; Hogeschool van Amsterdam &ndash; ICT Services &ndash; Divisie Vernieuwing, Afdeling Onderwijs & Onderzoek
                 </div>
             </div>
         </div>

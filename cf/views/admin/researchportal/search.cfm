@@ -9,7 +9,8 @@
 <div class="container">
     <div class="row main-row">
         <div class="12u">
-            <h3>Research portaal</h3>
+            <h3>Onderzoekersportaal</h3>
+            <h4>Doorzoek resultaten (anoniem)</h4>
             <hr />
         </div>
     </div>

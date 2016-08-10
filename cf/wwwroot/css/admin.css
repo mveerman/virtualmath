@@ -1,3 +1,10 @@
+#header .subheader {
+    font-size: 0.8em;
+    padding-left: 10px;
+    color: #0d3349;
+    font-weight: bold;
+}
+
 .green {
     color: green;
 }

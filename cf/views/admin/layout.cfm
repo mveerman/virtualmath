@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>VirtualMath</title>
+    <title>Interactive VirtualMath - Adminportal</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -42,21 +42,10 @@
         <![endif]-->
 
         #viewcollection.getView( "admin.body" )#
-
-
     </div>
 
     <div id="footer-wrapper">
 		#viewcollection.getView( "admin.footer" )#
-        <!---<div class="container">
-            <div class="row">
-                <div class="12u">
-                    <div id="copyright">
-                        &copy; HvA &ndash; ICT Services &ndash; O&O &mdash; VirtualMath: v<span app-version></span>
-                    </div>
-                </div>
-            </div>
-        </div>--->
     </div>
 </div>
 

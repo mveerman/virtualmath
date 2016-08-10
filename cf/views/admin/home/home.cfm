@@ -6,10 +6,15 @@
     <div class="row main-row">
         <div class="12u">
             <section>
-                <h3>Administratiemodule voor de VirtualMath applicatie</h3>
+                <h3>Welkom bij het administratieportaal voor de <i>Interactive VirtualMath</i> demo-applicatie</h3>
                 <p>
-                    Hier kan wat beschrijvende tekst komen
+                    In dit portaal kan onderzoek gedaan worden naar antwoorden die zijn ingevoerd via de VirtualMath
+                    demo-applicatie. Er zijn verschillende rollen waarmee ingelogd kan worden. Voor leraren is het
+                    mogelijk om de resultaten van leerlingen te volgen. Voor onderzoekers is het mogelijk om
+                    geanonimiseerd onderzoek te doen naar bijvoorbeeld trends in het gebruik van de applicatie. Rollen
+                    worden toegekend door beheerders.
                 </p>
+                <p>Voor u zijn de volgende functies beschikbaar:</p>
             </section>
         </div>
     </div>
@@ -17,8 +22,7 @@
         <cfif isTeacher or isAdministrator>
             <div class="4u 6u(mobile)">
                 <section>
-                    <h4>Docenten</h4>
-                    <p>Alle toepassingen voor de docent</p>
+                    <h4>Lerarenportaal</h4>
                     <nav>
                         <ul>
                             <li><a href="#viewstate.linkto('admin.teacherportal.studentresults')#">Bekijk resultaten leerlingen</a></li>
@@ -30,8 +34,7 @@
         <cfif isResearcher or isAdministrator>
             <div class="4u 6u(mobile)">
                 <section>
-                    <h4>Onderzoekers</h4>
-                    <p>Alle toepassingen voor de onderzoeker</p>
+                    <h4>Onderzoekersportaal</h4>
                     <nav>
                         <ul>
                             <li><a href="#viewstate.linkto('admin.researchportal.search')#">Doorzoek resultaten (anoniem)</a></li>
@@ -43,8 +46,7 @@
         <cfif isAdministrator>
                 <div class="4u 6u(mobile)">
                     <section>
-                        <h4>Systeem</h4>
-                        <p>Alle systeemfuncties</p>
+                        <h4>Systeemportaal</h4>
                         <nav>
                             <ul>
                                 <li><a href="#viewstate.linkto('admin.system.usermanagement')#">Beheer gebruikers</a></li>
