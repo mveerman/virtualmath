@@ -17,4 +17,12 @@ angular.module('virtualMath.help', [
             $location.path('/compare');
         };
 
+        $scope.help1Clicked = function () {
+            $scope.setHelp1Shown();
+        };
+
+        $scope.help2Clicked = function () {
+            $scope.setHelp2Shown();
+        };
+
     }]);
