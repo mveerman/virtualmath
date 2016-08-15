@@ -26,6 +26,7 @@
                                        ng-model="student.schoolName">
                             </div>
                         </div>
+                        <!--
                         <div class="row">
                             <div class="8u">
                                 <label for="studentSchoolType">{{ 'personal-info.label_schooltype' | i18next }}</label>
@@ -55,6 +56,35 @@
                                 </select>
                             </div>
                         </div>
+                        -->
+                        <!-- -->
+                        <div class="row">
+                            <div class="8u">
+                                <label for="studentSchoolType">{{ 'personal-info.label_schooltype' | i18next }}</label>
+                                <select name="studentSchoolType" id="studentSchoolType" ng-required="true"
+                                        ng-model="schoolyears" ng-options="studentSchoolType for (studentSchoolType, studentSchoolYear) in wiskundes">
+                                    <option value="" selected>{{ 'generic.select' | i18next }}...</option>
+                                </select>
+                            </div>
+                            <div class="4u">
+                                <label>{{ 'personal-info.label_year' | i18next }}</label>
+                                <select name="studentSchoolYear" id="studentSchoolYear" ng-disabled="!schoolyears" ng-required="true"
+                                        ng-model="schooltypes" ng-options="studentSchoolYear for (studentSchoolYear, studentWiskundeType) in schoolyears">
+                                    <option value="" selected>{{ 'personal-info.placeholder_year' | i18next }}...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="12u">
+                                <label for="studentWiskundeType">{{ 'personal-info.label_mathtype' | i18next }}</label>
+                                <select name="studentWiskundeType" id="studentWiskundeType" ng-disabled="!schooltypes || !schoolyears" ng-required="true"
+                                        ng-model="wiskundetype">
+                                    <option value="" selected>{{ 'generic.select' | i18next }}...</option>
+                                    <option ng-repeat="wiskundetype in schooltypes">{{wiskundetype}}</option>
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
 
                 </section>
