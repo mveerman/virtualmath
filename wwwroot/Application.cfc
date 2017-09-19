@@ -15,6 +15,7 @@
 	this.mappings["/ModelGlue"] 	= ExpandPath("../cf/lib/ModelGlue");
 	this.mappings["/Transfer"] 		= ExpandPath("../cf/lib/Transfer");
 	this.mappings["/virtualmath"] 	= ExpandPath("../cf");
+	this.mappings["/virtualmath/wwwroot"] = ExpandPath("./");
 	</cfscript>
 	
 	<cffunction name="onApplicationStart" access="public" output="false" returntype="void">
