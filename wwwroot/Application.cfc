@@ -11,10 +11,10 @@
 	this.loginstorage = "session";
 	
 	// set mappings
-	this.mappings["/ColdSpring"] 	= ExpandPath("../lib/ColdSpring");
-	this.mappings["/ModelGlue"] 	= ExpandPath("../lib/ModelGlue");
-	this.mappings["/Transfer"] 		= ExpandPath("../lib/Transfer");
-	this.mappings["/virtualmath"] 	= ExpandPath("../");
+	this.mappings["/ColdSpring"] 	= ExpandPath("../cf/lib/ColdSpring");
+	this.mappings["/ModelGlue"] 	= ExpandPath("../cf/lib/ModelGlue");
+	this.mappings["/Transfer"] 		= ExpandPath("../cf/lib/Transfer");
+	this.mappings["/virtualmath"] 	= ExpandPath("../cf");
 	</cfscript>
 	
 	<cffunction name="onApplicationStart" access="public" output="false" returntype="void">

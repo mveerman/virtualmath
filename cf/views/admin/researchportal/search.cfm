@@ -17,16 +17,16 @@
     <div class="row">
         <div class="4u">
             <section>
-                <cfform method="post" format="xml" skin="silver" style="width:95%">
-                    <cfformgroup type="vertical">
-                        <cfformitem type="text">Filters</cfformitem>
-                        <cfformitem type="hrule" />
-                        <cfinput type="number" name="code" value="#searchFormBean.getCode()#" validate="integer" message="Onjuiste unieke code opgegeven" label="Unieke code" style="width:95%" />
-                        <cfinput type="date" name="dateStart" label="Inleverdatum vanaf" value="#searchFormBean.getDateStart()#" style="width:95%" />
-                        <cfinput type="date" name="dateEnd" label="Inleverdatum tot" value="#searchFormBean.getDateEnd()#" style="width:95%" />
-                        <cfformitem type="hrule" />
-                        <cfinput type="number" name="ageStart" min="10" max="110" label="Leeftijd vanaf" value="#searchFormBean.getAgeStart()#" style="width:95%" />
-                        <cfinput type="number" name="ageEnd" min="10" max="110" label="Leeftijd tot en met" value="#searchFormBean.getAgeEnd()#" style="width:95%" />
+                <cfform method="post" format="html" skin="silver" style="width:95%">
+                    <!---<cfformgroup type="vertical">--->
+                        <label>Filters</label>
+                        <hr>
+                        <cfinput type="text" name="code" value="#searchFormBean.getCode()#" validate="integer" message="Onjuiste unieke code opgegeven" label="Unieke code" style="width:95%" />
+                        <cfinput type="text" name="dateStart" label="Inleverdatum vanaf" value="#searchFormBean.getDateStart()#" style="width:95%" />
+                        <cfinput type="text" name="dateEnd" label="Inleverdatum tot" value="#searchFormBean.getDateEnd()#" style="width:95%" />
+                        <hr>
+                        <cfinput type="text" name="ageStart" min="10" max="110" label="Leeftijd vanaf" value="#searchFormBean.getAgeStart()#" style="width:95%" />
+                        <cfinput type="text" name="ageEnd" min="10" max="110" label="Leeftijd tot en met" value="#searchFormBean.getAgeEnd()#" style="width:95%" />
                         <cfselect name="schoolName" label="Naam school" style="width:95%">
                             <option value="">n.v.t.</option>
                         <cfloop query="schoolNames">
@@ -51,14 +51,14 @@
                                     <option value="#mathType#"<cfif searchFormBean.getMathType() eq mathType> selected="selected"</cfif>>#mathType#</option>
                             </cfloop>
                         </cfselect>
-                        <cfformitem type="hrule" />
+                        <hr/>
                         <cfselect name="run" label="Beperk tot poging">
                             <option value="">n.v.t.</option>
                             <option value="1"<cfif searchFormBean.getRun() eq 1> selected="selected"</cfif>>1</option>
                             <option value="2"<cfif searchFormBean.getRun() eq 2> selected="selected"</cfif>>2</option>
                         </cfselect>
-                        <cfinput type="number" name="levelStart" min="0" max="2" label="Niveau vanaf" value="#searchFormBean.getLevelStart()#" style="width:40px" />
-                        <cfinput type="number" name="levelEnd" min="0" max="2" label="Niveau tot en met" value="#searchFormBean.getLevelEnd()#" style="width:40px" />
+                        <cfinput type="text" name="levelStart" min="0" max="2" label="Niveau vanaf" value="#searchFormBean.getLevelStart()#" style="width:40px" />
+                        <cfinput type="text" name="levelEnd" min="0" max="2" label="Niveau tot en met" value="#searchFormBean.getLevelEnd()#" style="width:40px" />
                         <cfselect name="help1Used" label="Help 1 gebruikt" style="width:60px">
                             <option value="">n.v.t.</option>
                             <option value="true"<cfif searchFormBean.getHelp1Used() eq true> selected="selected"</cfif>)>Ja</option>
@@ -69,9 +69,9 @@
                             <option value="true"<cfif searchFormBean.getHelp2Used() eq true> selected="selected"</cfif>)>Ja</option>
                             <option value="false"<cfif isBoolean(searchFormBean.getHelp2Used()) and not searchFormBean.getHelp2Used()> selected="selected"</cfif>>Nee</option>
                         </cfselect>
-                        <cfformitem type="hrule" />
+                        <hr/>
                         <cfinput type="submit" name="search" value="Zoek" align="right">
-                    </cfformgroup>
+                    <!---</cfformgroup>--->
                 </cfform>
             </section>
         </div>

@@ -16,7 +16,7 @@
 	
 	<cfset variables.dsn = "" />
 	
-	<cfset this.versiontablename = "DOCSYS_VERSION" />
+	<cfset this.versiontablename = "docsys_version" />
 
 	<!----------------------------------------------------------------------
 		Setter for datasource
@@ -255,7 +255,7 @@
 		<cfset var addVersion="" />
 		
 		<cfquery datasource="#dsn#" name="addVersion">
-		INSERT INTO #this.versiontablename#(installedversion)
+		INSERT INTO #this.versiontablename#
 		VALUES (<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.version#">)
 		</cfquery>
 	</cffunction>

@@ -68,7 +68,7 @@
    <bean id="AppConfig" class="ModelGlue.Bean.CommonBeans.SimpleConfig">
 		<property name="Config">
 			<map>
-				<entry key="dsn"><value>virtualmath</value></entry>
+				<entry key="dsn"><value>virtualmathdb</value></entry>
         <entry key="version"><value>0.4</value></entry>
         <entry key="saltkey"><value>kixRhubq4B8c1UbmuXq2eip2Kvi81ag4</value></entry>
 			</map>
@@ -77,7 +77,7 @@
 
   <!-- Managers -->
   <bean id="DatabaseManager" class="virtualmath.database.DatabaseManager">
-    <property name="datasource"><value>virtualmath</value></property>
+    <property name="datasource"><value>virtualmathdb</value></property>
     <property name="RootPath"><value></value></property>
     <property name="VersionsSchemaPath"><value>versions.xsd</value></property>
     <property name="DatabaseVersionsPath"><value>/virtualmath/database/versions.xml</value></property>

@@ -14,7 +14,7 @@
 	<div class="row">
 	    <div class="12u 12u(mobile)">
             <label>Gebruikersnaam</label>
-			<cfinput name="username" type="text" label="username" autosuggest="true" size="100">
+			<cfinput name="username" type="text" label="username" size="100">
 	    </div>
     </div>
     <div class="row">

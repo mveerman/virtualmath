@@ -1,0 +1,7 @@
+.travis.yml
+bower.json
+karma.conf.js
+package.json
+.jshintrc
+jshint.js
+node_modules

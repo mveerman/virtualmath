@@ -1,0 +1,28 @@
+version: "3"
+services:
+  web:
+    build: .
+    links:
+     - appdb
+    ports:
+     - "80:80"
+     - "8888:8888"
+    environment:
+     - LUCEE_PASSWORD=VirtualMath
+     - MYSQL_ROOT_PASSWORD=SecretMySQLRootPassword
+     - MYSQL_HOST=appdb
+     - MYSQL_DATABASE=virtualmathdb
+    volumes:
+      - ./cf:/var/cf
+      - ./wwwroot:/var/www
+      - ./app:/var/www/app
+  appdb:
+    image: mysql:latest
+    restart: always
+    volumes:
+     - vm-data-volume:/var/lib/mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=SecretMySQLRootPassword
+     - MYSQL_DATABASE=virtualmathdb
+volumes:
+  vm-data-volume:
