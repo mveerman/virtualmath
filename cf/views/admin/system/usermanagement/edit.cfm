@@ -22,8 +22,9 @@
     <section>
         <h3>Beheer gebruikers</h3>
     <div id="breadcrumb">
-            <a href="#listEvent#">Lijst van gebruikers</a> / <cfif isNew>Toevoegen nieuwe
-<cfelse>Bewerken</cfif> gebruiker
+            <a href="#listEvent#">Lijst van gebruikers</a> /
+    <cfif isNew>Toevoegen nieuwe
+    <cfelse>Bewerken</cfif> gebruiker
 </div>
 </section>
     <cfif hasErrors IS true>
@@ -37,49 +38,83 @@
             </section>
     </cfif>
     </div>
-    <div class="12u">
-    <cfform action="#commitEvent#" class="edit" format="xml">
-
+    <div class="12u container">
+    <cfform action="#commitEvent#" class="edit" format="html">
         <cfinput type="hidden" name="user_id" value="#security.userRecord.getuser_id()#">
-        <cfformgroup type="vertical" label="Persoonlijke gegevens">
-            <cfinput type="text" name="name" value="#security.userRecord.getName()#"
-                    label="Naam" required="true"/>
-        </cfformgroup>
-        <cfformgroup type="vertical" label="Inloggegevens">
+        <fieldset class="form-group">
+            <legend>Persoonlijke gegevens</legend>
+            <div class="col-sm-10">
+                <label for="name" class="col-2 col-form-label">Naam</label>
+                <div class="col-10">
+                    <cfinput type="text" name="name" value="#security.userRecord.getName()#" label="Naam" required="true" class="form-control"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <legend>Inloggegevens</legend>
             <cfset username_ac = StructNew()>
             <cfif !isNew>
                 <cfset username_ac.disabled = "disabled">
             </cfif>
-            <cfinput attributeCollection="#username_ac#" type="text" name="username" value="#security.userRecord.getusername()#"
-                    label="Gebruikersnaam" required="#isNew#"/>
-            <cfinput type="password" name="password" value=""
-                    label="Wachtwoord" required="#isNew#"/>
-        </cfformgroup>
-        <cfformgroup type="vertical" label="Rollen">
-            <cfformgroup type="horizontal" label="Administrateur">
-                <cfinput type="radio" name="admin" value="true" checked="#security.userRecord.getAdmin()#"
-                        label="Ja">
-                <cfinput type="radio" name="admin" value="false" checked="#!security.userRecord.getAdmin()#"
-                        label="Nee">
-            </cfformgroup>
-            <cfformgroup type="horizontal" label="Onderwijzer">
-                <cfinput type="radio" name="teacher" value="true" checked="#security.userRecord.getTeacher()#"
-                        label="Ja" >
-                <cfinput type="radio" name="teacher" value="false" checked="#!security.userRecord.getTeacher()#"
-                        label="Nee" >
-            </cfformgroup>
-            <cfformgroup type="horizontal" label="Onderzoeker">
-                <cfinput type="radio" name="researcher" value="true" checked="#security.userRecord.getResearcher()#"
-                        label="Ja" >
-                <cfinput type="radio" name="researcher" value="false" checked="#!security.userRecord.getResearcher()#"
-                        label="Nee" >
-            </cfformgroup>
-        </cfformgroup>
-        <cfformitem type="hrule" />
-        <cfformgroup type="horizontal">
-            <cfinput type="submit" name="submit" value=" Gebruiker opslaan " label="&nbsp;"/>
-        </cfformgroup>
+            <div class="col-sm-10">
+                    <label for="username" class="col-2 col-form-label">Gebruikersnaam</label>
+                <div class="col-10">
+                    <cfinput attributeCollection="#username_ac#" type="text" name="username" value="#security.userRecord.getusername()#" label="Gebruikersnaam" required="#isNew#" class="form-control"/>
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <label for="password" class="col-2 col-form-label">Wachtwoord</label>
+                <div class="col-10">
+                    <cfinput type="password" name="password" value="" label="Wachtwoord" required="#isNew#" class="form-control"/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <legend>Rollen</legend>
+            <div class="col-10">
+                <label class="col-2 col-form-label">Beheerder</label>
+                <div class="col-10 form-check-inline">
+                    <label class="form-check-label">
+                        <cfinput type="radio" name="admin" value="true" checked="#security.userRecord.getAdmin()#" label="Ja" class="form-check-input">
+                        Ja
+                    </label>
+                    <label class="form-check-label">
+                        <cfinput type="radio" name="admin" value="false" checked="#!security.userRecord.getAdmin()#" label="Nee" class="form-check-input">
+                        Nee
+                    </label>
+                </div>
+            </div>
 
+            <div class="col-10">
+                <label class="col-2 col-form-label">Onderwijzer</label>
+                <div class="col-10 form-check-inline">
+                    <label class="form-check-label">
+                        <cfinput type="radio" name="teacher" value="true" checked="#security.userRecord.getTeacher()#" label="Ja" class="form-check-input">
+                        Ja
+                    </label>
+                    <label class="form-check-label">
+                        <cfinput type="radio" name="teacher" value="false" checked="#!security.userRecord.getTeacher()#" label="Nee" class="form-check-input">
+                        Nee
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-10">
+                <label class="col-2 col-form-label">Onderzoeker</label>
+                <div class="col-10 form-check-inline">
+                    <label class="form-check-label">
+                        <cfinput type="radio" name="researcher" value="true" checked="#security.userRecord.getResearcher()#" label="Ja" class="form-check-input">
+                        Ja
+                    </label>
+                    <label class="form-check-label">
+                        <cfinput type="radio" name="researcher" value="false" checked="#!security.userRecord.getResearcher()#" label="Nee" class="form-check-input">
+                        Nee
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+        <hr/>
+        <cfinput type="submit" name="submit" value=" Gebruiker opslaan " label="&nbsp;"/>
     </cfform>
     </div>
     </div>
