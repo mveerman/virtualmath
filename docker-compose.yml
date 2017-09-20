@@ -6,7 +6,6 @@ services:
      - appdb
     ports:
      - "80:80"
-     - "8888:8888"
     environment:
      - LUCEE_PASSWORD=VirtualMath
      - MYSQL_ROOT_PASSWORD=SecretMySQLRootPassword
@@ -16,6 +15,8 @@ services:
       - ./cf:/var/cf
       - ./wwwroot:/var/www
       - ./app:/var/www/app
+      - ./Babylon:/var/www/Babylon
+      - ./3dsMax:/var/www/3dsMax
   appdb:
     image: mysql:latest
     restart: always
