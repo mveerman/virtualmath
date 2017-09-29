@@ -14,9 +14,6 @@ services:
     volumes:
       - ./cf:/var/cf
       - ./wwwroot:/var/www
-      - ./app:/var/www/app
-      - ./Babylon:/var/www/Babylon
-      - ./3dsMax:/var/www/3dsMax
   appdb:
     image: mysql:latest
     restart: always
