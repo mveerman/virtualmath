@@ -6,6 +6,8 @@ services:
      - appdb
     ports:
      - "80:80"
+# Lucee administrator port. DO NOT EXPOSE IN A PRODUCTION ENVIRONMENT!
+#     - "8888:8888"
     environment:
      - LUCEE_PASSWORD=VirtualMath
      - MYSQL_ROOT_PASSWORD=SecretMySQLRootPassword

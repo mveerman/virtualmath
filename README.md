@@ -1,43 +1,17 @@
-# angular-seed — the seed for AngularJS apps
+# VirtualMath README
 
-This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app.
-You can use it to quickly bootstrap your angular webapp projects and dev environment for these
-projects.
-
-The seed contains a sample AngularJS application and is preconfigured to install the Angular
-framework and a bunch of development and testing tools for instant web development gratification.
-
-The seed app doesn't do much, just shows how to wire two controllers and views together.
-
+This project is a proof of concept to implementing virtual reality concepts into an educational 
+environment to support the better understanding of certain mathematical concepts for students.
 
 ## Getting Started
 
-To get you started you can simply clone the angular-seed repository and install the dependencies:
+The application has been set up to run via docker. 
 
 ### Prerequisites
-
-You need git to clone the angular-seed repository. You can get git from
-[http://git-scm.com/](http://git-scm.com/).
-
-We also use a number of node.js tools to initialize and test angular-seed. You must have node.js and
+We use a number of node.js tools to initialize and test angular-seed. You must have node.js and
 its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
 
-### Clone angular-seed
-
-Clone the angular-seed repository using [git][git]:
-
-```
-git clone https://github.com/angular/angular-seed.git
-cd angular-seed
-```
-
-If you just want to start a new project without the angular-seed commit history then you can do:
-
-```bash
-git clone --depth=1 https://github.com/angular/angular-seed.git <your-project-name>
-```
-
-The `depth=1` tells git to only pull down one commit worth of historical data.
+You need to have docker installed as well. You can get it from [https://www.docker.com/](https://www.docker.com/)
 
 ### Install Dependencies
 
@@ -53,60 +27,58 @@ We have preconfigured `npm` to automatically run `bower` so we can simply do:
 npm install
 ```
 
-Behind the scenes this will also call `bower install`.  You should find that you have two new
-folders in your project.
-
-* `node_modules` - contains the npm packages for the tools we need
-* `app/bower_components` - contains the angular framework files
-
-*Note that the `bower_components` folder would normally be installed in the root folder but
-angular-seed changes this location through the `.bowerrc` file.  Putting it in the app folder makes
-it easier to serve the files by a webserver.*
+Behind the scenes this will also call `bower install`. This will install dependencies for the angular 
+based application. 
 
 ### Run the Application
 
-We have preconfigured the project with a simple development web server.  The simplest way to start
-this server is:
+To run the development docker container do:
 
 ```
-npm start
+docker-compose up --build
+``` 
+
+Now browse to the app at `http://localhost/`
+
+#### The administrator module
+
+The administrator module is written using the CFM (ColdFusion) language and runs via Lucee in a 
+Docker container. It is accessible via
+`http://localhost/admin`
+
+**Accounts:**
+
+* **admin**/*admin* (Standard administrator account)
+* **teacher**/*teacher* (Standard teacher account)
+* **researcher**/*researcher* (Standard researcher account)
+
+The Lucee administrative modules are not exposed by default, howevere it is possible to expose them 
+by modifying the `docker-compose.yml` file. Change the file so the "8888:8888" port mapping is enabled.  
+
 ```
+# Lucee administrator port. DO NOT EXPOSE IN A PRODUCTION ENVIRONMENT!
+     - "8888:8888"
+```
+The Lucee administrator module can be access via: 
+```
+http://localhost:8888/lucee/admin/server.cfm` (Server admin)
+http://localhost:8888/lucee/admin/web.cfm` (Web admin)
+```` 
 
-Now browse to the app at `http://localhost:8000/app/index.html`.
-
-
+The default password for both instances is: *VirtualMath*
 
 ## Directory Layout
 
 ```
-app/                    --> all of the source files for the application
-  app.css               --> default stylesheet
-  components/           --> all app specific modules
-    version/              --> version related components
-      version.js                 --> version module declaration and basic "version" value service
-      version_test.js            --> "version" value service tests
-      version-directive.js       --> custom directive that returns the current app version
-      version-directive_test.js  --> version directive tests
-      interpolate-filter.js      --> custom interpolation filter
-      interpolate-filter_test.js --> interpolate filter tests
-  view1/                --> the view1 view template and logic
-    view1.html            --> the partial template
-    view1.js              --> the controller logic
-    view1_test.js         --> tests of the controller
-  view2/                --> the view2 view template and logic
-    view2.html            --> the partial template
-    view2.js              --> the controller logic
-    view2_test.js         --> tests of the controller
-  app.js                --> main application module
-  index.html            --> app layout file (the main html template file of the app)
-  index-async.html      --> just like index.html, but loads js files asynchronously
-karma.conf.js         --> config file for running unit tests with Karma
-e2e-tests/            --> end-to-end tests
-  protractor-conf.js    --> Protractor config file
-  scenarios.js          --> end-to-end scenarios to be run by Protractor
+cf/                     --> all of the ColdFusion backend fules
+docker/                 --> specific files to setup the docker environment
+wwwroot/                --> all the files that are called directory from the client via the url
+  3dsMax/               --> all virtual help files built by 3dsMax
+  admin/                --> entrypoints for the admin module
+  app/                  --> all of the source files for the application
 ```
 
-## Testing
+## Testing (not implemented yet)
 
 There are two kinds of tests in the angular-seed application: Unit tests and End to End tests.
 
