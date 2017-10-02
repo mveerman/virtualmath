@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<application  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../cf/application.xsd">
+  <mode>development</mode>
+  <secure>false</secure>
+  <dbname>virtualmathdb</dbname>
+  <dbowner>virtualmathdb</dbowner>
+</application>
